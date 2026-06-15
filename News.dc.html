@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+  .afn *{ box-sizing:border-box; }
+  .afn{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .tap{ cursor:pointer; transition:transform .1s ease; }
+  .tap:active{ transform:scale(.99); }
+</style>
+</helmet>
+<div class="afn" style="width:393px; min-height:852px; background:#fff; position:relative;">
+
+  <!-- status bar -->
+  <div style="height:48px; display:flex; align-items:center; justify-content:space-between; padding:6px 22px 0 30px;">
+    <span style="font-family:'SF Pro Display',sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg>
+      <span style="font-weight:600; font-size:14px; color:#191919;">5G</span>
+      <div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.9;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:17px; background:#191919; border-radius:1px;"></div></div>
+    </div>
+  </div>
+
+  <!-- top bar -->
+  <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 20px;">
+    <span style="font-weight:800; font-size:21px; color:#363636; letter-spacing:-0.6px;">어바웃피싱</span>
+    <svg class="tap" width="22" height="22" viewBox="0 0 22 22"><circle cx="10" cy="10" r="7" fill="none" stroke="#191919" stroke-width="1.8"></circle><path d="M15 15 19 19" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg>
+  </div>
+
+  <!-- headline + weather -->
+  <div style="padding:6px 20px 0;">
+    <div class="tap" style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">5월 21일(목) · 신진도항 <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="#AAA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    <div style="margin-top:9px; display:flex; align-items:flex-start; justify-content:space-between;">
+      <div style="font-weight:800; font-size:22px; line-height:1.32; letter-spacing:-0.6px; color:#191919;">오늘은 출조하기<br><span style="color:#0041FF;">딱 좋은 날</span>이에요.</div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="14" r="6.5" fill="none" stroke="#FFB020" stroke-width="2"></circle><path d="M17 3 L17 5.5 M17 22.5 L17 25 M6 14 L8.5 14 M25.5 14 L28 14 M9 6 L10.8 7.8 M25 6 L23.2 7.8" stroke="#FFB020" stroke-width="2" stroke-linecap="round"></path></svg></div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:14px; font-weight:500; font-size:12px; color:#767676; letter-spacing:-0.3px;">
+      <span>파고 <b style="color:#363636;">0.5m</b></span><span>수온 <b style="color:#363636;">17°C</b></span><span>풍속 <b style="color:#363636;">3m/s</b></span><span>만조 <b style="color:#363636;">06:42</b></span>
+    </div>
+    <div class="tap" style="margin-top:10px; font-weight:600; font-size:12.5px; color:#0041FF; letter-spacing:-0.3px;">신진도항 주말 날씨는? ›</div>
+  </div>
+
+  <!-- 바로가기 quick -->
+  <div style="margin-top:18px; padding:0 14px; display:flex; justify-content:space-between;">
+    <sc-for list="{{ quick }}" as="q" hint-placeholder-count="6">
+      <div class="tap" onClick="{{ q.onClick }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="width:46px; height:46px; border-radius:15px; background:{{ q.tint }}; display:flex; align-items:center; justify-content:center;">{{ q.icon }}</div>
+        <span style="font-weight:500; font-size:11px; color:#555; letter-spacing:-0.4px; white-space:nowrap;">{{ q.label }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="height:9px; background:#F6F7F9; margin-top:20px;"></div>
+
+  <!-- 오늘의 새소식 -->
+  <div style="padding:20px 20px 4px; font-weight:800; font-size:17px; color:#191919; letter-spacing:-0.5px;">오늘의 새소식</div>
+
+  <sc-for list="{{ feed }}" as="f" hint-placeholder-count="6">
+    <div class="tap" onClick="{{ f.onClick }}" style="padding:16px 20px; border-bottom:1px solid #F4F4F4; display:flex; gap:13px;">
+      <div style="flex:1; min-width:0;">
+        <sc-if value="{{ f.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="height:21px; padding:0 8px; border-radius:6px; background:{{ f.badgeBg }}; color:{{ f.badgeColor }}; font-weight:700; font-size:10.5px; display:inline-flex; align-items:center; margin-bottom:8px;">{{ f.badge }}</span></sc-if>
+        <div style="font-weight:700; font-size:14.5px; line-height:1.4; color:#191919; letter-spacing:-0.4px;">{{ f.title }}</div>
+        <div style="margin-top:5px; font-weight:500; font-size:12px; color:#AAA; letter-spacing:-0.3px;">{{ f.meta }}</div>
+        <div style="margin-top:6px; font-weight:500; font-size:12.5px; line-height:1.5; color:#888; letter-spacing:-0.3px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{{ f.desc }}</div>
+        <sc-if value="{{ f.hasTags }}" hint-placeholder-val="{{ false }}"><div style="margin-top:9px; display:flex; gap:6px;"><sc-for list="{{ f.tags }}" as="t" hint-placeholder-count="2"><span style="height:21px; padding:0 8px; border-radius:5px; background:#EEF8FF; color:#0041FF; font-weight:600; font-size:10.5px; display:flex; align-items:center;">{{ t }}</span></sc-for></div></sc-if>
+        <sc-if value="{{ f.hasCta }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px; font-weight:700; font-size:12.5px; color:#0041FF; letter-spacing:-0.3px;">{{ f.cta }} ›</div></sc-if>
+      </div>
+      <sc-if value="{{ f.hasThumb }}" hint-placeholder-val="{{ true }}">
+        <div style="width:78px; height:78px; border-radius:12px; background:{{ f.thumbBg }}; flex:none; display:flex; align-items:center; justify-content:center;">{{ f.thumbIcon }}</div>
+      </sc-if>
+    </div>
+  </sc-for>
+
+  <!-- AD character card -->
+  <div class="tap" onClick="{{ noop }}" style="margin:14px 20px; border-radius:16px; background:linear-gradient(120deg,#EAF0FF,#F4EDFF); padding:18px; display:flex; align-items:center; gap:14px; position:relative; overflow:hidden;">
+    <span style="position:absolute; right:12px; top:11px; font-weight:600; font-size:10px; color:#B8BECC;">AD</span>
+    <img src="assets/avatar.png" style="width:74px; height:74px; object-fit:cover; object-position:50% 8%; border-radius:50%; flex:none;">
+    <div><div style="font-weight:800; font-size:15.5px; color:#191919; letter-spacing:-0.4px;">어바웃피싱 예약이<br>처음이시라면!</div><div style="margin-top:8px; font-weight:700; font-size:13px; color:#0041FF; letter-spacing:-0.3px;">10,000원 할인받고 예약하기 ›</div></div>
+  </div>
+
+  <!-- AD animation banner placeholder -->
+  <div class="tap" onClick="{{ noop }}" style="margin:0 20px 18px; height:96px; border-radius:16px; background:linear-gradient(120deg,#1B3A8F,#0041FF); display:flex; align-items:center; padding:0 20px; position:relative; overflow:hidden;">
+    <span style="position:absolute; right:12px; top:11px; font-weight:600; font-size:10px; color:rgba(255,255,255,.6);">AD</span>
+    <div><div style="font-weight:800; font-size:16px; color:#fff; letter-spacing:-0.4px;">홍원항 선단 특가</div><div style="margin-top:5px; font-weight:500; font-size:12px; color:rgba(255,255,255,.82); letter-spacing:-0.3px;">주말 출조 마감 임박 · 잔여 5자리</div></div>
+  </div>
+
+  <!-- footer -->
+  <div style="background:#FAFAFB; padding:22px 20px 30px; border-top:1px solid #F0F0F0;">
+    <div style="font-weight:800; font-size:15px; color:#363636; letter-spacing:-0.4px;">어바웃피싱<span style="color:#6433DF;">.</span></div>
+    <div style="margin-top:11px; font-weight:500; font-size:11.5px; line-height:1.7; color:#AAA; letter-spacing:-0.3px;">(주) 어바웃피싱 · 서울특별시 강남구 테헤란로 123<br>대표 홍길동 · 사업자등록 321-81-02422<br>통신판매업 신고 2026-서울강남-1872<br>고객센터 contact@aboutfishing.kr · 02-722-0385</div>
+    <div style="margin-top:12px; display:flex; gap:14px; font-weight:600; font-size:11.5px; color:#999;"><span class="tap">이용약관</span><span class="tap">개인정보처리방침</span></div>
+  </div>
+  <div style="height:90px;"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852}}">
+class Component extends DCLogic {
+  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+
+  qicon(name){
+    const R=React.createElement;
+    const svg=(ch,vb="0 0 26 26")=>R("svg",{width:24,height:24,viewBox:vb},ch);
+    const ln=(d,c,w=1.7)=>R("path",{d,fill:"none",stroke:c,strokeWidth:w,strokeLinecap:"round",strokeLinejoin:"round"});
+    switch(name){
+      case "cal": return svg([R("rect",{key:1,x:4,y:6,width:18,height:16,rx:3,fill:"none",stroke:"#0041FF",strokeWidth:1.7}),ln("M4 11 L22 11 M9 16 L12 19 L18 12","#0041FF")]);
+      case "live": return svg([R("circle",{key:1,cx:13,cy:13,r:4,fill:"#EE0005"}),R("circle",{key:2,cx:13,cy:13,r:8.5,fill:"none",stroke:"#EE0005",strokeWidth:1.5,opacity:.5})]);
+      case "review": return svg([ln("M13 4 L15.6 9.4 L21.5 10.2 L17 14.3 L18.2 20 L13 17 L7.8 20 L9 14.3 L4.5 10.2 L10.4 9.4 Z","#FF8A00")]);
+      case "store": return svg([ln("M5 11 L21 11 L20 21 L6 21 Z M5 11 L7 5 L19 5 L21 11","#1F8A5B")]);
+      case "new": return svg([ln("M13 4 L13 22 M4 13 L22 13","#6433DF",2)]);
+      case "fish": return svg([ln("M5 13 C8 8 15 8 19 13 C15 18 8 18 5 13 Z M19 13 L23 10 M19 13 L23 16","#0AA9C9"),R("circle",{key:9,cx:9,cy:12,r:1,fill:"#0AA9C9"})]);
+      default: return null;
+    }
+  }
+  thumb(kind){
+    const R=React.createElement;
+    if(kind==="coin") return R("div",{style:{width:42,height:42,borderRadius:"50%",background:"#FFC700",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,fontSize:18,color:"#fff"}},"M");
+    const c = kind==="fish" ? "#0AA9C9" : "#9AA6B8";
+    const d = kind==="fish"
+      ? "M9 20 C14 13 26 13 31 20 C26 27 14 27 9 20 Z M31 20 L37 16 M31 20 L37 24"
+      : "M11 24 L33 24 L29 30 L15 30 Z M16 24 L16 15 L28 15 L33 24 M21 15 L21 11 L26 11 L26 15";
+    return R("svg",{width:38,height:40,viewBox:"0 0 44 40"},[R("path",{key:1,d,fill:"none",stroke:c,strokeWidth:1.6,strokeLinejoin:"round"})]);
+  }
+
+  renderVals(){
+    const tagBoat=["할인쿠폰","평일제한환영"];
+    const post=(o)=>Object.assign({ hasBadge:false, hasTags:false, hasCta:false, hasThumb:true, thumbBg:"#EAEDF1", thumbIcon:this.thumb(o.thumb||"boat"), onClick:this.nav("noop") }, o);
+    return {
+      noop: this.nav("noop"),
+      quick: [
+        { label:"내 예약", tint:"#EAF0FF", icon:this.qicon("cal"), onClick:this.nav("my") },
+        { label:"실시간조황", tint:"#FFECEC", icon:this.qicon("live"), onClick:this.nav("noop") },
+        { label:"리뷰이벤트", tint:"#FFF4E4", icon:this.qicon("review"), onClick:this.nav("news_event") },
+        { label:"매장낚시", tint:"#E8FBEE", icon:this.qicon("store"), onClick:this.nav("noop") },
+        { label:"신규상품", tint:"#F1EEFC", icon:this.qicon("new"), onClick:this.nav("noop") },
+        { label:"어종도감", tint:"#E6F7FB", icon:this.qicon("fish"), onClick:this.nav("noop") },
+      ],
+      feed: [
+        post({ hasBadge:true, badge:"D-3", badgeBg:"#EEF3FF", badgeColor:"#0041FF", title:"만선호 출조일이 3일 남았어요! 이번 주 토요일 출조 잊지 않으셨죠?", meta:"5월 24일(토) 04:30 · 인천 중구 신진도", desc:"(김태수 선장) 출조 준비물과 집결 시간을 다시 한번 확인해 주세요. 좋은 물때라 마릿수 기대돼요.", hasTags:true, tags:tagBoat, onClick:this.nav("detail") }),
+        post({ title:"드래곤호 6/15 조황이 등록됐어요", meta:"태안 신진도항 · 12물 · 3시간 전", desc:"금일 조황 — 광어 45수, 우럭 32수, 백조기 2수, 붕장어 3수 외 다수. 초보 손님도 손맛 톡톡히 봤어요.", hasTags:true, tags:tagBoat }),
+        post({ thumb:"fish", title:"이번 주는 [우럭]을 노려보세요!", meta:"48분 전", desc:"우럭이 지난주보다 24% 많은 조황이 확인됐어요. 주요 출몰지는 충남 보령과 경남 신항 일대예요." }),
+        post({ hasBadge:true, badge:"할인쿠폰", badgeBg:"#EEF3FF", badgeColor:"#0041FF", title:"충남 당진 태백호 재예약 10% 기간 한정 쿠폰 이벤트 중", meta:"태안 신진도항 · 2시간 전", desc:"태백호 단골 고객님을 위한 재예약 10% 기간 한정 쿠폰 이벤트를 진행 중입니다. 지금 받아두세요.", hasTags:true, tags:tagBoat, hasCta:true, cta:"쿠폰 받기" }),
+        post({ thumb:"fish", title:"[긴꼬리벵에돔]이 지난주보다 22% 더 나오고 있어요!", meta:"1시간 전", desc:"경남 남해·통영 수온이 상승하며 긴꼬리벵에돔 조황이 전주 대비 22% 상승했어요. 지금이 적기예요." }),
+        post({ thumb:"coin", thumbBg:"#FFF7E0", hasBadge:true, badge:"Reward", badgeBg:"#FFF4E4", badgeColor:"#E6A100", title:"1,500 머니가 지급되었어요", meta:"23분 전", desc:"5월 13일 이용하신 출조 후기 작성 보상 머니(1,500원)가 지급되었어요. 다음 예약에 바로 쓸 수 있어요.", onClick:this.nav("my") }),
+        post({ hasBadge:true, badge:"AD", badgeBg:"#F3F3F3", badgeColor:"#999", title:"인천에서 미터급 태광어를 만나고 싶다면!", meta:"대광어 호점 · 대표호", desc:"미터급 대광어 전문 선단. 초보도 선장이 포인트까지 책임지고 안내해 드려요." }),
+        post({ title:"단골 선박 [에이스호]의 조황이 등록되었어요", meta:"태안 신진도항 · 4시간 전", desc:"오늘은 특히 활성도가 좋았고 넙치, 양태, 백조기 등 다양한 어종이 포획되었어요.", hasTags:true, tags:tagBoat }),
+        post({ thumb:"fish", hasBadge:true, badge:"AI 추천", badgeBg:"#F1EEFC", badgeColor:"#6433DF", title:"[AI 추천] 이번 주말 태안 우럭이 제철이에요", meta:"현일님 관심 어종 분석 · 매칭률 94%", desc:"최근 관심 어종과 출조 이력을 분석했어요. 지금 예약 가능한 맞춤 선박을 추천해 드려요.", hasCta:true, cta:"맞춤 선박 3척 보기", onClick:this.nav("search") }),
+        post({ hasBadge:true, badge:"이벤트", badgeBg:"#FFF4E4", badgeColor:"#FF8A00", title:"어바웃피싱 챔피언십 2차전 참가자 모집", meta:"충남 홍원항 · 2시간 전", desc:"6월 12일 충남 홍원항에서 총 상금 4천만원 규모의 어바웃피싱 챔피언십 2차전이 열려요.", hasCta:true, cta:"자세히 보기", onClick:this.nav("news_event") }),
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

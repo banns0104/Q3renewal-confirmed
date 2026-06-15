@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+  .af-sub *{ box-sizing:border-box; }
+  .af-sub{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .tap{ cursor:pointer; transition:transform .1s ease, background .12s ease; }
+  .tap:active{ transform:scale(.985); }
+</style>
+</helmet>
+<div class="af-sub" style="width:393px; min-height:852px; background:#fff; position:relative;">
+
+  <!-- status bar -->
+  <div style="height:54px; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 34px; background:{{ statusBg }};">
+    <span style="font-family:'SF Pro Display',sans-serif; font-weight:600; font-size:16px; color:{{ statusColor }};">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <svg width="18" height="12" viewBox="0 0 18 12"><g fill="{{ statusColor }}"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg>
+      <span style="font-weight:600; font-size:14px; color:{{ statusColor }};">5G</span>
+      <div style="width:24px; height:12px; border:1.4px solid {{ statusColor }}; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:{{ statusColor }}; border-radius:1px;"></div></div>
+    </div>
+  </div>
+
+  <!-- ============ 예약 상세 ============ -->
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ true }}">
+  <div style="position:relative;">
+    <div style="position:relative; height:280px; margin-top:-54px; background:linear-gradient(155deg,#1B3A8F 0%,#0041FF 60%,#2C74FF 100%); overflow:hidden;">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="af-detail-hero" shape="rect" placeholder="선박 대표 사진 올리기" style="position:absolute; inset:0; width:393px; height:280px;"></x-import>
+      <div style="position:absolute; left:0; top:0; width:84px; height:84px; overflow:hidden; z-index:2;"><div style="position:absolute; transform:rotate(-45deg); left:-28px; top:15px; width:112px; text-align:center; background:#0AD2FF; color:#fff; font-weight:800; font-size:11px; padding:4px 0;">실시간예약</div></div>
+      <div style="position:absolute; left:0; right:0; top:54px; height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 16px;">
+        <div class="tap" onClick="{{ back }}" style="width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.26); display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        <div style="display:flex; gap:8px;">
+          <div class="tap" onClick="{{ toggleWish }}" style="width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.26); display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 20.5C12 20.5 3.5 14.5 3.5 8.8C3.5 6.1 5.6 4 8.2 4C9.9 4 11.3 5 12 6.3C12.7 5 14.1 4 15.8 4C18.4 4 20.5 6.1 20.5 8.8C20.5 14.5 12 20.5 12 20.5Z" fill="{{ wishFill }}" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"></path></svg></div>
+          <div class="tap" onClick="{{ noop }}" style="width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.26); display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 20 20"><circle cx="5" cy="10" r="1.6" fill="#fff"></circle><circle cx="15" cy="5" r="1.6" fill="#fff"></circle><circle cx="15" cy="15" r="1.6" fill="#fff"></circle><path d="M6.4 9 13.6 5.6 M6.4 11 13.6 14.4" stroke="#fff" stroke-width="1.4"></path></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:20px 20px 0;">
+      <div style="display:flex; gap:6px; align-items:center;">
+        <span style="height:23px; padding:0 9px; border-radius:5px; background:#FFF1E9; color:#FF4C14; font-weight:700; font-size:11px; display:flex; align-items:center;">보유인증</span>
+        <span style="height:23px; padding:0 9px; border-radius:5px; background:#EEF8FF; color:#0041FF; font-weight:700; font-size:11px; display:flex; align-items:center;">선장 직접운영</span>
+        <span style="margin-left:auto; font-weight:600; font-size:12px; color:#EE0005; letter-spacing:-0.3px;">잔여 2자리 · 마감 임박</span>
+      </div>
+      <div style="margin-top:12px; font-weight:800; font-size:23px; color:#191919; letter-spacing:-0.7px;">블랙이글호</div>
+      <div style="margin-top:7px; display:flex; align-items:center; gap:8px; font-weight:500; font-size:13.5px; color:#767676; letter-spacing:-0.4px;"><span>인천 중구 · 홍원항</span><span style="color:#E0E0E0;">|</span><span style="color:#FF8A00; font-weight:700;">★ 4.9</span><span style="color:#AAA;">후기 128</span></div>
+      <div style="margin-top:16px; display:flex; align-items:baseline; gap:7px;"><span style="font-weight:800; font-size:25px; color:#191919; letter-spacing:-0.6px;">90,000원</span><span style="font-weight:600; font-size:14px; color:#AAA;">~ / 1인</span></div>
+    </div>
+
+    <!-- 선장 한마디 (persona hook) -->
+    <div style="margin:18px 20px 0; border-radius:14px; background:#F5F7FA; padding:15px 16px; display:flex; gap:12px;">
+      <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(150deg,#3E6BF6,#0041FF); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#fff; flex:none;">김</div>
+      <div><div style="font-weight:700; font-size:13.5px; color:#191919; letter-spacing:-0.3px;">김태수 선장</div><div style="margin-top:4px; font-weight:500; font-size:13px; line-height:1.55; color:#555; letter-spacing:-0.3px;">“오늘 물때 아주 좋습니다. 초보자도 자리·채비 다 챙겨드리니 편하게 오세요.”</div></div>
+    </div>
+
+    <div style="height:8px; background:#F8F8F8; margin-top:22px;"></div>
+    <div style="padding:22px 20px 0;">
+      <div style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.5px;">출항 정보</div>
+      <div style="margin-top:14px; display:flex; flex-direction:column; gap:13px;">
+        <sc-for list="{{ detailInfo }}" as="d" hint-placeholder-count="4">
+          <div style="display:flex; align-items:center;"><span style="width:88px; font-weight:500; font-size:14px; color:#999; letter-spacing:-0.4px;">{{ d.k }}</span><span style="flex:1; font-weight:600; font-size:14px; color:#363636; letter-spacing:-0.4px;">{{ d.v }}</span></div>
+        </sc-for>
+      </div>
+      <div style="margin-top:18px; border-radius:14px; background:#F5F7FA; padding:16px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:12px;"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="14" r="7" fill="none" stroke="#FFB020" stroke-width="2"></circle><path d="M17 2 L17 5 M17 23 L17 26 M5 14 L8 14 M26 14 L29 14 M8.5 5.5 L10.5 7.5 M23.5 5.5 L21.5 7.5" stroke="#FFB020" stroke-width="2" stroke-linecap="round"></path></svg><div><div style="font-weight:700; font-size:14px; color:#191919;">맑음 · 22°C</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">풍속 3m/s · 파고 0.5m</div></div></div>
+        <span style="height:24px; padding:0 11px; border-radius:1000px; background:#E8FBEE; color:#1F8A5B; font-weight:700; font-size:11.5px; display:flex; align-items:center;">출조 적합</span>
+      </div>
+    </div>
+
+    <div style="height:8px; background:#F8F8F8; margin-top:22px;"></div>
+    <div style="padding:22px 20px 0;">
+      <div style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.5px;">포함 사항</div>
+      <div style="margin-top:13px; display:flex; flex-wrap:wrap; gap:8px;">
+        <sc-for list="{{ includes }}" as="i" hint-placeholder-count="4"><span style="height:32px; padding:0 13px; border-radius:1000px; background:#F3F3F3; color:#555; font-weight:600; font-size:12.5px; display:flex; align-items:center; gap:5px;">{{ i }}</span></sc-for>
+      </div>
+    </div>
+
+    <div style="height:8px; background:#F8F8F8; margin-top:22px;"></div>
+    <div style="padding:22px 20px 0;">
+      <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.5px;">출조 후기 <span style="color:#0041FF;">128</span></span><span class="tap" onClick="{{ noop }}" style="font-weight:600; font-size:13px; color:#999;">전체보기 ›</span></div>
+      <div style="margin-top:14px; display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+          <div style="border-bottom:1px solid #F4F4F4; padding-bottom:14px;"><div style="display:flex; align-items:center; gap:8px;"><span style="font-weight:700; font-size:13px; color:#191919;">{{ r.name }}</span><span style="color:#FF8A00; font-weight:700; font-size:12px;">{{ r.star }}</span><span style="margin-left:auto; font-weight:500; font-size:11.5px; color:#BBB;">{{ r.date }}</span></div><div style="margin-top:7px; font-weight:500; font-size:13px; line-height:1.55; color:#555; letter-spacing:-0.3px;">{{ r.text }}</div></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="height:128px;"></div>
+
+    <div style="position:sticky; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #EEE; padding:8px 18px 14px;">
+      <div style="text-align:center; font-weight:600; font-size:11.5px; color:#EE0005; letter-spacing:-0.3px; padding:3px 0 7px;">지금 3명이 함께 보고 있어요 · 잔여 2자리</div>
+      <div style="display:flex; align-items:center; gap:13px;">
+        <div class="tap" onClick="{{ toggleWish }}" style="width:50px; height:52px; border-radius:12px; border:1px solid #EEE; display:flex; align-items:center; justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 20.5C12 20.5 3.5 14.5 3.5 8.8C3.5 6.1 5.6 4 8.2 4C9.9 4 11.3 5 12 6.3C12.7 5 14.1 4 15.8 4C18.4 4 20.5 6.1 20.5 8.8C20.5 14.5 12 20.5 12 20.5Z" fill="{{ wishFill2 }}" stroke="{{ wishStroke }}" stroke-width="1.8" stroke-linejoin="round"></path></svg></div>
+        <div class="tap" onClick="{{ noop }}" style="flex:1; height:52px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff; letter-spacing:-0.4px;">예약하기</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 알림 ============ -->
+  <sc-if value="{{ isNotif }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">알림</span><span class="tap" onClick="{{ noop }}" style="font-weight:500; font-size:13px; color:#999;">모두 읽음</span></div>
+    <sc-for list="{{ notifList }}" as="n" hint-placeholder-count="4">
+      <div class="tap" onClick="{{ n.onClick }}" style="display:flex; gap:13px; padding:16px 20px; background:{{ n.bg }}; border-bottom:1px solid #F5F5F5;">
+        <div style="width:42px; height:42px; border-radius:12px; background:{{ n.tint }}; display:flex; align-items:center; justify-content:center; flex:none;">{{ n.icon }}</div>
+        <div style="flex:1;"><div style="display:flex; align-items:center; gap:6px;"><span style="font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">{{ n.title }}</span><sc-if value="{{ n.unread }}" hint-placeholder-val="{{ false }}"><span style="width:6px; height:6px; border-radius:50%; background:#EE0005;"></span></sc-if></div><div style="margin-top:4px; font-weight:500; font-size:13px; line-height:1.5; color:#767676; letter-spacing:-0.4px;">{{ n.desc }}</div><div style="margin-top:6px; font-weight:500; font-size:11.5px; color:#BBB;">{{ n.time }}</div></div>
+      </div>
+    </sc-for>
+    <div style="height:40px;"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 공지사항 ============ -->
+  <sc-if value="{{ isNotice }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">공지사항</span></div>
+    <sc-for list="{{ notices }}" as="n" hint-placeholder-count="5">
+      <div class="tap" onClick="{{ noop }}" style="padding:18px 20px; border-bottom:1px solid #F3F3F3;">
+        <div style="display:flex; align-items:center; gap:8px;"><span style="height:22px; padding:0 9px; border-radius:6px; background:{{ n.badgeBg }}; color:{{ n.badgeColor }}; font-weight:700; font-size:11px; display:flex; align-items:center;">{{ n.badge }}</span><span style="margin-left:auto; font-weight:500; font-size:12px; color:#BBB;">{{ n.date }}</span></div>
+        <div style="margin-top:9px; font-weight:600; font-size:15px; color:#191919; letter-spacing:-0.4px;">{{ n.title }}</div>
+        <div style="margin-top:5px; font-weight:500; font-size:13px; line-height:1.5; color:#999; letter-spacing:-0.3px;">{{ n.desc }}</div>
+      </div>
+    </sc-for>
+    <div style="height:40px;"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 이벤트 ============ -->
+  <sc-if value="{{ isEvent }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">이벤트</span></div>
+    <div style="padding:8px 18px 0; display:flex; flex-direction:column; gap:14px;">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
+        <div class="tap" onClick="{{ e.onClick }}" style="border-radius:16px; overflow:hidden; box-shadow:0 4px 18px rgba(20,22,30,.08);">
+          <div style="height:128px; background:{{ e.bg }}; position:relative; display:flex; flex-direction:column; justify-content:center; padding:0 20px;">
+            <span style="position:absolute; right:14px; top:13px; height:22px; padding:0 9px; border-radius:1000px; background:rgba(255,255,255,.22); color:#fff; font-weight:700; font-size:10.5px; display:flex; align-items:center;">{{ e.tag }}</span>
+            <div style="font-weight:800; font-size:19px; color:#fff; letter-spacing:-0.5px; line-height:1.3; white-space:pre-line;">{{ e.title }}</div>
+            <div style="margin-top:7px; font-weight:600; font-size:12.5px; color:rgba(255,255,255,.85); letter-spacing:-0.3px;">{{ e.sub }}</div>
+          </div>
+          <div style="padding:13px 16px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:500; font-size:12px; color:#999;">{{ e.period }}</span><span style="font-weight:700; font-size:12.5px; color:#0041FF;">자세히 ›</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:40px;"></div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;detail&quot;,&quot;notif&quot;,&quot;notice&quot;,&quot;event&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { wish:false };
+  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+
+  ic(name){
+    const R=React.createElement;
+    const ln=(d,c,w=1.7)=>R("path",{d,fill:"none",stroke:c,strokeWidth:w,strokeLinecap:"round",strokeLinejoin:"round"});
+    const svg=(ch)=>R("svg",{width:22,height:22,viewBox:"0 0 24 24"},ch);
+    switch(name){
+      case "cal": return svg([R("rect",{key:1,x:4,y:5,width:16,height:15,rx:3,fill:"none",stroke:"#0041FF",strokeWidth:1.7}),ln("M4 9 L20 9 M8 16 L11 19 L16 12","#0041FF")]);
+      case "coin": return svg([R("circle",{key:1,cx:12,cy:12,r:9,fill:"none",stroke:"#E6A100",strokeWidth:1.7}),R("text",{key:2,x:12,y:16,textAnchor:"middle",fontSize:11,fontWeight:800,fill:"#E6A100"},"M")]);
+      case "trade": return svg([ln("M5 8 L19 8 L18 19 L6 19 Z M8 8 C8 5.5 9.7 4 12 4 C14.3 4 16 5.5 16 8","#1F8A5B")]);
+      case "bell": return svg([ln("M7 10C7 7 9 5 12 5C15 5 17 7 17 10C17 15 19 17 19 17L5 17C5 17 7 15 7 10Z","#6433DF")]);
+      default: return null;
+    }
+  }
+
+  renderVals(){
+    const s = this.props.screen || "detail";
+    const isDetail = s==="detail";
+    return {
+      isDetail, isNotif:s==="notif", isNotice:s==="notice", isEvent:s==="event",
+      statusBg: isDetail ? "transparent" : "#fff",
+      statusColor: isDetail ? "#fff" : "#191919",
+      back: this.nav("back"), noop: this.nav("noop"),
+
+      wishFill: this.state.wish ? "#FF3C3A" : "rgba(255,255,255,.001)",
+      wishFill2: this.state.wish ? "#FF3C3A" : "none",
+      wishStroke: this.state.wish ? "#FF3C3A" : "#AAA",
+      toggleWish: ()=> this.setState(st=>({wish:!st.wish})),
+
+      detailInfo: [
+        { k:"집결지", v:"인천 중구 홍원항 선착장" },
+        { k:"출항 시간", v:"04:30 (당일) · 약 8시간" },
+        { k:"대상 어종", v:"광어 · 우럭 · 참돔" },
+        { k:"탑승 인원", v:"최대 12명 · 좌석 지정" },
+      ],
+      includes: ["전동릴 대여","기본 채비","미끼 무제한","따뜻한 식사"],
+      reviews: [
+        { name:"광어헌터", star:"★ 5.0", date:"3일 전", text:"선장님이 포인트를 잘 잡아주셔서 우럭 마릿수 좋았어요. 초보도 케어 확실합니다." },
+        { name:"서해단골", star:"★ 4.8", date:"1주 전", text:"자리 넓고 화장실 깨끗해요. 다음 물때 또 예약합니다." },
+      ],
+
+      notifList: [
+        { title:"예약이 확정되었어요", desc:"블랙이글호 · 08.16(토) 04:30 출항이 확정됐어요. 준비물을 확인해보세요.", time:"방금 전", tint:"#EAF0FF", icon:this.ic("cal"), unread:true, bg:"#F7FAFF", onClick:this.nav("detail") },
+        { title:"머니 70원이 적립됐어요", desc:"첫 예약 축하 머니가 도착했어요. 다음 예약에 바로 쓸 수 있어요.", time:"1시간 전", tint:"#FFF7E0", icon:this.ic("coin"), unread:true, bg:"#FFFDF6", onClick:this.nav("my") },
+        { title:"중고거래 채팅이 왔어요", desc:"#광어킹 고객이 ‘갈치대 4.5칸’에 문의를 남겼어요.", time:"어제", tint:"#E8FBEE", icon:this.ic("trade"), unread:false, bg:"#fff", onClick:this.nav("noop") },
+        { title:"관심 어종 핫조황", desc:"팔로우한 ‘참돔러버’님이 홍원항 조황을 올렸어요.", time:"2일 전", tint:"#F5EDFF", icon:this.ic("bell"), unread:false, bg:"#fff", onClick:this.nav("news_b") },
+      ],
+      notices: [
+        { badge:"중요", badgeBg:"#FFECEC", badgeColor:"#EE0005", date:"2026.08.14", title:"추석 연휴 예약·환불 운영 안내", desc:"연휴 기간 고객센터 운영 시간과 환불 처리 일정을 안내드려요." },
+        { badge:"업데이트", badgeBg:"#EEF3FF", badgeColor:"#0041FF", date:"2026.08.10", title:"출조 준비 체크리스트 기능이 추가됐어요", desc:"예약 상세에서 멀미약·복장·채비를 한 번에 확인할 수 있어요." },
+        { badge:"정책", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.08.01", title:"기상 결항 자동 환불 정책 변경", desc:"선장 결항 판단 시 결제 금액 100%가 자동으로 환불돼요." },
+        { badge:"점검", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.07.28", title:"시스템 정기 점검 안내 (08.15 02:00~06:00)", desc:"점검 시간 동안 예약·결제 이용이 일시 제한될 수 있어요." },
+      ],
+      events: [
+        { title:"첫 출조,\n5,000원 머니 드려요", sub:"신규 가입하고 첫 예약 시 자동 적립", tag:"진행중", period:"2026.08.01 ~ 08.31", bg:"linear-gradient(135deg,#2E6BF6,#0041FF)", onClick:this.nav("noop") },
+        { title:"제2회 어바웃피싱\n챔피언십 참가자 모집", sub:"전국 선상낚시 최강자를 가려요", tag:"D-12", period:"2026.09.01 ~ 09.30", bg:"linear-gradient(135deg,#7B3FE4,#5A1FC0)", onClick:this.nav("noop") },
+        { title:"주말 출조\n최대 20% 할인", sub:"주꾸미 시즌 한정 특가", tag:"진행중", period:"매주 금~일", bg:"linear-gradient(135deg,#0AA9C9,#0AD2FF)", onClick:this.nav("noop") },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

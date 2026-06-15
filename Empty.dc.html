@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>.af-empty *{box-sizing:border-box;} .af-empty{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}</style>
+</helmet>
+<div class="af-empty" style="width:393px; height:852px; background:#ffffff; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+
+  <!-- status bar -->
+  <div style="height:54px; width:100%; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 34px; flex:none;">
+    <span style="font-family:'SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg>
+      <span style="font-weight:600; font-size:14px; color:#191919;">5G</span>
+      <div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div>
+    </div>
+  </div>
+
+  <!-- top bar -->
+  <div style="height:56px; flex:none; display:flex; align-items:center; padding:0 18px; gap:6px;">
+    <sc-if value="{{ hasBack }}" hint-placeholder-val="{{ false }}">
+      <div style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    </sc-if>
+    <div style="display:flex; align-items:baseline; gap:2px; white-space:nowrap; flex:none;">
+      <span style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:21px; letter-spacing:-0.6px; color:#363636; white-space:nowrap;">{{ title }}</span>
+      <sc-if value="{{ hasDot }}" hint-placeholder-val="{{ true }}"><span style="width:5px; height:5px; border-radius:50%; background:#0041FF; display:inline-block; transform:translateY(-1px);"></span></sc-if>
+    </div>
+  </div>
+
+  <!-- search bar (search type only) -->
+  <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:0 18px 6px; flex:none;">
+      <div style="height:46px; border-radius:10px; background:#F3F3F3; display:flex; align-items:center; padding:0 14px; gap:9px;">
+        <svg width="18" height="18" viewBox="0 0 20 20"><circle cx="9" cy="9" r="6.4" fill="none" stroke="#999" stroke-width="1.8"></circle><path d="M14 14 18 18" stroke="#999" stroke-width="1.8" stroke-linecap="round"></path></svg>
+        <span style="font-weight:500; font-size:15px; color:#363636; letter-spacing:-0.4px;">갈치 먼바다</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- empty body -->
+  <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 40px 70px;">
+    <div style="width:108px; height:108px; border-radius:50%; background:{{ tint }}; display:flex; align-items:center; justify-content:center; margin-bottom:26px;">
+      {{ iconEl }}
+    </div>
+    <div style="font-weight:700; font-size:18px; color:#191919; letter-spacing:-0.5px; text-align:center;">{{ message }}</div>
+    <div style="margin-top:11px; font-weight:500; font-size:14px; line-height:1.55; color:#999; letter-spacing:-0.4px; text-align:center; white-space:pre-line;">{{ sub }}</div>
+
+    <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:24px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+          <div style="height:36px; padding:0 15px; border-radius:1000px; border:1px solid #E0E0E0; display:flex; align-items:center; font-weight:600; font-size:13px; color:#363636; letter-spacing:-0.4px;">{{ c }}</div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ hasCta }}" hint-placeholder-val="{{ true }}">
+      <div onClick="{{ ctaClick }}" style="margin-top:30px; height:50px; padding:0 30px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:15px; color:#fff; letter-spacing:-0.4px; cursor:pointer;">{{ ctaLabel }}</div>
+    </sc-if>
+  </div>
+
+  <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;type&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;reserve&quot;,&quot;wish&quot;,&quot;search&quot;,&quot;news&quot;,&quot;alarm&quot;],&quot;default&quot;:&quot;reserve&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  cfg = {
+    reserve: { title:"예약", hasBack:false, hasDot:true, tint:"#EAF0FF", icon:"calendar",
+      message:"아직 예약 내역이 없어요", sub:"마음에 드는 선박을 찾아\n첫 출조를 예약해보세요.", cta:"선박 예약하러 가기", ctaTo:"reserve" },
+    wish: { title:"찜", hasBack:true, hasDot:false, tint:"#FFECEC", icon:"heart",
+      message:"찜한 선박이 없어요", sub:"관심있는 선박을 찜해두면\n여기에서 모아볼 수 있어요.", cta:"선박 둘러보기", ctaTo:"reserve_list" },
+    search: { title:"검색", hasBack:true, hasDot:false, tint:"#F3F3F3", icon:"search", isSearch:true,
+      message:"검색 결과가 없어요", sub:"‘갈치 먼바다’에 대한 결과를 찾지 못했어요.\n다른 검색어로 찾아보세요.", chips:["갈치 선상","홍원항","먼바다 참돔"] },
+    news: { title:"새소식", hasBack:false, hasDot:true, tint:"#EAFBF0", icon:"people",
+      message:"아직 새소식이 없어요", sub:"어친을 팔로우하면 출조 소식과\n조황을 여기에서 받아볼 수 있어요.", cta:"어친 찾아보기", ctaTo:"news_b" },
+    alarm: { title:"알림", hasBack:true, hasDot:false, tint:"#F5EDFF", icon:"bell",
+      message:"받은 알림이 없어요", sub:"예약 확정·취소, 거래 알림을\n여기에서 확인할 수 있어요." },
+    catch: { title:"내 조황", hasBack:true, hasDot:false, tint:"#E6F7FB", icon:"fish",
+      message:"아직 등록한 조황이 없어요", sub:"오늘의 손맛을 기록하면\n어친들과 나눌 수 있어요.", cta:"조황 올리기" },
+    coupon: { title:"쿠폰함", hasBack:true, hasDot:false, tint:"#FFF4E4", icon:"coupon",
+      message:"사용 가능한 쿠폰이 없어요", sub:"이벤트에 참여하고\n할인 쿠폰을 받아보세요.", cta:"이벤트 보기", ctaTo:"news_event" },
+    chat: { title:"채팅", hasBack:true, hasDot:false, tint:"#EAFBF0", icon:"chat",
+      message:"진행 중인 채팅이 없어요", sub:"중고거래나 선장 문의를 시작하면\n여기에서 대화할 수 있어요." },
+    payment: { title:"결제 내역", hasBack:true, hasDot:false, tint:"#F3F3F3", icon:"receipt",
+      message:"결제 내역이 없어요", sub:"예약·상품 결제 내역을\n여기에서 확인할 수 있어요." },
+  };
+
+  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+
+  icon(name){
+    const R = React.createElement;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = (children, vb="0 0 40 40") => R("svg", { width:46, height:46, viewBox:vb }, children);
+    const p = (d, extra={}) => R("path", Object.assign({ d, fill:"none", stroke:"#0041FF", strokeWidth:2.2, strokeLinecap:"round", strokeLinejoin:"round" }, extra));
+    switch(name){
+      case "calendar": return svg([
+        R("rect",{key:1,x:6,y:9,width:28,height:25,rx:5,fill:"none",stroke:"#0041FF",strokeWidth:2.2}),
+        p("M6 16 L34 16",{key:2}), p("M14 5 L14 11",{key:3}), p("M26 5 L26 11",{key:4}),
+        p("M13 24 L18 29 L28 20",{key:5})
+      ]);
+      case "heart": return svg([ p("M20 33C20 33 7 25.5 7 16.6 7 12.4 10.3 9 14.3 9 16.8 9 19 10.3 20 12.3 21 10.3 23.2 9 25.7 9 29.7 9 33 12.4 33 16.6 33 25.5 20 33 20 33Z",{key:1}) ]);
+      case "search": return svg([ R("circle",{key:1,cx:17,cy:17,r:11,fill:"none",stroke:"#767676",strokeWidth:2.4}), p("M25 25 L34 34",{key:2,stroke:"#767676"}) ]);
+      case "people": return svg([
+        R("circle",{key:1,cx:14,cy:15,r:5,fill:"none",stroke:"#1F8A5B",strokeWidth:2.2}),
+        R("circle",{key:2,cx:27,cy:17,r:4,fill:"none",stroke:"#1F8A5B",strokeWidth:2.2}),
+        p("M6 31C6 26 9.5 23 14 23 17 23 19.5 24.5 21 27",{key:3,stroke:"#1F8A5B"}),
+        p("M22 31C22.5 27.5 24.5 25.5 27 25.5 30.5 25.5 33 28 33 31.5",{key:4,stroke:"#1F8A5B"})
+      ]);
+      case "bell": return svg([
+        p("M20 7C14.5 7 11 11 11 16.5 11 25 8 27 8 27L32 27C32 27 29 25 29 16.5 29 11 25.5 7 20 7Z",{key:1,stroke:"#6433DF"}),
+        p("M17 31C17.5 33 18.6 34 20 34 21.4 34 22.5 33 23 31",{key:2,stroke:"#6433DF"})
+      ]);
+      case "fish": return svg([ p("M8 20 C13 13 26 13 32 20 C26 27 13 27 8 20Z",{key:1,stroke:"#0AA9C9"}), p("M32 20 L37 16 M32 20 L37 24",{key:2,stroke:"#0AA9C9"}), R("circle",{key:3,cx:14,cy:18,r:1.4,fill:"#0AA9C9"}) ]);
+      case "coupon": return svg([ R("path",{key:1,d:"M6 12 L34 12 L34 17 A3 3 0 0 0 34 23 L34 28 L6 28 L6 23 A3 3 0 0 0 6 17 Z",fill:"none",stroke:"#FF8A00",strokeWidth:2.2,strokeLinejoin:"round"}), R("path",{key:2,d:"M20 12 L20 28",stroke:"#FF8A00",strokeWidth:2,strokeDasharray:"2 3"}) ]);
+      case "chat": return svg([ p("M7 11 C7 8.8 8.8 7 11 7 L29 7 C31.2 7 33 8.8 33 11 L33 22 C33 24.2 31.2 26 29 26 L18 26 L11 31 L11 26 C8.8 26 7 24.2 7 22 Z",{key:1,stroke:"#1F8A5B"}) ]);
+      case "receipt": return svg([ p("M10 6 L30 6 L30 32 L26 29 L23 32 L20 29 L17 32 L14 29 L10 32 Z",{key:1,stroke:"#888"}), p("M15 14 L25 14 M15 20 L25 20",{key:2,stroke:"#888"}) ]);
+      default: return null;
+    }
+  }
+
+  renderVals(){
+    const t = this.props.type || "reserve";
+    const c = this.cfg[t] || this.cfg.reserve;
+    return {
+      title: c.title, hasBack: !!c.hasBack, hasDot: !!c.hasDot, tint: c.tint,
+      isSearch: !!c.isSearch,
+      iconEl: this.icon(c.icon),
+      message: c.message, sub: c.sub,
+      hasCta: !!c.cta, ctaLabel: c.cta || "", ctaClick: this.nav(c.ctaTo || "noop"),
+      hasChips: !!c.chips, chips: c.chips || [],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+  .sysc *{ box-sizing:border-box; }
+  .sysc{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .sysc .board{ display:flex; flex-wrap:wrap; gap:40px 34px; }
+  .sysc .case{ width:393px; flex:none; }
+  .sysc .clabel{ display:flex; align-items:center; gap:7px; margin-bottom:11px; }
+  .sysc .ctype{ height:22px; padding:0 9px; border-radius:6px; font-weight:800; font-size:11px; color:#fff; display:flex; align-items:center; }
+  .sysc .csit{ font-weight:700; font-size:15px; color:#363636; letter-spacing:-0.3px; }
+  .sysc .frame{ position:relative; width:393px; height:852px; border-radius:30px; overflow:hidden; box-shadow:0 12px 34px rgba(20,22,30,.16); background:#fff; }
+  .sysc .inner{ position:absolute; left:0; top:0; width:393px; height:852px; transform:none; transform-origin:top left; }
+  .sysc .syc-arrow{ position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:7; overflow:visible; }
+  /* backdrop */
+  .sysc .sb{ height:46px; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 28px; }
+  .sysc .bdrow{ height:13px; border-radius:4px; background:#EFF1F4; }
+  .sysc .ctxchip{ display:inline-flex; align-items:center; height:26px; padding:0 12px; border-radius:1000px; background:#F0F3F8; color:#8A93A3; font-weight:700; font-size:13px; letter-spacing:-0.3px; }
+  .sysc .scrim{ position:absolute; inset:0; background:rgba(0,0,0,.55); }
+  /* iOS alert */
+  .sysc .alert{ position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); width:270px; background:rgba(250,250,252,.96); backdrop-filter:blur(18px); border-radius:15px; overflow:hidden; }
+  .sysc .alert .ab{ padding:20px 18px 15px; text-align:center; }
+  .sysc .alert .at{ font-weight:700; font-size:17px; color:#191919; letter-spacing:-0.4px; }
+  .sysc .alert .ad{ margin-top:6px; font-weight:400; font-size:13.5px; line-height:1.45; color:#363636; }
+  .sysc .alert .arow{ display:flex; border-top:.5px solid rgba(0,0,0,.16); }
+  .sysc .alert .abtn{ flex:1; height:45px; display:flex; align-items:center; justify-content:center; font-size:17px; color:#0A84FF; }
+  .sysc .alert .abtn+.abtn{ border-left:.5px solid rgba(0,0,0,.16); }
+  /* toast */
+  .sysc .toast{ position:absolute; left:50%; bottom:104px; transform:translateX(-50%); display:inline-flex; align-items:center; gap:9px; background:rgba(25,25,25,.93); color:#fff; font-weight:600; font-size:15px; letter-spacing:-0.3px; padding:14px 20px; border-radius:1000px; white-space:nowrap; }
+  /* push */
+  .sysc .push{ position:absolute; left:14px; right:14px; top:58px; background:rgba(252,252,253,.86); backdrop-filter:blur(16px); border-radius:18px; padding:14px 15px; display:flex; gap:12px; box-shadow:0 8px 24px rgba(20,22,30,.16); }
+  .sysc .appicon{ width:40px; height:40px; border-radius:11px; background:linear-gradient(150deg,#6E45E8,#0041FF); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:17px; flex:none; }
+  /* kakao */
+  .sysc .kakao{ position:absolute; left:24px; right:24px; top:50%; transform:translateY(-50%); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,.3); }
+  .sysc .ktop{ height:40px; background:#FEE500; display:flex; align-items:center; gap:8px; padding:0 15px; }
+  .sysc .kbtn{ height:46px; display:flex; align-items:center; justify-content:center; border-top:1px solid #F0F0F0; font-weight:600; font-size:14px; color:#363636; }
+</style>
+</helmet>
+<div class="sysc" ref="{{ rootRef }}">
+  <div class="board">
+    <sc-for list="{{ cases }}" as="c" hint-placeholder-count="16">
+      <div class="case">
+        <div class="clabel"><span class="ctype" style="background:{{ c.typeColor }};">{{ c.typeLabel }}</span><span class="csit">{{ c.situation }}</span></div>
+        <div class="frame">
+          <div class="inner">
+            <!-- real prototype screen backdrop -->
+            <div style="position:absolute; inset:0; overflow:hidden;">
+              <sc-if value="{{ c.bgDetail }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></sc-if>
+              <sc-if value="{{ c.bgPay }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="pay" hint-size="393,1600"></dc-import></sc-if>
+              <sc-if value="{{ c.bgDone }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="done" hint-size="393,852"></dc-import></sc-if>
+              <sc-if value="{{ c.bgMy }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="mypage" hint-size="393,1400"></dc-import></sc-if>
+              <sc-if value="{{ c.bgReserv }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="reserv" hint-size="393,852"></dc-import></sc-if>
+              <sc-if value="{{ c.bgProfile }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></sc-if>
+              <sc-if value="{{ c.bgNews }}" hint-placeholder-val="{{ false }}"><dc-import name="News" hint-size="393,1600"></dc-import></sc-if>
+              <sc-if value="{{ c.bgMap }}" hint-placeholder-val="{{ false }}"><dc-import name="Map" hint-size="393,852"></dc-import></sc-if>
+              <sc-if value="{{ c.bgOnboard }}" hint-placeholder-val="{{ false }}"><dc-import name="Auth" start="onboarding" hint-size="393,852"></dc-import></sc-if>
+            </div>
+
+            <sc-if value="{{ c.dim }}" hint-placeholder-val="{{ false }}"><div class="scrim"></div></sc-if>
+
+            <!-- ALERT / CONFIRM -->
+            <sc-if value="{{ c.isAlert }}" hint-placeholder-val="{{ false }}">
+              <div class="alert"><div class="ab"><div class="at">{{ c.title }}</div><div class="ad">{{ c.desc }}</div></div><div class="arow"><sc-for list="{{ c.buttons }}" as="b" hint-placeholder-count="2"><div class="abtn" style="color:{{ b.color }}; font-weight:{{ b.weight }};">{{ b.label }}</div></sc-for></div></div>
+            </sc-if>
+
+            <!-- TOAST -->
+            <sc-if value="{{ c.isToast }}" hint-placeholder-val="{{ false }}">
+              <div class="toast"><span style="width:18px; height:18px; border-radius:50%; background:{{ c.dotColor }}; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.7 9.5 3.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>{{ c.title }}</div>
+            </sc-if>
+
+            <!-- PUSH -->
+            <sc-if value="{{ c.isPush }}" hint-placeholder-val="{{ false }}">
+              <div class="push"><div class="appicon">어</div><div style="flex:1; min-width:0;"><div style="display:flex; align-items:baseline; justify-content:space-between;"><span style="font-weight:700; font-size:14px; color:#191919;">어바웃피싱</span><span style="font-weight:500; font-size:12px; color:#888;">{{ c.time }}</span></div><div style="margin-top:3px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.3px;">{{ c.title }}</div><div style="margin-top:2px; font-weight:400; font-size:13.5px; line-height:1.4; color:#444; letter-spacing:-0.3px;">{{ c.desc }}</div></div></div>
+            </sc-if>
+
+            <!-- KAKAO -->
+            <sc-if value="{{ c.isKakao }}" hint-placeholder-val="{{ false }}">
+              <div class="kakao"><div class="ktop"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7 3 10.7c0 2.3 1.6 4.4 4 5.6-.2.7-.6 2.2-.7 2.5-.1.4.2.4.4.3.2-.1 2.3-1.5 3.2-2.1.7.1 1.4.2 2.1.2 5 0 9-3 9-6.7S17 4 12 4z" fill="#3C1E1E"></path></svg><span style="font-weight:700; font-size:13px; color:#3C1E1E;">알림톡 도착</span></div><div style="padding:15px 16px 13px;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:22px; height:22px; border-radius:7px; background:linear-gradient(150deg,#6E45E8,#0041FF); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:10px;">어</div><span style="font-weight:700; font-size:13px; color:#191919;">어바웃피싱</span></div><div style="margin-top:11px; font-weight:700; font-size:14.5px; color:#191919; letter-spacing:-0.3px;">{{ c.title }}</div><div style="margin-top:9px; font-weight:400; font-size:13px; line-height:1.7; color:#444; letter-spacing:-0.3px; white-space:pre-line;">{{ c.desc }}</div></div><sc-for list="{{ c.buttons }}" as="b" hint-placeholder-count="2"><div class="kbtn">{{ b.label }}</div></sc-for></div>
+            </sc-if>
+
+          </div>
+          <svg class="syc-arrow"></svg>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1100,&quot;height&quot;:560}}">
+class Component extends DCLogic {
+  rootRef = (el)=>{ this._root = el; if(el){ setTimeout(()=>this.drawCardArrows(),400); setTimeout(()=>this.drawCardArrows(),1400); } };
+  componentDidMount(){ this._d = ()=>this.drawCardArrows(); window.addEventListener("resize", this._d); setTimeout(this._d, 900); }
+  componentWillUnmount(){ window.removeEventListener("resize", this._d); }
+  drawCardArrows(){
+    const root = this._root; if(!root) return;
+    [...root.querySelectorAll(".case")].forEach((card,i)=>{
+      const frame=card.querySelector(".frame"), svg=card.querySelector(".syc-arrow");
+      const msg=card.querySelector(".alert");
+      if(!frame||!svg||!msg){ if(svg) svg.innerHTML=""; return; }
+      const fb=frame.getBoundingClientRect(), mb=msg.getBoundingClientRect();
+      const sx=fb.width*0.5, sy=14;
+      const mcx=mb.left+mb.width/2-fb.left, mtop=mb.top-fb.top, mbot=mb.bottom-fb.top;
+      const ex=mcx, ey = (mtop>sy+30) ? mtop-8 : mbot+8;
+      const my=(sy+ey)/2;
+      svg.innerHTML = `<defs><marker id="syah${i}" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0041FF"/></marker></defs><circle cx="${sx}" cy="${sy}" r="4" fill="#0041FF"/><path d="M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}" fill="none" stroke="#0041FF" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#syah${i})"/>`;
+    });
+  }
+  renderVals(){
+    const T = {
+      alert:{ l:"얼럿", c:"#FF3B30" }, confirm:{ l:"컴펌", c:"#6433DF" },
+      toast:{ l:"토스트", c:"#0041FF" }, push:{ l:"푸쉬", c:"#1F8A5B" }, kakao:{ l:"알림톡", c:"#E6A100" },
+    };
+    const tint = { detail:"#fff", pay:"#fff", my:"#fff", news:"#fff", map:"#EAF1F6", onboard:"#fff", done:"#fff", reserv:"#fff", profile:"#fff", review:"#fff", home:"#fff", lock:"#11131A" };
+    const mk = (o)=>{
+      const t = T[o.type];
+      return Object.assign({
+        typeLabel:t.l, typeColor:t.c, bdTint: tint[o.bd]||"#fff",
+        isAlert: o.type==="alert"||o.type==="confirm",
+        isToast: o.type==="toast", isPush: o.type==="push", isKakao: o.type==="kakao",
+        dim: o.type==="alert"||o.type==="confirm"||o.type==="kakao"||o.type==="push",
+        bgDetail: o.bd==="detail"||o.bd==="review", bgPay: o.bd==="pay", bgDone: o.bd==="done",
+        bgMy: o.bd==="my", bgReserv: o.bd==="reserv", bgProfile: o.bd==="profile",
+        bgNews: o.bd==="news"||o.bd==="home", bgMap: o.bd==="map", bgOnboard: o.bd==="onboard",
+        dotColor:"#3FD18A", time:"지금", buttons:o.buttons||[], desc:o.desc||"",
+      }, o);
+    };
+    const close={label:"닫기",color:"#0A84FF",weight:400}, cancel={label:"취소",color:"#0A84FF",weight:400};
+    const red=(l)=>({label:l,color:"#FF3B30",weight:600}), blue=(l)=>({label:l,color:"#0A84FF",weight:600});
+    return {
+      rootRef: this.rootRef,
+      cases: [
+        // 얼럿
+        mk({ type:"alert", situation:"예약 상세 · 정원 마감", screen:"예약 상세 화면", bd:"detail", title:"예약이 마감되었어요", desc:"다른 날짜나 다른 선박을 확인해보세요.", buttons:[blue("확인")] }),
+        mk({ type:"alert", situation:"결제 · 결제 실패", screen:"결제 화면", bd:"pay", title:"결제에 실패했어요", desc:"카드 한도나 정보를 확인하고 다시 시도해주세요.", buttons:[blue("확인")] }),
+        mk({ type:"alert", situation:"탐색 · 위치 권한", screen:"탐색(지도) 화면", bd:"map", title:"위치 권한이 필요해요", desc:"내 주변 출조 선박을 보려면 권한을 켜주세요.", buttons:[close,blue("설정 열기")] }),
+        mk({ type:"alert", situation:"예약 내역 · 당일 취소", screen:"예약 내역 화면", bd:"reserv", title:"지금은 환불이 어려워요", desc:"출항 당일 취소는 환불되지 않아요. 취소할까요?", buttons:[{label:"돌아가기",color:"#0A84FF",weight:600},red("취소")] }),
+        // 컴펌
+        mk({ type:"confirm", situation:"마이페이지 · 로그아웃", screen:"마이페이지 화면", bd:"my", title:"로그아웃 할까요?", desc:"다시 이용하려면 로그인이 필요해요.", buttons:[cancel,blue("로그아웃")] }),
+        mk({ type:"confirm", situation:"프로필 편집 · 회원 탈퇴", screen:"프로필 편집 화면", bd:"profile", title:"정말 탈퇴할까요?", desc:"등급·머니·쿠폰이 모두 사라지고 복구할 수 없어요.", buttons:[{label:"계속 이용",color:"#0A84FF",weight:600},red("탈퇴")] }),
+        mk({ type:"confirm", situation:"후기 작성 · 이탈", screen:"후기 작성 화면", bd:"review", title:"작성 중인 후기가 있어요", desc:"지금 나가면 작성한 내용이 사라져요.", buttons:[{label:"이어쓰기",color:"#0A84FF",weight:600},red("나가기")] }),
+        // 토스트
+        mk({ type:"toast", situation:"예약 상세 · 찜 추가", screen:"예약 상세 화면", bd:"detail", title:"찜한 선박에 추가했어요" }),
+        mk({ type:"toast", situation:"마이페이지 · 코드 복사", screen:"친구 초대 모달", bd:"my", title:"초대 코드를 복사했어요" }),
+        mk({ type:"toast", situation:"예약 완료 · 머니 적립", screen:"예약 완료 화면", bd:"done", title:"머니 70원이 적립됐어요" }),
+        mk({ type:"toast", situation:"관심 온보딩 · 선택 제한", screen:"관심 온보딩 화면", bd:"onboard", title:"최대 6개까지 선택할 수 있어요" }),
+        mk({ type:"toast", situation:"공통 · 네트워크 복구", screen:"전체 공통", bd:"news", title:"네트워크에 다시 연결됐어요" }),
+        // 푸쉬
+        mk({ type:"push", situation:"홈 · 예약 확정 수신", screen:"새소식(홈) 화면", bd:"news", title:"예약이 확정됐어요", desc:"블랙이글호 · 5/24(토) 04:30 출항이 확정됐어요.", time:"지금" }),
+        mk({ type:"push", situation:"홈 · 마감 임박 리타겟", screen:"새소식(홈) 화면", bd:"news", title:"찜한 만선호, 잔여 1자리", desc:"마감되기 전에 지금 예약하세요.", time:"5분 전" }),
+        // 알림톡
+        mk({ type:"kakao", situation:"카카오 · 예약 확정", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 예약이 확정되었습니다", desc:"현일님, 예약이 확정되었어요.\n· 블랙이글호 5/24(토) 04:30\n· 홍원항 · 1명 · 90,000원", buttons:[{label:"예약 상세 보기"},{label:"예약 취소"}] }),
+        mk({ type:"kakao", situation:"카카오 · 출항 전 안내", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 출항 전 안내드려요", desc:"내일 새벽 출항을 잊지 마세요.\n· 04:30 홍원항 집결\n· 준비물 신분증·멀미약·방한복", buttons:[{label:"길찾기"},{label:"준비물 확인"}] }),
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>어바웃피싱 서비스 최적화 (앱) · 8월버전</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Pretendard Variable",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:#0E0F13;color:#fff;min-height:100vh;padding:64px 32px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+  h1{font-size:30px;font-weight:800;letter-spacing:-0.8px;}
+  .sub{margin-top:10px;font-size:15px;font-weight:500;color:#8A92A6;letter-spacing:-0.3px;}
+  .grid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;}
+  a.card{display:block;text-decoration:none;background:#17191F;border:1px solid #23262F;border-radius:18px;padding:24px;transition:border-color .15s ease,transform .12s ease;}
+  a.card:hover{border-color:#0041FF;transform:translateY(-2px);}
+  .tag{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:1000px;font-size:11px;font-weight:700;letter-spacing:-0.2px;}
+  .t-primary{background:#0041FF;color:#fff;}
+  .t-dark{background:#2A2E38;color:#9AA2B2;}
+  .ctitle{margin-top:14px;font-size:19px;font-weight:800;letter-spacing:-0.5px;color:#fff;}
+  .cdesc{margin-top:7px;font-size:13.5px;font-weight:500;line-height:1.55;color:#7E8696;letter-spacing:-0.3px;}
+  .arrow{margin-top:14px;font-size:13px;font-weight:700;color:#5B8CFF;}
+  .sec{margin-top:46px;font-size:13px;font-weight:700;color:#5A6072;letter-spacing:0.4px;text-transform:uppercase;}
+  .files{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
+  .files a{text-decoration:none;font-size:12.5px;font-weight:600;color:#AEB6C6;background:#17191F;border:1px solid #23262F;border-radius:9px;padding:8px 13px;letter-spacing:-0.2px;}
+  .files a:hover{border-color:#0041FF;color:#fff;}
+  .foot{margin-top:54px;font-size:12px;color:#5A6072;line-height:1.7;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>어바웃피싱 서비스 최적화 (앱) · 8월버전<span style="color:#6433DF;">.</span></h1>
+    <div class="sub">전체 화면 · 인터랙티브 프로토타입 · 플로우 기획서 · 시스템 메시지 — iPhone 14 Pro (393px) 기준</div>
+
+    <div class="grid">
+      <a class="card" href="layout.dc.html">
+        <span class="tag t-primary">전체 화면</span>
+        <div class="ctitle">Layout · 전체 화면</div>
+        <div class="cdesc">인증·메인·마이·서브·빈상태·에러·상황별 시스템 메시지까지 모든 화면을 한 보드에서.</div>
+        <div class="arrow">열기 →</div>
+      </a>
+      <a class="card" href="prototype.dc.html">
+        <span class="tag t-primary">프로토타입</span>
+        <div class="ctitle">인터랙티브 프로토타입</div>
+        <div class="cdesc">디바이스 프레임 + 하단 탭(새소식·탐색·출조·프로필) + 모든 버튼/뒤로가기 동작.</div>
+        <div class="arrow">열기 →</div>
+      </a>
+      <a class="card" href="flow-spec.dc.html">
+        <span class="tag t-primary">플로우 기획서</span>
+        <div class="ctitle">플로우 기획서</div>
+        <div class="cdesc">화면별 번호·기능정책 + 버튼→화면 직각 연결 화살표 + 상황별 시스템 메시지.</div>
+        <div class="arrow">열기 →</div>
+      </a>
+      <a class="card" href="system-messages.dc.html">
+        <span class="tag t-dark">시스템 메시지</span>
+        <div class="ctitle">시스템 메시지 세트</div>
+        <div class="cdesc">얼럿 · 컴펌 · 토스트 · 푸쉬 · 카카오 알림톡 전체 카탈로그.</div>
+        <div class="arrow">열기 →</div>
+      </a>
+    </div>
+
+    <div class="sec">개별 화면 컴포넌트</div>
+    <div class="files">
+      <a href="Auth.dc.html">인증·온보딩</a>
+      <a href="Permission.dc.html">권한 동의</a>
+      <a href="News.dc.html">새소식 (피드형)</a>
+      <a href="Reserve.dc.html">선박상세·예약·결제·완료</a>
+      <a href="Map.dc.html">탐색 지도</a>
+      <a href="Search.dc.html">통합검색</a>
+      <a href="My.dc.html">마이페이지 (9종)</a>
+      <a href="Sub.dc.html">알림·공지·이벤트</a>
+      <a href="Empty.dc.html">빈 상태 (9종)</a>
+      <a href="Error.dc.html">에러 (4종)</a>
+      <a href="SysCase.dc.html">상황별 시스템 메시지</a>
+    </div>
+
+    <div class="foot">
+      어바웃피싱 서비스 최적화 (앱) · 8월버전 — Design Component (.dc.html) 기반.<br>
+      각 .dc.html은 단독 실행되며 support.js·scr/(추출 번들)·assets/를 상대경로로 참조해요. 깃 업로드 시 폴더 전체를 함께 올려주세요.
+    </div>
+  </div>
+</body>
+</html>
