@@ -87,7 +87,6 @@
     .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
       border-radius:2px;box-sizing:border-box;overflow:hidden}
     @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
-    @keyframes sc-veil-pulse{0%,100%{opacity:.4}50%{opacity:1}}
     html.sc-dc-streaming .sc-placeholder,
     html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
       background:color-mix(in srgb,currentColor 5%,transparent);
@@ -96,11 +95,10 @@
     html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
       position:absolute;inset:0;pointer-events:none;
       background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
-      background-size:400% 100%;animation:sc-shine .73s ease infinite}
-    html.sc-dc-streaming::after{content:'';position:fixed;inset:0;
-      z-index:2147483646;pointer-events:none;
-      box-shadow:inset 0 0 90px rgba(217,119,87,.16),inset 0 0 22px rgba(217,119,87,.1);
-      animation:sc-veil-pulse 1.36s ease-in-out infinite}
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
     .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
       color:rgba(0,0,0,.7);word-break:break-word}
     .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;

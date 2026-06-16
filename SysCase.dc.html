@@ -102,6 +102,8 @@ class Component extends DCLogic {
   componentWillUnmount(){ window.removeEventListener("resize", this._d); }
   drawCardArrows(){
     const root = this._root; if(!root) return;
+    [...root.querySelectorAll(".syc-arrow")].forEach(svg=>{ svg.innerHTML=""; });
+    return;
     [...root.querySelectorAll(".case")].forEach((card,i)=>{
       const frame=card.querySelector(".frame"), svg=card.querySelector(".syc-arrow");
       const msg=card.querySelector(".alert");

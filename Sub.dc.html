@@ -118,12 +118,25 @@
   </div>
   </sc-if>
 
+  <!-- ============ 공지/이벤트 상세 ============ -->
+  <sc-if value="{{ isPostDetail }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; background:#fff; z-index:50;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ closeDet }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">공지사항</span></div>
+    <div style="padding:14px 22px 0;">
+      <span style="height:22px; padding:0 9px; border-radius:6px; background:{{ pdBadgeBg }}; color:{{ pdBadgeColor }}; font-weight:700; font-size:11px; display:inline-flex; align-items:center;">{{ pdBadge }}</span>
+      <div style="margin-top:12px; font-weight:800; font-size:19px; line-height:1.4; color:#191919; letter-spacing:-0.5px;">{{ pdTitle }}</div>
+      <div style="margin-top:8px; font-weight:500; font-size:12.5px; color:#AAA;">{{ pdDate }}</div>
+      <div style="margin-top:20px; padding-top:20px; border-top:1px solid #F2F2F2; font-weight:500; font-size:14px; line-height:1.8; color:#444; letter-spacing:-0.3px; white-space:pre-line;">{{ pdBody }}</div>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ============ 공지사항 ============ -->
   <sc-if value="{{ isNotice }}" hint-placeholder-val="{{ false }}">
   <div>
     <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">공지사항</span></div>
     <sc-for list="{{ notices }}" as="n" hint-placeholder-count="5">
-      <div class="tap" onClick="{{ noop }}" style="padding:18px 20px; border-bottom:1px solid #F3F3F3;">
+      <div class="tap" onClick="{{ n.onClick }}" style="padding:18px 20px; border-bottom:1px solid #F3F3F3;">
         <div style="display:flex; align-items:center; gap:8px;"><span style="height:22px; padding:0 9px; border-radius:6px; background:{{ n.badgeBg }}; color:{{ n.badgeColor }}; font-weight:700; font-size:11px; display:flex; align-items:center;">{{ n.badge }}</span><span style="margin-left:auto; font-weight:500; font-size:12px; color:#BBB;">{{ n.date }}</span></div>
         <div style="margin-top:9px; font-weight:600; font-size:15px; color:#191919; letter-spacing:-0.4px;">{{ n.title }}</div>
         <div style="margin-top:5px; font-weight:500; font-size:13px; line-height:1.5; color:#999; letter-spacing:-0.3px;">{{ n.desc }}</div>
@@ -153,12 +166,69 @@
   </div>
   </sc-if>
 
+  <!-- ============ 후기 작성 ============ -->
+  <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">후기 작성</span></div><span style="font-weight:700; font-size:13px; color:#0041FF;">+1,500 머니</span></div>
+    <div style="padding:14px 20px 0;">
+      <div style="font-weight:700; font-size:15px; color:#191919; letter-spacing:-0.4px;">블랙이글호 · 5/24 출조</div>
+      <div style="margin-top:16px; font-weight:600; font-size:13px; color:#767676;">만족도</div>
+      <div style="margin-top:9px; display:flex; gap:6px;"><sc-for list="{{ stars }}" as="s" hint-placeholder-count="5"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 3 L14.6 9 L21 9.5 L16 14 L17.5 20.5 L12 17 L6.5 20.5 L8 14 L3 9.5 L9.4 9 Z" fill="{{ s }}"></path></svg></sc-for></div>
+      <div style="margin-top:20px; font-weight:600; font-size:13px; color:#767676;">사진 첨부 <span style="color:#AAA;">(선택)</span></div>
+      <div style="margin-top:9px; display:flex; gap:8px;"><div class="tap" onClick="{{ noop }}" style="width:74px; height:74px; border-radius:12px; background:#F3F4F6; display:flex; align-items:center; justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 6 L12 18 M6 12 L18 12" stroke="#AAA" stroke-width="2" stroke-linecap="round"></path></svg></div></div>
+      <div style="margin-top:20px; font-weight:600; font-size:13px; color:#767676;">후기 내용</div>
+      <div style="margin-top:9px; height:130px; border-radius:12px; background:#F5F6F8; padding:14px; font-weight:500; font-size:14px; color:#AAA; line-height:1.6;">조황·선장 친절도·시설 등 솔직한 후기를 남겨주세요. 다른 낚시인에게 큰 도움이 돼요.</div>
+    </div>
+    <div style="position:sticky; bottom:0; background:#fff; padding:14px 18px; border-top:1px solid #EEE;"><div class="tap" onClick="{{ submitReview }}" style="height:52px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">등록하기</div></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 1:1 채팅 (선장/중고거래) ============ -->
+  <sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex; flex-direction:column; height:804px;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px; border-bottom:1px solid #F2F2F2; flex:none;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div style="flex:1;"><div style="font-weight:700; font-size:15px; color:#191919;">김태수 선장</div><div style="margin-top:1px; font-weight:500; font-size:11.5px; color:#1F8A5B;">● 응답 보통 10분 이내</div></div><svg class="tap" width="22" height="22" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="#999"></circle><circle cx="12" cy="12" r="1.6" fill="#999"></circle><circle cx="19" cy="12" r="1.6" fill="#999"></circle></svg></div>
+    <div style="flex:1; overflow-y:auto; background:#F5F6F8; padding:16px 16px;">
+      <div style="text-align:center; margin-bottom:14px;"><span style="font-weight:600; font-size:11px; color:#999; background:rgba(0,0,0,.05); padding:5px 11px; border-radius:1000px;">2026.05.21</span></div>
+      <div style="display:flex; gap:8px; margin-bottom:12px;"><div style="width:30px; height:30px; border-radius:50%; background:#D9DEE5; flex:none;"></div><div style="max-width:74%; background:#fff; border-radius:4px 16px 16px 16px; padding:11px 14px; font-weight:500; font-size:14px; color:#363636; line-height:1.5;">안녕하세요 선장님, 5/24 출조 초보도 괜찮을까요?</div></div>
+      <div style="display:flex; justify-content:flex-end; margin-bottom:12px;"><div style="max-width:74%; background:#F2F5FA; border-radius:16px 4px 16px 16px; padding:11px 14px; font-weight:500; font-size:14px; color:#363636; line-height:1.5;">네 그럼요! 채비·자리 다 챙겨드리니 편하게 오세요. 멀미약만 챙겨오시면 돼요.</div></div>
+    </div>
+    <div style="flex:none; padding:10px 14px; border-top:1px solid #EEE; display:flex; align-items:center; gap:9px; background:#fff;"><div style="width:34px; height:34px; border-radius:50%; background:#F3F4F6; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 6 L12 18 M6 12 L18 12" stroke="#999" stroke-width="2" stroke-linecap="round"></path></svg></div><div style="flex:1; height:40px; border-radius:1000px; background:#F3F4F6; display:flex; align-items:center; padding:0 15px; font-weight:500; font-size:14px; color:#AAA;">메시지를 입력하세요</div><div class="tap" onClick="{{ noop }}" style="width:40px; height:40px; border-radius:50%; background:#0041FF; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 12 L20 4 L13 20 L11 13 Z" fill="#fff"></path></svg></div></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 예약 취소·환불 ============ -->
+  <sc-if value="{{ isCancel }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">예약 취소·환불</span></div>
+    <div style="padding:14px 20px 0;">
+      <div style="border-radius:14px; background:#F8F8F8; padding:16px;"><div style="font-weight:700; font-size:15px; color:#191919;">블랙이글호</div><div style="margin-top:5px; font-weight:500; font-size:13px; color:#767676;">5/24(토) 04:30 · 1인 · 90,000원</div></div>
+      <div style="margin-top:22px; font-weight:700; font-size:14px; color:#191919;">취소 사유</div>
+      <div style="margin-top:11px; display:flex; flex-direction:column; gap:11px;"><sc-for list="{{ cancelReasons }}" as="c" hint-placeholder-count="4"><div class="tap" onClick="{{ noop }}" style="display:flex; align-items:center; gap:10px;"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="{{ c.stroke }}" stroke-width="1.6"></circle><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><circle cx="10" cy="10" r="4.5" fill="#0041FF"></circle></sc-if></svg><span style="font-weight:500; font-size:14px; color:#363636;">{{ c.label }}</span></div></sc-for></div>
+      <div style="margin-top:22px; border-radius:12px; background:#EAF0FF; padding:15px 16px;"><div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:13px; color:#5570A8;">예상 환불 금액</span><span style="font-weight:800; font-size:17px; color:#0041FF;">90,000원</span></div><div style="margin-top:6px; font-weight:500; font-size:11.5px; color:#7E94C4;">*출항 24시간 전이라 전액 환불돼요.</div></div>
+    </div>
+    <div style="position:sticky; bottom:0; background:#fff; padding:14px 18px; border-top:1px solid #EEE;"><div class="tap" onClick="{{ submitCancel }}" style="height:52px; border-radius:1000px; background:#EE0005; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">예약 취소하기</div></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 완료 오버레이 (취소/후기) ============ -->
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; background:#fff; z-index:60; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 40px; text-align:center;">
+    <div style="width:92px; height:92px; border-radius:50%; background:{{ doneTint }}; display:flex; align-items:center; justify-content:center;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M11 21 L18 28 L30 13" fill="none" stroke="{{ doneColor }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    <div style="margin-top:22px; font-weight:800; font-size:20px; color:#191919; letter-spacing:-0.5px;">{{ doneTitle }}</div>
+    <div style="margin-top:11px; font-weight:500; font-size:14px; line-height:1.6; color:#999; letter-spacing:-0.4px; white-space:pre-line;">{{ doneDesc }}</div>
+    <div class="tap" onClick="{{ goHome }}" style="margin-top:30px; height:50px; padding:0 36px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#fff;">{{ doneCta }}</div>
+    <sc-if value="{{ doneSub }}" hint-placeholder-val="{{ false }}"><div class="tap" onClick="{{ back }}" style="margin-top:16px; font-weight:500; font-size:14px; color:#999; text-decoration:underline; text-underline-offset:3px;">{{ doneSub }}</div></sc-if>
+  </div>
+  </sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;detail&quot;,&quot;notif&quot;,&quot;notice&quot;,&quot;event&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { wish:false };
+  state = { wish:false, det:null, done:null };
   nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  showDet(d){ return ()=> this.setState({det:d}); }
+  closeDet = ()=> this.setState({det:null});
 
   ic(name){
     const R=React.createElement;
@@ -176,8 +246,26 @@ class Component extends DCLogic {
   renderVals(){
     const s = this.props.screen || "detail";
     const isDetail = s==="detail";
+    const det = this.state.det;
     return {
+      isPostDetail: !!det,
+      pdBadge: det?det.badge:"", pdBadgeBg: det?det.badgeBg:"#EEF3FF", pdBadgeColor: det?det.badgeColor:"#0041FF",
+      pdDate: det?det.date:"", pdTitle: det?det.title:"", pdBody: det?det.body:"",
+      closeDet: this.closeDet,
       isDetail, isNotif:s==="notif", isNotice:s==="notice", isEvent:s==="event",
+      isReview:s==="review", isChat:s==="chat", isCancel:s==="cancel",
+      isDone: !!this.state.done,
+      doneTint: this.state.done==="cancel" ? "#FFECEC" : "#E8FBEE",
+      doneColor: this.state.done==="cancel" ? "#EE0005" : "#1F8A5B",
+      doneTitle: this.state.done==="cancel" ? "예약이 취소됐어요" : "후기가 등록됐어요",
+      doneDesc: this.state.done==="cancel" ? "환불 90,000원은 2~3영업일 이내\n원결제 수단으로 입금돼요." : "소중한 후기 감사해요.\n1,500머니가 적립됐어요.",
+      doneCta: this.state.done==="cancel" ? "예약 내역으로" : "홈으로",
+      doneSub: this.state.done==="cancel" ? "" : "내 조황에서 보기",
+      submitReview: ()=> this.setState({done:"review"}),
+      submitCancel: ()=> this.setState({done:"cancel"}),
+      goHome: this.state.done==="cancel" ? this.nav("reserv") : this.nav("home"),
+      stars:["#FF8A00","#FF8A00","#FF8A00","#FF8A00","#E5E5E5"],
+      cancelReasons:[{label:"개인 사정으로 일정 변경",on:true,stroke:"#0041FF"},{label:"기상 악화 우려",on:false,stroke:"#CFCFCF"},{label:"다른 선박으로 변경",on:false,stroke:"#CFCFCF"},{label:"단순 변심",on:false,stroke:"#CFCFCF"}],
       statusBg: isDetail ? "transparent" : "#fff",
       statusColor: isDetail ? "#fff" : "#191919",
       back: this.nav("back"), noop: this.nav("noop"),
@@ -202,19 +290,19 @@ class Component extends DCLogic {
       notifList: [
         { title:"예약이 확정되었어요", desc:"블랙이글호 · 08.16(토) 04:30 출항이 확정됐어요. 준비물을 확인해보세요.", time:"방금 전", tint:"#EAF0FF", icon:this.ic("cal"), unread:true, bg:"#F7FAFF", onClick:this.nav("detail") },
         { title:"머니 70원이 적립됐어요", desc:"첫 예약 축하 머니가 도착했어요. 다음 예약에 바로 쓸 수 있어요.", time:"1시간 전", tint:"#FFF7E0", icon:this.ic("coin"), unread:true, bg:"#FFFDF6", onClick:this.nav("my") },
-        { title:"중고거래 채팅이 왔어요", desc:"#광어킹 고객이 ‘갈치대 4.5칸’에 문의를 남겼어요.", time:"어제", tint:"#E8FBEE", icon:this.ic("trade"), unread:false, bg:"#fff", onClick:this.nav("noop") },
+        { title:"중고거래 채팅이 왔어요", desc:"#광어킹 고객이 ‘갈치대 4.5칸’에 문의를 남겼어요.", time:"어제", tint:"#E8FBEE", icon:this.ic("trade"), unread:false, bg:"#fff", onClick:this.nav("chat") },
         { title:"관심 어종 핫조황", desc:"팔로우한 ‘참돔러버’님이 홍원항 조황을 올렸어요.", time:"2일 전", tint:"#F5EDFF", icon:this.ic("bell"), unread:false, bg:"#fff", onClick:this.nav("news_b") },
       ],
       notices: [
-        { badge:"중요", badgeBg:"#FFECEC", badgeColor:"#EE0005", date:"2026.08.14", title:"추석 연휴 예약·환불 운영 안내", desc:"연휴 기간 고객센터 운영 시간과 환불 처리 일정을 안내드려요." },
-        { badge:"업데이트", badgeBg:"#EEF3FF", badgeColor:"#0041FF", date:"2026.08.10", title:"출조 준비 체크리스트 기능이 추가됐어요", desc:"예약 상세에서 멀미약·복장·채비를 한 번에 확인할 수 있어요." },
-        { badge:"정책", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.08.01", title:"기상 결항 자동 환불 정책 변경", desc:"선장 결항 판단 시 결제 금액 100%가 자동으로 환불돼요." },
-        { badge:"점검", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.07.28", title:"시스템 정기 점검 안내 (08.15 02:00~06:00)", desc:"점검 시간 동안 예약·결제 이용이 일시 제한될 수 있어요." },
+        { badge:"중요", badgeBg:"#FFECEC", badgeColor:"#EE0005", date:"2026.08.14", title:"추석 연휴 예약·환불 운영 안내", desc:"연휴 기간 고객센터 운영 시간과 환불 처리 일정을 안내드려요.", onClick:this.showDet({badge:"중요",badgeBg:"#FFECEC",badgeColor:"#EE0005",date:"2026.08.14",title:"추석 연휴 예약·환불 운영 안내",body:"추석 연휴(9/14~9/18) 기간 고객센터 운영과 환불 처리 일정을 안내드려요.\n\n· 고객센터 휴무  9/15 ~ 9/17\n· 휴무 기간 접수된 환불은 9/18\ubd80\ud130 순차 처리돼요.\n· 기상 결항 자동환불은 연휴 중에도 정상 작동해요.\n\n이용에 참고 부탁드려요."}) },
+        { badge:"업데이트", badgeBg:"#EEF3FF", badgeColor:"#0041FF", date:"2026.08.10", title:"출조 준비 체크리스트 기능이 추가됐어요", desc:"예약 상세에서 멀미약·복장·채비를 한 번에 확인할 수 있어요.", onClick:this.showDet({badge:"업데이트",badgeBg:"#EEF3FF",badgeColor:"#0041FF",date:"2026.08.10",title:"출조 준비 체크리스트 기능 추가",body:"이제 예약 상세 화면에서 출조 준비물을 체크리스트로 한번에 확인할 수 있어요.\n\n· 멀미약·방한복·장갑 등 기본 준비물\n· 선박별 제공/미제공 채비 구분\n· 날씨·물때 자동 안내\n\n지금 바로 써보세요."}) },
+        { badge:"정책", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.08.01", title:"기상 결항 자동 환불 정책 변경", desc:"선장 결항 판단 시 결제 금액 100%가 자동으로 환불돼요.", onClick:this.showDet({badge:"정책",badgeBg:"#F3F3F3",badgeColor:"#767676",date:"2026.08.01",title:"기상 결항 자동 환불 정책 변경",body:"선장의 결항 판단 시 버튼 한 번으로 결제 금액 100%가 자동 환불돼요.\n\n· 별도 신청 없이 자동 처리\n· 원결제 수단으로 2~3영업일 내 입금\n· 적용일  2026.08.01\n\n고객 편의를 위한 변경이에요."}) },
+        { badge:"점검", badgeBg:"#F3F3F3", badgeColor:"#767676", date:"2026.07.28", title:"시스템 정기 점검 안내 (08.15 02:00~06:00)", desc:"점검 시간 동안 예약·결제 이용이 일시 제한될 수 있어요.", onClick:this.showDet({badge:"점검",badgeBg:"#F3F3F3",badgeColor:"#767676",date:"2026.07.28",title:"시스템 정기 점검 안내",body:"더 나은 서비스를 위해 시스템 점검을 진행해요.\n\n· 일시  2026.08.15(금) 02:00 ~ 06:00\n· 영향  예약·결제·로그인 일시 중단\n· 조황·지도 조회는 정상 이용 가능\n\n이용에 참고 부탁드려요."}) },
       ],
       events: [
-        { title:"첫 출조,\n5,000원 머니 드려요", sub:"신규 가입하고 첫 예약 시 자동 적립", tag:"진행중", period:"2026.08.01 ~ 08.31", bg:"linear-gradient(135deg,#2E6BF6,#0041FF)", onClick:this.nav("noop") },
-        { title:"제2회 어바웃피싱\n챔피언십 참가자 모집", sub:"전국 선상낚시 최강자를 가려요", tag:"D-12", period:"2026.09.01 ~ 09.30", bg:"linear-gradient(135deg,#7B3FE4,#5A1FC0)", onClick:this.nav("noop") },
-        { title:"주말 출조\n최대 20% 할인", sub:"주꾸미 시즌 한정 특가", tag:"진행중", period:"매주 금~일", bg:"linear-gradient(135deg,#0AA9C9,#0AD2FF)", onClick:this.nav("noop") },
+        { title:"첫 출조,\n5,000원 머니 드려요", sub:"신규 가입하고 첫 예약 시 자동 적립", tag:"진행중", period:"2026.08.01 ~ 08.31", bg:"linear-gradient(135deg,#2E6BF6,#0041FF)", onClick:this.showDet({badge:"이벤트",badgeBg:"#EEF3FF",badgeColor:"#0041FF",date:"2026.08.01 ~ 08.31",title:"첫 출조, 5,000원 머니 드려요",body:"신규 가입 후 첫 선박 예약을 완료하면 5,000원 머니를 자동 지급해드려요.\n\n· 대상  신규 가입 회원\n· 지급  첫 예약 결제 완료 시 자동 적립\n· 사용  적립일로부터 30일 이내\n\n지금 마음에 드는 선박을 찾아보세요."}) },
+        { title:"제2회 어바웃피싱\n챔피언십 참가자 모집", sub:"전국 선상낚시 최강자를 가려요", tag:"D-12", period:"2026.09.01 ~ 09.30", bg:"linear-gradient(135deg,#7B3FE4,#5A1FC0)", onClick:this.showDet({badge:"챔피언십",badgeBg:"#F1EBFF",badgeColor:"#6433DF",date:"2026.09.01 ~ 09.30",title:"제2회 어바웃피싱 챔피언십",body:"전국 선상낚시 최강자를 가리는 제2회 챔피언십에 참가하세요.\n\n· 기간  2026.09.01 ~ 09.30\n· 총 상금  4,000만원 규모\n· 참가  앱 내 신청 후 지정 선박 예약\n· Lv.4 이상은 시드 자동 부여\n\n지금 참가 신청하고 명예의 전다에 도전하세요."}) },
+        { title:"주말 출조\n최대 20% 할인", sub:"주꾸미 시즌 한정 특가", tag:"진행중", period:"매주 금~일", bg:"linear-gradient(135deg,#0AA9C9,#0AD2FF)", onClick:this.showDet({badge:"할인",badgeBg:"#E6F7FB",badgeColor:"#0AA9C9",date:"매주 금~일",title:"주말 출조 최대 20% 할인",body:"주꾸미 시즌 한정, 주말 출조 선박을 최대 20% 할인해드려요.\n\n· 대상  매주 금~일 출항 선박\n· 할인  선박별 최대 20%\n· 주꾸미·갈치 시즌 선박 중점 적용\n\n마감 전에 서둘러 예약하세요."}) },
       ],
     };
   }

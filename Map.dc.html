@@ -37,11 +37,21 @@
   </div>
 
   <!-- map surface -->
-  <div style="position:absolute; inset:0; background:linear-gradient(180deg,#BFE0EF,#A9D4E8);">
-    <div style="position:absolute; left:-40px; top:120px; width:340px; height:520px; background:#E9EFE0; border-radius:46% 54% 60% 40%/50% 44% 56% 50%; opacity:.96;"></div>
-    <div style="position:absolute; left:150px; top:330px; width:300px; height:430px; background:#EDF1E6; border-radius:54% 46% 42% 58%/46% 54% 46% 54%;"></div>
-    <div style="position:absolute; left:60px; top:230px; right:60px; height:2px; background:rgba(255,170,90,.5);"></div>
-    <div style="position:absolute; left:120px; top:200px; bottom:200px; width:2px; background:rgba(255,170,90,.45);"></div>
+  <div style="position:absolute; inset:0; background:#ABD3E8; overflow:hidden;">
+    <!-- landmass (Korea-ish coastline) -->
+    <div style="position:absolute; left:-60px; top:90px; width:360px; height:620px; background:#EDEFE6; border-radius:42% 58% 52% 48%/38% 42% 58% 62%; box-shadow:inset -8px 0 18px rgba(150,170,140,.18);"></div>
+    <div style="position:absolute; left:170px; top:300px; width:320px; height:520px; background:#EFF1E9; border-radius:56% 44% 48% 52%/44% 56% 44% 56%;"></div>
+    <div style="position:absolute; left:30px; top:540px; width:120px; height:120px; background:#EFF1E9; border-radius:50%;"></div>
+    <!-- roads -->
+    <div style="position:absolute; left:40px; top:210px; width:280px; height:3px; background:rgba(255,165,80,.55); transform:rotate(8deg);"></div>
+    <div style="position:absolute; left:90px; top:160px; width:3px; height:420px; background:rgba(255,165,80,.45); transform:rotate(-6deg);"></div>
+    <div style="position:absolute; left:150px; top:360px; width:230px; height:2px; background:rgba(255,200,120,.5); transform:rotate(-12deg);"></div>
+    <div style="position:absolute; left:200px; top:120px; width:2px; height:360px; background:rgba(255,200,120,.45);"></div>
+    <!-- region labels -->
+    <span style="position:absolute; left:60px; top:300px; font-weight:700; font-size:12px; color:rgba(120,130,110,.6);">경기도</span>
+    <span style="position:absolute; left:240px; top:440px; font-weight:700; font-size:12px; color:rgba(120,130,110,.6);">강원도</span>
+    <span style="position:absolute; left:120px; top:600px; font-weight:700; font-size:12px; color:rgba(120,130,110,.6);">충청도</span>
+    <span style="position:absolute; right:24px; top:240px; font-weight:600; font-size:10px; color:rgba(90,140,180,.7);">동해</span>
 
     <!-- markers -->
     <sc-for list="{{ markers }}" as="m" hint-placeholder-count="8">
@@ -64,6 +74,21 @@
     <div class="tap" onClick="{{ noop }}" style="width:44px; height:44px; border-radius:50%; background:#fff; box-shadow:0 3px 12px rgba(20,22,30,.16); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="4.5" fill="none" stroke="#0041FF" stroke-width="1.7"></circle><path d="M11 1.5 L11 4 M11 18 L11 20.5 M1.5 11 L4 11 M18 11 L20.5 11" stroke="#0041FF" stroke-width="1.7" stroke-linecap="round"></path></svg></div>
   </div>
 
+  <!-- BOTTOM TAB (탐색은 메인 탭이라 하단탭 노출) -->
+  <sc-if value="{{ noSheet }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute; left:0; right:0; bottom:0; height:84px; background:linear-gradient(180deg, rgba(255,255,255,0), #ffffff 58%); border-top:1px solid rgba(133,137,160,.12); z-index:25;">
+    <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 28px;">
+      <div style="display:flex; align-items:center; gap:26px;">
+        <span class="tap" onClick="{{ goNews }}" style="font-weight:600; font-size:18px; color:#AEAEB6; letter-spacing:-0.5px;">새소식</span>
+        <span class="tap" onClick="{{ noop }}" style="font-weight:700; font-size:18px; color:#191919; letter-spacing:-0.5px;">탐색</span>
+        <span class="tap" onClick="{{ goChuljo }}" style="font-weight:600; font-size:18px; color:#AEAEB6; letter-spacing:-0.5px;">출조</span>
+      </div>
+      <div class="tap" onClick="{{ goMy }}" style="width:40px; height:40px; border-radius:50%; background:linear-gradient(150deg,#7B5CFF,#5B33E0); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#fff;">현</div>
+    </div>
+    <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
+  </div>
+  </sc-if>
+
   <!-- ============ 피싱포인트 시트 ============ -->
   <sc-if value="{{ sPoint }}" hint-placeholder-val="{{ false }}">
   <div class="sheet" style="top:300px;">
@@ -79,7 +104,7 @@
       <div style="padding:18px 22px 0; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">시간대별 해상바람</div>
       <div style="padding:10px 22px 0;">
         <sc-for list="{{ windRows }}" as="w" hint-placeholder-count="8">
-          <div style="display:flex; align-items:center; padding:6px 0; font-size:12.5px; letter-spacing:-0.3px;"><span style="width:42px; color:#999; font-weight:500;">{{ w.h }}</span><span style="width:56px; color:#363636; font-weight:600;">{{ w.spd }}</span><span style="width:46px; color:#767676; font-weight:500;">{{ w.dir }}</span><span style="flex:1; color:#0041FF; font-weight:600;">{{ w.wave }}</span></div>
+          <div style="display:flex; align-items:center; padding:6px 0; font-size:12.5px; letter-spacing:-0.3px;"><span style="width:38px; color:#999; font-weight:500;">{{ w.h }}</span><span style="width:54px; color:#363636; font-weight:600;">{{ w.spd }}</span><span style="width:42px; color:#767676; font-weight:500;">{{ w.dir }}</span><span style="width:74px; color:#0041FF; font-weight:600;">{{ w.wave }}</span><span style="flex:1; color:#5B8CC9; font-weight:500;">{{ w.wave2 }}</span></div>
         </sc-for>
       </div>
       <div style="padding:20px 22px 0; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">어류활성도 / 입질확률 <span style="font-weight:500; font-size:12px; color:#AAA;">(예측)</span></div>
@@ -123,12 +148,13 @@
   <!-- ============ 길안내 앱 선택 ============ -->
   <sc-if value="{{ sApp }}" hint-placeholder-val="{{ false }}">
   <div style="position:absolute; inset:0; background:rgba(0,0,0,.4); z-index:40; display:flex; align-items:flex-end;" onClick="{{ close }}">
-    <div class="sheet" style="position:relative;">
+    <div class="sheet" style="position:relative; width:100%;">
       <div class="grab"></div>
       <div style="text-align:center; padding:10px 0 18px; font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">길안내 앱 선택</div>
-      <div style="display:flex; gap:12px; padding:0 22px;">
-        <div class="tap" onClick="{{ close }}" style="flex:1; height:118px; border-radius:14px; background:#F4F5F7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px;"><div style="width:50px; height:50px; border-radius:50%; background:#03C75A; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:22px;">N</div><span style="font-weight:600; font-size:13.5px; color:#363636;">네이버 지도</span></div>
-        <div class="tap" onClick="{{ close }}" style="flex:1; height:118px; border-radius:14px; background:#F4F5F7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px;"><div style="width:50px; height:50px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; color:#3C1E1E; font-weight:800; font-size:22px;">K</div><span style="font-weight:600; font-size:13.5px; color:#363636;">카카오맵</span></div>
+      <div style="display:flex; gap:10px; padding:0 22px;">
+        <div class="tap" onClick="{{ close }}" style="flex:1; height:118px; border-radius:14px; background:#F4F5F7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px;"><div style="width:50px; height:50px; border-radius:50%; background:#03C75A; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:22px;">N</div><span style="font-weight:600; font-size:13px; color:#363636;">네이버지도</span></div>
+        <div class="tap" onClick="{{ close }}" style="flex:1; height:118px; border-radius:14px; background:#F4F5F7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px;"><div style="width:50px; height:50px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; color:#3C1E1E; font-weight:800; font-size:22px;">K</div><span style="font-weight:600; font-size:13px; color:#363636;">카카오맵</span></div>
+        <div class="tap" onClick="{{ close }}" style="flex:1; height:118px; border-radius:14px; background:#F4F5F7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px;"><div style="width:50px; height:50px; border-radius:50%; background:#1A1A2E; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:20px;">T</div><span style="font-weight:600; font-size:13px; color:#363636;">T맵</span></div>
       </div>
       <div class="tap" onClick="{{ close }}" style="text-align:center; padding:18px 0 24px; font-weight:500; font-size:14px; color:#AAA;">취소</div>
     </div>
@@ -192,11 +218,18 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;base&quot;,&quot;point&quot;,&quot;route&quot;,&quot;parking&quot;,&quot;app&quot;,&quot;catchf&quot;,&quot;catch&quot;,&quot;reservef&quot;,&quot;reserve&quot;,&quot;cctvf&quot;,&quot;cctv&quot;],&quot;default&quot;:&quot;base&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { filter:"point", sheet:null, ptab:"낚시예측" };
+  state = { filter:null, sheet:undefined, ptab:"낚시예측" };
   nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
   set(p){ return ()=> this.setState(p); }
+  presets = {
+    base:{filter:"point",sheet:null}, point:{filter:"point",sheet:"point"}, route:{filter:"point",sheet:"route"},
+    parking:{filter:"point",sheet:"parking"}, app:{filter:"point",sheet:"app"},
+    catchf:{filter:"catch",sheet:null}, catch:{filter:"catch",sheet:"catch"},
+    reservef:{filter:"reserve",sheet:null}, reserve:{filter:"reserve",sheet:"reserve"},
+    cctvf:{filter:"cctv",sheet:null}, cctv:{filter:"cctv",sheet:"cctv"},
+  };
 
   mkCluster(n, color){ const R=React.createElement; return R("div",{style:{minWidth:n>99?34:30,height:n>99?34:30,padding:"0 4px",borderRadius:999,background:color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:n>99?12:13,boxShadow:"0 2px 6px rgba(0,0,0,.18)"}},String(n)); }
   mkLabel(name){ const R=React.createElement; return R("div",{style:{height:28,padding:"0 11px 0 8px",borderRadius:999,background:"#fff",border:"1.5px solid #0041FF",display:"flex",alignItems:"center",gap:5,boxShadow:"0 2px 8px rgba(0,0,0,.14)"}},[R("div",{key:1,style:{width:16,height:16,borderRadius:"50%",background:"#1F8A5B",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:9,fontWeight:800}},"S"),R("span",{key:2,style:{fontWeight:700,fontSize:12,color:"#0041FF",whiteSpace:"nowrap"}},name)]); }
@@ -204,11 +237,13 @@ class Component extends DCLogic {
   mkCam(){ const R=React.createElement; return R("div",{style:{width:30,height:30,borderRadius:8,background:"#191919",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 6px rgba(0,0,0,.22)"}},R("svg",{width:16,height:16,viewBox:"0 0 20 20"},[R("rect",{key:1,x:3,y:6,width:11,height:9,rx:2,fill:"#fff"}),R("path",{key:2,d:"M14 9 L17 7 L17 14 L14 12Z",fill:"#fff"})])); }
 
   renderVals(){
-    const f = this.state.filter, sh = this.state.sheet;
+    const pre = this.presets[this.props.view] || this.presets.base;
+    const f = this.state.filter!=null ? this.state.filter : pre.filter;
+    const sh = this.state.sheet!==undefined ? this.state.sheet : pre.sheet;
     const chip=(key,label)=>{ const on=f===key; return { label, onClick:()=>this.setState({filter:key, sheet:null}), bg:on?"#0041FF":"#fff", color:on?"#fff":"#555" }; };
 
     // markers per filter
-    const pos=[["12%","30%"],["30%","22%"],["54%","16%"],["72%","30%"],["20%","46%"],["46%","40%"],["64%","52%"],["80%","60%"],["34%","66%"],["56%","74%"]];
+    const pos=[["14%","30%"],["32%","27%"],["56%","31%"],["74%","34%"],["20%","44%"],["46%","41%"],["64%","50%"],["80%","57%"],["30%","62%"],["54%","70%"]];
     let markers;
     if(f==="point"){
       const labels=["거진항","포천대교","홍천 청량지","정선(송계교)","이천(복하교)"];
@@ -225,12 +260,14 @@ class Component extends DCLogic {
 
     return {
       noop:this.nav("noop"), close:this.set({sheet:null}),
+      noSheet: sh===null,
+      goNews:this.nav("news_b"), goChuljo:this.nav("home"), goMy:this.nav("my"),
       filters:[chip("point","피싱포인트"),chip("catch","조황"),chip("reserve","예약"),chip("cctv","CCTV")],
       markers,
       sPoint:sh==="point", sRoute:sh==="route", sParking:sh==="parking", sApp:sh==="app", sCatch:sh==="catch", sReserve:sh==="reserve", sCctv:sh==="cctv",
       startRoute:this.set({sheet:"route"}), goParking:this.set({sheet:"parking"}), goApp:this.set({sheet:"app"}),
       pointTabs:["낚시예측","물때","날씨","바람·파고","조위정보","바다예보"].map(ptab),
-      windRows:[["00시","1.5m/s","남풍","파고 0.3m"],["03시","2.9m/s","북동풍","파고 0.5m"],["06시","3.5m/s","남서풍","파고 0.7m"],["09시","3.1m/s","남동풍","파고 0.8m"],["12시","1.8m/s","북풍","파고 0.8m"],["15시","2.6m/s","남풍","파고 0.6m"],["18시","3.5m/s","동풍","파고 0.4m"],["21시","3.2m/s","서풍","파고 0.5m"]].map(r=>({h:r[0],spd:r[1],dir:r[2],wave:r[3]})),
+      windRows:[["00시","1.5m/s","남풍","파고 0.3m","유의파고 0.5m"],["03시","2.9m/s","북동풍","파고 0.5m","유의파고 0.9m"],["06시","3.5m/s","남서풍","파고 0.7m","유의파고 1.2m"],["09시","3.1m/s","남동풍","파고 0.8m","유의파고 1.3m"],["12시","1.8m/s","북풍","파고 0.8m","유의파고 1.2m"],["15시","2.6m/s","남풍","파고 0.6m","유의파고 1m"],["18시","3.5m/s","동풍","파고 0.4m","유의파고 0.6m"],["21시","3.2m/s","서풍","파고 0.5m","유의파고 0.8m"]].map(r=>({h:r[0],spd:r[1],dir:r[2],wave:r[3],wave2:r[4]})),
       actRows:[["0시","45점","45%"],["2시","45점","45%"],["4시","45점","45%"],["6시","80점","80%"],["8시","80점","80%"],["10시","65점","65%"],["12시","65점","65%"]].map(r=>({h:r[0],score:r[1],w:r[2]})),
       parkings:[{name:"인근 공영주차장",meta:"320m"},{name:"○○마트 주차장",meta:"580m"},{name:"항구 무료주차장",meta:"710m · 무료"}],
       catchInfo:[{k:"기법",v:"루어낚시 · 스피너베이트"},{k:"어종",v:"쏘가리 51cm"},{k:"날짜",v:"2026.05.02 (월) 11:56"},{k:"날씨",v:"맑음 16.8° · 습도 37%"},{k:"바람",v:"2.6m/s 서풍 · 파고 0m"},{k:"물때",v:"9물 · 8물때식"}],

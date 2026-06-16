@@ -82,6 +82,9 @@
             <sc-if value="{{ v_notif }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_notice }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_event }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_review }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="review" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_chat }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="chat" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_cancel }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></sc-if>
 
             <sc-if value="{{ v_empty_reserve }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="reserve" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_empty_wish }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="wish" hint-size="393,852"></dc-import></sc-if>
@@ -160,6 +163,9 @@ class Component extends DCLogic {
     { key:"notif", label:"알림", group:"서브페이지" },
     { key:"news_notice", label:"공지사항", group:"서브페이지" },
     { key:"news_event", label:"이벤트", group:"서브페이지" },
+    { key:"review", label:"후기 작성", group:"서브페이지" },
+    { key:"chat", label:"1:1 채팅", group:"서브페이지" },
+    { key:"cancel", label:"예약 취소·환불", group:"서브페이지" },
 
     { my:"mypage", label:"마이페이지", group:"마이페이지" },
     { my:"reserv", label:"예약 내역", group:"마이페이지" },
@@ -288,7 +294,7 @@ class Component extends DCLogic {
     const view = this.state.view;
     const ACT = "#191919", IDLE = "#AEAEB6";
     const out = {};
-    this.EXTRACTED.concat(["splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
+    this.EXTRACTED.concat(["splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","review","chat","cancel","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
 
     out.mySub = this.state.mySub; out.myKey = this.state.myKey; out.fadeKey = view+"_"+this.state.myKey;
 

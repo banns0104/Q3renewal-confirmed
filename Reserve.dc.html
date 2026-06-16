@@ -97,7 +97,7 @@
         <div style="display:flex; flex-direction:column; gap:10px;"><sc-for list="{{ doneInfo }}" as="d" hint-placeholder-count="4"><div style="display:flex;"><span style="width:80px; font-weight:500; font-size:13px; color:#999;">{{ d.k }}</span><span style="flex:1; font-weight:700; font-size:13.5px; color:#191919;">{{ d.v }}</span></div></sc-for></div>
         <div style="margin-top:14px; padding-top:14px; border-top:1px solid #F2F2F2; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:13px; color:#767676;">결제 금액</span><span style="font-weight:800; font-size:17px; color:#0041FF;">90,000원</span></div>
       </div>
-      <div style="margin-top:16px; width:100%; background:#FFF7E0; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:9px;"><div style="width:24px; height:24px; border-radius:50%; background:#FFC700; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:12px;">M</div><span style="font-weight:600; font-size:13px; color:#9A7B1E; letter-spacing:-0.3px;">출조 후 후기를 남기면 1,500머니를 드려요</span></div>
+      <div class="tap" onClick="{{ goReview }}" style="margin-top:16px; width:100%; background:#FFF7E0; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:9px; cursor:pointer;"><div style="width:24px; height:24px; border-radius:50%; background:#FFC700; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:12px;">M</div><span style="font-weight:600; font-size:13px; color:#9A7B1E; letter-spacing:-0.3px;">출조 후 후기를 남기면 1,500머니를 드려요 ›</span></div>
     </div>
     <div style="padding:14px 18px 24px; display:flex; gap:10px;"><div class="tap" onClick="{{ goHome }}" style="width:120px; height:52px; border-radius:1000px; background:#F3F3F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:15px; color:#555;">홈으로</div><div class="tap" onClick="{{ goMyReserv }}" style="flex:1; height:52px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#fff;">예약 내역 보기</div></div>
   </div>
@@ -129,7 +129,7 @@ class Component extends DCLogic {
       isDetail:s==="detail", isReserve:s==="reserve", isPay:s==="pay", isDone:s==="done",
       back:this.nav("back"), noop:this.nav("noop"),
       goDetail:this.set("detail"), goReserve:this.set("reserve"), goPay:this.set("pay"), goDone:this.set("done"),
-      goHome:this.nav("home"), goMyReserv:this.nav("reserv"),
+      goHome:this.nav("home"), goMyReserv:this.nav("reserv"), goReview:this.nav("review"),
       wishFill:this.state.wish?"#191919":"none", toggleWish:()=>this.setState(st=>({wish:!st.wish})),
       qty:this.state.qty, inc:()=>this.setState(st=>({qty:st.qty+1})), dec:()=>this.setState(st=>({qty:Math.max(1,st.qty-1)})),
       resvCtaBg:this.state.qty>0?"#0041FF":"#F3F3F3", resvCtaColor:this.state.qty>0?"#fff":"#BBB",
