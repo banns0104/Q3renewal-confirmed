@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#0041FF"/><rect x="26" y="40" width="48" height="30" rx="8" fill="#fff"/><circle cx="38" cy="55" r="3.5" fill="#0041FF"/><circle cx="50" cy="55" r="3.5" fill="#0041FF"/><circle cx="62" cy="55" r="3.5" fill="#0041FF"/></svg></template>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+  .sm *{ box-sizing:border-box; }
+  .sm{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .ghead{ display:flex; align-items:center; gap:11px; margin:46px 0 20px; }
+  .gnum{ width:28px; height:28px; border-radius:8px; background:#191919; color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .gtitle{ font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px; }
+  .gnote{ font-weight:500; font-size:12.5px; color:#999; letter-spacing:-0.3px; }
+  .cap{ font-weight:700; font-size:12.5px; color:#555; letter-spacing:-0.3px; margin-bottom:9px; }
+  .row{ display:flex; flex-wrap:wrap; gap:26px; align-items:flex-start; }
+  .col{ display:flex; flex-direction:column; }
+  /* iOS alert */
+  .alert{ width:272px; background:rgba(250,250,252,.94); backdrop-filter:blur(20px); border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(20,22,30,.18); }
+  .alert .body{ padding:19px 17px 15px; text-align:center; }
+  .alert .t{ font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px; }
+  .alert .d{ margin-top:6px; font-weight:400; font-size:13px; line-height:1.45; color:#363636; letter-spacing:-0.3px; }
+  .alert .btns{ display:flex; }
+  .alert .btn{ flex:1; height:44px; display:flex; align-items:center; justify-content:center; border-top:0.5px solid rgba(0,0,0,.14); font-size:16px; color:#0A84FF; }
+  .alert .btn+.btn{ border-left:0.5px solid rgba(0,0,0,.14); }
+  .alert .btn.b{ font-weight:600; }
+  .alert .btn.red{ color:#FF3B30; font-weight:600; }
+  /* toast */
+  .toast{ display:inline-flex; align-items:center; gap:8px; background:rgba(25,25,25,.92); color:#fff; font-weight:600; font-size:13.5px; letter-spacing:-0.3px; padding:13px 18px; border-radius:1000px; box-shadow:0 8px 24px rgba(0,0,0,.18); }
+  /* push */
+  .push{ width:330px; background:rgba(250,250,251,.82); backdrop-filter:blur(18px); border-radius:18px; padding:13px 14px; display:flex; gap:11px; box-shadow:0 10px 30px rgba(20,22,30,.12); border:0.5px solid rgba(255,255,255,.5); }
+  .appicon{ width:38px; height:38px; border-radius:10px; background:linear-gradient(150deg,#6E45E8,#0041FF); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; flex:none; }
+  /* kakao */
+  .kakao{ width:300px; background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(20,22,30,.12); border:1px solid #EEE; }
+  .ktop{ height:38px; background:#FEE500; display:flex; align-items:center; gap:7px; padding:0 14px; }
+  .kbtn{ height:44px; display:flex; align-items:center; justify-content:center; border-top:1px solid #F0F0F0; font-weight:600; font-size:13.5px; color:#363636; }
+</style>
+</helmet>
+<div class="sm" style="background:#e7e8ec; padding:46px 56px 80px; min-height:100vh;">
+
+  <div>
+    <div style="font-weight:800; font-size:30px; color:#191919; letter-spacing:-0.8px;">어바웃피싱 · 시스템 메시지<span style="color:#6433DF;">.</span></div>
+    <div style="margin-top:8px; font-weight:500; font-size:14px; color:#767676; letter-spacing:-0.3px;">얼럿 · 컨펌 · 토스트 · 푸쉬 · 카카오 알림톡 — 화면별 메시지 스펙 (해요체 · 노이모지)</div>
+  </div>
+
+  <!-- 1. ALERT -->
+  <div class="ghead"><div class="gnum">1</div><div class="gtitle">얼럿 (Alert)</div><div class="gnote">시스템 차단형 · 1~2 버튼 · 파괴적 동작은 빨강</div></div>
+  <div class="row">
+    <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="6">
+      <div class="col"><div class="cap">{{ a.cap }}</div>
+        <div class="alert"><div class="body"><div class="t">{{ a.t }}</div><div class="d">{{ a.d }}</div></div>
+          <div class="btns">
+            <sc-for list="{{ a.buttons }}" as="b" hint-placeholder-count="2"><div class="btn {{ b.cls }}">{{ b.label }}</div></sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- 2. CONFIRM -->
+  <div class="ghead"><div class="gnum">2</div><div class="gtitle">컨펌 (Confirm)</div><div class="gnote">되돌릴 수 없는 동작 직전 · 이탈 방지형</div></div>
+  <div class="row">
+    <sc-for list="{{ confirms }}" as="a" hint-placeholder-count="3">
+      <div class="col"><div class="cap">{{ a.cap }}</div>
+        <div class="alert"><div class="body"><div class="t">{{ a.t }}</div><div class="d">{{ a.d }}</div></div>
+          <div class="btns"><sc-for list="{{ a.buttons }}" as="b" hint-placeholder-count="2"><div class="btn {{ b.cls }}">{{ b.label }}</div></sc-for></div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- 3. TOAST -->
+  <div class="ghead"><div class="gnum">3</div><div class="gtitle">토스트 (Toast)</div><div class="gnote">하단 2초 노출 · 비차단 · 결과/제한 피드백</div></div>
+  <div class="row" style="gap:14px;">
+    <sc-for list="{{ toasts }}" as="t" hint-placeholder-count="6">
+      <div class="col"><div class="cap">{{ t.cap }}</div><div class="toast"><span style="width:16px; height:16px; flex:none;">{{ t.icon }}</span>{{ t.text }}</div></div>
+    </sc-for>
+  </div>
+
+  <!-- 4. PUSH -->
+  <div class="ghead"><div class="gnum">4</div><div class="gtitle">푸쉬 (Push)</div><div class="gnote">잠금화면·배너 · 앱 미진입 상태 재방문 유도</div></div>
+  <div class="row">
+    <sc-for list="{{ pushes }}" as="p" hint-placeholder-count="6">
+      <div class="col"><div class="cap">{{ p.cap }}</div>
+        <div class="push"><div class="appicon">어</div><div style="flex:1; min-width:0;"><div style="display:flex; align-items:baseline; justify-content:space-between;"><span style="font-weight:700; font-size:13.5px; color:#191919; letter-spacing:-0.3px;">어바웃피싱</span><span style="font-weight:500; font-size:11px; color:#999;">{{ p.time }}</span></div><div style="margin-top:3px; font-weight:700; font-size:13.5px; color:#191919; letter-spacing:-0.3px;">{{ p.t }}</div><div style="margin-top:2px; font-weight:400; font-size:13px; line-height:1.4; color:#444; letter-spacing:-0.3px;">{{ p.d }}</div></div></div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- 5. KAKAO -->
+  <div class="ghead"><div class="gnum">5</div><div class="gtitle">카카오 알림톡</div><div class="gnote">예약·결제·환불 거래 알림 · 정보성 템플릿 + 버튼</div></div>
+  <div class="row">
+    <sc-for list="{{ kakaos }}" as="k" hint-placeholder-count="4">
+      <div class="col"><div class="cap">{{ k.cap }}</div>
+        <div class="kakao">
+          <div class="ktop"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7 3 10.7c0 2.3 1.6 4.4 4 5.6-.2.7-.6 2.2-.7 2.5-.1.4.2.4.4.3.2-.1 2.3-1.5 3.2-2.1.7.1 1.4.2 2.1.2 5 0 9-3 9-6.7S17 4 12 4z" fill="#3C1E1E"></path></svg><span style="font-weight:700; font-size:12.5px; color:#3C1E1E;">알림톡 도착</span></div>
+          <div style="padding:16px 16px 14px;">
+            <div style="display:flex; align-items:center; gap:7px;"><div style="width:22px; height:22px; border-radius:7px; background:linear-gradient(150deg,#6E45E8,#0041FF); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:10px;">어</div><span style="font-weight:700; font-size:13px; color:#191919;">어바웃피싱</span></div>
+            <div style="margin-top:12px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.3px;">{{ k.t }}</div>
+            <div style="margin-top:9px; font-weight:400; font-size:12.5px; line-height:1.75; color:#444; letter-spacing:-0.3px; white-space:pre-line;">{{ k.body }}</div>
+          </div>
+          <sc-for list="{{ k.buttons }}" as="b" hint-placeholder-count="2"><div class="kbtn">{{ b }}</div></sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  ti(name){
+    const R=React.createElement; const ln=(d,c,w=1.8)=>R("path",{d,fill:"none",stroke:c,strokeWidth:w,strokeLinecap:"round",strokeLinejoin:"round"});
+    const svg=(ch)=>R("svg",{width:16,height:16,viewBox:"0 0 18 18"},ch);
+    switch(name){
+      case "heart": return svg([R("path",{key:1,d:"M9 15.5C9 15.5 2.5 11 2.5 6.6 2.5 4.4 4.2 3 6 3 7.3 3 8.4 3.8 9 4.9 9.6 3.8 10.7 3 12 3 13.8 3 15.5 4.4 15.5 6.6 15.5 11 9 15.5 9 15.5Z",fill:"#FF6B6B",stroke:"none"})]);
+      case "check": return svg([ln("M3.5 9.2 7.2 13 14.5 5","#5BD18A")]);
+      case "copy": return svg([R("rect",{key:1,x:6,y:6,width:8,height:9,rx:1.5,fill:"none",stroke:"#fff",strokeWidth:1.5}),ln("M11 6 L11 4 A1 1 0 0 0 10 3 L5 3 A1 1 0 0 0 4 4 L4 10 A1 1 0 0 0 5 11","#fff")]);
+      case "coin": return svg([R("circle",{key:1,cx:9,cy:9,r:6.5,fill:"#FFC700"}),R("text",{key:2,x:9,y:12,textAnchor:"middle",fontSize:8,fontWeight:800,fill:"#fff"},"M")]);
+      case "wifi": return svg([ln("M3 7 C6 4.5 12 4.5 15 7","#5BD18A"),ln("M5.5 9.5 C7.3 8 10.7 8 12.5 9.5","#5BD18A"),R("circle",{key:3,cx:9,cy:12.5,r:1,fill:"#5BD18A"})]);
+      case "info": return svg([R("circle",{key:1,cx:9,cy:9,r:6.5,fill:"none",stroke:"#fff",strokeWidth:1.5}),ln("M9 8.2 L9 12","#fff",1.6),R("circle",{key:3,cx:9,cy:6,r:0.9,fill:"#fff"})]);
+      default: return null;
+    }
+  }
+  renderVals(){
+    const close={label:"닫기",cls:""}, no={label:"취소",cls:""};
+    return {
+      alerts: [
+        { cap:"예약 취소 (24h 전)", t:"예약을 취소할까요?", d:"출항 24시간 전이라 결제 금액 전액이 환불돼요.", buttons:[close,{label:"취소하기",cls:"red"}] },
+        { cap:"노쇼 경고 (임박)", t:"출항이 곧 시작돼요", d:"지금 취소하면 환불이 어려워요. 그래도 취소할까요?", buttons:[{label:"돌아가기",cls:"b"},{label:"취소",cls:"red"}] },
+        { cap:"결제 실패", t:"결제에 실패했어요", d:"카드 한도나 정보를 확인하고 다시 시도해주세요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"위치 권한 거부", t:"위치 권한이 필요해요", d:"내 주변 출조 선박을 보려면 설정에서 권한을 켜주세요.", buttons:[close,{label:"설정 열기",cls:"b"}] },
+        { cap:"로그아웃", t:"로그아웃 할까요?", d:"다시 이용하려면 로그인이 필요해요.", buttons:[no,{label:"로그아웃",cls:"b"}] },
+        { cap:"버전 업데이트", t:"새 버전이 나왔어요", d:"원활한 이용을 위해 최신 버전으로 업데이트해주세요.", buttons:[{label:"나중에",cls:""},{label:"업데이트",cls:"b"}] },
+        { cap:"세션 만료", t:"다시 로그인해주세요", d:"보안을 위해 자동 로그아웃됐어요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"정원 마감", t:"방금 마감됐어요", d:"이 출조는 잔여석이 모두 찼어요. 다른 날짜를 확인해보세요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"본인인증 실패", t:"본인인증에 실패했어요", d:"입력하신 정보를 다시 확인해주세요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"쿠폰 사용 불가", t:"사용할 수 없는 쿠폰이에요", d:"최소 결제 금액을 확인해주세요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"환불 불가 (당일)", t:"지금은 환불이 어려워요", d:"출항 당일 취소는 규정상 환불이 불가해요. 그래도 취소할까요?", buttons:[{label:"닫기",cls:""},{label:"취소",cls:"red"}] },
+        { cap:"카메라 권한", t:"카메라 권한이 필요해요", d:"조황을 촬영하려면 설정에서 권한을 켜주세요.", buttons:[{label:"닫기",cls:""},{label:"설정 열기",cls:"b"}] },
+        { cap:"위치 서비스 꺼짐", t:"위치 서비스가 꺼져 있어요", d:"기기 설정에서 위치를 켜면 주변 선박을 볼 수 있어요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"비속어 감지", t:"부적절한 표현이 포함됐어요", d:"커뮤니티 가이드에 맞게 다시 작성해주세요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"중복 예약", t:"이미 예약한 출조예요", d:"같은 시간대에 예약 내역이 있어요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"저장 공간 부족", t:"저장 공간이 부족해요", d:"사진을 저장할 공간이 부족해요. 정리 후 다시 시도해주세요.", buttons:[{label:"확인",cls:"b"}] },
+      ],
+      confirms: [
+        { cap:"채비 삭제", t:"이 채비를 삭제할까요?", d:"삭제하면 다시 되돌릴 수 없어요.", buttons:[no,{label:"삭제",cls:"red"}] },
+        { cap:"사용자 차단", t:"이 사용자를 차단할까요?", d:"차단하면 채팅과 거래가 모두 제한돼요.", buttons:[no,{label:"차단",cls:"red"}] },
+        { cap:"작성 이탈", t:"작성 중인 후기가 있어요", d:"지금 나가면 작성한 내용이 사라져요.", buttons:[{label:"이어쓰기",cls:"b"},{label:"나가기",cls:"red"}] },
+        { cap:"게시글 삭제", t:"이 게시글을 삭제할까요?", d:"삭제하면 댓글도 함께 사라져요.", buttons:[no,{label:"삭제",cls:"red"}] },
+        { cap:"채팅방 나가기", t:"채팅방을 나갈까요?", d:"나가면 대화 내용이 모두 삭제돼요.", buttons:[no,{label:"나가기",cls:"red"}] },
+        { cap:"찜 전체 해제", t:"찜을 모두 해제할까요?", d:"해제하면 다시 되돌릴 수 없어요.", buttons:[no,{label:"전체 해제",cls:"red"}] },
+        { cap:"결제수단 삭제", t:"이 카드를 삭제할까요?", d:"등록된 결제수단에서 제거돼요.", buttons:[no,{label:"삭제",cls:"red"}] },
+        { cap:"예약 변경", t:"예약을 변경할까요?", d:"변경 시 잔여석에 따라 자리가 바뀔 수 있어요.", buttons:[no,{label:"변경",cls:"b"}] },
+        { cap:"계정 삭제(웹)", t:"계정을 삭제할까요?", d:"모든 데이터가 영구 삭제되며 복구할 수 없어요.", buttons:[no,{label:"삭제",cls:"red"}] },
+        { cap:"변경사항 저장", t:"변경사항을 저장할까요?", d:"저장하지 않으면 수정한 내용이 사라져요.", buttons:[{label:"저장 안 함",cls:""},{label:"저장",cls:"b"}] },
+        { cap:"전화 연결", t:"선장님께 전화할까요?", d:"010-1234-5678로 연결돼요.", buttons:[no,{label:"전화",cls:"b"}] },
+        { cap:"알림 끄기", t:"이 알림을 끌까요?", d:"중요 거래 알림은 받지 못할 수 있어요.", buttons:[no,{label:"끄기",cls:"red"}] },
+        { cap:"계정 일시정지", t:"일시정지된 계정이에요", d:"고객센터로 문의해주세요.", buttons:[{label:"문의",cls:"b"}] },
+        { cap:"이미지 용량 초과", t:"사진이 너무 커요", d:"10MB 이하 이미지만 올릴 수 있어요.", buttons:[{label:"확인",cls:"b"}] },
+        { cap:"최소 결제 금액", t:"최소 결제 금액 미달", d:"머니는 1,000원부터 사용할 수 있어요.", buttons:[{label:"확인",cls:"b"}] },
+      ],
+      toasts: [
+        { cap:"찜 추가", icon:this.ti("heart"), text:"찜한 선박에 추가했어요" },
+        { cap:"코드 복사", icon:this.ti("copy"), text:"초대 코드를 복사했어요" },
+        { cap:"예약 완료", icon:this.ti("check"), text:"예약이 완료됐어요" },
+        { cap:"머니 적립", icon:this.ti("coin"), text:"머니 70원이 적립됐어요" },
+        { cap:"네트워크 복구", icon:this.ti("wifi"), text:"네트워크에 다시 연결됐어요" },
+        { cap:"선택 제한", icon:this.ti("info"), text:"최대 6명까지 선택할 수 있어요" },
+        { cap:"찜 해제", icon:this.ti("heart"), text:"찜을 해제했어요" },
+        { cap:"리뷰 등록", icon:this.ti("check"), text:"후기가 등록됐어요" },
+        { cap:"사진 저장", icon:this.ti("check"), text:"사진을 저장했어요" },
+        { cap:"쿠폰 다운로드", icon:this.ti("check"), text:"쿠폰을 받았어요" },
+        { cap:"신고 완료", icon:this.ti("info"), text:"신고가 접수됐어요" },
+        { cap:"로그인 필요", icon:this.ti("info"), text:"로그인이 필요한 기능이에요" },
+        { cap:"차단 완료", icon:this.ti("check"), text:"사용자를 차단했어요" },
+        { cap:"임시저장", icon:this.ti("check"), text:"임시저장됐어요" },
+        { cap:"전송 완료", icon:this.ti("check"), text:"메시지를 보냈어요" },
+        { cap:"위치 갱신", icon:this.ti("wifi"), text:"현재 위치로 이동했어요" },
+        { cap:"링크 복사", icon:this.ti("copy"), text:"공유 링크를 복사했어요" },
+        { cap:"신고 접수", icon:this.ti("check"), text:"신고가 접수됐어요" },
+        { cap:"차단 완료", icon:this.ti("check"), text:"차단했어요. 더 이상 노출되지 않아요" },
+        { cap:"주소 복사", icon:this.ti("copy"), text:"집결지 주소를 복사했어요" },
+        { cap:"알림 설정", icon:this.ti("check"), text:"알림을 켰어요" },
+      ],
+      pushes: [
+        { cap:"결제 완료", time:"방금", t:"결제가 완료됐어요", d:"블랙이글호 90,000원 결제가 완료됐어요." },
+        { cap:"투표 마감", time:"10분 전", t:"챔피언십 투표가 곧 마감돼요", d:"오늘 22시까지 투표할 수 있어요." },
+        { cap:"선장 회신", time:"지금", t:"김태수 선장님이 답한했어요", d:"네, 모레 04:30 정상 출항합니다." },
+        { cap:"예약 확정", time:"지금", t:"예약이 확정됐어요", d:"블랙이글호 · 5/24(토) 04:30 출항이 확정됐어요." },
+        { cap:"출항 D-day", time:"오후 9:00", t:"내일 새벽 출항이에요", d:"04:30 홍원항 집결이에요. 준비물 잊지 마세요." },
+        { cap:"마감 임박", time:"5분 전", t:"찜한 만선호, 잔여 1자리", d:"마감되기 전에 지금 예약하세요." },
+        { cap:"조황 등록", time:"방금", t:"참돔러버님이 조황을 올렸어요", d:"오늘 홍원항 우럭 마릿수가 좋았대요." },
+        { cap:"머니 지급", time:"1시간 전", t:"머니 1,500원이 도착했어요", d:"출조 후기 작성 보상이 적립됐어요." },
+        { cap:"챔피언십", time:"오전 10:00", t:"챔피언십 2차전 D-3", d:"총 상금 4천만원, 지금 참가 신청하세요." },
+        { cap:"환불 완료", time:"방금", t:"환불이 완료됐어요", d:"블랙이글호 예약 90,000원이 환불됐어요." },
+        { cap:"선장 메시지", time:"10분 전", t:"김태수 선장님의 메시지", d:"내일 집결 시간 한 번 더 확인 부탁드려요." },
+        { cap:"중고거래 채팅", time:"방금", t:"새 채팅이 도착했어요", d:"광어킹님: 갈치대 4.5칸 아직 거래 가능할까요?" },
+        { cap:"가격 인하", time:"1시간 전", t:"찜한 상품 가격이 내렸어요", d:"방수 태클박스가 8,900원으로 인하됐어요." },
+        { cap:"후기 요청", time:"오후 6:00", t:"오늘 출조는 어떠셨나요?", d:"후기를 남기면 머니 1,500원을 드려요." },
+        { cap:"출항 취소", time:"오전 5:00", t:"기상으로 출항이 취소됐어요", d:"결제 금액 100%가 자동 환불돼요." },
+        { cap:"쿠폰 만료", time:"오전 9:00", t:"쿠폰이 곧 만료돼요", d:"10% 할인 쿠폰이 내일 사라져요." },
+        { cap:"좋아요·댓글", time:"방금", t:"참돔러버님이 좋아해요", d:"내 조황 글에 댓글이 1개 달렸어요." },
+        { cap:"재입고", time:"30분 전", t:"품절됐던 상품이 돌아왔어요", d:"피쉬시리즈 채비 세트가 재입고됐어요." },
+      ],
+      kakaos: [
+        { cap:"예약 확정 알림톡", t:"[어바웃피싱] 예약이 확정되었습니다", body:"현일님, 예약이 확정되었어요.\n\n· 선박  블랙이글호 (김태수 선장)\n· 일시  2026.05.24(토) 04:30\n· 집결지  인천 중구 홍원항 선착장\n· 인원  1명\n· 결제  90,000원\n\n출항 전날 준비물 안내를 다시 보내드릴게요.", buttons:["예약 상세 보기","예약 취소"] },
+        { cap:"출항 전 안내", t:"[어바웃피싱] 출항 전 안내드려요", body:"내일 새벽 출항을 잊지 마세요.\n\n· 집결  04:30 / 홍원항 선착장\n· 준비물  신분증·멀미약·방한복\n· 날씨  맑음 22°C · 파고 0.5m (출조 적합)\n· 선장 연락처  010-1234-5678", buttons:["길찾기","준비물 확인"] },
+        { cap:"결제 완료", t:"[어바웃피싱] 결제가 완료되었습니다", body:"· 결제금액  90,000원\n· 결제수단  신용카드 (일시불)\n· 적립머니  +900원\n· 승인일시  2026.05.20 14:22", buttons:["결제 영수증 보기"] },
+        { cap:"환불 완료", t:"[어바웃피싱] 환불이 완료되었습니다", body:"요청하신 예약 취소 건이 처리되었어요.\n\n· 환불금액  90,000원 (전액)\n· 환불수단  원결제 카드\n· 예상 입금  영업일 기준 2~3일 이내", buttons:["고객센터 문의"] },
+        { cap:"예약 접수 (대기)", t:"[어바웃피싱] 예약이 접수되었습니다", body:"현일님, 예약 요청이 접수되었어요.\n선장 확인 후 확정 알림을 보내드릴게요.\n\n· 선박  블랙이글호\n· 일시  2026.05.24(토) 04:30\n· 상태  확정 대기", buttons:["예약 상세 보기"] },
+        { cap:"출조 완료·후기", t:"[어바웃피싱] 즐거운 출조 되셨나요?", body:"오늘 블랙이글호 출조는 어떠셨어요?\n후기를 남겨주시면 머니 1,500원을 드려요.", buttons:["후기 작성하기"] },
+        { cap:"회원가입 환영", t:"[어바웃피싱] 가입을 환영해요", body:"현일님, 어바웃피싱 가입을 환영해요!\n첫 예약에 쓸 수 있는 5,000원 쿠폰을 드렸어요.", buttons:["쿠폰 확인하기"] },
+        { cap:"정기 휴무 안내", t:"[어바웃피싱] 휴무 안내", body:"예약하신 선박의 정기 휴무 일정이 변경되었어요.\n자세한 일정은 예약 상세에서 확인해주세요.", buttons:["예약 상세 보기","고객센터 문의"] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

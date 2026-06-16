@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0041FF">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0041FF"/><rect x="470" y="230" width="260" height="420" rx="40" fill="#fff"/><circle cx="600" cy="600" r="14" fill="#0041FF"/><text x="600" y="160" font-family="sans-serif" font-size="60" font-weight="800" fill="#fff" text-anchor="middle">어바웃피싱</text></svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<style>
+  .afx *{ box-sizing:border-box; }
+  .afx{ font-family:"Pretendard Variable",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .col{ display:flex; flex-direction:column; gap:12px; flex:none; }
+  .row{ display:flex; flex-direction:row; gap:36px; align-items:flex-start; flex-wrap:wrap; padding-bottom:8px; }
+  .cap{ font-weight:700; font-size:13px; color:#363636; letter-spacing:-0.3px; }
+  .capsub{ margin-top:2px; font-weight:500; font-size:11.5px; color:#AAA; letter-spacing:-0.3px; }
+  .frame{ width:393px; flex:none; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 8px 30px rgba(20,22,30,.12); align-self:flex-start; }
+  .ghead{ display:flex; align-items:center; gap:11px; margin:46px 0 20px; }
+  .gnum{ width:28px; height:28px; border-radius:8px; background:#191919; color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .gtitle{ font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px; }
+</style>
+</helmet>
+<div class="afx" style="background:#e7e8ec; padding:44px 52px 80px;">
+  <div style="font-weight:800; font-size:28px; color:#191919; letter-spacing:-0.7px;">어바웃피싱 · 디자인 화면 (Figma 임포트용)<span style="color:#6433DF;">.</span></div>
+  <div style="margin-top:7px; font-weight:500; font-size:14px; color:#767676;">커스텀 제작 화면 모음 — iPhone 14 Pro 393px · html.to.design 임포트 대상</div>
+
+  <div class="ghead"><div class="gnum">1</div><div class="gtitle">인증 · 온보딩</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">로그인</div><div class="frame"><dc-import name="Auth" start="login" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">카카오 동의</div><div class="frame"><dc-import name="Auth" start="kakao" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">네이버 동의</div><div class="frame"><dc-import name="Auth" start="naver" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">휴대폰 번호 입력</div><div class="frame"><dc-import name="Auth" start="phone" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">인증번호 입력</div><div class="frame"><dc-import name="Auth" start="phonecode" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">약관 미동의</div><div class="frame"><dc-import name="Auth" start="terms" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">약관 전체동의</div><div class="frame"><dc-import name="Auth" start="termsagreed" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">약관 상세</div><div class="frame"><dc-import name="Auth" start="termsdetail" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">관심 온보딩</div><div class="frame"><dc-import name="Auth" start="onboarding" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">권한 동의</div><div class="frame"><dc-import name="Permission" screen="intro" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">위치 권한</div><div class="frame"><dc-import name="Permission" screen="location" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">알림 권한</div><div class="frame"><dc-import name="Permission" screen="notification" hint-size="393,852"></dc-import></div></div>
+  </div>
+
+  <div class="ghead"><div class="gnum">2</div><div class="gtitle">메인 · 검색 · 탐색</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">새소식 (피드형)</div><div class="frame"><dc-import name="News" hint-size="393,1600"></dc-import></div></div>
+    <div class="col"><div class="cap">통합검색 (결과)</div><div class="frame"><dc-import name="Search" screen="result" hint-size="393,1400"></dc-import></div></div>
+    <div class="col"><div class="cap">통합검색 (검색 전)</div><div class="frame"><dc-import name="Search" screen="empty" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">탐색 지도 (기본)</div><div class="frame"><dc-import name="Map" view="base" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">피싱포인트 시트</div><div class="frame"><dc-import name="Map" view="point" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">길안내 경로</div><div class="frame"><dc-import name="Map" view="route" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">인근 주차장</div><div class="frame"><dc-import name="Map" view="parking" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">길안내 앱 선택</div><div class="frame"><dc-import name="Map" view="app" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">조황 상세</div><div class="frame"><dc-import name="Map" view="catch" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">예약 업체 리스트</div><div class="frame"><dc-import name="Map" view="reserve" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">CCTV 모달</div><div class="frame"><dc-import name="Map" view="cctv" hint-size="393,852"></dc-import></div></div>
+  </div>
+
+  <div class="ghead"><div class="gnum">3</div><div class="gtitle">예약 플로우 · 서브</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">선박 상세</div><div class="frame"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></div></div>
+    <div class="col"><div class="cap">예약 (인원·날짜)</div><div class="frame"><dc-import name="Reserve" screen="reserve" hint-size="393,1200"></dc-import></div></div>
+    <div class="col"><div class="cap">결제</div><div class="frame"><dc-import name="Reserve" screen="pay" hint-size="393,1600"></dc-import></div></div>
+    <div class="col"><div class="cap">예약 완료</div><div class="frame"><dc-import name="Reserve" screen="done" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">알림</div><div class="frame"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">공지사항</div><div class="frame"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">이벤트</div><div class="frame"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></div></div>
+  </div>
+
+  <div class="ghead"><div class="gnum">4</div><div class="gtitle">마이페이지</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">마이페이지</div><div class="frame"><dc-import name="My" screen="mypage" hint-size="393,1400"></dc-import></div></div>
+    <div class="col"><div class="cap">회원 레벨 안내</div><div class="frame"><dc-import name="My" screen="level" hint-size="393,1400"></dc-import></div></div>
+    <div class="col"><div class="cap">예약 내역</div><div class="frame"><dc-import name="My" screen="reserv" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">내 조황</div><div class="frame"><dc-import name="My" screen="catch" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">찜한 선박</div><div class="frame"><dc-import name="My" screen="wish" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">쿠폰함</div><div class="frame"><dc-import name="My" screen="coupon" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">관심낚시 설정</div><div class="frame"><dc-import name="My" screen="interest" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">알림 설정</div><div class="frame"><dc-import name="My" screen="noti" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">고객센터 FAQ</div><div class="frame"><dc-import name="My" screen="faq" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">프로필 편집</div><div class="frame"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">회원 탈퇴</div><div class="frame"><dc-import name="My" screen="withdraw" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">탈퇴 완료</div><div class="frame"><dc-import name="My" screen="withdraw_done" hint-size="393,852"></dc-import></div></div>
+  </div>
+
+  <div class="ghead"><div class="gnum">5</div><div class="gtitle">빈 상태 (Empty)</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">예약 없음</div><div class="frame"><dc-import name="Empty" type="reserve" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">찜 없음</div><div class="frame"><dc-import name="Empty" type="wish" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">검색결과 없음</div><div class="frame"><dc-import name="Empty" type="search" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">새소식 없음</div><div class="frame"><dc-import name="Empty" type="news" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">알림 없음</div><div class="frame"><dc-import name="Empty" type="alarm" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">조황 없음</div><div class="frame"><dc-import name="Empty" type="catch" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">쿠폰 없음</div><div class="frame"><dc-import name="Empty" type="coupon" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">채팅 없음</div><div class="frame"><dc-import name="Empty" type="chat" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">결제내역 없음</div><div class="frame"><dc-import name="Empty" type="payment" hint-size="393,852"></dc-import></div></div>
+  </div>
+
+  <div class="ghead"><div class="gnum">6</div><div class="gtitle">에러 · 시스템 메시지</div></div>
+  <div class="row">
+    <div class="col"><div class="cap">404</div><div class="frame"><dc-import name="Error" type="404" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">500</div><div class="frame"><dc-import name="Error" type="500" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">네트워크 오류</div><div class="frame"><dc-import name="Error" type="network" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">서비스 점검</div><div class="frame"><dc-import name="Error" type="maintenance" hint-size="393,852"></dc-import></div></div>
+  </div>
+  <div style="margin-top:24px;"><dc-import name="SysCase" hint-size="100%,2500"></dc-import></div>
+</div>
+</x-dc>
+</body>
+</html>

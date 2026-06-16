@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+  .af-auth *{ box-sizing:border-box; }
+  .af-auth{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .af-chip{ transition:all .15s ease; }
+  .af-btn{ transition:transform .12s ease, opacity .12s ease; cursor:pointer; }
+  .af-btn:active{ transform:scale(.98); }
+</style>
+</helmet>
+<div class="af-auth" style="width:393px; height:852px; background:#ffffff; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+
+  <!-- status bar -->
+  <div style="height:54px; width:100%; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 34px; flex:none;">
+    <span style="font-family:'SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <svg width="18" height="12" viewBox="0 0 18 12" style="display:block;"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg>
+      <span style="font-weight:600; font-size:14px; color:#191919;">5G</span>
+      <div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div>
+    </div>
+  </div>
+
+  <!-- ============ LOGIN ============ -->
+  <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative;">
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; padding-top:78px;">
+      <div style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:36px; letter-spacing:-1px; color:#6433DF; white-space:nowrap;">어바웃피싱</div>
+      <div style="margin-top:12px; font-weight:500; font-size:15px; color:#767676; letter-spacing:-0.4px; white-space:nowrap;">신나는 나의 피싱라이프</div>
+      <img src="assets/character.png" alt="" style="width:280px; height:auto; margin-top:8px; object-fit:contain;">
+    </div>
+    <div style="padding:0 18px 40px; display:flex; flex-direction:column; gap:9px;">
+      <div class="af-btn" onClick="{{ goKakao }}" style="height:54px; border-radius:1000px; background:#FEE500; display:flex; align-items:center; justify-content:center; gap:8px; position:relative;">
+        <svg width="20" height="20" viewBox="0 0 24 24" style="position:absolute; left:20px;"><path d="M12 3.5C6.8 3.5 2.6 6.8 2.6 10.9c0 2.6 1.8 4.9 4.4 6.2-.2.7-.7 2.5-.8 2.9-.1.5.2.5.4.37.15-.1 2.4-1.62 3.4-2.3.66.1 1.33.14 2 .14 5.2 0 9.4-3.3 9.4-7.4S17.2 3.5 12 3.5z" fill="#191919"></path></svg>
+        <span style="font-weight:600; font-size:15.5px; color:#191919; letter-spacing:-0.4px;">카카오로 시작하기</span>
+      </div>
+      <div class="af-btn" onClick="{{ goNaver }}" style="height:54px; border-radius:1000px; background:#03C75A; display:flex; align-items:center; justify-content:center; position:relative;">
+        <svg width="17" height="17" viewBox="0 0 24 24" style="position:absolute; left:22px;"><path d="M14.6 12.4 9.2 5H5v14h4.6v-7.4L14.8 19H19V5h-4.4v7.4z" fill="#fff"></path></svg>
+        <span style="font-weight:600; font-size:15.5px; color:#fff; letter-spacing:-0.4px;">네이버로 시작하기</span>
+      </div>
+      <div class="af-btn" onClick="{{ goPhone }}" style="height:54px; border-radius:1000px; background:#000; display:flex; align-items:center; justify-content:center; position:relative;">
+        <svg width="17" height="17" viewBox="0 0 24 24" style="position:absolute; left:22px;"><path d="M16.36 12.78c-.02-2.4 1.96-3.55 2.05-3.6-1.12-1.64-2.86-1.86-3.48-1.89-1.48-.15-2.89.87-3.64.87-.75 0-1.91-.85-3.14-.83-1.62.02-3.11.94-3.94 2.39-1.68 2.91-.43 7.22 1.21 9.58.8 1.16 1.76 2.46 3.02 2.41 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.87.78 3.15.76 1.3-.02 2.12-1.18 2.91-2.35.92-1.35 1.3-2.66 1.32-2.73-.03-.01-2.53-.97-2.55-3.85zM14.6 5.62c.66-.8 1.11-1.92.99-3.03-.95.04-2.11.63-2.79 1.43-.61.71-1.15 1.84-1 2.93 1.06.08 2.14-.54 2.8-1.33z" fill="#fff"></path></svg>
+        <span style="font-weight:600; font-size:15.5px; color:#fff; letter-spacing:-0.4px;">Apple로 시작하기</span>
+      </div>
+      <div class="af-btn" onClick="{{ goPhone }}" style="height:54px; border-radius:1000px; background:#fff; border:1px solid #E0E0E0; display:flex; align-items:center; justify-content:center; position:relative;">
+        <svg width="16" height="16" viewBox="0 0 24 24" style="position:absolute; left:23px;"><rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="none" stroke="#363636" stroke-width="1.7"></rect><circle cx="12" cy="18" r="1.1" fill="#363636"></circle></svg>
+        <span style="font-weight:600; font-size:15.5px; color:#363636; letter-spacing:-0.4px;">휴대폰번호로 시작하기</span>
+      </div>
+      <div class="af-btn" onClick="{{ goHome }}" style="margin-top:6px; text-align:center; font-weight:500; font-size:14px; color:#999; letter-spacing:-0.4px; text-decoration:underline; text-underline-offset:3px;">비회원으로 둘러보기</div>
+      <div style="margin-top:6px; text-align:center; font-weight:400; font-size:11.5px; color:#BBB; letter-spacing:-0.3px; line-height:1.5;">가입 시 이용약관 및 개인정보처리방침에<br>동의하게 됩니다.</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ PHONE AUTH ============ -->
+  <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; flex:none;">
+      <div class="af-btn" onClick="{{ goLogin }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;">
+        <svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="padding:18px 24px 0; flex:1;">
+      <div style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:24px; line-height:1.32; letter-spacing:-0.6px; color:#191919; white-space:pre-line;">{{ phoneTitle }}</div>
+      <div style="margin-top:11px; font-weight:500; font-size:14px; color:#767676; letter-spacing:-0.4px;">{{ phoneDesc }}</div>
+
+      <div style="margin-top:40px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.4px;">휴대폰 번호</div>
+      <div style="margin-top:9px; display:flex; gap:8px;">
+        <div style="flex:1; height:50px; border:1px solid #0041FF; border-radius:10px; display:flex; align-items:center; padding:0 15px;">
+          <span style="font-weight:600; font-size:16px; color:#191919; letter-spacing:0.2px;">010 1234 5678</span>
+        </div>
+        <div class="af-btn" onClick="{{ requestCode }}" style="width:96px; height:50px; border-radius:10px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#fff; letter-spacing:-0.4px;">인증요청</div>
+      </div>
+
+      <sc-if value="{{ codeSent }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:24px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.4px;">인증번호</div>
+      <div style="margin-top:9px; height:50px; border:1px solid #E0E0E0; border-radius:10px; display:flex; align-items:center; justify-content:space-between; padding:0 15px;">
+        <span style="font-weight:600; font-size:16px; color:#191919; letter-spacing:4px;">••••••</span>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-weight:600; font-size:14px; color:#EE0005; letter-spacing:-0.2px;">2:58</span>
+          <span style="font-weight:500; font-size:13px; color:#999; letter-spacing:-0.4px; text-decoration:underline; text-underline-offset:2px;">재전송</span>
+        </div>
+      </div>
+      <div style="margin-top:10px; font-weight:400; font-size:12.5px; color:#999; letter-spacing:-0.4px;">*문자로 받은 6자리 인증번호를 입력해주세요.</div>
+      </sc-if>
+    </div>
+    <div style="padding:0 18px 28px;">
+      <div class="af-btn" onClick="{{ goTerms }}" style="height:54px; border-radius:1000px; background:{{ phoneCtaBg }}; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; color:{{ phoneCtaColor }}; letter-spacing:-0.4px;">확인</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ TERMS ============ -->
+  <sc-if value="{{ isTerms }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; flex:none;">
+      <div class="af-btn" onClick="{{ goPhone }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;">
+        <svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="padding:18px 24px 0; flex:1;">
+      <div style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:24px; line-height:1.32; letter-spacing:-0.6px; color:#191919;">어바웃피싱 이용약관에<br>동의해주세요</div>
+
+      <div class="af-btn" onClick="{{ toggleAll }}" style="margin-top:32px; height:60px; border-radius:14px; background:#F8F8F8; display:flex; align-items:center; gap:13px; padding:0 18px;">
+        <div style="width:26px; height:26px; border-radius:50%; background:{{ allColor }}; display:flex; align-items:center; justify-content:center; flex:none;">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <span style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">약관 전체동의</span>
+      </div>
+
+      <div style="margin-top:8px; display:flex; flex-direction:column;">
+        <sc-for list="{{ terms }}" as="t" hint-placeholder-count="4">
+          <div class="af-btn" onClick="{{ t.detail }}" style="height:50px; display:flex; align-items:center; gap:12px; padding:0 6px;">
+            <svg width="20" height="20" viewBox="0 0 20 20" style="flex:none;"><path d="M3 10.5 7.5 15 16.5 5" fill="none" stroke="{{ t.stroke }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="flex:1; font-weight:500; font-size:14.5px; color:#363636; letter-spacing:-0.4px;">{{ t.label }}</span>
+            <svg width="7" height="13" viewBox="0 0 7 13" style="flex:none;"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="padding:0 18px 28px;">
+      <div class="af-btn" onClick="{{ goOnboard }}" style="height:54px; border-radius:1000px; background:{{ termsCtaBg }}; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; color:{{ termsCtaColor }}; letter-spacing:-0.4px;">동의하고 계속하기</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ KAKAO CONSENT ============ -->
+  <sc-if value="{{ isKakao }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative; background:#fff;">
+    <div style="height:50px; background:#FEE500; display:flex; align-items:center; justify-content:space-between; padding:0 16px; flex:none;">
+      <div class="af-btn" onClick="{{ goLogin }}" style="width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#3C1E1E" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
+      <span style="font-weight:700; font-size:15px; color:#3C1E1E; letter-spacing:-0.3px;">카카오계정 로그인</span>
+      <div style="width:26px;"></div>
+    </div>
+    <div style="padding:34px 24px 0; flex:1; overflow:hidden;">
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <div style="width:60px; height:60px; border-radius:18px; background:#FEE500; display:flex; align-items:center; justify-content:center;"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.4 1.5 4.6 3.7 5.9-.2.7-.7 2.5-.8 2.9-.1.5.2.5.4.37.15-.1 2.4-1.62 3.4-2.3.43.06.86.1 1.3.1 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#3C1E1E"></path></svg></div>
+        <div style="margin-top:16px; font-weight:700; font-size:18px; color:#191919; letter-spacing:-0.4px;">어바웃피싱</div>
+        <div style="margin-top:5px; font-weight:500; font-size:13.5px; color:#999; letter-spacing:-0.3px;">서비스 이용을 위해 정보 제공에 동의해주세요</div>
+      </div>
+      <div style="margin-top:30px;">
+        <div class="af-btn" onClick="{{ toggleAll }}" style="display:flex; align-items:center; gap:11px; padding:6px 2px 14px; border-bottom:1px solid #EEE;"><div style="width:24px; height:24px; border-radius:50%; background:{{ allColor }}; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:700; font-size:15px; color:#191919;">전체 동의하기</span></div>
+        <div style="margin-top:14px; display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; align-items:center; gap:11px;"><svg width="18" height="18" viewBox="0 0 20 20"><path d="M3 10.5 7.5 15 16.5 5" fill="none" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="flex:1; font-weight:500; font-size:14px; color:#363636;">[필수] 프로필 정보(닉네임/프로필 사진)</span></div>
+          <div style="display:flex; align-items:center; gap:11px;"><svg width="18" height="18" viewBox="0 0 20 20"><path d="M3 10.5 7.5 15 16.5 5" fill="none" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="flex:1; font-weight:500; font-size:14px; color:#363636;">[필수] 카카오계정(이메일)</span></div>
+          <div style="display:flex; align-items:center; gap:11px;"><svg width="18" height="18" viewBox="0 0 20 20"><path d="M3 10.5 7.5 15 16.5 5" fill="none" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="flex:1; font-weight:500; font-size:14px; color:#363636;">[선택] 카카오스토리 친구 관계</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 18px 28px;">
+      <div class="af-btn" onClick="{{ goTerms }}" style="height:54px; border-radius:8px; background:#FEE500; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#3C1E1E; letter-spacing:-0.4px;">동의하고 계속하기</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ NAVER CONSENT ============ -->
+  <sc-if value="{{ isNaver }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative; background:#fff;">
+    <div style="height:50px; background:#03C75A; display:flex; align-items:center; justify-content:space-between; padding:0 16px; flex:none;">
+      <div class="af-btn" onClick="{{ goLogin }}" style="width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#fff" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
+      <span style="font-weight:700; font-size:15px; color:#fff; letter-spacing:-0.3px;">네이버 로그인</span>
+      <div style="width:26px;"></div>
+    </div>
+    <div style="padding:30px 24px 0; flex:1; overflow:hidden;">
+      <div style="display:flex; align-items:center; gap:13px; padding-bottom:22px; border-bottom:1px solid #EEE;">
+        <div style="width:48px; height:48px; border-radius:50%; background:#03C75A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:#fff;">N</div>
+        <div><div style="font-weight:700; font-size:15px; color:#191919;">어바웃피싱</div><div style="margin-top:3px; font-weight:500; font-size:12.5px; color:#999;">에서 회원님의 정보를 요청해요</div></div>
+      </div>
+      <div style="margin-top:22px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.3px;">제공 항목</div>
+      <div style="margin-top:14px; display:flex; flex-direction:column; gap:15px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:500; font-size:14px; color:#363636;">이메일 주소</span><span style="font-weight:700; font-size:12px; color:#03C75A;">필수</span></div>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:500; font-size:14px; color:#363636;">별명</span><span style="font-weight:700; font-size:12px; color:#03C75A;">필수</span></div>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:500; font-size:14px; color:#363636;">프로필 사진</span><span style="font-weight:500; font-size:12px; color:#AAA;">선택</span></div>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:500; font-size:14px; color:#363636;">휴대전화번호</span><span style="font-weight:500; font-size:12px; color:#AAA;">선택</span></div>
+      </div>
+      <div style="margin-top:22px; padding:14px 16px; border-radius:10px; background:#F8F8F8; font-weight:500; font-size:12px; line-height:1.6; color:#999; letter-spacing:-0.3px;">개인정보는 회원 식별·서비스 제공 목적으로만 이용되며, 동의 철회 시 연동이 해제돼요.</div>
+    </div>
+    <div style="padding:0 18px 28px; display:flex; gap:10px;">
+      <div class="af-btn" onClick="{{ goLogin }}" style="width:110px; height:54px; border-radius:8px; background:#F3F3F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:15px; color:#666;">취소</div>
+      <div class="af-btn" onClick="{{ goTerms }}" style="flex:1; height:54px; border-radius:8px; background:#03C75A; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff; letter-spacing:-0.4px;">동의하기</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ TERMS DETAIL (서브페이지) ============ -->
+  <sc-if value="{{ isTermsDetail }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 18px; flex:none; gap:8px;">
+      <div class="af-btn" onClick="{{ goTerms }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <span style="font-weight:700; font-size:17px; color:#191919; letter-spacing:-0.4px;">서비스 이용약관</span>
+    </div>
+    <div style="padding:14px 24px 0; flex:1; overflow:hidden;">
+      <div style="font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">제1조 (목적)</div>
+      <div style="margin-top:8px; font-weight:400; font-size:13px; line-height:1.75; color:#555; letter-spacing:-0.3px;">이 약관은 주식회사 어바웃피싱(이하 “회사”)이 제공하는 낚시 예약·커뮤니티·중고거래 및 관련 서비스(이하 “서비스”)의 이용 조건 및 절차, 회사와 회원 간의 권리·의무 및 책임사항을 규정함을 목적으로 해요.</div>
+      <div style="margin-top:18px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">제2조 (정의)</div>
+      <div style="margin-top:8px; font-weight:400; font-size:13px; line-height:1.75; color:#555; letter-spacing:-0.3px;">“회원”이란 본 약관에 동의하고 회사와 이용계약을 체결한 자를 말해요. “선주”란 선박 예약 상품을 등록·운영하는 사업자 회원을 말해요.</div>
+      <div style="margin-top:18px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">제3조 (약관의 효력 및 변경)</div>
+      <div style="margin-top:8px; font-weight:400; font-size:13px; line-height:1.75; color:#555; letter-spacing:-0.3px;">회사는 관련 법령을 위반하지 않는 범위에서 약관을 개정할 수 있어요. 개정 시 적용일자 7일 전부터 공지하며, 회원에게 불리한 변경은 30일 전 개별 통지해요.</div>
+      <div style="margin-top:18px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">제4조 (예약 및 환불)</div>
+      <div style="margin-top:8px; font-weight:400; font-size:13px; line-height:1.75; color:#555; letter-spacing:-0.3px;">출항 24시간 전까지 취소 시 전액 환불되며, 기상 악화로 인한 결항 시 결제 금액 100%가 자동 환불돼요.</div>
+    </div>
+    <div style="padding:0 18px 28px;">
+      <div class="af-btn" onClick="{{ goTerms }}" style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; color:#fff; letter-spacing:-0.4px;">동의하고 돌아가기</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ ONBOARDING ============ -->
+  <sc-if value="{{ isOnboard }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1; display:flex; flex-direction:column; position:relative;">
+    <div style="height:52px; display:flex; align-items:center; justify-content:flex-end; padding:0 22px; flex:none;">
+      <div class="af-btn" onClick="{{ goHome }}" style="font-weight:500; font-size:14px; color:#999; letter-spacing:-0.4px;">건너뛰기</div>
+    </div>
+    <div style="padding:14px 24px 0; flex:1; overflow:hidden;">
+      <div style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:24px; line-height:1.32; letter-spacing:-0.6px; color:#191919;">선호하는 낚시를<br>알려주세요</div>
+      <div style="margin-top:11px; font-weight:500; font-size:14px; color:#767676; letter-spacing:-0.4px;">관련된 맞춤 정보를 제공해 드려요!</div>
+
+      <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">관심 어종</div>
+      <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ fishChips }}" as="c" hint-placeholder-count="7"><div class="af-btn" onClick="{{ c.toggle }}" style="height:40px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
+      <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">숙련도</div>
+      <div style="margin-top:11px; height:46px; border-radius:11px; background:#F2F3F5; display:flex; padding:4px;"><sc-for list="{{ levels }}" as="l" hint-placeholder-count="3"><div class="af-btn" onClick="{{ l.onClick }}" style="flex:1; border-radius:8px; background:{{ l.bg }}; display:flex; align-items:center; justify-content:center; font-weight:{{ l.weight }}; font-size:14px; color:{{ l.color }}; box-shadow:{{ l.shadow }};">{{ l.label }}</div></sc-for></div>
+      <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">자주 가는 지역</div>
+      <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ regionChips }}" as="c" hint-placeholder-count="4"><div class="af-btn" onClick="{{ c.toggle }}" style="height:40px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
+    </div>
+    <div style="padding:0 18px 28px;">
+      <div style="text-align:center; margin-bottom:14px; font-weight:500; font-size:13px; color:#AAA; letter-spacing:-0.4px;">{{ selectedCountLabel }}</div>
+      <div class="af-btn" onClick="{{ goHome }}" style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; color:#fff; letter-spacing:-0.4px;">시작하기</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- home indicator -->
+  <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;start&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;kakao&quot;,&quot;naver&quot;,&quot;phone&quot;,&quot;phonecode&quot;,&quot;terms&quot;,&quot;termsagreed&quot;,&quot;termsdetail&quot;,&quot;onboarding&quot;],&quot;default&quot;:&quot;login&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = {
+    step: null,
+    codeSent: false,
+    allAgree: false,
+    terms: [false, false, false, false],
+    interests: {}, fish:{"우럭":true,"갈치":true,"광어":true,"참도":false,"감성도":false,"주꾸미":false,"볼락":false}, skill:"중급", region:{"충남":true,"전남":false,"경남":false,"제주":false},
+  };
+
+  get step(){ return this.state.step || this.props.start || "login"; }
+
+  effStep(){
+    const s = this.step;
+    if(s==="phonecode") return "phone";
+    if(s==="termsagreed") return "terms";
+    if(s==="termsdetail") return "termsdetail";
+    return s;
+  }
+
+  termLabels = [
+    "(필수) 만 14세 이상이에요",
+    "(필수) 서비스 이용약관 동의",
+    "(필수) 개인정보 수집 및 이용 동의",
+    "(선택) 마케팅 정보 수신 동의",
+  ];
+  interestList = ["선상낚시","갯바위","방파제","민물낚시","루어낚시","찌낚시","참돔","갈치","광어","우럭","볼락","주꾸미","문어","감성돔","농어"];
+
+  go(step){ return () => this.setState({ step }); }
+
+  toggleTerm(i){
+    return () => { this._touched = true; this.setState(s => {
+      const t = s.terms.slice(); t[i] = !t[i];
+      return { terms: t, allAgree: t.every(Boolean) };
+    }); };
+  }
+  toggleAll = () => { this._touched = true; this.setState(s => {
+    const v = !s.allAgree;
+    return { allAgree: v, terms: s.terms.map(()=>v) };
+  }); };
+  toggleInterest(label){
+    return () => this.setState(s => {
+      const m = Object.assign({}, s.interests); m[label] = !m[label];
+      return { interests: m };
+    });
+  }
+
+  renderVals(){
+    const step = this.effStep();
+    const forceCode = this.step==="phonecode";
+    const forceAgree = this.step==="termsagreed";
+    const codeSent = this.state.codeSent || forceCode;
+    const termsArr = (this._touched || !forceAgree) ? this.state.terms : [true,true,true,true];
+    const requiredOk = termsArr.slice(0,3).every(Boolean);
+    const allAgree = this.state.allAgree || forceAgree;
+    const selCount = Object.values(this.state.interests).filter(Boolean).length;
+    return {
+      isLogin: step === "login",
+      isKakao: step === "kakao",
+      isNaver: step === "naver",
+      isPhone: step === "phone",
+      isTerms: step === "terms",
+      isTermsDetail: step === "termsdetail",
+      isOnboard: step === "onboarding",
+      codeSent,
+      phoneTitle: codeSent ? "인증번호를\n입력해주세요" : "휴대폰 번호를\n입력해주세요",
+      phoneDesc: codeSent ? "문자로 받은 6자리 인증번호를 입력해주세요." : "본인 확인을 위해 인증이 필요해요.",
+
+      goLogin: this.go("login"),
+      goKakao: this.go("kakao"),
+      goNaver: this.go("naver"),
+      goPhone: this.go("phone"),
+      goTerms: this.go("terms"),
+      goOnboard: this.go("onboarding"),
+      goHome: () => { window.parent && window.parent.postMessage({ type:"af-nav", to:"home" }, "*"); this.setState({ step:"login" }); },
+      requestCode: () => this.setState({ codeSent: true }),
+
+      phoneCtaBg: codeSent ? "#0041FF" : "#F3F3F3",
+      phoneCtaColor: codeSent ? "#fff" : "#BBB",
+
+      allColor: allAgree ? "#0041FF" : "#D5D5D5",
+      terms: this.termLabels.map((label, i) => ({
+        label,
+        stroke: termsArr[i] ? "#0041FF" : "#CFCFCF",
+        toggle: this.toggleTerm(i),
+        detail: this.go("termsdetail"),
+      })),
+      termsCtaBg: requiredOk ? "#0041FF" : "#F3F3F3",
+      termsCtaColor: requiredOk ? "#fff" : "#BBB",
+
+      fishChips: ["우럭","갈치","광어","참도","감성도","주꾸미","볼락"].map(l=>{ const on=!!this.state.fish[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({fish:Object.assign({},st.fish,{[l]:!st.fish[l]})})) }; }),
+      levels: ["초보","중급","베테랑"].map(l=>{ const on=this.state.skill===l; return { label:l, onClick:()=>this.setState({skill:l}), bg:on?"#fff":"transparent", color:on?"#0041FF":"#999", weight:on?700:500, shadow:on?"0 1px 4px rgba(0,0,0,.12)":"none" }; }),
+      regionChips: ["충남","전남","경남","제주"].map(l=>{ const on=!!this.state.region[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({region:Object.assign({},st.region,{[l]:!st.region[l]})})) }; }),
+      selectedCountLabel: (Object.values(this.state.fish).filter(Boolean).length) + "개 어종을 선택했어요",
+    };
+  }
+}
+</script>
+</body>
+</html>
