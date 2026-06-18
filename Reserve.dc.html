@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<style>.af-rv *{box-sizing:border-box;} .af-rv{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;} .tap{cursor:pointer;transition:transform .1s ease;} .tap:active{transform:scale(.99);} .cell{height:38px;display:flex;align-items:center;justify-content:center;font-size:13.5px;border-radius:9px;}</style>
+</helmet>
+<div class="af-rv" style="width:393px; min-height:852px; background:#fff; position:relative;">
+  <div style="height:48px; display:flex; align-items:center; justify-content:space-between; padding:6px 20px 0; position:relative; z-index:6;">
+    <span style="font-family:'SF Pro Display',sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg><span style="font-weight:600; font-size:14px; color:#191919;">5G</span><div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div></div>
+  </div>
+
+  <!-- 출조탭 선박 리스트 -->
+  <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 20px 0;"><div style="display:flex; align-items:baseline; gap:2px;"><span style="font-weight:800; font-size:22px; color:#191919; letter-spacing:-0.6px;">출조</span><span style="width:5px; height:5px; border-radius:50%; background:#0041FF;"></span></div><div style="display:flex; gap:15px;"><svg class="tap" width="23" height="23" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="#191919" stroke-width="1.8"></circle><path d="M16 16 20 20" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div>
+    <div style="display:flex; gap:20px; padding:14px 20px 0;"><sc-for list="{{ subTabs }}" as="t" hint-placeholder-count="3"><span class="tap" style="font-weight:{{ t.weight }}; font-size:16px; color:{{ t.color }}; letter-spacing:-0.4px;">{{ t.label }}</span></sc-for></div>
+    <div style="margin-top:14px; display:flex; gap:7px; padding:0 20px 12px; overflow-x:auto; border-bottom:1px solid #F2F2F2;"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><div class="tap" style="height:34px; padding:0 13px; border-radius:1000px; border:1px solid {{ f.border }}; background:{{ f.bg }}; display:flex; align-items:center; gap:4px; white-space:nowrap; flex:none;"><span style="font-weight:600; font-size:13px; color:{{ f.color }}; letter-spacing:-0.3px;">{{ f.label }}</span><svg width="9" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="{{ f.color }}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></sc-for></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 20px 4px;"><span style="font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">총 <b style="color:#191919;">128</b>척</span><div class="tap" style="display:flex; align-items:center; gap:4px; font-weight:600; font-size:13px; color:#363636;">추천순 <svg width="9" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="#363636" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    <div style="padding:6px 18px 0; display:flex; flex-direction:column; gap:14px;">
+      <sc-for list="{{ boats }}" as="b" hint-placeholder-count="5">
+        <div class="tap" onClick="{{ goDetail }}" style="display:flex; gap:13px; padding-bottom:14px; border-bottom:1px solid #F4F4F4;">
+          <div style="position:relative; width:104px; height:104px; border-radius:13px; background:#E9ECF1; overflow:hidden; flex:none;"><span style="position:absolute; left:0; top:0; height:21px; padding:0 8px; background:{{ b.ribBg }}; color:#fff; font-weight:700; font-size:10px; display:flex; align-items:center; border-radius:0 0 8px 0;">{{ b.rib }}</span><div style="position:absolute; right:7px; bottom:7px; width:26px; height:26px; border-radius:7px; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center;"><svg width="15" height="14" viewBox="0 0 16 15"><path d="M8 13.5C8 13.5 1.5 9.2 1.5 5.3C1.5 3.4 3 2 4.8 2C6 2 7.2 2.7 8 3.9C8.8 2.7 10 2 11.2 2C13 2 14.5 3.4 14.5 5.3C14.5 9.2 8 13.5 8 13.5Z" fill="{{ b.heart }}" stroke="#AAA" stroke-width="1.3" stroke-linejoin="round"></path></svg></div></div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:5px;"><sc-for list="{{ b.badges }}" as="bd" hint-placeholder-count="2"><span style="height:20px; padding:0 7px; border-radius:5px; background:{{ bd.bg }}; color:{{ bd.color }}; font-weight:700; font-size:10px; display:flex; align-items:center;">{{ bd.t }}</span></sc-for></div>
+            <div style="margin-top:6px; font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">{{ b.name }}</div>
+            <div style="margin-top:3px; font-weight:500; font-size:12px; color:#999; letter-spacing:-0.3px;">{{ b.meta }}</div>
+            <div style="margin-top:7px; display:flex; gap:5px;"><sc-for list="{{ b.tags }}" as="tg" hint-placeholder-count="3"><span style="height:21px; padding:0 8px; border-radius:5px; background:#F3F3F3; color:#767676; font-weight:600; font-size:10.5px; display:flex; align-items:center;">{{ tg }}</span></sc-for></div>
+            <div style="margin-top:8px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:12px; color:{{ b.seatColor }};">{{ b.seat }}</span><span style="font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">{{ b.price }}<span style="font-size:12px; font-weight:600; color:#AAA;">~</span></span></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:30px;"></div>
+  </div>
+  </sc-if>
+
+  <!-- 선박 상세 -->
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <div style="position:relative; height:290px; margin-top:-48px;">
+      <image-slot id="af-rv-hero" shape="rect" placeholder="선박 대표 사진" style="position:absolute; inset:0; width:393px; height:290px;"></image-slot>
+      <div style="position:absolute; left:0; right:0; top:48px; height:48px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; z-index:3;">
+        <div class="tap" onClick="{{ back }}" style="width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center;"><svg width="10" height="18" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        <div style="display:flex; gap:8px;"><div class="tap" style="width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 20 20"><circle cx="5" cy="10" r="1.5" fill="#191919"></circle><circle cx="15" cy="5" r="1.5" fill="#191919"></circle><circle cx="15" cy="15" r="1.5" fill="#191919"></circle><path d="M6.4 9 13.6 5.6 M6.4 11 13.6 14.4" stroke="#191919" stroke-width="1.3"></path></svg></div><div class="tap" onClick="{{ toggleWish }}" style="width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center;"><svg width="15" height="17" viewBox="0 0 16 18"><path d="M3 2 L13 2 L13 16 L8 12 L3 16 Z" fill="{{ wishFill }}" stroke="#191919" stroke-width="1.4" stroke-linejoin="round"></path></svg></div></div>
+      </div>
+      <div style="position:absolute; left:50%; bottom:14px; transform:translateX(-50%); height:22px; padding:0 11px; border-radius:1000px; background:rgba(0,0,0,.5); color:#fff; font-weight:600; font-size:11.5px; display:flex; align-items:center; z-index:3;">3 / 4</div>
+    </div>
+    <div style="padding:20px 20px 0; display:flex; align-items:flex-start; justify-content:space-between;">
+      <div style="flex:1;"><div style="font-weight:800; font-size:23px; color:#191919; letter-spacing:-0.6px;">전투호</div><div style="margin-top:7px; font-weight:500; font-size:13px; color:#767676;">경기 시흥시 &nbsp;|&nbsp; 9.77t &nbsp;|&nbsp; 최대 20명 탑승</div><div style="margin-top:11px; display:flex; gap:6px; flex-wrap:wrap;"><sc-for list="{{ fishTags }}" as="t" hint-placeholder-count="5"><span style="height:24px; padding:0 10px; border-radius:6px; background:#F3F3F3; color:#555; font-weight:600; font-size:11.5px; display:flex; align-items:center;">{{ t }}</span></sc-for></div></div>
+      <div class="tap" style="display:flex; flex-direction:column; align-items:center; gap:5px; margin-left:12px;"><div style="width:44px; height:44px; border-radius:50%; background:#F3F3F3; display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 22 22"><path d="M6 4C5 4 4 5 4 6C4 13 9 18 16 18C17 18 18 17 18 16L18 13.5L13.5 12L11.5 14C9 13 8 12 7 9.5L9 7.5L7.5 3Z" fill="none" stroke="#363636" stroke-width="1.6" stroke-linejoin="round"></path></svg></div><span style="font-weight:600; font-size:11px; color:#767676;">전화하기</span></div>
+    </div>
+    <div style="margin-top:18px; display:flex; padding:0 20px; border-bottom:1px solid #EEE;"><div style="flex:1; height:46px; display:flex; align-items:center; justify-content:center; border-bottom:2px solid #191919; font-weight:700; font-size:15px; color:#191919;">상품 정보</div><div class="tap" style="flex:1; height:46px; display:flex; align-items:center; justify-content:center; font-weight:500; font-size:15px; color:#AAA;">업체 정보</div></div>
+    <div style="margin:18px 18px 0; border:1px solid #EAEAEA; border-radius:14px; padding:16px;"><div style="display:flex; align-items:center; justify-content:space-between;"><div><div style="font-weight:700; font-size:14px; color:#191919;">사용할 수 있는 쿠폰 1장</div><div style="margin-top:4px; font-weight:500; font-size:12px; color:#999;">결제 시 선택해 적용할 수 있어요.</div></div><svg width="13" height="8" viewBox="0 0 13 8"><path d="M1 1 6.5 6.5 12 1" fill="none" stroke="#BBB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div style="margin-top:14px; padding-top:14px; border-top:1px dashed #E5E5E5; display:flex; align-items:center; justify-content:space-between;"><div><div style="font-weight:700; font-size:13.5px; color:#191919;">단체예약 10% 쿠폰</div><div style="margin-top:3px; font-weight:500; font-size:11.5px; color:#AAA;">발급 후 31일까지</div></div><div class="tap" style="height:36px; padding:0 16px; border-radius:9px; background:#0041FF; color:#fff; font-weight:600; font-size:13px; display:flex; align-items:center;">가입하고 받기</div></div></div>
+    <div style="padding:24px 20px 0;"><div style="display:flex; align-items:center; justify-content:center; gap:18px;"><span style="width:32px;height:32px;border:1px solid #E5E5E5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">‹</span><span style="font-weight:800; font-size:18px; color:#191919;">2026년 06월</span><span style="width:32px;height:32px;border:1px solid #E5E5E5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">›</span></div><div style="margin-top:14px; display:grid; grid-template-columns:repeat(7,1fr);"><sc-for list="{{ dow }}" as="d" hint-placeholder-count="7"><div class="cell" style="font-weight:600; color:{{ d.c }};">{{ d.l }}</div></sc-for></div><div style="display:grid; grid-template-columns:repeat(7,1fr); gap:2px;"><sc-for list="{{ days }}" as="d" hint-placeholder-count="35"><div class="cell" style="color:{{ d.color }}; background:{{ d.bg }}; font-weight:{{ d.w }};">{{ d.n }}</div></sc-for></div></div>
+    <div style="margin:22px 18px 0;"><div style="display:flex; align-items:center; gap:7px;"><svg width="18" height="18" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="13" rx="2.5" fill="none" stroke="#191919" stroke-width="1.6"></rect><path d="M3 8 L17 8 M7 2.5 L7 5.5 M13 2.5 L13 5.5" stroke="#191919" stroke-width="1.6" stroke-linecap="round"></path></svg><span style="font-weight:700; font-size:15px; color:#191919;">2026-06-17</span></div>
+      <div class="tap" onClick="{{ goReserve }}" style="margin-top:14px; border:1px solid #EEE; border-radius:14px; padding:16px;"><div style="display:flex; align-items:flex-start; justify-content:space-between;"><div><div style="font-weight:700; font-size:15px; color:#191919;">대광어 다운샷</div><div style="margin-top:3px; font-weight:500; font-size:12px; color:#999;">광어</div></div><div style="text-align:right;"><div style="font-weight:800; font-size:17px; color:#0041FF;">110,000원</div><div style="margin-top:2px; font-weight:600; font-size:12px; color:#AAA;">20/20석</div></div></div><div style="margin-top:14px; display:flex; flex-direction:column; gap:7px;"><sc-for list="{{ prodInfo }}" as="p" hint-placeholder-count="5"><div style="display:flex;"><span style="width:74px; font-weight:500; font-size:12.5px; color:#999;">{{ p.k }}</span><span style="flex:1; font-weight:600; font-size:12.5px; color:#363636;">{{ p.v }}</span></div></sc-for></div></div>
+    </div>
+    <div style="height:96px;"></div>
+    <div style="position:sticky; bottom:0; background:#fff; border-top:1px solid #EEE; padding:12px 18px 16px;"><div class="tap" onClick="{{ goReserve }}" style="height:54px; border-radius:1000px; background:#0041FF; display:flex; flex-direction:column; align-items:center; justify-content:center;"><span style="font-weight:700; font-size:16px; color:#fff;">예약하기</span><span style="font-weight:500; font-size:11px; color:rgba(255,255,255,.8); margin-top:1px;">출조일 3일 이전까지 무료 취소</span></div></div>
+  </div>
+  </sc-if>
+
+  <!-- 예약 -->
+  <sc-if value="{{ isReserve }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:50px; display:flex; align-items:center; padding:0 16px;"><div class="tap" onClick="{{ goDetail }}" style="width:30px; height:30px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    <div style="padding:8px 20px 0; font-weight:800; font-size:18px; color:#191919;">예약 상품</div>
+    <div style="margin:14px 20px 0; background:#F8F8F8; border-radius:14px; padding:16px;"><div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:700; font-size:15px; color:#191919;">광어/우럭 다운샷</span><span style="font-weight:800; font-size:16px; color:#0041FF;">90,000원</span></div><div style="margin-top:13px; display:flex; flex-direction:column; gap:7px;"><sc-for list="{{ resvInfo }}" as="r" hint-placeholder-count="5"><div style="display:flex;"><span style="width:80px; font-weight:500; font-size:13px; color:#999;">{{ r.k }}</span><span style="flex:1; font-weight:600; font-size:13px; color:{{ r.c }};">{{ r.v }}</span></div></sc-for></div></div>
+    <div style="padding:24px 20px 0; font-weight:800; font-size:16px; color:#191919;">예약 인원</div>
+    <div style="margin:12px 20px 0; border:1px solid #EEE; border-radius:14px; padding:16px; display:flex; align-items:center; justify-content:space-between;"><div><div style="font-weight:600; font-size:14px; color:#191919;">대인</div><div style="margin-top:2px; font-weight:700; font-size:14px; color:#363636;">90,000원</div></div><div style="display:flex; align-items:center; border:1px solid #E5E5E5; border-radius:10px; overflow:hidden;"><div class="tap" onClick="{{ dec }}" style="width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:18px; color:#767676;">−</div><div style="width:40px; text-align:center; font-weight:700; font-size:15px; color:#191919;">{{ qty }}</div><div class="tap" onClick="{{ inc }}" style="width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:18px; color:#0041FF;">+</div></div></div>
+    <div style="padding:24px 20px 0; font-weight:800; font-size:16px; color:#191919;">예약일 선택</div>
+    <div style="padding:14px 20px 0;"><div style="display:flex; align-items:center; justify-content:center; gap:18px;"><span style="width:30px;height:30px;border:1px solid #E5E5E5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">‹</span><span style="font-weight:800; font-size:17px; color:#191919;">2026년 06월</span><span style="width:30px;height:30px;border:1px solid #E5E5E5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">›</span></div><div style="margin-top:12px; display:grid; grid-template-columns:repeat(7,1fr);"><sc-for list="{{ dow }}" as="d" hint-placeholder-count="7"><div class="cell" style="font-weight:600; color:{{ d.c }};">{{ d.l }}</div></sc-for></div><div style="display:grid; grid-template-columns:repeat(7,1fr); gap:2px;"><sc-for list="{{ days16 }}" as="d" hint-placeholder-count="35"><div class="cell" style="color:{{ d.color }}; background:{{ d.bg }}; font-weight:{{ d.w }};">{{ d.n }}</div></sc-for></div></div>
+    <div style="height:96px;"></div>
+    <div style="position:sticky; bottom:0; background:#fff; border-top:1px solid #EEE; padding:12px 18px 16px;"><div class="tap" onClick="{{ goPay }}" style="height:54px; border-radius:1000px; background:{{ resvCtaBg }}; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:{{ resvCtaColor }};">예약 정보 입력하기</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 결제 -->
+  <sc-if value="{{ isPay }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="height:50px; display:flex; align-items:center; padding:0 16px;"><div class="tap" onClick="{{ goReserve }}" style="width:30px; height:30px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    <div style="padding:6px 20px 0; font-weight:800; font-size:16px; color:#191919;">예약자 정보</div>
+    <div style="margin:12px 20px 0; display:flex; flex-direction:column; gap:9px;"><div style="height:48px; background:#F5F6F8; border-radius:10px; display:flex; align-items:center; padding:0 15px; font-weight:600; font-size:14px; color:#191919;">서현일테스트</div><div style="height:48px; background:#F5F6F8; border-radius:10px; display:flex; align-items:center; padding:0 15px; font-weight:600; font-size:14px; color:#191919;">010-3333-3768</div></div>
+    <div style="padding:24px 20px 0; font-weight:800; font-size:16px; color:#191919;">상품 정보</div>
+    <div style="margin:12px 20px 0; display:flex; flex-direction:column; gap:9px;"><sc-for list="{{ payInfo }}" as="p" hint-placeholder-count="6"><div style="display:flex;"><span style="width:76px; font-weight:500; font-size:13px; color:#999;">{{ p.k }}</span><span style="flex:1; font-weight:600; font-size:13px; color:#363636;">{{ p.v }}</span></div></sc-for></div>
+    <div style="height:8px; background:#F6F7F9; margin-top:22px;"></div>
+    <div style="padding:18px 20px 0; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:16px; color:#191919;">내 쿠폰</span><span style="height:24px; padding:0 10px; border-radius:1000px; background:#EEF3FF; color:#0041FF; font-weight:700; font-size:11.5px; display:flex; align-items:center;">11장 사용 가능</span></div>
+    <div class="tap" style="margin:12px 20px 0; height:50px; background:#F8F8F8; border-radius:12px; display:flex; align-items:center; justify-content:space-between; padding:0 16px;"><span style="font-weight:500; font-size:13.5px; color:#767676;">사용할 수 있는 쿠폰이 11개 있어요.</span><svg width="13" height="8" viewBox="0 0 13 8"><path d="M1 1 6.5 6.5 12 1" fill="none" stroke="#BBB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    <div style="padding:24px 20px 0; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:16px; color:#191919;">결제 금액</span><span style="font-weight:800; font-size:20px; color:#0041FF;">90,000원</span></div>
+    <div style="margin:12px 20px 0; padding:14px 0; border-top:1px solid #F0F0F0; display:flex; flex-direction:column; gap:8px;"><div style="display:flex; justify-content:space-between;"><span style="font-weight:500; font-size:13px; color:#999;">상품 금액</span><span style="font-weight:600; font-size:13px; color:#363636;">90,000원</span></div><div style="display:flex; justify-content:space-between;"><span style="font-weight:500; font-size:13px; color:#999;">예약 인원</span><span style="font-weight:600; font-size:13px; color:#363636;">{{ qty }}명</span></div><div style="display:flex; justify-content:space-between; padding-top:6px; border-top:1px solid #F4F4F4;"><span style="font-weight:700; font-size:14px; color:#191919;">총 결제 금액</span><span style="font-weight:800; font-size:16px; color:#191919;">90,000원</span></div></div>
+    <div style="padding:18px 20px 0; font-weight:800; font-size:16px; color:#191919;">결제 방법</div>
+    <div style="margin:12px 20px 0;"><div style="border:1.5px solid #0041FF; border-radius:12px; padding:13px 15px; position:relative;"><span style="position:absolute; left:13px; top:-9px; height:18px; padding:0 7px; border-radius:5px; background:#0041FF; color:#fff; font-weight:700; font-size:9.5px; display:flex; align-items:center;">결제마다 0.3% 할인 + 30% 소득공제</span><div style="font-weight:700; font-size:14px; color:#191919; text-align:center;">퀵계좌이체</div></div>
+      <div style="margin-top:9px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px;"><div class="tap" style="height:54px; border:1px solid #EEE; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:12.5px; color:#363636;">신용·체크카드</div><div class="tap" style="height:54px; border:1px solid #EEE; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:#03C75A; position:relative;"><span style="position:absolute; top:-9px; height:18px; padding:0 7px; border-radius:5px; background:#1F8A5B; color:#fff; font-weight:700; font-size:9px; display:flex; align-items:center;">적립혜택</span>Npay</div><div class="tap" style="height:54px; border:1px solid #EEE; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12.5px; color:#0064FF;">toss pay</div></div>
+      <div style="margin-top:9px; width:108px; height:54px; border:1px solid #EEE; border-radius:11px; display:flex; align-items:center; justify-content:center; background:#FEE500; font-weight:700; font-size:13px; color:#3C1E1E;">pay</div>
+    </div>
+    <div style="margin:18px 20px 0; padding:14px 16px; background:#F5F8FF; border-radius:12px; display:flex; align-items:center; gap:9px;"><div style="width:24px; height:24px; border-radius:50%; background:#0041FF; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:11px;">신</div><span style="font-weight:600; font-size:13px; color:#363636;">신한카드 최대 3개월 무이자 할부</span></div>
+    <div style="padding:18px 20px 0; font-weight:800; font-size:15px; color:#191919;">예약 안내</div>
+    <div style="padding:10px 20px 0; font-weight:500; font-size:12.5px; line-height:1.6; color:#888;">결제가 완료되면 예약 신청이 완료돼요.<br>업체에서 확인 후 예약 확정까지 최대 3일이 걸릴 수 있어요.</div>
+    <div class="tap" onClick="{{ toggleAgree }}" style="margin:18px 18px 0; height:50px; display:flex; align-items:center; gap:11px; padding:0 8px;"><div style="width:22px; height:22px; border-radius:6px; background:{{ agreeBg }}; border:1.5px solid {{ agreeBorder }}; display:flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="flex:1; font-weight:600; font-size:13.5px; color:#363636;">[필수] 결제 서비스 이용약관, 개인정보 처리 동의</span><svg width="7" height="13" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    <div style="height:96px;"></div>
+    <div style="position:sticky; bottom:0; background:#fff; border-top:1px solid #EEE; padding:12px 18px 16px;"><div class="tap" onClick="{{ goDone }}" style="height:54px; border-radius:1000px; background:{{ payCtaBg }}; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:700; font-size:16px; color:{{ payCtaColor }};">90,000원 결제하기<span style="height:18px; padding:0 7px; border-radius:5px; background:#EE0005; color:#fff; font-weight:700; font-size:10px; display:flex; align-items:center;">쿠폰 미적용</span></div></div>
+  </div>
+  </sc-if>
+
+  <!-- 예약 완료 -->
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex; flex-direction:column; min-height:780px;">
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; padding:60px 30px 0; text-align:center;">
+      <div style="width:84px; height:84px; border-radius:50%; background:#EAF0FF; display:flex; align-items:center; justify-content:center;"><svg width="40" height="40" viewBox="0 0 42 42"><circle cx="21" cy="21" r="18" fill="none" stroke="#0041FF" stroke-width="2.4"></circle><path d="M13 21.5 L18.5 27 L29 16" fill="none" stroke="#0041FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div style="margin-top:24px; font-weight:800; font-size:22px; color:#191919; letter-spacing:-0.6px;">예약이 접수되었어요</div>
+      <div style="margin-top:12px; font-weight:500; font-size:14px; line-height:1.6; color:#999; letter-spacing:-0.3px;">업체 확인 후 최대 3일 내에<br>확정 알림을 보내드릴게요.</div>
+      <div style="margin-top:28px; width:100%; border:1px solid #EEE; border-radius:16px; padding:18px; text-align:left;">
+        <div style="display:flex; flex-direction:column; gap:10px;"><sc-for list="{{ doneInfo }}" as="d" hint-placeholder-count="4"><div style="display:flex;"><span style="width:80px; font-weight:500; font-size:13px; color:#999;">{{ d.k }}</span><span style="flex:1; font-weight:700; font-size:13.5px; color:#191919;">{{ d.v }}</span></div></sc-for></div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid #F2F2F2; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:13px; color:#767676;">결제 금액</span><span style="font-weight:800; font-size:17px; color:#0041FF;">90,000원</span></div>
+      </div>
+      <div class="tap" onClick="{{ goReview }}" style="margin-top:16px; width:100%; background:#FFF7E0; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:9px; cursor:pointer;"><div style="width:24px; height:24px; border-radius:50%; background:#FFC700; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:12px;">M</div><span style="font-weight:600; font-size:13px; color:#9A7B1E; letter-spacing:-0.3px;">출조 후 후기를 남기면 1,500머니를 드려요 ›</span></div>
+    </div>
+    <div style="padding:14px 18px 24px; display:flex; gap:10px;"><div class="tap" onClick="{{ goHome }}" style="width:120px; height:52px; border-radius:1000px; background:#F3F3F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:15px; color:#555;">홈으로</div><div class="tap" onClick="{{ goMyReserv }}" style="flex:1; height:52px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#fff;">예약 내역 보기</div></div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;list&quot;,&quot;detail&quot;,&quot;reserve&quot;,&quot;pay&quot;,&quot;done&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { screen:null, qty:1, wish:false, agree:false };
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  set(s){ return ()=> this.setState({ screen:s }); }
+
+  cal(sel){
+    // 2026-06: June 1 = Monday (offset 1)
+    const cells=[]; for(let i=0;i<1;i++) cells.push({n:"",color:"transparent",bg:"transparent",w:400});
+    for(let d=1; d<=30; d++){
+      const idx=(1+d-1)%7; // 0=Sun
+      const on=d===sel;
+      cells.push({ n:String(d), color: on?"#fff":(idx===0?"#EE5B49":(idx===6?"#3B82F6":"#363636")), bg: on?"#0041FF":"transparent", w: on?800:500 });
+    }
+    return cells;
+  }
+
+  renderVals(){
+    const s=this.state.screen || this.props.screen || "detail";
+    const dow=[["일","#EE5B49"],["월","#888"],["화","#888"],["수","#888"],["목","#888"],["금","#888"],["토","#3B82F6"]].map(x=>({l:x[0],c:x[1]}));
+    return {
+      isDetail:s==="detail", isReserve:s==="reserve", isPay:s==="pay", isDone:s==="done", isList:s==="list",
+      subTabs:["홈","탐색","조황"].map((label,i)=>({label, weight:i===0?700:500, color:i===0?"#191919":"#AAA"})),
+      filters:[{label:"지역"},{label:"어종"},{label:"날짜"},{label:"실시간예약"}].map((f,i)=>({label:f.label, border:i===0?"#0041FF":"#E2E2E2", bg:i===0?"#EEF3FF":"#fff", color:i===0?"#0041FF":"#555"})),
+      boats:[
+        { name:"전투호", meta:"경기 시흥 · 9.77t · 최대 20명", rib:"실시간", ribBg:"#0AD2FF", heart:"none", seat:"잔여 11석", seatColor:"#0041FF", price:"90,000원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"},{t:"보유인증",bg:"#FFF1E9",color:"#FF4C14"}], tags:["광어","우럭"] },
+        { name:"블랙이글호", meta:"인천 중구 홍원항 · 12t · 최대 18명", rib:"실시간", ribBg:"#0AD2FF", heart:"#FF3C3A", seat:"잔여 2석 · 마감 임박", seatColor:"#EE0005", price:"104,500원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"}], tags:["참돔","갈치"] },
+        { name:"만선호", meta:"태안 신진도항 · 9.9t · 최대 16명", rib:"5%", ribBg:"#FF6B2C", heart:"none", seat:"잔여 8석", seatColor:"#999", price:"82,000원", badges:[{t:"전화예약",bg:"#F3F3F3",color:"#767676"}], tags:["우럭","광어","노래미"] },
+        { name:"거제대박호", meta:"거제 장목항 · 15t · 최대 22명", rib:"대회", ribBg:"#6433DF", heart:"none", seat:"잔여 5석", seatColor:"#999", price:"130,000원", badges:[{t:"챔피언십",bg:"#F1EBFF",color:"#6433DF"}], tags:["갈치"] },
+        { name:"청해호", meta:"통영 삼덕항 · 9.77t · 최대 20명", rib:"최저가", ribBg:"#B9E100", heart:"none", seat:"잔여 14석", seatColor:"#999", price:"75,000원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"}], tags:["볼락","우럭"] },
+      ],
+      back:this.nav("back"), noop:this.nav("noop"),
+      goDetail:this.set("detail"), goReserve:this.set("reserve"), goPay:this.set("pay"), goDone:this.set("done"),
+      goHome:this.nav("home"), goMyReserv:this.nav("reserv"), goReview:this.nav("review"),
+      wishFill:this.state.wish?"#191919":"none", toggleWish:()=>this.setState(st=>({wish:!st.wish})),
+      qty:this.state.qty, inc:()=>this.setState(st=>({qty:st.qty+1})), dec:()=>this.setState(st=>({qty:Math.max(1,st.qty-1)})),
+      resvCtaBg:this.state.qty>0?"#0041FF":"#F3F3F3", resvCtaColor:this.state.qty>0?"#fff":"#BBB",
+      toggleAgree:()=>this.setState(st=>({agree:!st.agree})),
+      agreeBg:this.state.agree?"#0041FF":"#fff", agreeBorder:this.state.agree?"#0041FF":"#D5D5D5",
+      payCtaBg:this.state.agree?"#0041FF":"#C7D2EE", payCtaColor:"#fff",
+      dow, days:this.cal(17), days16:this.cal(16),
+      fishTags:["갑오징어","노래미","주꾸미","광어","우럭"],
+      prodInfo:[{k:"출조일자",v:"26년 06월 17일"},{k:"이용시간",v:"05:00 ~ 15:00 (당일)"},{k:"최소인원",v:"1인"},{k:"자리배정",v:"추첨"},{k:"출조버스",v:"미운행"}],
+      resvInfo:[{k:"남은자리",v:"11/11석",c:"#0041FF"},{k:"어종",v:"광어, 우럭",c:"#363636"},{k:"이용시간",v:"05:30 ~ 15:00 (당일)",c:"#363636"},{k:"자리배정",v:"추첨",c:"#363636"},{k:"최소인원",v:"6인",c:"#363636"}],
+      payInfo:[{k:"상품명",v:"광어/우럭 다운샷"},{k:"상품금액",v:"90,000원"},{k:"예약 인원",v:this.state.qty+"명"},{k:"예약일정",v:"2026.06.16, 05:30 ~ (당일)15:00"},{k:"주소",v:"충남 보령시 오천면 소성리 60-1"},{k:"자리 배정",v:"추첨"}],
+      doneInfo:[{k:"선박",v:"전투호 · 광어/우럭 다운샷"},{k:"일시",v:"2026.06.16 (화) 05:30"},{k:"인원",v:this.state.qty+"명"},{k:"상태",v:"확정 대기"}],
+    };
+  }
+}
+</script>
+</body>
+</html>

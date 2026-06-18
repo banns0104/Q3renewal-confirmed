@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#0041FF"/><rect x="34" y="22" width="32" height="56" rx="7" fill="#fff"/><circle cx="50" cy="68" r="3" fill="#0041FF"/></svg></template>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="./scr/home/fig-tokens.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-tokens.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-assets.css">
+<link rel="stylesheet" href="./scr/splash/fig-assets.css">
+<link rel="stylesheet" href="./scr/home/fig-assets.css">
+<link rel="stylesheet" href="./scr/reserve_list/fig-assets.css">
+<link rel="stylesheet" href="./scr/map/fig-assets.css">
+<link rel="stylesheet" href="./scr/search/fig-assets.css">
+<style>
+  .afp *{ box-sizing:border-box; }
+  .afp{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  #afscroll::-webkit-scrollbar{ width:0; height:0; }
+  .nav-row{ cursor:pointer; transition:background .12s ease; }
+  .nav-row:hover{ background:#F1F2F5; }
+  .af-fade{ animation:afFade .26s ease; }
+  @keyframes afFade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+  .af-ripple{ position:absolute; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%; background:rgba(0,65,255,.28); pointer-events:none; animation:afRip .5s ease-out forwards; z-index:50; }
+  @keyframes afRip{ from{ opacity:.5; transform:scale(1);} to{ opacity:0; transform:scale(9);} }
+  .af-toast{ position:absolute; left:50%; bottom:104px; transform:translateX(-50%); background:rgba(25,25,25,.92); color:#fff; font-size:13px; font-weight:600; letter-spacing:-0.3px; padding:11px 18px; border-radius:1000px; z-index:60; animation:afToast 1.8s ease forwards; white-space:nowrap; }
+  @keyframes afToast{ 0%{opacity:0; transform:translate(-50%,8px);} 12%{opacity:1; transform:translate(-50%,0);} 80%{opacity:1;} 100%{opacity:0;} }
+  .tab-btn{ cursor:pointer; }
+</style>
+</helmet>
+<div class="afp" style="min-height:100vh; background:#e7e8ec; padding:34px 40px; display:flex; gap:34px; align-items:flex-start;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <div style="width:270px; flex:none; position:sticky; top:34px; max-height:calc(100vh - 68px); overflow-y:auto;">
+    <div style="font-weight:800; font-size:21px; color:#191919; letter-spacing:-0.6px;">어바웃피싱<span style="color:#6433DF;">.</span></div>
+    <div style="margin-top:5px; font-weight:600; font-size:12.5px; color:#999; letter-spacing:-0.3px;">서비스 최적화 · 8월버전 프로토타입</div>
+    <a href="layout.dc.html" style="margin-top:12px; display:inline-flex; align-items:center; height:32px; padding:0 14px; border-radius:1000px; background:#fff; text-decoration:none; font-weight:600; font-size:11.5px; color:#0041FF; letter-spacing:-0.3px; box-shadow:0 3px 12px rgba(20,22,30,.08);">전체 화면 레이아웃 →</a>
+
+    <div style="margin-top:16px; background:#fff; border-radius:16px; padding:10px; box-shadow:0 6px 24px rgba(20,22,30,.07);">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+        <div style="padding:10px 10px 4px; font-weight:700; font-size:10.5px; color:#AAA; letter-spacing:0.3px;">{{ g.title }}</div>
+        <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="5">
+          <div class="nav-row" onClick="{{ it.onClick }}" style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:9px; background:{{ it.rowBg }};">
+            <div style="width:6px; height:6px; border-radius:50%; background:{{ it.dot }}; flex:none;"></div>
+            <span style="flex:1; font-weight:{{ it.weight }}; font-size:13px; color:{{ it.color }}; letter-spacing:-0.3px;">{{ it.label }}</span>
+          </div>
+        </sc-for>
+        <div style="height:7px;"></div>
+      </sc-for>
+    </div>
+    <div style="margin-top:10px; padding:0 6px; font-weight:500; font-size:11px; line-height:1.6; color:#AAA; letter-spacing:-0.3px;">하단 탭(새소식·탐색·출조·프로필)으로 이동하고, 화면 안의 카드·배너·아이콘을 눌러보세요. 모든 요소가 반응해요.</div>
+  </div>
+
+  <!-- ===== PHONE ===== -->
+  <div style="flex:none; position:sticky; top:34px;">
+    <div ref="{{ phoneRef }}" style="width:411px; height:870px; background:#0c0d10; border-radius:54px; padding:9px; box-shadow:0 22px 70px rgba(15,17,25,.32); position:relative;">
+      <div style="width:393px; height:852px; background:#fff; border-radius:46px; overflow:hidden; position:relative;">
+
+        <div id="afscroll" ref="{{ scrollRef }}" style="position:absolute; inset:0; overflow-y:auto; overflow-x:hidden;">
+          <div class="af-fade" key="{{ fadeKey }}" style="width:393px;">
+
+            <sc-if value="{{ v_splash }}" hint-placeholder-val="{{ true }}"><x-import component-from-global-scope="AFSplash" from="./scr/splash/Components.bundle.js" hint-size="393,852"></x-import></sc-if>
+            <sc-if value="{{ v_auth_login }}" hint-placeholder-val="{{ false }}"><dc-import name="Auth" start="login" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_auth_phone }}" hint-placeholder-val="{{ false }}"><dc-import name="Auth" start="phone" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_auth_terms }}" hint-placeholder-val="{{ false }}"><dc-import name="Auth" start="terms" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_auth_onboard }}" hint-placeholder-val="{{ false }}"><dc-import name="Auth" start="onboarding" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_perm_intro }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="intro" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_perm_location }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="location" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_perm_notification }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="notification" hint-size="393,852"></dc-import></sc-if>
+
+            <sc-if value="{{ v_news_b }}" hint-placeholder-val="{{ false }}"><dc-import name="News" hint-size="393,1600"></dc-import></sc-if>
+            <sc-if value="{{ v_reserve_list }}" hint-placeholder-val="{{ false }}"><div style="position:relative; content-visibility:auto; contain-intrinsic-size:393px 8516px; overflow:hidden; height:8516px;"><x-import component-from-global-scope="AFChuljoHome" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import><div data-route="search" style="position:absolute; left:14px; right:14px; top:474px; height:62px; z-index:6; cursor:pointer;"></div></div></sc-if>
+            <sc-if value="{{ v_map }}" hint-placeholder-val="{{ false }}"><dc-import name="Map" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_search }}" hint-placeholder-val="{{ false }}"><dc-import name="Search" screen="empty" hint-size="393,1200"></dc-import></sc-if>
+
+            <sc-if value="{{ v_my }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="{{ mySub }}" key="{{ myKey }}" hint-size="393,1400"></dc-import></sc-if>
+            <sc-if value="{{ v_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></sc-if>
+            <sc-if value="{{ v_catch_register }}" hint-placeholder-val="{{ false }}"><dc-import name="Catch" screen="pin" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_notif }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_news_notice }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_news_event }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_review }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="review" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_chat }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="chat" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_cancel }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></sc-if>
+
+            <sc-if value="{{ v_empty_reserve }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="reserve" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_wish }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="wish" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_search }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="search" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_news }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="news" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_alarm }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="alarm" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_catch }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="catch" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_coupon }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="coupon" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_chat }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="chat" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_empty_payment }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="payment" hint-size="393,852"></dc-import></sc-if>
+
+            <sc-if value="{{ v_err_404 }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="404" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_err_500 }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="500" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_err_network }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="network" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_err_maintenance }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="maintenance" hint-size="393,852"></dc-import></sc-if>
+
+          </div>
+          <div style="height:96px;"></div>
+        </div>
+
+        <!-- top-right icon cluster (clean overlay over extracted gnb) -->
+        <sc-if value="{{ showTopIcons }}" hint-placeholder-val="{{ false }}">
+          <div ref="{{ overlayRef }}" style="position:absolute; right:18px; top:71px; display:flex; gap:15px; align-items:center; z-index:20; transition:opacity .18s ease;">
+            <div class="tab-btn" data-route="notif" style="position:relative; width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M7 10C7 7 9 5 12 5C15 5 17 7 17 10C17 15 19 17 19 17L5 17C5 17 7 15 7 10Z" fill="none" stroke="#363636" stroke-width="1.7" stroke-linejoin="round"></path><path d="M10 19.5C10.4 20.4 11.1 21 12 21C12.9 21 13.6 20.4 14 19.5" fill="none" stroke="#363636" stroke-width="1.7" stroke-linecap="round"></path></svg><span style="position:absolute; right:1px; top:1px; width:6px; height:6px; border-radius:50%; background:#EE0005;"></span></div>
+            
+            <div class="tab-btn" data-route="my" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="#363636" stroke-width="1.7"></circle><path d="M5.5 19.5C5.5 15.9 8.4 14 12 14C15.6 14 18.5 15.9 18.5 19.5" fill="none" stroke="#363636" stroke-width="1.7" stroke-linecap="round"></path></svg></div>
+            <div class="tab-btn" data-route="search" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect></svg></div>
+          </div>
+        </sc-if>
+
+        <!-- channel talk -->
+        <sc-if value="{{ showBubble }}" hint-placeholder-val="{{ false }}">
+          <div class="tab-btn" onClick="{{ goNotif }}" style="position:absolute; right:14px; bottom:100px; width:48px; height:48px; border-radius:50%; background:#191919; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.22); z-index:40;">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.4 1.4 4.5 3.6 5.9-.2.9-.7 2.3-.8 2.6-.1.4.1.4.3.3.2-.1 2.3-1.5 3.2-2.1.8.2 1.6.3 2.4.3 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#fff"></path><circle cx="8.5" cy="11.3" r="1.1" fill="#191919"></circle><circle cx="12" cy="11.3" r="1.1" fill="#191919"></circle><circle cx="15.5" cy="11.3" r="1.1" fill="#191919"></circle></svg>
+          </div>
+        </sc-if>
+
+        <!-- BOTTOM TAB (real 8월 design) -->
+        <sc-if value="{{ showTab }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute; left:0; right:0; bottom:0; height:84px; background:linear-gradient(180deg, rgba(255,255,255,0), #ffffff 58%); border-top:1px solid rgba(133,137,160,.12); border-radius:24px 24px 0 0; z-index:30;">
+          <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 28px;">
+            <div style="display:flex; align-items:center; gap:26px;">
+              <span class="tab-btn" onClick="{{ goNews }}" style="font-weight:{{ newsW }}; font-size:18px; color:{{ newsC }}; letter-spacing:-0.5px;">새소식</span>
+              <span class="tab-btn" onClick="{{ goExplore }}" style="font-weight:{{ exploreW }}; font-size:18px; color:{{ exploreC }}; letter-spacing:-0.5px;">탐색</span>
+              <span class="tab-btn" onClick="{{ goChuljo }}" style="font-weight:{{ chuljoW }}; font-size:18px; color:{{ chuljoC }}; letter-spacing:-0.5px;">출조</span>
+            </div>
+            <div class="tab-btn" onClick="{{ goMy }}" style="width:40px; height:40px; border-radius:50%; background:linear-gradient(150deg,#7B5CFF,#5B33E0); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#fff; box-shadow:0 0 0 {{ profRing }} #0041FF;">현</div>
+          </div>
+          <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+    <div style="margin-top:14px; text-align:center; font-weight:600; font-size:12px; color:#AAA; letter-spacing:-0.3px;">{{ currentLabel }}</div>
+    <sc-if value="{{ hasUserChips }}" hint-placeholder-val="{{ false }}">
+    <div style="margin:12px auto 0; width:411px; background:#fff; border-radius:14px; padding:12px 14px; box-shadow:0 6px 24px rgba(20,22,30,.1);">
+      <div style="font-weight:700; font-size:11px; color:#6433DF; letter-spacing:0.2px; margin-bottom:9px;">🔗 레이아웃에서 연결한 화면</div>
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <sc-for list="{{ userChips }}" as="u" hint-placeholder-count="0">
+          <div class="tab-btn" onClick="{{ u.onClick }}" style="display:flex; align-items:center; gap:8px; padding:8px 11px; border-radius:9px; background:#F4F1FC; cursor:pointer;">
+            <span style="height:20px; padding:0 8px; border-radius:1000px; background:#6433DF; color:#fff; font-weight:700; font-size:10.5px; display:flex; align-items:center; white-space:nowrap;">{{ u.label }}</span>
+            <span style="flex:1; font-weight:600; font-size:12.5px; color:#363636; letter-spacing:-0.3px;">→ {{ u.to }}</span>
+            <svg width="6" height="11" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#9A8DC4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view:"splash", mySub:"mypage", myKey:0, hist:[], userConns:[] };
+  _scroll = null; _phone = null;
+
+  EXTRACTED = ["reserve_list"];
+  TAB_VIEWS = ["news_b","reserve_list","map","search","my"];
+  MY_SUBS = ["mypage","reserv","catch","wish","coupon","noti","faq","interest","profile"];
+
+  SCREENS = [
+    { key:"news_b", label:"새소식", group:"메인 화면" },
+    { key:"map", label:"탐색 지도", group:"메인 화면" },
+    { key:"search", label:"통합검색", group:"메인 화면" },
+    { key:"reserve_list", label:"출조 (통합홈)", group:"메인 화면" },
+
+    { key:"detail", label:"예약 상세", group:"서브페이지" },
+    { key:"catch_register", label:"조황 등록(핀)", group:"서브페이지" },
+    { key:"notif", label:"알림", group:"서브페이지" },
+    { key:"news_notice", label:"공지사항", group:"서브페이지" },
+    { key:"news_event", label:"이벤트", group:"서브페이지" },
+    { key:"review", label:"후기 작성", group:"서브페이지" },
+    { key:"chat", label:"1:1 채팅", group:"서브페이지" },
+    { key:"cancel", label:"예약 취소·환불", group:"서브페이지" },
+
+    { my:"mypage", label:"마이페이지", group:"마이페이지" },
+    { my:"reserv", label:"예약 내역", group:"마이페이지" },
+    { my:"catch", label:"내 조황", group:"마이페이지" },
+    { my:"wish", label:"찜한 선박", group:"마이페이지" },
+    { my:"coupon", label:"쿠폰함", group:"마이페이지" },
+    { my:"interest", label:"관심낚시 설정", group:"마이페이지" },
+    { my:"noti", label:"알림 설정", group:"마이페이지" },
+    { my:"faq", label:"고객센터 FAQ", group:"마이페이지" },
+    { my:"profile", label:"프로필 편집", group:"마이페이지" },
+
+    { key:"splash", label:"스플래쉬", group:"인증 · 온보딩" },
+    { key:"perm_intro", label:"앱 권한 동의", group:"인증 · 온보딩" },
+    { key:"perm_location", label:"위치 권한 요청", group:"인증 · 온보딩" },
+    { key:"perm_notification", label:"알림 권한 요청", group:"인증 · 온보딩" },
+    { key:"auth_login", label:"로그인", group:"인증 · 온보딩" },
+    { key:"auth_phone", label:"휴대폰 인증", group:"인증 · 온보딩" },
+    { key:"auth_terms", label:"약관 동의", group:"인증 · 온보딩" },
+    { key:"auth_onboard", label:"관심 온보딩", group:"인증 · 온보딩" },
+
+    { key:"empty_reserve", label:"예약 내역 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_wish", label:"찜 목록 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_search", label:"검색결과 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_news", label:"새소식 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_alarm", label:"알림 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_catch", label:"조황 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_coupon", label:"쿠폰 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_chat", label:"채팅 없음", group:"빈 상태 (Empty)" },
+    { key:"empty_payment", label:"결제내역 없음", group:"빈 상태 (Empty)" },
+
+    { key:"err_404", label:"404", group:"에러 (Error)" },
+    { key:"err_500", label:"500", group:"에러 (Error)" },
+    { key:"err_network", label:"네트워크 오류", group:"에러 (Error)" },
+    { key:"err_maintenance", label:"서비스 점검", group:"에러 (Error)" },
+  ];
+
+  scrollRef = (el)=>{ this._scroll = el; };
+  phoneRef = (el)=>{ this._phone = el; };
+
+  go(view, mySub){
+    this.setState(st=>{
+      const hist = st.view && st.view!==view ? st.hist.concat([{ view:st.view, mySub:st.mySub }]) : st.hist;
+      return { view, mySub: (mySub!=null?mySub:st.mySub), myKey: st.myKey+1, hist };
+    }, ()=> this.afterNav());
+  }
+  setView(v){ return ()=> this.go(v, "mypage"); }
+  setMy(sub){ return ()=> this.go("my", sub); }
+  back(){
+    this.setState(st=>{
+      if(!st.hist.length) return {};
+      const p = st.hist[st.hist.length-1];
+      return { view:p.view, mySub:p.mySub, myKey:st.myKey+1, hist:st.hist.slice(0,-1) };
+    }, ()=> this.afterNav());
+  }
+  afterNav(){ if(this._scroll) this._scroll.scrollTop = 0; this.scheduleEnhance(); }
+
+  toast(msg){
+    if(!this._phone) return;
+    const t = document.createElement("div");
+    t.className = "af-toast"; t.textContent = msg;
+    this._phone.appendChild(t);
+    setTimeout(()=>{ t.remove(); }, 1800);
+  }
+  ripple(x,y){
+    if(!this._phone) return;
+    const r = this._phone.getBoundingClientRect();
+    const s = document.createElement("span");
+    s.className = "af-ripple";
+    s.style.left = (x - r.left) + "px"; s.style.top = (y - r.top) + "px";
+    this._phone.appendChild(s);
+    setTimeout(()=>{ s.remove(); }, 520);
+  }
+
+  namePath(e){
+    const t = (e.target && e.target.textContent) ? e.target.textContent : "";
+    return t.length > 55 ? "" : t;
+  }
+  routeFor(view, j){
+    if(/찾아보세요|검색|돋보기/.test(j)) return "search";
+    if(/이벤트|챔피언십|기획전|쿠폰|혜택/.test(j)) return "news_event";
+    if(/공지/.test(j)) return "news_notice";
+    if(/포인트맵|포인트 맵|지도/.test(j)) return "map";
+    if(/조황/.test(j)) return "catch_register";
+    if(view==="map" || view==="pointmap") return null;
+    if(view==="shop") return "cart";
+    return "detail";
+  }
+
+  onClick = (e)=>{
+    this.ripple(e.clientX, e.clientY);
+    const routed = e.target.closest && e.target.closest("[data-route]");
+    if(routed){ this.go(routed.getAttribute("data-route"), "mypage"); return; }
+    if(this.state.view==="splash"){ clearTimeout(this._t); this.go("perm_intro","mypage"); return; }
+    if(!this.EXTRACTED.includes(this.state.view)) return;
+    const r = this.routeFor(this.state.view, this.namePath(e));
+    if(r) this.go(r, "mypage");
+  };
+
+  overlayRef = (el)=>{ this._overlay = el; };
+  onScroll = ()=>{
+    if(!this._overlay) return;
+    const t = this._scroll ? this._scroll.scrollTop : 0;
+    this._overlay.style.opacity = t < 80 ? "1" : "0";
+    this._overlay.style.pointerEvents = t < 80 ? "auto" : "none";
+  };
+  scheduleEnhance(){ if(this._overlay){ this._overlay.style.opacity = "1"; this._overlay.style.pointerEvents = "auto"; } }
+
+  onMsg = (e)=>{
+    const d = e.data; if(!d || d.type!=="af-nav") return;
+    const to = d.to;
+    if(to==="back"){ this.back(); return; }
+    if(to==="noop"){ this.toast("준비 중인 기능이에요"); return; }
+    if(this.MY_SUBS.includes(to)){ this.go("my", to); return; }
+    this.go(to, "mypage");
+  };
+
+  componentDidMount(){
+    window.addEventListener("message", this.onMsg);
+    if(this._phone) this._phone.addEventListener("click", this.onClick, false);
+    if(this._scroll) this._scroll.addEventListener("scroll", this.onScroll, { passive:true });
+    this._t = setTimeout(()=>{ if(this.state.view==="splash") this.go("perm_intro","mypage"); }, 2000);
+    try{ this.setState({userConns: JSON.parse(localStorage.getItem("af_connections")||"[]")}); }catch(e){}
+    this._csync=(e)=>{ if(!e || e.key==="af_connections"){ try{ this.setState({userConns: JSON.parse(localStorage.getItem("af_connections")||"[]")}); }catch(x){} } };
+    window.addEventListener("storage", this._csync);
+    this.scheduleEnhance();
+  }
+  componentWillUnmount(){
+    window.removeEventListener("message", this.onMsg);
+    if(this._phone) this._phone.removeEventListener("click", this.onClick, false);
+    clearTimeout(this._t);
+  }
+
+  renderVals(){
+    const view = this.state.view;
+    const ACT = "#191919", IDLE = "#AEAEB6";
+    const out = {};
+    this.EXTRACTED.concat(["catch_register","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","review","chat","cancel","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
+
+    out.mySub = this.state.mySub; out.myKey = this.state.myKey; out.fadeKey = view+"_"+this.state.myKey;
+
+    const order = ["메인 화면","마이페이지","서브페이지","인증 · 온보딩","빈 상태 (Empty)","에러 (Error)"];
+    out.groups = order.map(title=>({
+      title,
+      items: this.SCREENS.filter(s=>s.group===title).map(s=>{
+        const active = s.my!=null ? (view==="my" && this.state.mySub===s.my) : (view===s.key);
+        return {
+          label: s.label,
+          onClick: s.my!=null ? this.setMy(s.my) : this.setView(s.key),
+          rowBg: active ? "#EEF3FF" : "transparent",
+          dot: active ? "#0041FF" : "#D8D8D8",
+          color: active ? "#0041FF" : "#363636",
+          weight: active ? 700 : 500,
+        };
+      }),
+    }));
+
+    const newsOn = (view==="news_b");
+    out.goNews = this.setView("news_b"); out.newsC = newsOn?ACT:IDLE; out.newsW = newsOn?700:600;
+    out.goExplore = this.setView("map"); out.exploreC = view==="map"?ACT:IDLE; out.exploreW = view==="map"?700:600;
+    out.goChuljo = this.setView("reserve_list"); out.chuljoC = view==="reserve_list"?ACT:IDLE; out.chuljoW = view==="reserve_list"?700:600;
+    out.goMy = this.setMy("mypage"); out.profRing = (view==="my"?"2.5px":"0px");
+    out.goNotif = this.setView("notif");
+
+    out.showTab = this.TAB_VIEWS.includes(view);
+    out.showBubble = this.EXTRACTED.includes(view);
+    out.showTopIcons = this.EXTRACTED.includes(view) && view!=="map" && view!=="pointmap";
+    const cur = this.SCREENS.find(s=> s.my!=null ? (view==="my"&&this.state.mySub===s.my) : s.key===view);
+    out.currentLabel = cur ? cur.label : (view==="my" ? "마이페이지" : "");
+    out.scrollRef = this.scrollRef; out.phoneRef = this.phoneRef; out.overlayRef = this.overlayRef;
+    const _norm=s=>String(s||"").replace(/\([^)]*\)/g,"").replace(/[·∙\/\s]/g,"").toLowerCase();
+    const _nc=_norm(out.currentLabel);
+    const _mapView=(label)=>{ const n=_norm(label); if(!n) return null; for(const s of this.SCREENS){ const sn=_norm(s.label); if(sn && (sn===n || sn.indexOf(n)>=0 || n.indexOf(sn)>=0)){ return s.my!=null?["my",s.my]:[s.key,"mypage"]; } } return null; };
+    const _uc=(this.state.userConns||[]).filter(c=>{ if(!c||!c.from) return false; const fn=_norm(c.from); return fn && _nc && (fn===_nc || fn.indexOf(_nc)>=0 || _nc.indexOf(fn)>=0); }).map(c=>{ const t=_mapView(c.to); return t?{ label:c.label||"탭", to:c.to, onClick:()=>this.go(t[0],t[1]) }:null; }).filter(Boolean);
+    out.userChips=_uc; out.hasUserChips=_uc.length>0;
+    return out;
+  }
+}
+</script>
+</body>
+</html>
