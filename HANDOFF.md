@@ -7,9 +7,9 @@
 - `index.html` — 랜딩 허브 (전체화면/프로토타입/플로우기획서/시스템메시지/기능상세정책 링크)
 - `layout.dc.html` — **전체 화면 보드** (모든 화면 한눈에)
 - `prototype.dc.html` — **인터랙티브 프로토타입** (디바이스 + 하단탭 + 좌측 화면 인덱스)
-- `flow-spec.dc.html` — 플로우 기획서 (화면 번호 + 직각 연결 화살표)
+- `flowspec.dc.html` — 플로우 기획서 (화면 번호 + 직각 연결 화살표)
 - `기능상세정책.dc.html` — 기능상세정책 (S1~S55 화면별 요소 번호 + D1~D5 개발 명세 · 서비스기획/PM/FE/BE 4관점 노트)
-- `system-messages.dc.html` / `SysCase.dc.html` — 얼럿/컨펌/토스트/푸쉬/알림톡 카탈로그 & 상황별
+- `systemmessages.dc.html` / `SysCase.dc.html` — 얼럿/컨펌/토스트/푸쉬/알림톡 카탈로그 & 상황별
 - 화면 컴포넌트: `Auth / Permission / News / Reserve / Map / Search / My / Sub / Empty / Error`
 - `support.js` — 런타임(필수) · `scr/` — Figma 추출 번들 · `assets/` — 이미지
 - `design-export.standalone.html` — 커스텀 화면만 담은 단독 실행본(이미지 포함)

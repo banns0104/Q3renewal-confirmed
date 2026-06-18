@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0041FF">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0041FF"/><g fill="none" stroke="#fff" stroke-width="10"><rect x="360" y="300" width="150" height="200" rx="18"/><rect x="690" y="300" width="150" height="200" rx="18"/><path d="M510 400 L690 400" stroke-dasharray="0"/><path d="M675 388 L690 400 L675 412" stroke-linecap="round" stroke-linejoin="round"/></g><text x="600" y="250" font-family="sans-serif" font-size="62" font-weight="800" fill="#fff" text-anchor="middle">FLOW</text></svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-tokens.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-assets.css">
+<style>
+  .fl *{ box-sizing:border-box; }
+  .fl{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  .node{ display:flex; gap:18px; align-items:flex-start; }
+  .mock{ position:relative; z-index:2; width:393px; height:auto; min-height:560px; overflow:hidden; border-radius:26px; box-shadow:0 10px 30px rgba(20,22,30,.16); background:#fff; flex:none; }
+  .mockinner{ transform:none; transform-origin:top left; width:393px; }
+  .mlabel{ margin-top:9px; font-weight:700; font-size:12.5px; color:#363636; letter-spacing:-0.3px; }
+  .badge{ position:absolute; left:9px; width:22px; height:22px; border-radius:50%; background:#0041FF; color:#fff; font-weight:800; font-size:9.5px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.25); z-index:5; }
+  .spec{ position:relative; z-index:2; width:288px; background:#fff; border-radius:13px; box-shadow:0 4px 16px rgba(20,22,30,.08); padding:13px 15px; flex:none; }
+  .schip{ min-width:24px; height:20px; padding:0 5px; border-radius:6px; color:#fff; font-weight:800; font-size:10.5px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .srow{ display:flex; gap:8px; margin-top:6px; }
+  .sk{ width:42px; flex:none; font-weight:600; font-size:10.5px; color:#9AA0AE; letter-spacing:-0.2px; padding-top:1px; }
+  .sv{ flex:1; font-weight:500; font-size:11.5px; line-height:1.5; color:#444; letter-spacing:-0.3px; }
+  .to{ display:inline-flex; align-items:center; height:18px; padding:0 7px; border-radius:5px; background:#EEF3FF; color:#0041FF; font-weight:700; font-size:10px; cursor:pointer; transition:background .12s, color .12s; }
+  .to:hover{ background:#0041FF; color:#fff; }
+  .fl-hl{ animation: flHl 1.9s ease; }
+  @keyframes flHl{ 0%,100%{ box-shadow:0 10px 30px rgba(20,22,30,.16);} 18%,62%{ box-shadow:0 0 0 4px #0041FF, 0 14px 40px rgba(0,65,255,.45);} }
+  .sec{ margin-top:46px; }
+  .sech{ display:flex; align-items:center; gap:11px; margin-bottom:22px; }
+  .secnum{ width:30px; height:30px; border-radius:9px; background:#191919; color:#fff; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  .sect{ font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px; }
+  .secn{ font-weight:500; font-size:12.5px; color:#999; }
+  .grid{ display:flex; gap:34px; flex-wrap:wrap; align-items:flex-start; }
+  .sm{ position:relative; z-index:2; width:393px; height:auto; min-height:560px; overflow:hidden; border-radius:26px; box-shadow:0 8px 24px rgba(20,22,30,.12); background:#fff; flex:none; content-visibility:auto; contain-intrinsic-size:393px 852px; }
+  .sminner{ transform:none; transform-origin:top left; width:393px; }
+  .smlabel{ margin-top:7px; font-weight:600; font-size:11px; color:#555; text-align:center; letter-spacing:-0.3px; }
+</style>
+</helmet>
+<div class="fl" style="background:#EDEEF1; min-height:100vh;">
+
+  <div style="position:sticky; top:0; z-index:20; background:#15161A; padding:18px 34px; display:flex; align-items:center; justify-content:space-between;">
+    <div>
+      <div style="font-weight:800; font-size:21px; color:#fff; letter-spacing:-0.5px;">어바웃피싱 플로우 기획서 <span style="font-weight:600; font-size:13px; color:#7E8696;">· 전체 화면 + 기능정책 + 연결</span></div>
+      <div style="margin-top:5px; font-weight:500; font-size:12px; color:#9AA0AE; letter-spacing:-0.2px;">화면 → 번호(A1·B1…) → 번호별 기능·정책 · <span style="color:#6FA8FF;">파란 실선</span>=순차 이동, <span style="color:#FFB36F;">주황 점선</span>=버튼→화면 점프 · 기능정책의 <span style="color:#6FA8FF; font-weight:700;">→ 파란 칩</span>을 클릭하면 해당 화면으로 이동</div>
+    </div>
+    <a href="prototype.dc.html" style="text-decoration:none; height:40px; padding:0 18px; border-radius:1000px; background:#0041FF; color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center;">프로토타입 열기 →</a>
+  </div>
+
+  <div style="background:#fff; padding:12px 34px; display:flex; gap:24px; flex-wrap:wrap; border-bottom:1px solid #E5E6EA;">
+    <sc-for list="{{ legend }}" as="l" hint-placeholder-count="6"><div style="display:flex; align-items:center; gap:7px;"><span style="width:22px; height:0; border-top:2.5px {{ l.style }} {{ l.color }};"></span><span style="font-weight:600; font-size:12px; color:#555; letter-spacing:-0.3px;">{{ l.label }}</span></div></sc-for>
+  </div>
+
+  <div style="padding:30px 34px 80px; position:relative;">
+    <svg ref="{{ svgRef }}" style="position:absolute; left:0; top:0; width:100%; height:100%; z-index:5; pointer-events:none; overflow:visible;"></svg>
+
+    <!-- 1 인증·온보딩 -->
+    <div class="sech"><div class="secnum">1</div><div class="sect">인증 · 온보딩</div><div class="secn">앱 진입 → 권한 → 로그인 → 본인인증 → 약관 → 관심설정 → 홈</div></div>
+    <div class="grid">
+      <div><div class="mock"><div class="mockinner"><x-import component-from-global-scope="AFSplash" from="./scr/splash/Components.bundle.js" hint-size="393,852"></x-import></div></div><div class="mlabel">01 · 스플래쉬</div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Permission" screen="intro" hint-size="393,852"></dc-import></div><div class="badge" style="top:160px;">A1</div></div><div class="mlabel">02 · 권한 동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#FF3B30;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">접근 권한 안내</span></div>
+          <div class="srow"><span class="sk">노출</span><span class="sv">최초 1회 · 스플래쉬 직후</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">위치/기기=필수, 알림/카메라=선택 · 거부해도 가입 가능</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 시작하기 <span class="to">→ 로그인</span> · OS 다이얼로그 후 진행</span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">권한 거부 시 해당 기능 진입점에서 재요청</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Permission" screen="location" hint-size="393,852"></dc-import></div><div class="badge" style="top:240px;">A2</div></div><div class="mlabel">02-1 · 위치 권한</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#FF3B30;">A2</div><span style="font-weight:700;font-size:13px;color:#191919;">위치 권한 (필수)</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">탐색 지도·내 주변 선박·길안내 필수 · 거부 시 기본좌표(인천)로 폴백</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">앱 사용 중 허용 <span class="to">→ 알림 권한</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">거부=지도 진입 시 권한 재요청 배너</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Permission" screen="notification" hint-size="393,852"></dc-import></div><div class="badge" style="top:240px;">A3</div></div><div class="mlabel">02-2 · 알림 권한</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#FF3B30;">A3</div><span style="font-weight:700;font-size:13px;color:#191919;">알림 권한 (선택)</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">예약 확정·출조 D-day·조황·머니 알림 · 거부해도 가입 진행</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">허용/나중에 <span class="to">→ 로그인</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">거부 시 마이>알림설정에서 재유도</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Permission" screen="tracking_ios" hint-size="393,852"></dc-import></div><div class="badge" style="top:240px;">A4</div></div><div class="mlabel">02-3 · 광고 추적 (iOS)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#FF3B30;">A4</div><span style="font-weight:700;font-size:13px;color:#191919;">앱 추적 투명성(ATT)</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">iOS 14.5+ 필수 · 광고 식별자(IDFA) 수집 동의 · 거부=비맞춤 광고</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">허용/추적 금지 <span class="to">→ 광고 ID (AOS)</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">설정>추적에서 언제든 변경 가능</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Permission" screen="tracking_aos" hint-size="393,852"></dc-import></div><div class="badge" style="top:240px;">A5</div></div><div class="mlabel">02-4 · 광고 ID (AOS)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#FF3B30;">A5</div><span style="font-weight:700;font-size:13px;color:#191919;">광고 식별자(ADID) 수집</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">Android 광고 ID(ADID·AAID) 수집 동의 · 거부해도 가입 진행</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의/동의 안 함 <span class="to">→ 로그인</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">맞춤형 광고·리타겟팅에만 사용 · 설정에서 초기화 가능</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="login" hint-size="393,852"></dc-import></div><div class="badge" style="top:300px;">A1</div></div><div class="mlabel">03 · 로그인</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">소셜·휴대폰 로그인</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">카카오·Apple·휴대폰(네이버 없음) · 14세 미만 차단</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">소셜 인증 <span class="to">→ 휴대폰 인증</span> · 비회원 둘러보기 <span class="to">→ 홈</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">기가입 계정=즉시 홈 · 미가입=약관 플로우</span></div>
+          <div class="srow"><span class="sk">트래킹</span><span class="sv">login_success(provider)</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="kakao" hint-size="393,852"></dc-import></div><div class="badge" style="top:300px;">A2</div></div><div class="mlabel">03-1 · 카카오 동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A2</div><span style="font-weight:700;font-size:13px;color:#191919;">카카오 계정 동의</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">프로필(필수)·카카오계정 이메일(선택) 동의 항목</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 계속하기 <span class="to">→ 휴대폰 인증</span> · 취소 <span class="to">→ 로그인</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">OAuth 콜백 실패=재시도 얼럿 · 신규=약관 플로우</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="naver" hint-size="393,852"></dc-import></div><div class="badge" style="top:300px;">A3</div></div><div class="mlabel">03-2 · 네이버 동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A3</div><span style="font-weight:700;font-size:13px;color:#191919;">네이버 계정 동의</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">이름·연락처 등 제공 항목 동의</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하기 <span class="to">→ 휴대폰 인증</span> · 취소 <span class="to">→ 로그인</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="phone" hint-size="393,852"></dc-import></div><div class="badge" style="top:200px;">A1</div></div><div class="mlabel">04 · 휴대폰 인증</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">본인 확인</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">인증요청 → 6자리 입력란 노출 · 확인 <span class="to">→ 약관</span></span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">3분 타이머 · 재전송 · 일 5회 제한</span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">불일치=인라인 에러 · 만료=재요청 유도</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="phonecode" hint-size="393,852"></dc-import></div><div class="badge" style="top:280px;">A2</div></div><div class="mlabel">04-1 · 인증번호 입력</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A2</div><span style="font-weight:700;font-size:13px;color:#191919;">인증번호 6자리</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">3분 타이머 · 만료 시 재전송 활성 · 5회 실패 시 잠금</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">일치 시 확인 <span class="to">→ 약관 동의</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">불일치=인라인 에러 · 타이머 만료=만료 안내</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="terms" hint-size="393,852"></dc-import></div><div class="badge" style="top:250px;">A1</div></div><div class="mlabel">05 · 약관 동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">약관 동의</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">필수 3종 전체 체크 시 CTA 활성 · 마케팅=선택</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 계속 <span class="to">→ 관심 온보딩</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="termsagreed" hint-size="393,852"></dc-import></div><div class="badge" style="top:250px;">A2</div></div><div class="mlabel">05-1 · 약관 전체동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A2</div><span style="font-weight:700;font-size:13px;color:#191919;">전체동의 활성</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">필수 3종 모두 체크 → CTA 파란색 활성</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 계속 <span class="to">→ 관심 온보딩</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="termsdetail" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A3</div></div><div class="mlabel">05-2 · 약관 상세</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A3</div><span style="font-weight:700;font-size:13px;color:#191919;">약관 전문</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">이용약관·개인정보·위치기반·마케팅 전문 스크롤</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">각 약관 '보기' → 상세 · ‹ 뒤로 복귀</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Auth" start="onboarding" hint-size="393,852"></dc-import></div><div class="badge" style="top:170px;">A1</div></div><div class="mlabel">06 · 관심 온보딩</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">관심 낚시 설정</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">관심 어종 · 숙련도 · 자주 가는 지역 (마이와 동일)</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">개인화 추천 시드 · 건너뛰기 허용</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">시작하기 <span class="to">→ 홈(통합홈)</span></span></div>
+        </div></div>
+    </div>
+
+    <!-- 2 메인 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">2</div><div class="sect">메인 탭</div><div class="secn">하단 탭: 새소식 · 탐색 · 출조(통합홈) · 프로필</div></div>
+    <div class="grid">
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="News" hint-size="393,1600"></dc-import></div><div class="badge" style="top:150px;">A1</div><div class="badge" style="top:248px;">B1</div><div class="badge" style="top:360px;">C1</div></div><div class="mlabel">새소식 (홈)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">데일리 브리핑</span></div>
+          <div class="srow"><span class="sk">노출</span><span class="sv">로그인 시 닉네임 호명 + 당일 파고/수온/풍속/만조</span></div>
+          <div class="srow"><span class="sk">데이터</span><span class="sv">기상청 단기예보 + 바다누리 · 1h 캐시 · 실패 시 일반 카피</span></div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:11px;"><div class="schip" style="background:#0041FF;">B1</div><span style="font-weight:700;font-size:13px;color:#191919;">피드 카드</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">D-day·조황·쿠폰·Reward·AI추천·이벤트·AD 유형</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">선박 카드 <span class="to">→ 예약 상세</span> · 이벤트 <span class="to">→ 이벤트</span> · AI추천 <span class="to">→ 통합검색</span></span></div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:11px;"><div class="schip" style="background:#0041FF;">C1</div><span style="font-weight:700;font-size:13px;color:#191919;">바로가기</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">내 예약 <span class="to">→ 마이</span> · 리뷰이벤트 <span class="to">→ 이벤트</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Map" hint-size="393,852"></dc-import></div><div class="badge" style="top:104px;">A1</div><div class="badge" style="top:160px;">A2</div></div><div class="mlabel">탐색 (지도)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">필터 · 마커</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">피싱포인트/조황/예약/CCTV · 클러스터 줌 분리</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">포인트 <span class="to">→ 낚시예측 시트</span> · 예약마커 <span class="to">→ 업체 리스트</span> · CCTV <span class="to">→ 영상 모달</span></span></div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:11px;"><div class="schip" style="background:#FF8A00;">A2</div><span style="font-weight:700;font-size:13px;color:#191919;">길안내 플로우</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">길안내 시작 → 경로카드 → 인근주차장 → 앱선택(네이버/카카오)</span></div>
+          <div class="srow"><span class="sk">데이터</span><span class="sv">해상바람·어류활성도 예측 · 경로 API</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Search" hint-size="393,1200"></dc-import></div><div class="badge" style="top:140px;">A1</div></div><div class="mlabel">통합검색</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">통합검색 결과</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">최근검색·추천검색 · 선박 외 어종/포인트/상품 섹션</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">결과 카드 <span class="to">→ 예약 상세</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">결과 0건 <span class="to">→ 검색결과 없음(엠티)</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner" style="content-visibility:auto;contain-intrinsic-size:393px 8604px;"><x-import component-from-global-scope="Screen" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import></div><div class="badge" style="top:150px;">A1</div><div class="badge" style="top:300px;">B1</div></div><div class="mlabel">출조 (통합홈)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">출조탭 통합홈</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">홈·탐색·조황 서브탭 · 지역/어종/날짜 필터 · 추천 선박 그리드 · 챔피언십 · 기획전</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">선박 카드 <span class="to">→ 선박 상세</span> · 검색 <span class="to">→ 통합검색</span></span></div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:11px;"><div class="schip" style="background:#0041FF;">B1</div><span style="font-weight:700;font-size:13px;color:#191919;">기획전·배너</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">기획전 → 선박/상품 목록 · 이벤트 <span class="to">→ 이벤트</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><img src="./scr/snapshots/quickmenu.png" style="width:100%;display:block;" alt=""></div><div class="badge" style="top:30px;">A1</div></div><div class="mlabel">퀵메뉴 (오버레이)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">퀵메뉴 바로가기</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">주꾸미배·인기선박·이달의신상·출석체크·이벤트·인기글·포인트맵·챌린지·낚시대회·최신조황·주말선박 (hot 뱃지)</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">아이콘 <span class="to">→ 각 화면</span> · 포인트맵 <span class="to">→ 탐색 지도</span> · 출석체크=머니 적립</div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">종료된 이벤트 아이콘 비활성 · 비로그인=로그인 유도</span></div>
+        </div></div>
+    </div>
+
+    <!-- 2-1 탐색 지도 서브 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">2-1</div><div class="sect">탐색 지도 · 서브화면 / 모달</div><div class="secn">필터(피싱포인트·조황·예약·CCTV) · 시트 · 길안내(경로→주차장→앱선택)</div></div>
+    <div class="grid" style="gap:30px;">
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="base" hint-size="393,852"></dc-import></div></div><div class="smlabel">기본 (피싱포인트)</div></div>
+      <div><div class="sm"><div class="sminner"><img src="./scr/snapshots/point_sea.png" style="width:100%;display:block;" alt=""></div></div><div class="smlabel">포인트 정보 (바다·항구)</div></div>
+      <div><div class="sm"><div class="sminner"><img src="./scr/snapshots/point_river.png" style="width:100%;display:block;" alt=""></div></div><div class="smlabel">포인트 정보 (민물·강)</div></div>
+      <div><div class="sm"><div class="sminner"><img src="./scr/snapshots/point_dam.png" style="width:100%;display:block;" alt=""></div></div><div class="smlabel">포인트 정보 (민물·댐)</div></div>
+      <div><div class="sm"><div class="sminner"><img src="./scr/snapshots/point_common.png" style="width:100%;display:block;" alt=""></div></div><div class="smlabel">포인트 정보 (민물·공통)</div></div>
+      <div><div class="sm"><div class="sminner"><img src="./scr/snapshots/weather_drag.png" style="width:100%;display:block;" alt=""></div></div><div class="smlabel">포인트 날씨 · 드래그</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="route" hint-size="393,852"></dc-import></div></div><div class="smlabel">길안내 경로</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="parking" hint-size="393,852"></dc-import></div></div><div class="smlabel">인근 주차장</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="app" hint-size="393,852"></dc-import></div></div><div class="smlabel">길안내 앱 선택</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="catchf" hint-size="393,852"></dc-import></div></div><div class="smlabel">조황 필터</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="catch" hint-size="393,852"></dc-import></div></div><div class="smlabel">조황 상세</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="reservef" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 필터</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="reserve" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 업체 리스트</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="cctvf" hint-size="393,852"></dc-import></div></div><div class="smlabel">CCTV 필터</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Map" view="cctv" hint-size="393,852"></dc-import></div></div><div class="smlabel">CCTV 영상 모달</div></div>
+    </div>
+
+    <!-- 3 서브·상세 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">3</div><div class="sect">예약 플로우 · 서브</div><div class="secn">선박 상세 → 예약 → 결제 → 완료 · 알림 · 공지/이벤트</div></div>
+    <div class="grid">
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></div><div class="badge" style="top:300px;">A1</div><div class="badge" style="top:388px;">A2</div></div><div class="mlabel">① 선박 상세</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">상세 · 상품 선택</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">대표사진(업로드)·톤수·탑승·어종태그·쿠폰·달력·상품</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">출조일 3일 이전까지 무료 취소 · 잔여석 실시간</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">예약하기 <span class="to">→ ② 예약</span> · 찜(토스트) · 전화하기</span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">정원 마감=얼럿 · 미로그인=로그인 유도</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Reserve" screen="reserve" hint-size="393,1200"></dc-import></div><div class="badge" style="top:150px;">A1</div></div><div class="mlabel">② 예약 (인원·날짜)</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">상품·인원·예약일</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">최소인원 미만 시 안내 · 마감일 비활성</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">예약 정보 입력하기 <span class="to">→ ③ 결제</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Reserve" screen="pay" hint-size="393,1600"></dc-import></div><div class="badge" style="top:150px;">A1</div><div class="badge" style="top:300px;">A2</div></div><div class="mlabel">③ 결제</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">결제 수단·쿠폰</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">예약자·쿠폰·금액·결제수단(퀵계좌·카드·페이)</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">필수 약관 동의 시 CTA 활성 · PG 연동</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">결제하기 <span class="to">→ ④ 완료</span> · 실패=얼럿</span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Reserve" screen="done" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A1</div></div><div class="mlabel">④ 예약 완료</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#1F8A5B;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">접수 완료</span></div>
+          <div class="srow"><span class="sk">노출</span><span class="sv">접수 안내 · 결제내역 · 후기 1,500머니 유도</span></div>
+          <div class="srow"><span class="sk">알림톡</span><span class="sv">예약 접수→확정 카카오 알림톡 발송</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">홈으로 <span class="to">→ 홈</span> · 예약 내역 보기 <span class="to">→ 예약 내역</span></span></div>
+        </div></div>
+    </div>
+    <div class="grid" style="margin-top:30px;">
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A1</div></div><div class="mlabel">알림</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">알림 인박스</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">30일 보관 · 진입 시 일괄 읽음 · 유형 딥링크</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">예약 <span class="to">→ 예약 상세</span> · 머니 <span class="to">→ 마이</span> · 새소식 <span class="to">→ 새소식</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">0건 <span class="to">→ 알림 없음(엠티)</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></div><div class="badge" style="top:130px;">A1</div></div><div class="mlabel">이벤트</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">이벤트 리스트</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">진행중/D-day 뱃지 · 만료 시 비활성</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">카드 <span class="to">→ 이벤트 상세</span> (딥링크)</span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="event_detail" hint-size="393,852"></dc-import></div></div><div class="mlabel">이벤트 상세</div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A1</div></div><div class="mlabel">공지사항</div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="notice_detail" hint-size="393,852"></dc-import></div></div><div class="mlabel">공지 상세</div></div>
+    </div>
+    <div class="grid" style="margin-top:30px;">
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="review" hint-size="393,852"></dc-import></div><div class="badge" style="top:140px;">A1</div></div><div class="mlabel">후기 작성</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">출조 후기</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">출조 완료 예약만 1회 작성 · 사진 최대 10장 · 별점 필수</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">등록하기 <span class="to">→ 후기 완료(+1,500머니)</span> · 완료 토스트</span></div>
+          <div class="srow"><span class="sk">알림톡</span><span class="sv">머니 적립 카카오 알림톡</span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="review_done" hint-size="393,852"></dc-import></div></div><div class="mlabel">후기 완료</div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></div><div class="badge" style="top:140px;">A1</div></div><div class="mlabel">예약 취소·환불</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#EE0005;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">취소 사유·환불액</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">출조 3일 전 전액·이후 규정 차감·당일 불가 · 기상결항 100%</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">취소 사유 선택 → 예약 취소하기 <span class="to">→ 취소 완료</span></span></div>
+          <div class="srow"><span class="sk">알림톡</span><span class="sv">취소·환불 접수 카카오 알림톡</span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Sub" screen="cancel_done" hint-size="393,852"></dc-import></div></div><div class="mlabel">취소 완료</div></div>
+    </div>
+
+    <!-- 3-1 결제·정책 플로우 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">3-1</div><div class="sect">결제 · 정책 · 안전 플로우</div><div class="secn">결제 진행·검증 · 승선 안전 동의 · 취소/환불 규정 · 신고 · 쿠폰 · 설정</div></div>
+    <div class="grid" style="gap:30px;">
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></div><div class="badge" style="top:150px;">A1</div></div><div class="mlabel">승선 안전 동의</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">출항 전 필수 동의</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">구명조끼·음주제한·기상결항·보호자동반 4종 · 전체 체크 시 CTA 활성</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 계속 <span class="to">→ 결제</span></span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">면책 고지 — 안전수칙 미준수 사고 비보장</span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="refund" hint-size="393,852"></dc-import></div></div><div class="mlabel">취소·환불 규정</div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="paying" hint-size="393,852"></dc-import></div><div class="badge" style="top:380px;">A1</div></div><div class="mlabel">결제 진행중</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">PG 결제 로딩</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">PG 리다이렉트 · 창 닫기 방지 · 타임아웃 시 결제 확인중 전환</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">성공 <span class="to">→ 예약 완료</span> · 실패 <span class="to">→ 결제 실패</span></span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="verifying" hint-size="393,852"></dc-import></div></div><div class="mlabel">결제 확인중</div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="failed" hint-size="393,852"></dc-import></div><div class="badge" style="top:300px;">A1</div></div><div class="mlabel">결제 실패</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#EE0005;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">결제 승인 거절</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">예약 미완료 상태 유지 · 좌석 10분 보관 · 머니/쿠폰 원상복구</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">다시 시도 <span class="to">→ 결제</span> · 다른 결제수단 선택</span></div>
+          <div class="srow"><span class="sk">예외</span><span class="sv">한도초과·카드사 거절·잔액부족 사유별 안내</span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="report" hint-size="393,852"></dc-import></div></div><div class="mlabel">신고하기</div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="coupon" hint-size="393,852"></dc-import></div></div><div class="mlabel">쿠폰 등록</div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="setting" hint-size="393,852"></dc-import></div></div><div class="mlabel">설정</div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="locoff" hint-size="393,852"></dc-import></div></div><div class="mlabel">위치 꺼짐</div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Catch" screen="pin" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A1</div></div><div class="mlabel">조황 등록 ① 위치</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">핀 위치 선택</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">위치 권한 기반 GPS 좌표 캡처 · 지도 핀 드래그로 보정</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">이 위치로 등록 <span class="to">→ 조황 등록 ② 입력</span></span></div>
+        </div></div>
+      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Catch" screen="form" hint-size="393,852"></dc-import></div><div class="badge" style="top:200px;">A1</div></div><div class="mlabel">조황 등록 ② 입력</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">사진·어종·크기</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">사진 10장 · 어종(바다/민물 가로스크롤+검색) · 크기·마릿수 · 위치 공개 토글</span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">어종 1개 이상 선택 시 CTA 활성 · GPS 공개=정확 좌표 노출</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">조황 등록하기 <span class="to">→ 조황 등록 ③ 완료</span></span></div>
+        </div></div>
+      <div><div class="mock"><div class="mockinner"><dc-import name="Catch" screen="done" hint-size="393,852"></dc-import></div></div><div class="mlabel">조황 등록 ③ 완료</div></div>
+    </div>
+
+    <!-- 4 마이페이지 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">4</div><div class="sect">마이페이지</div><div class="secn">프로필 · 활동 · 설정 · 탈퇴 플로우</div></div>
+    <div class="grid" style="gap:24px;">
+      <div class="node" style="gap:14px;"><div><div class="mock"><div class="mockinner"><dc-import name="My" screen="mypage" hint-size="393,1400"></dc-import></div><div class="badge" style="top:200px;">A1</div><div class="badge" style="top:320px;">B1</div></div><div class="mlabel">마이페이지</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">프로필·머니·레벨</span></div>
+          <div class="srow"><span class="sk">구성</span><span class="sv">등급/매너 · D-day 예약 · Lv 진행바 · 머니/쿠폰</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">수정 <span class="to">→ 프로필 편집</span> · D카드 <span class="to">→ 예약 내역</span></span></div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:10px;"><div class="schip" style="background:#0041FF;">B1</div><span style="font-weight:700;font-size:13px;color:#191919;">활동·설정 메뉴</span></div>
+          <div class="srow"><span class="sk">동작</span><span class="sv">예약내역/내조황/찜/쿠폰/관심낚시/알림설정/FAQ <span class="to">→ 각 화면</span></span></div>
+          <div class="srow"><span class="sk">정책</span><span class="sv">친구초대=모달(코드+양쪽 5,000원)</span></div>
+          <div class="srow"><span class="sk">계정</span><span class="sv">로그아웃=얼럿 <span class="to">→ 로그인</span> · 회원탈퇴 <span class="to">→ 탈퇴 완료</span> <span class="to">→ 로그인</span></span></div>
+        </div></div>
+    </div>
+    <div class="grid" style="margin-top:24px; gap:30px;">
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="reserv" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 내역 (예정)</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="reserv_done" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 내역 · 완료</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="reserv_cancel" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 내역 · 취소</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="catch" hint-size="393,852"></dc-import></div></div><div class="smlabel">내 조황</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="wish" hint-size="393,852"></dc-import></div></div><div class="smlabel">찜한 선박</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="coupon" hint-size="393,852"></dc-import></div></div><div class="smlabel">쿠폰함</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="interest" hint-size="393,852"></dc-import></div></div><div class="smlabel">관심낚시 설정</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="noti" hint-size="393,852"></dc-import></div></div><div class="smlabel">알림 설정</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="faq" hint-size="393,852"></dc-import></div></div><div class="smlabel">고객센터 FAQ</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></div></div><div class="smlabel">프로필 편집</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="level" hint-size="393,1400"></dc-import></div></div><div class="smlabel">회원 레벨 안내</div></div>
+    </div>
+
+    <!-- 4-1 회원탈퇴 플로우 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">4-1</div><div class="sect">로그아웃 · 회원탈퇴 플로우</div><div class="secn">프로필 편집 → 탈퇴 사유(8종) → 탈퇴 완료 → 로그인</div></div>
+    <div class="grid" style="gap:30px;">
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></div></div><div class="smlabel">프로필 편집</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_0" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 예약/출조</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_1" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 상품/주문배송</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_2" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 이벤트/혜택</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_3" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 알림/마케팅</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_4" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 보상/회원혜택</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_5" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 커뮤니티/회원</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_6" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 지도/날씨</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_7" hint-size="393,852"></dc-import></div></div><div class="smlabel">회원탈퇴 · 오류/이용경험</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="withdraw_done" hint-size="393,852"></dc-import></div></div><div class="smlabel">탈퇴 완료 <span class="to">→ 로그인</span></div></div>
+    </div>
+
+    <!-- 5 빈상태 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">5</div><div class="sect">빈 상태 (Empty)</div><div class="secn">화면별 케이스 9종 · 원인 + 다음 행동 CTA 1개</div></div>
+    <div class="grid" style="gap:30px;">
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="reserve" hint-size="393,852"></dc-import></div></div><div class="smlabel">예약 없음 <span class="to">→ 예약</span></div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="wish" hint-size="393,852"></dc-import></div></div><div class="smlabel">찜 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="search" hint-size="393,852"></dc-import></div></div><div class="smlabel">검색결과 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="news" hint-size="393,852"></dc-import></div></div><div class="smlabel">새소식 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="alarm" hint-size="393,852"></dc-import></div></div><div class="smlabel">알림 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="catch" hint-size="393,852"></dc-import></div></div><div class="smlabel">조황 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="coupon" hint-size="393,852"></dc-import></div></div><div class="smlabel">쿠폰 없음</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Empty" type="payment" hint-size="393,852"></dc-import></div></div><div class="smlabel">결제내역 없음</div></div>
+    </div>
+
+    <!-- 6 에러·시스템 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">6</div><div class="sect">에러 · 시스템 메시지</div><div class="secn">공통 에러 + 얼럿·컴펌·토스트·푸쉬·알림톡</div></div>
+    <div class="grid" style="gap:30px; align-items:flex-start;">
+      <div><div class="sm"><div class="sminner"><dc-import name="Error" type="404" hint-size="393,852"></dc-import></div></div><div class="smlabel">404</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Error" type="500" hint-size="393,852"></dc-import></div></div><div class="smlabel">500</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Error" type="network" hint-size="393,852"></dc-import></div></div><div class="smlabel">네트워크 오류</div></div>
+      <div><div class="sm"><div class="sminner"><dc-import name="Error" type="maintenance" hint-size="393,852"></dc-import></div></div><div class="smlabel">서비스 점검</div></div>
+    </div>
+
+    <!-- 7 상황별 시스템 메시지 -->
+    <div class="sech" style="margin-top:50px;"><div class="secnum">7</div><div class="sect">상황별 시스템 메시지</div><div class="secn">각 화면·상황에서 뜨는 얼럿 · 컴펌 · 토스트 · 푸쉬 · 카카오 알림톡 (발생 화면 위에 표시)</div></div>
+    <dc-import name="SysCase" hint-size="100%,2500"></dc-import>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  svgRef = (el)=>{ this._svg = el; if(el){ setTimeout(()=>this.drawArrows(), 1500); setTimeout(()=>this.drawArrows(), 3200); } };
+  componentDidMount(){ this._draw = ()=>{ this.stampBadges(); this.drawArrows(); }; window.addEventListener("resize", this._draw); setTimeout(this._draw, 1800); setTimeout(this._draw, 4000); document.addEventListener("click", this.onChipClick); this._sync=()=>this.drawArrows(); window.addEventListener("storage", this._sync); }
+  stampBadges(){ const root = this._svg && this._svg.closest(".fl"); if(!root) return; root.querySelectorAll(".sm,.mock").forEach(f=>{ if(f.querySelector(".badge")) return; const b=document.createElement("div"); b.className="badge"; b.style.top=f.classList.contains("sm")?"10px":"120px"; b.textContent="A1"; f.appendChild(b); }); }
+  componentWillUnmount(){ window.removeEventListener("resize", this._draw); document.removeEventListener("click", this.onChipClick); }
+  cleanLabel(t){ t=t.replace(/\([^)]*\)/g,""); const p=t.split("·"); return p[p.length-1].replace(/\s/g,""); }
+  resolveKey(raw){ let k=raw.replace(/[\u2192\u2039\u203A]/g,"").replace(/\([^)]*\)/g,"").replace(/\s/g,""); const alias={ "\uD648":"\uD1B5\uD569\uD648","\uD648\uD1B5\uD569\uD648":"\uD1B5\uD569\uD648","\uC644\uB8CC":"\uC608\uC57D\uC644\uB8CC","\u2463\uC644\uB8CC":"\uC608\uC57D\uC644\uB8CC","\uC608\uC57D\uC0C1\uC138":"\uC120\uBC15\uC0C1\uC138","\uB09A\uC2DC\uC608\uCE21\uC2DC\uD2B8":"\uD53C\uC2F1\uD3EC\uC778\uD2B8\uC2DC\uD2B8","\uB9C8\uC774":"\uB9C8\uC774\uD398\uC774\uC9C0","\uC608\uC57D":"\uD1B5\uD569\uD648","\uAC01\uD654\uBA74":"" }; if(k in alias) k=alias[k]; return k; }
+  nodeByKey(key){ if(!key) return null; const labels=[...document.querySelectorAll(".mlabel,.smlabel")]; let l=labels.find(e=>this.cleanLabel(e.textContent)===key); if(!l) l=labels.find(e=>this.cleanLabel(e.textContent).includes(key)); if(!l) l=labels.find(e=>e.textContent.replace(/\s/g,"").includes(key)); return l?l.parentElement.querySelector(".mock,.sm"):null; }
+  onChipClick=(e)=>{ const chip=e.target.closest&&e.target.closest(".to"); if(!chip) return; const node=this.nodeByKey(this.resolveKey(chip.textContent)); if(!node) return; e.preventDefault(); const top=node.getBoundingClientRect().top+window.scrollY-90; window.scrollTo({top,behavior:"smooth"}); node.classList.remove("fl-hl"); void node.offsetWidth; node.classList.add("fl-hl"); setTimeout(()=>node.classList.remove("fl-hl"),1900); };
+  findNode(txt){
+    const root = this._svg && this._svg.closest(".fl"); if(!root) return null;
+    const key = txt.replace(/\s/g,"");
+    const labels = [...root.querySelectorAll(".mlabel,.smlabel")];
+    const l = labels.find(e=> e.textContent.replace(/\s/g,"").includes(key));
+    return l ? l.parentElement.querySelector(".mock,.sm") : null;
+  }
+  drawArrows(){
+    const svg = this._svg; if(!svg) return;
+    const host = svg.parentElement; const hb = host.getBoundingClientRect();
+    const conns = [
+      // 인증·온보딩 순차
+      ["스플래쉬","권한 동의","seq"],["권한 동의","위치 권한","seq"],["위치 권한","알림 권한","seq"],["알림 권한","로그인","seq"],["로그인","휴대폰 인증","seq"],
+      ["로그인","카카오 동의","jump"],["로그인","네이버 동의","jump"],["카카오 동의","휴대폰 인증","seq"],["네이버 동의","휴대폰 인증","seq"],
+      ["휴대폰 인증","인증번호 입력","seq"],["인증번호 입력","약관 동의","seq"],["마이페이지","회원 레벨 안내","jump"],
+      ["알림 권한","광고 추적","seq"],["광고 추적","광고 ID","seq"],["광고 ID","로그인","seq"],
+      ["약관 동의","약관 전체동의","seq"],["약관 동의","약관 상세","jump"],["약관 전체동의","관심 온보딩","seq"],["관심 온보딩","통합홈","seq"],
+      // 예약 플로우 순차
+      ["선박 상세","예약 (인원","seq"],["예약 (인원","결제","seq"],["결제","예약 완료","seq"],
+      // 메인 → 상세/검색/알림/마이 점프
+      ["통합홈","선박 상세","jump"],["통합홈","통합검색","jump"],["통합홈","알림","jump"],["통합홈","마이페이지","jump"],
+      ["새소식","선박 상세","jump"],["새소식","이벤트","jump"],["새소식","마이페이지","jump"],
+      ["탐색","선박 상세","jump"],["통합검색","선박 상세","jump"],["알림","선박 상세","jump"],
+      ["예약 완료","예약 내역","jump"],
+      // 마이페이지 허브 → 서브
+      ["마이페이지","예약 내역","jump"],["마이페이지","내 조황","jump"],["마이페이지","찜한 선박","jump"],
+      ["마이페이지","쿠폰함","jump"],["마이페이지","관심낚시","jump"],["마이페이지","알림 설정","jump"],
+      ["마이페이지","고객센터","jump"],["마이페이지","프로필 편집","jump"],["프로필 편집","회원 탈퇴","jump"],
+      ["마이페이지","회원 탈퇴","jump"],["마이페이지","로그인","jump"],["회원 탈퇴","탈퇴 완료","jump"],["탈퇴 완료","로그인","jump"],
+      // 추가: 메인 보조 점프
+      ["로그인","통합홈","jump"],["새소식","공지사항","jump"],["새소식","알림","jump"],
+      ["출조","선박 상세","jump"],
+      ["탐색","피싱포인트 시트","jump"],["피싱포인트 시트","길안내 경로","jump"],["길안내 경로","인근 주차장","jump"],["인근 주차장","길안내 앱 선택","jump"],
+      ["탐색","예약 업체 리스트","jump"],["예약 업체 리스트","선박 상세","jump"],["탐색","조황 상세","jump"],["탐색","CCTV 영상 모달","jump"],
+      ["탐색","조황 등록 ① 위치","jump"],["내 조황","조황 등록 ① 위치","jump"],["조황 등록 ① 위치","조황 등록 ② 입력","seq"],["조황 등록 ② 입력","조황 등록 ③ 완료","seq"],["조황 등록 ③ 완료","내 조황","jump"],
+      ["예약 내역","예약 취소·환불","jump"],["예약 내역","후기 작성","jump"],["후기 작성","내 조황","jump"],["후기 작성","후기 완료","seq"],["예약 취소·환불","취소 완료","seq"],["취소 완료","예약 내역","jump"],
+      ["선박 상세","승선 안전 동의","jump"],["승선 안전 동의","결제 진행중","seq"],["결제 진행중","결제 확인중","seq"],["결제 확인중","예약 완료","seq"],["결제 진행중","결제 실패","jump"],["결제 실패","결제","jump"],["선박 상세","취소·환불 규정","jump"],["마이페이지","설정","jump"],["설정","회원 탈퇴","jump"],["쿠폰함","쿠폰 등록","jump"],["탐색","위치 꺼짐","empty"],
+      ["선박 상세","알림","jump"],["선박 상세","마이페이지","jump"],["알림","마이페이지","jump"],["알림","새소식","jump"],
+      ["예약 완료","통합홈","jump"],["예약 내역","선박 상세","jump"],["찜한 선박","선박 상세","jump"],
+      ["공지사항","선박 상세","jump"],["이벤트","선박 상세","jump"],["공지사항","공지 상세","jump"],["이벤트","이벤트 상세","jump"],
+      // 빈 상태 CTA → 채우기 화면
+      ["예약 없음","통합홈","empty"],["찜 없음","통합검색","empty"],["검색결과 없음","통합검색","empty"],
+      ["새소식 없음","새소식","empty"],["알림 없음","통합홈","empty"],["조황 없음","내 조황","empty"],
+      ["쿠폰 없음","마이페이지","empty"],["결제내역 없음","예약 내역","empty"],
+      // 에러 CTA
+      ["404","통합홈","empty"],["500","통합홈","empty"],["네트워크 오류","통합홈","empty"],["서비스 점검","공지사항","empty"],
+    ];
+    try{ const uc=JSON.parse(localStorage.getItem("af_connections")||"[]"); uc.forEach(c=>{ if(c&&c.from&&c.to) conns.push([c.from,c.to,"user"]); }); }catch(e){}
+    const COL = { seq:"#0041FF", jump:"#FF8A00", empty:"#1F8A5B", user:"#6433DF" };
+    let defs="", paths="";
+    Object.keys(COL).forEach(k=>{ defs += `<marker id="ah-${k}" markerWidth="10" markerHeight="10" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="${COL[k]}"/></marker>`; });
+    const M=10;
+    const obs=[...host.querySelectorAll(".mock,.sm")].map(el=>{const r=el.getBoundingClientRect();return {l:r.left-hb.left,t:r.top-hb.top,r:r.right-hb.left,b:r.bottom-hb.top};});
+    const hitH=(y,x0,x1)=>obs.some(o=> y>=o.t-M&&y<=o.b+M&&Math.max(x0,x1)>=o.l-M&&Math.min(x0,x1)<=o.r+M);
+    const hitV=(x,y0,y1)=>obs.some(o=> x>=o.l-M&&x<=o.r+M&&Math.max(y0,y1)>=o.t-M&&Math.min(y0,y1)<=o.b+M);
+    const freeY=(ty,x0,x1)=>{for(let s=0;s<5000;s+=6){for(const d of[1,-1]){const y=ty+d*s;if(!hitH(y,x0,x1))return y;}}return ty;};
+    const freeX=(tx,y0,y1)=>{for(let s=0;s<4000;s+=6){for(const d of[1,-1]){const x=tx+d*s;if(!hitV(x,y0,y1))return x;}}return tx;};
+    conns.forEach(([a,b,kind],idx)=>{
+      const fa=this.findNode(a), fb=this.findNode(b); if(!fa||!fb) return;
+      const ra=fa.getBoundingClientRect(), rb=fb.getBoundingClientRect();
+      const A={l:ra.left-hb.left,t:ra.top-hb.top,r:ra.right-hb.left,b:ra.bottom-hb.top,cx:ra.left-hb.left+ra.width/2,cy:ra.top-hb.top+ra.height/2};
+      const B={l:rb.left-hb.left,t:rb.top-hb.top,r:rb.right-hb.left,b:rb.bottom-hb.top,cx:rb.left-hb.left+rb.width/2,cy:rb.top-hb.top+rb.height/2};
+      const lane=((idx%6)-2.5)*9;
+      let pts;
+      if(Math.abs(A.cy-B.cy) < Math.min(ra.height,rb.height)*0.45){
+        const dir=B.cx>A.cx?1:-1;
+        const sx=dir>0?A.r:A.l, ex=dir>0?B.l:B.r;
+        const y=A.cy+lane;
+        pts=[[sx,y],[ex,y]];
+      } else {
+        const down=B.cy>A.cy;
+        const sx=A.cx, sy=down?A.b:A.t;
+        const ex=B.cx, ey=down?B.t:B.b;
+        const hx=freeX((A.cx+B.cx)/2+lane, Math.min(sy,ey), Math.max(sy,ey));
+        const myA=freeY(sy+(down?18:-18), Math.min(sx,hx), Math.max(sx,hx));
+        const myB=freeY(ey+(down?-18:18), Math.min(ex,hx), Math.max(ex,hx));
+        pts=[[sx,sy],[sx,myA],[hx,myA],[hx,myB],[ex,myB],[ex,ey]];
+      }
+      let d="M"+pts[0][0].toFixed(1)+","+pts[0][1].toFixed(1);
+      for(let i=1;i<pts.length;i++) d+=" L"+pts[i][0].toFixed(1)+","+pts[i][1].toFixed(1);
+      const dash = kind==="jump"?"7 5":kind==="empty"?"2 6":kind==="user"?"9 4":"0";
+      paths += `<circle cx="${pts[0][0].toFixed(1)}" cy="${pts[0][1].toFixed(1)}" r="3.5" fill="${COL[kind]}"/>`;
+      paths += `<path d="${d}" fill="none" stroke="${COL[kind]}" stroke-width="2" stroke-dasharray="${dash}" marker-end="url(#ah-${kind})" opacity="0.92" stroke-linejoin="round" stroke-linecap="round"/>`;
+    });
+    svg.innerHTML = `<defs>${defs}</defs>${paths}`;
+  }
+  renderVals(){
+    return {
+      svgRef: this.svgRef,
+      legend: [
+        { label:"화면 이동 (순차)", color:"#0041FF", style:"solid" },
+        { label:"버튼→화면 점프", color:"#FF8A00", style:"dashed" },
+        { label:"시트·모달", color:"#FF8A00", style:"solid" },
+        { label:"권한 얼럿", color:"#FF3B30", style:"dashed" },
+        { label:"알림톡·푸시", color:"#1F8A5B", style:"solid" },
+        { label:"엠티 상태", color:"#AAB", style:"dashed" },
+        { label:"사용자 연결 (레이아웃 편집)", color:"#6433DF", style:"dashed" },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
