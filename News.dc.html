@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
   .afn *{ box-sizing:border-box; }
   .afn{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -18,6 +17,26 @@
 </style>
 </helmet>
 <div class="afn" style="width:393px; min-height:852px; background:#fff; position:relative;">
+
+  <!-- 관심지역 선택 바텔시트 -->
+  <sc-if value="{{ regionOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; z-index:90;">
+    <div class="tap" onClick="{{ closeRegion }}" style="position:absolute; inset:0; background:rgba(0,0,0,.5);"></div>
+    <div style="position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:22px 22px 0 0; overflow:hidden; max-height:560px; display:flex; flex-direction:column;">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 22px 12px;"><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">내 관심지역 선택</span><div style="display:flex; align-items:center; gap:14px;"><span class="tap" onClick="{{ toggleRegionEdit }}" style="font-weight:600; font-size:14px; color:{{ regionEditColor }}; letter-spacing:-0.3px;">{{ regionEditLabel }}</span><div class="tap" onClick="{{ closeRegion }}" style="width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div></div>
+      <div style="flex:1; overflow-y:auto; padding:0 6px;">
+        <sc-for list="{{ regionList }}" as="r" hint-placeholder-count="5">
+          <div style="display:flex; align-items:center; gap:12px; padding:0 16px; border-bottom:1px solid #F4F4F4;">
+            <sc-if value="{{ r.editing }}" hint-placeholder-val="{{ false }}"><div class="tap" onClick="{{ r.remove }}" style="width:22px; height:22px; border-radius:50%; background:#EE0005; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="11" height="2" viewBox="0 0 11 2"><path d="M1 1 L10 1" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg></div></sc-if>
+            <div class="tap" onClick="{{ r.select }}" style="flex:1; height:54px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:{{ r.weight }}; font-size:15.5px; color:{{ r.color }}; letter-spacing:-0.3px;">{{ r.label }}</span><sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="18" height="13" viewBox="0 0 18 13"><path d="M2 7 L6.5 11.5 L16 1.5" fill="none" stroke="#0041FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></div>
+          </div>
+        </sc-for>
+        <div class="tap" onClick="{{ addRegion }}" style="display:flex; align-items:center; gap:9px; padding:0 16px; height:56px;"><div style="width:22px; height:22px; border-radius:50%; border:1.6px dashed #0041FF; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 1 L6 11 M1 6 L11 6" stroke="#0041FF" stroke-width="1.7" stroke-linecap="round"></path></svg></div><span style="font-weight:600; font-size:14.5px; color:#0041FF; letter-spacing:-0.3px;">관심지역 추가하기</span></div>
+      </div>
+      <div style="padding:12px 18px 26px;"><div class="tap" onClick="{{ closeRegion }}" style="height:54px; border-radius:1000px; background:#5B33E0; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff; letter-spacing:-0.4px;">내 관심지역 선택 완료</div></div>
+    </div>
+  </div>
+  </sc-if>
 
   <!-- status bar -->
   <div style="height:48px; display:flex; align-items:center; justify-content:space-between; padding:6px 22px 0 30px;">
@@ -37,7 +56,7 @@
 
   <!-- headline + weather -->
   <div style="padding:6px 20px 0;">
-    <div class="tap" style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">5월 21일(목) · 신진도항 <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="#AAA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+    <div class="tap" onClick="{{ openRegion }}" style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">5월 21일(목) · <b style="color:#191919; font-weight:700;">{{ curRegion }}</b> <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="#AAA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
     <div style="margin-top:9px; display:flex; align-items:flex-start; justify-content:space-between;">
       <div style="font-weight:800; font-size:22px; line-height:1.32; letter-spacing:-0.6px; color:#191919;">오늘은 출조하기<br><span style="color:#0041FF;">딱 좋은 날</span>이에요.</div>
       <div style="display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="14" r="6.5" fill="none" stroke="#FFB020" stroke-width="2"></circle><path d="M17 3 L17 5.5 M17 22.5 L17 25 M6 14 L8.5 14 M25.5 14 L28 14 M9 6 L10.8 7.8 M25 6 L23.2 7.8" stroke="#FFB020" stroke-width="2" stroke-linecap="round"></path></svg></div>
@@ -60,9 +79,33 @@
 
   <div style="height:9px; background:#F6F7F9; margin-top:20px;"></div>
 
-  <!-- 오늘의 새소식 -->
-  <div style="padding:20px 20px 4px; font-weight:800; font-size:17px; color:#191919; letter-spacing:-0.5px;">오늘의 새소식</div>
+  <!-- 피드 형식 전환 탭 -->
+  <div style="padding:18px 20px 4px; display:flex; align-items:center; justify-content:space-between;">
+    <span style="font-weight:800; font-size:17px; color:#191919; letter-spacing:-0.5px;">오늘의 새소식</span>
+    <div style="display:flex; background:#F2F3F5; border-radius:9px; padding:3px;">
+      <sc-for list="{{ newsTabs }}" as="t" hint-placeholder-count="2"><div class="tap" onClick="{{ t.onClick }}" style="padding:6px 14px; border-radius:7px; background:{{ t.bg }}; font-weight:{{ t.weight }}; font-size:12.5px; color:{{ t.color }}; letter-spacing:-0.3px; box-shadow:{{ t.shadow }};">{{ t.label }}</div></sc-for>
+    </div>
+  </div>
 
+  <!-- 피드형 (카드) -->
+  <sc-if value="{{ isFeed }}" hint-placeholder-val="{{ true }}">
+  <div style="padding:6px 20px 0; display:flex; flex-direction:column; gap:16px;">
+    <sc-for list="{{ feed }}" as="f" hint-placeholder-count="4">
+      <div class="tap" onClick="{{ f.onClick }}" style="border:1px solid #F0F0F0; border-radius:16px; overflow:hidden; box-shadow:0 3px 14px rgba(20,22,30,.05);">
+        <div style="height:150px; background:{{ f.thumbBg }}; display:flex; align-items:center; justify-content:center; position:relative;"><sc-if value="{{ f.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:13px; top:13px; height:23px; padding:0 9px; border-radius:7px; background:{{ f.badgeBg }}; color:{{ f.badgeColor }}; font-weight:700; font-size:11px; display:flex; align-items:center;">{{ f.badge }}</span></sc-if><div style="transform:scale(1.7);">{{ f.thumbIcon }}</div></div>
+        <div style="padding:15px 16px 17px;">
+          <div style="font-weight:700; font-size:15.5px; line-height:1.4; color:#191919; letter-spacing:-0.4px;">{{ f.title }}</div>
+          <div style="margin-top:6px; font-weight:500; font-size:12px; color:#AAA; letter-spacing:-0.3px;">{{ f.meta }}</div>
+          <div style="margin-top:8px; font-weight:500; font-size:13px; line-height:1.55; color:#888; letter-spacing:-0.3px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{{ f.desc }}</div>
+          <sc-if value="{{ f.hasCta }}" hint-placeholder-val="{{ false }}"><div style="margin-top:11px; font-weight:700; font-size:13px; color:#0041FF; letter-spacing:-0.3px;">{{ f.cta }} ›</div></sc-if>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <!-- 기본형 (리스트) -->
+  <sc-if value="{{ isBasic }}" hint-placeholder-val="{{ false }}">
   <sc-for list="{{ feed }}" as="f" hint-placeholder-count="6">
     <div class="tap" onClick="{{ f.onClick }}" style="padding:16px 20px; border-bottom:1px solid #F4F4F4; display:flex; gap:13px;">
       <div style="flex:1; min-width:0;">
@@ -78,6 +121,7 @@
       </sc-if>
     </div>
   </sc-for>
+  </sc-if>
 
   <!-- AD character card -->
   <div class="tap" onClick="{{ noop }}" style="margin:14px 20px; border-radius:16px; background:linear-gradient(120deg,#EAF0FF,#F4EDFF); padding:18px; display:flex; align-items:center; gap:14px; position:relative; overflow:hidden;">
@@ -103,7 +147,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852}}">
 class Component extends DCLogic {
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
 
   qicon(name){
     const R=React.createElement;
@@ -130,10 +174,26 @@ class Component extends DCLogic {
   }
 
   renderVals(){
+    const tab = this.state.newsTab || "피드형";
+    const regions = this.state.regions || ["충남 신진도항","인천 진두항","인천 선진포항","인천 덕적도항","제주 애월항"];
+    const rsel = this.state.regionSel==null ? 0 : this.state.regionSel;
+    const redit = !!this.state.regionEdit;
     const tagBoat=["할인쿠폰","평일제한환영"];
     const post=(o)=>Object.assign({ hasBadge:false, hasTags:false, hasCta:false, hasThumb:true, thumbBg:"#EAEDF1", thumbIcon:this.thumb(o.thumb||"boat"), onClick:this.nav("noop") }, o);
     return {
       noop: this.nav("noop"),
+      curRegion: (regions[rsel]||"충남 신진도항").split(" ").slice(-1)[0],
+      regionOpen: !!this.state.regionOpen,
+      openRegion: ()=>this.setState({regionOpen:true}),
+      closeRegion: ()=>this.setState({regionOpen:false, regionEdit:false}),
+      toggleRegionEdit: ()=>this.setState(st=>({regionEdit:!st.regionEdit})),
+      regionEditLabel: redit?"완료":"편집", regionEditColor: redit?"#0041FF":"#999",
+      regionList: regions.map((label,i)=>({ label, checked:i===rsel, weight:i===rsel?700:500, color:i===rsel?"#191919":"#555", editing:redit,
+        select:()=>this.setState({regionSel:i}),
+        remove:()=>this.setState(st=>{const a=(st.regions||regions).slice(); a.splice(i,1); let ns=st.regionSel==null?0:st.regionSel; if(i<ns)ns--; if(ns>=a.length)ns=Math.max(0,a.length-1); return {regions:a, regionSel:ns};}) })),
+      addRegion: ()=>this.setState(st=>{const a=(st.regions||regions).slice(); const pool=["부산 가덕도항","경남 통영항","전남 여수항","강원 주문진항","경북 후포항"]; const nw=pool.find(p=>!a.includes(p))||("관심지역 "+(a.length+1)); a.push(nw); return {regions:a};}),
+      isFeed: tab==="피드형", isBasic: tab==="기본형",
+      newsTabs: ["피드형","기본형"].map(label=>{ const on=tab===label; return { label, onClick:()=>this.setState({newsTab:label}), bg:on?"#fff":"transparent", color:on?"#191919":"#999", weight:on?700:500, shadow:on?"0 1px 4px rgba(0,0,0,.12)":"none" }; }),
       quick: [
         { label:"내 예약", tint:"#EAF0FF", icon:this.qicon("cal"), onClick:this.nav("my") },
         { label:"실시간조황", tint:"#FFECEC", icon:this.qicon("live"), onClick:this.nav("noop") },

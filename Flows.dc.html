@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+<style>.afx *{box-sizing:border-box;} .afx{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;} .tap{cursor:pointer;transition:transform .1s ease;} .tap:active{transform:scale(.99);} @keyframes spin{to{transform:rotate(360deg);}}</style>
+</helmet>
+<div class="afx" style="width:393px; height:852px; background:{{ pageBg }}; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+  <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ true }}">
+  <div style="height:48px; display:flex; align-items:center; justify-content:space-between; padding:6px 22px 0 30px; flex:none;">
+    <span style="font-family:'SF Pro Display',sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+    <div style="display:flex; align-items:center; gap:6px;"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg><span style="font-weight:600; font-size:14px; color:#191919;">5G</span><div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div></div>
+  </div>
+  <div style="height:50px; display:flex; align-items:center; padding:0 14px; flex:none;"><div class="tap" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:21px; color:#191919; letter-spacing:-0.5px; margin-left:6px;">{{ title }}</span></div>
+  </sc-if>
+
+  <!-- 승선 안전 동의 -->
+  <sc-if value="{{ isSafety }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="padding:8px 24px 0; font-weight:700; font-size:15px; color:#191919; letter-spacing:-0.4px;">안전한 출조를 위해 꼭 확인해 주세요</div>
+    <div style="padding:18px 18px 0; flex:1; display:flex; flex-direction:column; gap:10px;">
+      <sc-for list="{{ safetyItems }}" as="s" hint-placeholder-count="4"><div class="tap" onClick="{{ s.toggle }}" style="height:58px; border-radius:13px; background:#F7F8FA; display:flex; align-items:center; gap:12px; padding:0 16px;"><div style="width:24px; height:24px; border-radius:50%; background:{{ s.bg }}; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="flex:1; font-weight:600; font-size:14px; color:#363636; letter-spacing:-0.3px;">{{ s.label }}</span></div></sc-for>
+      <div style="margin-top:4px; border-radius:12px; background:#FFF6EE; padding:14px 16px;"><div style="font-weight:700; font-size:12.5px; color:#FF8A00;">면책 고지</div><div style="margin-top:6px; font-weight:500; font-size:12.5px; line-height:1.6; color:#9A7B5A;">자연재해·기상에 의한 결항은 전액 환불되며,<br>안전수칙 미준수로 인한 사고는 책임지지 않습니다</div></div>
+      <div class="tap" onClick="{{ toggleSafetyAll }}" style="display:flex; align-items:center; gap:10px; padding:8px 4px;"><div style="width:24px; height:24px; border-radius:50%; background:{{ safetyAllBg }}; display:flex; align-items:center; justify-content:center;"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:700; font-size:14px; color:#191919;">위 내용을 모두 확인했습니다 (필수)</span></div>
+    </div>
+    <div style="padding:12px 18px 20px;"><div style="height:54px; border-radius:1000px; background:{{ safetyCtaBg }}; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">동의하고 계속</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 취소·환불 규정 -->
+  <sc-if value="{{ isRefund }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="padding:8px 24px 0; font-weight:700; font-size:15px; color:#191919; letter-spacing:-0.4px;">출조일 기준 취소 수수료</div>
+    <div style="padding:16px 18px 0; flex:1; display:flex; flex-direction:column; gap:11px;">
+      <sc-for list="{{ refundTiers }}" as="r" hint-placeholder-count="4"><div style="border-left:4px solid {{ r.bar }}; background:#F7F8FA; border-radius:0 12px 12px 0; padding:15px 16px; display:flex; align-items:center; justify-content:space-between;"><div><div style="font-weight:700; font-size:14.5px; color:#191919;">{{ r.t }}</div><div style="margin-top:3px; font-weight:500; font-size:12px; color:#999;">{{ r.s }}</div></div><span style="font-weight:800; font-size:15px; color:{{ r.bar }};">{{ r.rate }}</span></div></sc-for>
+      <div style="margin-top:4px; border-radius:12px; background:#EEF3FF; padding:14px 16px;"><div style="font-weight:700; font-size:12.5px; color:#0041FF;">기상 결항 안내</div><div style="margin-top:5px; font-weight:500; font-size:12.5px; line-height:1.6; color:#5570A8;">선장 판단 또는 기상특보로 결항 시<br>수수료 없이 전액 환불됩니다</div></div>
+      <div style="display:flex; align-items:center; gap:9px; padding:6px 4px;"><div style="width:22px; height:22px; border-radius:50%; border:1.6px solid #CFCFCF;"></div><span style="font-weight:500; font-size:13.5px; color:#363636;">취소·환불 규정을 확인했습니다</span></div>
+    </div>
+    <div style="padding:12px 18px 20px;"><div style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">확인</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 신고 -->
+  <sc-if value="{{ isReport }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="padding:8px 24px 0; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">신고 사유</div>
+    <div style="padding:8px 18px 0; flex:1;">
+      <sc-for list="{{ reportReasons }}" as="r" hint-placeholder-count="5"><div class="tap" onClick="{{ r.onClick }}" style="display:flex; align-items:center; gap:12px; padding:13px 4px; border-bottom:1px solid #F4F4F4;"><div style="width:22px; height:22px; border-radius:50%; border:2px solid {{ r.ring }}; display:flex; align-items:center; justify-content:center;"><div style="width:9px; height:9px; border-radius:50%; background:{{ r.dot }};"></div></div><span style="font-weight:500; font-size:14.5px; color:#363636;">{{ r.label }}</span></div></sc-for>
+      <div style="margin-top:16px; height:96px; border-radius:12px; background:#F5F6F8; padding:14px; font-weight:500; font-size:13.5px; color:#BBB;">상세 내용을 입력해 주세요 (선택)</div>
+      <div style="margin-top:18px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:700; font-size:15px; color:#191919;">이 사용자 차단하기</span><div class="tap" onClick="{{ toggleBlock }}" style="width:46px; height:27px; border-radius:1000px; background:{{ blockBg }}; position:relative;"><div style="position:absolute; top:2.5px; left:{{ blockKnob }}; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.2); transition:left .2s;"></div></div></div>
+    </div>
+    <div style="padding:12px 18px 20px;"><div style="height:54px; border-radius:1000px; background:{{ reportCtaBg }}; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">신고 접수</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 쿠폰 등록 -->
+  <sc-if value="{{ isCoupon }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="padding:8px 22px 0; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">쿠폰 코드</div>
+    <div style="padding:12px 18px 0; display:flex; gap:9px;"><div style="flex:1; height:54px; border-radius:11px; background:#F5F6F8; display:flex; align-items:center; padding:0 16px; font-weight:500; font-size:15px; color:#BBB;">코드를 입력하세요</div><div class="tap" style="width:84px; height:54px; border-radius:11px; background:#EEF0F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#555;">붙여넣기</div></div>
+    <div style="margin:18px 18px 0; border-radius:12px; background:#EEF3FF; padding:15px 16px;"><div style="font-weight:700; font-size:13px; color:#0041FF;">쿠폰 등록 안내</div><div style="margin-top:8px; font-weight:500; font-size:12.5px; line-height:1.7; color:#5570A8;">· 코드는 대소문자를 구분합니다<br>· 등록한 쿠폰은 쿠폰함에서 확인할 수 있어요</div></div>
+    <div style="flex:1;"></div>
+    <div style="padding:12px 18px 20px;"><div style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">쿠폰 등록</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 설정 -->
+  <sc-if value="{{ isSetting }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; overflow-y:auto;">
+    <sc-for list="{{ settingGroups }}" as="g" hint-placeholder-count="3">
+      <div style="padding:18px 20px 6px; font-weight:600; font-size:12.5px; color:#AAA;">{{ g.title }}</div>
+      <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3"><div class="tap" style="height:54px; display:flex; align-items:center; padding:0 20px; border-bottom:1px solid #F4F4F4;"><span style="flex:1; font-weight:500; font-size:15px; color:{{ it.color }};">{{ it.label }}</span><sc-if value="{{ it.hasVal }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600; font-size:13px; color:#AAA; margin-right:8px;">{{ it.val }}</span></sc-if><sc-if value="{{ it.hasArrow }}" hint-placeholder-val="{{ true }}"><svg width="7" height="13" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></div></sc-for>
+    </sc-for>
+    <div style="height:30px;"></div>
+  </div>
+  </sc-if>
+
+  <!-- 가상계좌 입금대기 -->
+  <sc-if value="{{ isVbank }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="margin:8px 18px 0; border-radius:12px; background:#FFF6EE; padding:14px 16px;"><div style="font-weight:700; font-size:12.5px; color:#FF8A00;">입금 기한</div><div style="margin-top:5px; font-weight:800; font-size:15px; color:#191919;">오늘 23:59 까지 · 02:14:30 남음</div></div>
+    <div style="margin:16px 18px 0; border:1px solid #EEE; border-radius:14px; padding:18px;"><sc-for list="{{ vbankRows }}" as="v" hint-placeholder-count="4"><div style="display:flex; align-items:center; justify-content:space-between; padding:7px 0;"><span style="font-weight:500; font-size:13.5px; color:#999;">{{ v.k }}</span><span style="font-weight:700; font-size:14px; color:{{ v.c }};">{{ v.v }}</span></div></sc-for></div>
+    <div class="tap" style="margin:14px 18px 0; height:50px; border-radius:12px; background:#EEF3FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:#0041FF;">계좌번호 복사</div>
+    <div style="margin:18px 18px 0; padding:14px 16px; border-radius:12px; background:#F7F8FA; font-weight:500; font-size:12px; line-height:1.7; color:#999;">· 입금 확인 후 예약이 자동 확정됩니다<br>· 기한 내 미입금 시 예약이 취소됩니다<br>· 입금자명이 다르면 고객센터로 문의해 주세요</div>
+    <div style="flex:1;"></div>
+    <div style="padding:12px 18px 20px;"><div style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">입금 완료했어요</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 위치 꺼짐 -->
+  <sc-if value="{{ isLocOff }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column; padding:0 18px;">
+    <div style="margin-top:8px; border-radius:14px; background:#F7F8FA; padding:24px; text-align:center;"><div style="width:44px; height:44px; border-radius:50%; background:#FFF1E3; display:inline-flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 21 C12 21 19 14 19 9 C19 5 16 2.5 12 2.5 C8 2.5 5 5 5 9 C5 14 12 21 12 21Z" fill="none" stroke="#FF8A00" stroke-width="1.8" stroke-linejoin="round"></path><circle cx="12" cy="9" r="2.4" fill="none" stroke="#FF8A00" stroke-width="1.8"></circle></svg></div><div style="margin-top:14px; font-weight:800; font-size:17px; color:#191919;">위치가 꺼져 있어요</div><div style="margin-top:7px; font-weight:500; font-size:13px; color:#999;">내 주변 선박·포인트를 보려면 위치를 켜주세요</div></div>
+    <div style="margin-top:16px; display:flex; gap:10px;"><div class="tap" style="flex:1; height:50px; border-radius:12px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#fff;">위치 켜기</div><div class="tap" style="flex:1; height:50px; border-radius:12px; border:1px solid #E2E2E2; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#555;">지역 선택</div></div>
+    <div style="margin-top:24px; font-weight:600; font-size:12.5px; color:#AAA;">지역으로 둘러보기</div>
+    <div style="margin-top:10px; display:flex; flex-direction:column; gap:9px;"><sc-for list="{{ regionPick }}" as="r" hint-placeholder-count="4"><div class="tap" style="height:52px; border:1px solid #EEE; border-radius:12px; display:flex; align-items:center; padding:0 18px; font-weight:600; font-size:14.5px; color:#363636;">{{ r }}</div></sc-for></div>
+  </div>
+  </sc-if>
+
+  <!-- 결제 실패 -->
+  <sc-if value="{{ isFailed }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1; display:flex; flex-direction:column;">
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; padding:30px 30px 0; text-align:center;">
+      <div style="width:88px; height:88px; border-radius:50%; background:#FDECEC; display:flex; align-items:center; justify-content:center;"><svg width="40" height="40" viewBox="0 0 44 44"><path d="M15 15 L29 29 M29 15 L15 29" fill="none" stroke="#EE0005" stroke-width="3.6" stroke-linecap="round"></path></svg></div>
+      <div style="margin-top:22px; font-weight:800; font-size:22px; color:#191919; letter-spacing:-0.5px;">결제에 실패했어요</div>
+      <div style="margin-top:11px; font-weight:500; font-size:14px; line-height:1.6; color:#999; letter-spacing:-0.3px;">결제 승인이 거절되었어요.<br>카드 정보를 확인하거나 다른 수단으로 시도해 주세요.</div>
+      <div style="margin-top:26px; width:100%; border:1px solid #EEE; border-radius:16px; padding:18px; text-align:left;"><sc-for list="{{ failRows }}" as="f" hint-placeholder-count="3"><div style="display:flex; align-items:center; justify-content:space-between; padding:7px 0;"><span style="font-weight:500; font-size:13.5px; color:#999;">{{ f.k }}</span><span style="font-weight:700; font-size:14px; color:{{ f.c }};">{{ f.v }}</span></div></sc-for></div>
+      <div style="margin-top:14px; width:100%; border-radius:12px; background:#FFF6EE; padding:14px 16px; text-align:left;"><div style="font-weight:700; font-size:12.5px; color:#FF8A00;">안내</div><div style="margin-top:5px; font-weight:500; font-size:12.5px; line-height:1.6; color:#9A7B5A;">예약은 아직 완료되지 않았어요.<br>선택한 좌석은 10분간 보관돼요.</div></div>
+    </div>
+    <div style="padding:12px 18px 20px; display:flex; gap:10px;"><div class="tap" style="flex:1; height:54px; border-radius:1000px; border:1px solid #E2E2E2; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#555;">다른 결제수단</div><div class="tap" style="flex:1.25; height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#fff;">다시 시도</div></div>
+  </div>
+  </sc-if>
+
+  <!-- 결제 진행중 (dim overlay) -->
+  <sc-if value="{{ isPaying }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; background:rgba(60,60,66,.55); display:flex; align-items:center; justify-content:center;">
+    <div style="width:280px; background:#fff; border-radius:18px; padding:30px 24px 24px; text-align:center;"><div style="width:42px; height:42px; border-radius:50%; border:4px solid #E5E8FF; border-top-color:#0041FF; margin:0 auto; animation:spin 0.9s linear infinite;"></div><div style="margin-top:18px; font-weight:800; font-size:16px; color:#191919;">{{ payingTitle }}</div><div style="margin-top:8px; font-weight:500; font-size:13px; color:#999; white-space:pre-line;">{{ payingDesc }}</div><div style="margin-top:14px; font-weight:500; font-size:12px; color:#BBB;">🔒 {{ payingFoot }}</div></div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;safety&quot;,&quot;refund&quot;,&quot;report&quot;,&quot;coupon&quot;,&quot;setting&quot;,&quot;vbank&quot;,&quot;locoff&quot;,&quot;paying&quot;,&quot;verifying&quot;,&quot;failed&quot;],&quot;default&quot;:&quot;safety&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { safety:{}, block:false, report:0 };
+  get s(){ return this.props.screen || "safety"; }
+  renderVals(){
+    const s = this.s;
+    const overlay = (s==="paying"||s==="verifying");
+    const titles = { safety:"승선 안전 동의", refund:"취소·환불 규정", report:"신고하기", coupon:"쿠폰 등록", setting:"설정", vbank:"입금 대기", locoff:"내 주변", failed:"결제 실패" };
+    const safetyDefs = ["구명조끼는 승선 중 항상 착용합니다","음주 상태 승선은 제한될 수 있습니다","기상 악화 시 출조가 결항될 수 있습니다","임산부·만 14세 미만은 보호자 동반 필수"];
+    const sAll = safetyDefs.every((_,i)=>this.state.safety[i]);
+    const rep = this.state.report;
+    return {
+      pageBg: overlay ? "#7C7C84" : "#fff",
+      showStatus: !overlay,
+      title: titles[s] || "",
+      isSafety:s==="safety", isRefund:s==="refund", isReport:s==="report", isCoupon:s==="coupon",
+      isSetting:s==="setting", isVbank:s==="vbank", isLocOff:s==="locoff", isPaying:overlay, isFailed:s==="failed",
+      failRows:[{k:"실패 사유",v:"카드 한도 초과",c:"#EE0005"},{k:"결제 수단",v:"신한카드 (1234)",c:"#191919"},{k:"결제 금액",v:"178,000원",c:"#191919"}],
+      safetyItems: safetyDefs.map((label,i)=>{ const on=!!this.state.safety[i]; return { label, bg:on?"#0041FF":"#D5D5D5", toggle:()=>this.setState(st=>({safety:Object.assign({},st.safety,{[i]:!st.safety[i]})})) }; }),
+      toggleSafetyAll: ()=>this.setState({safety: sAll?{}:{0:true,1:true,2:true,3:true}}),
+      safetyAllBg: sAll?"#0041FF":"#D5D5D5", safetyCtaBg: sAll?"#0041FF":"#C7D2EE",
+      refundTiers:[{t:"출조 3일 전까지",s:"무료 취소",rate:"100% 환불",bar:"#1F8A5B"},{t:"출조 2일 전",s:"수수료 20%",rate:"80% 환불",bar:"#191919"},{t:"출조 1일 전",s:"수수료 50%",rate:"50% 환불",bar:"#FF8A00"},{t:"출조 당일·노쇼",s:"환불 불가",rate:"0% 환불",bar:"#EE0005"}],
+      reportReasons:["욕설·비방·혐오 표현","음란·불법 콘텐츠","허위·사기 정보","스팸·광고","기타"].map((label,i)=>({label, ring:rep===i?"#0041FF":"#CFCFCF", dot:rep===i?"#0041FF":"transparent", onClick:()=>this.setState({report:i})})),
+      toggleBlock:()=>this.setState(st=>({block:!st.block})), blockBg:this.state.block?"#0041FF":"#E3E3E8", blockKnob:this.state.block?"21px":"2.5px",
+      reportCtaBg:"#EE5B52",
+      settingGroups:[
+        {title:"알림", items:[{label:"알림 설정",hasArrow:true},{label:"마케팅 수신 동의",hasVal:true,val:"ON"}]},
+        {title:"약관·정책", items:[{label:"서비스 이용약관",hasArrow:true},{label:"개인정보 처리방침",hasArrow:true},{label:"위치기반서비스 약관",hasArrow:true}]},
+        {title:"앱 정보", items:[{label:"버전 정보",hasVal:true,val:"v2.4.0"},{label:"캐시 삭제",hasVal:true,val:"12.4MB"},{label:"로그아웃",hasArrow:true},{label:"회원 탈퇴",hasArrow:true,color:"#EE0005"}]},
+      ].map(g=>({title:g.title, items:g.items.map(it=>Object.assign({color:"#363636",hasArrow:false,hasVal:false},it))})),
+      vbankRows:[{k:"입금 은행",v:"국민은행",c:"#191919"},{k:"계좌번호",v:"012345-04-678910",c:"#191919"},{k:"예금주",v:"(주)어바웃피싱",c:"#191919"},{k:"입금 금액",v:"178,000원",c:"#0041FF"}],
+      regionPick:["인천·경기","충남·서해","전남·여수","경남·통영"],
+      payingTitle: s==="verifying"?"결제를 확인하고 있어요":"결제를 진행하고 있어요",
+      payingDesc: s==="verifying"?"최대 1분 정도 걸릴 수 있어요\n창을 닫지 말고 기다려 주세요":"창을 닫지 말고 잠시만 기다려 주세요",
+      payingFoot: s==="verifying"?"안전하게 처리 중":"안전한 PG 보안 결제",
+    };
+  }
+}
+</script>
+</body>
+</html>

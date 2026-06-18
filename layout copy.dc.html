@@ -12,9 +12,9 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="./scr/chuljohome/fig-tokens.css">
+<link rel="stylesheet" href="./scr/home/fig-tokens.css">
 <link rel="stylesheet" href="./scr/splash/fig-assets.css">
-<link rel="stylesheet" href="./scr/chuljohome/fig-assets.css">
+<link rel="stylesheet" href="./scr/home/fig-assets.css">
 <link rel="stylesheet" href="./scr/news_a/fig-assets.css">
 <link rel="stylesheet" href="./scr/news_b/fig-assets.css">
 <link rel="stylesheet" href="./scr/reserve/fig-assets.css">
@@ -36,44 +36,9 @@
   .gnum{ width:30px; height:30px; border-radius:9px; background:#191919; color:#fff; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; }
   .gtitle{ font-weight:800; font-size:20px; color:#191919; letter-spacing:-0.5px; }
   .gnote{ font-weight:500; font-size:13px; color:#999; letter-spacing:-0.3px; }
-  .tapbtn{ transition:transform .1s ease; }
-  .tapbtn:active{ transform:scale(.96); }
-  .chandle{ display:none !important; }
-  .afl.cmode .chandle{ display:flex !important; }
-  .afl.cmode .frame{ box-shadow:0 0 0 2px rgba(0,65,255,.25), 0 12px 44px rgba(20,22,30,.13); }
-  .afl.cmode .col:hover .frame{ box-shadow:0 0 0 2.5px #0041FF, 0 12px 44px rgba(20,22,30,.18); }
 </style>
 </helmet>
-<div class="afl {{ modeClass }}" ref="{{ rootRef }}" style="background:#e7e8ec; padding:48px 56px 80px; min-height:100vh; position:relative;">
-
-  <!-- 연결 모드 툴바 -->
-  <div style="position:sticky; top:14px; z-index:300; display:flex; align-items:center; gap:12px; margin-bottom:6px; pointer-events:none;">
-    <div class="tapbtn" onClick="{{ toggleMode }}" style="pointer-events:auto; height:44px; padding:0 22px; border-radius:1000px; background:{{ toggleBg }}; color:{{ toggleColor }}; border:1.5px solid #0041FF; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 6px 20px rgba(0,65,255,.22);">🔗 {{ toggleLabel }}</div>
-    <sc-if value="{{ mode }}" hint-placeholder-val="{{ false }}">
-      <div style="pointer-events:auto; display:flex; align-items:center; gap:10px;">
-        <span style="font-weight:500; font-size:12.5px; color:#555; background:#fff; padding:9px 14px; border-radius:1000px; box-shadow:0 2px 10px rgba(0,0,0,.08); letter-spacing:-0.3px;">화면 오른쪽 ● 핸들을 끌어 다른 화면으로 연결하세요 · 라벨 클릭=수정 · ×=삭제</span>
-        <div class="tapbtn" onClick="{{ clearAll }}" style="height:36px; padding:0 15px; border-radius:1000px; background:#fff; color:#EE0005; font-weight:600; font-size:12.5px; display:flex; align-items:center; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.08);">전체 지우기 ({{ connCount }})</div>
-      </div>
-    </sc-if>
-  </div>
-
-  <!-- 연결선 SVG 오버레이 -->
-  <svg style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:60; overflow:visible;">
-    <defs><marker id="carrow" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8 Z" fill="#0041FF"></path></marker></defs>
-    {{ connSvg }}
-  </svg>
-
-  <!-- 연결 라벨 / 삭제 -->
-  <sc-if value="{{ mode }}" hint-placeholder-val="{{ false }}">
-  <div style="position:absolute; inset:0; pointer-events:none; z-index:70;">
-    <sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
-      <div style="position:absolute; left:{{ l.mx }}px; top:{{ l.my }}px; transform:translate(-50%,-50%); display:flex; align-items:center; pointer-events:auto;">
-        <span class="tapbtn" onClick="{{ l.edit }}" style="height:25px; padding:0 10px; border-radius:1000px 0 0 1000px; background:#0041FF; color:#fff; font-weight:700; font-size:11px; display:flex; align-items:center; cursor:pointer; white-space:nowrap; box-shadow:0 2px 8px rgba(0,0,0,.2);">{{ l.label }}</span>
-        <span class="tapbtn" onClick="{{ l.del }}" style="width:25px; height:25px; border-radius:0 1000px 1000px 0; background:#EE0005; color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.2);">×</span>
-      </div>
-    </sc-for>
-  </div>
-  </sc-if>
+<div class="afl" style="background:#e7e8ec; padding:48px 56px 80px; min-height:100vh;">
 
   <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px;">
     <div>
@@ -111,10 +76,8 @@
   <!-- 2. MAIN -->
   <div class="ghead"><div class="gnum">2</div><div class="gtitle">메인 화면</div><div class="gnote">Figma 8월버전 그대로 추출</div></div>
   <div class="row">
-    <div class="col"><div class="cap">출조 (통합홈)</div><div class="capsub">출조 탭 홈 · Figma 추출</div><div class="frame" style="content-visibility:auto;contain-intrinsic-size:393px 8604px;"><x-import component-from-global-scope="Screen" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import></div></div>
     <div class="col"><div class="cap">새소식 (피드형)</div><div class="capsub">홈 탭 · 완성본</div><div class="frame"><dc-import name="News" hint-size="393,1600"></dc-import></div></div>
-    <div class="col"><div class="cap">새소식 (기본형)</div><div class="capsub">날씨·내예약·찜한선박 · Figma</div><div class="frame"><x-import component-from-global-scope="AFNewsA" from="./scr/news_a/Components.bundle.js" hint-size="393,1600"></x-import></div></div>
-    <div class="col"><div class="cap">퀵메뉴 (오버레이)</div><div class="capsub">바로가기 그리드 · Figma</div><div class="frame"><img src="./scr/snapshots/quickmenu.png" style="width:100%;display:block;" alt=""></div></div>
+    <div class="col"><div class="cap">새소식 (기본형)</div><div class="capsub">날씨·내예약·찜한선박</div><div class="frame"><x-import component-from-global-scope="AFNewsA" from="./scr/news_a/Components.bundle.js" hint-size="393,3000"></x-import></div></div>
     <div class="col"><div class="cap">탐색 지도</div><div class="capsub">지도 탐색 · 완성본</div><div class="frame"><dc-import name="Map" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">통합검색</div><div class="capsub">검색 결과 · 다중 섹션</div><div class="frame"><dc-import name="Search" hint-size="393,1200"></dc-import></div></div>
   </div>
@@ -149,32 +112,30 @@
     <div class="col"><div class="cap">이벤트</div><div class="capsub">이벤트 리스트</div><div class="frame"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">이벤트 상세</div><div class="capsub">글 상세 화면</div><div class="frame"><dc-import name="Sub" screen="event_detail" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">후기 작성</div><div class="capsub">+1,500 머니</div><div class="frame"><dc-import name="Sub" screen="review" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">후기 완료</div><div class="capsub">머니 적립 완료</div><div class="frame"><dc-import name="Sub" screen="review_done" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">1:1 채팅</div><div class="capsub">선장 문의</div><div class="frame"><dc-import name="Sub" screen="chat" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">예약 취소·환불</div><div class="capsub">취소 사유·환불액</div><div class="frame"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">취소 완료</div><div class="capsub">환불 안내</div><div class="frame"><dc-import name="Sub" screen="cancel_done" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">승선 안전 동의</div><div class="capsub">체크리스트·면책</div><div class="frame"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">취소·환불 규정</div><div class="capsub">수수료 단계</div><div class="frame"><dc-import name="Flows" screen="refund" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">신고하기</div><div class="capsub">사유·차단</div><div class="frame"><dc-import name="Flows" screen="report" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">쿠폰함 · 코드입력 모달</div><div class="capsub">코드 붙여넣기</div><div class="frame"><dc-import name="My" screen="coupon_reg" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">쿠폰 등록</div><div class="capsub">코드 입력</div><div class="frame"><dc-import name="Flows" screen="coupon" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">결제 진행중</div><div class="capsub">PG 로딩</div><div class="frame"><dc-import name="Flows" screen="paying" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">결제 확인중</div><div class="capsub">최대 1분</div><div class="frame"><dc-import name="Flows" screen="verifying" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">결제 실패</div><div class="capsub">승인 거절 · 재시도</div><div class="frame"><dc-import name="Flows" screen="failed" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">가상계좌 입금대기</div><div class="capsub">입금 기한·계좌</div><div class="frame"><dc-import name="Flows" screen="vbank" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">설정</div><div class="capsub">알림·약관·계정</div><div class="frame"><dc-import name="Flows" screen="setting" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">위치 꺼짐</div><div class="capsub">지역 선택 대체</div><div class="frame"><dc-import name="Flows" screen="locoff" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">조황 등록 ① 위치</div><div class="capsub">지도 핀 선택</div><div class="frame"><dc-import name="Catch" screen="pin" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">조황 등록 ② 입력</div><div class="capsub">사진·어종·크기</div><div class="frame"><dc-import name="Catch" screen="form" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">조황 등록 ③ 완료</div><div class="capsub">지도·새소식 공유</div><div class="frame"><dc-import name="Catch" screen="done" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">회원탈퇴 · 예약/출조</div><div class="capsub">사유 화면</div><div class="frame"><dc-import name="My" screen="withdraw_0" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">회원탈퇴 · 알림/마케팅</div><div class="capsub">사유 화면</div><div class="frame"><dc-import name="My" screen="withdraw_3" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">회원탈퇴 · 오류/경험</div><div class="capsub">사유 화면</div><div class="frame"><dc-import name="My" screen="withdraw_7" hint-size="393,852"></dc-import></div></div>
   </div>
 
   <!-- 5. EMPTY -->
   <div class="ghead"><div class="gnum">4-1</div><div class="gtitle">탐색 지도 · 서브화면 / 모달</div><div class="gnote">필터(피싱포인트·조황·예약·CCTV) · 시트 · 길안내 플로우</div></div>
   <div class="row">
     <div class="col"><div class="cap">기본 (피싱포인트)</div><div class="capsub">마커 + 하단탭</div><div class="frame"><dc-import name="Map" view="base" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">포인트 정보 (바다·항구)</div><div class="capsub">물때·조류·날씨 · Figma 정밀본</div><div class="frame"><img src="./scr/snapshots/point_sea.png" style="width:100%;display:block;" alt=""></div></div>
-    <div class="col"><div class="cap">포인트 정보 (민물·강)</div><div class="capsub">수위·방류·관심/경보수위</div><div class="frame"><img src="./scr/snapshots/point_river.png" style="width:100%;display:block;" alt=""></div></div>
-    <div class="col"><div class="cap">포인트 정보 (민물·댐)</div><div class="capsub">저수위·총방류량·저수율</div><div class="frame"><img src="./scr/snapshots/point_dam.png" style="width:100%;display:block;" alt=""></div></div>
-    <div class="col"><div class="cap">포인트 정보 (민물·공통)</div><div class="capsub">내수면 공통 포인트</div><div class="frame"><img src="./scr/snapshots/point_common.png" style="width:100%;display:block;" alt=""></div></div>
-    <div class="col"><div class="cap">포인트 날씨 · 드래그</div><div class="capsub">시간별 날씨 · 드래그 시트</div><div class="frame"><img src="./scr/snapshots/weather_drag.png" style="width:100%;display:block;" alt=""></div></div>
+    <div class="col"><div class="cap">포인트 정보 (항구·바다)</div><div class="capsub">물때·조류세기·타임라인</div><div class="frame"><dc-import name="Map" view="point" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">포인트 정보 (강)</div><div class="capsub">수위·유량 · 환경부</div><div class="frame"><dc-import name="Map" view="point_river" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">포인트 정보 (돐)</div><div class="capsub">저수위·방류량·저수율</div><div class="frame"><dc-import name="Map" view="point_dam" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">포인트 정보 (저수지)</div><div class="capsub">저수위·저수율</div><div class="frame"><dc-import name="Map" view="point_reservoir" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">길안내 경로</div><div class="capsub">거리·시간·통행료</div><div class="frame"><dc-import name="Map" view="route" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">인근 주차장</div><div class="capsub">길안내 시트</div><div class="frame"><dc-import name="Map" view="parking" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">길안내 앱 선택</div><div class="capsub">네이버·카카오</div><div class="frame"><dc-import name="Map" view="app" hint-size="393,852"></dc-import></div></div>
@@ -189,14 +150,7 @@
   <!-- 4-2. 회원탈퇴 플로우 --><div class="ghead"><div class="gnum">4-2</div><div class="gtitle">로그아웃 · 회원탈퇴 플로우</div><div class="gnote">프로필 편집 → 회원탈퇴 → 탈퇴 완료</div></div>
   <div class="row">
     <div class="col"><div class="cap">프로필 편집</div><div class="capsub">하단 로그아웃·탈퇴</div><div class="frame"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 예약/출조</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_0" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 상품/주문배송</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_1" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 이벤트/혜택</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_2" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 알림/마케팅</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_3" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 보상/회원혜택</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_4" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 커뮤니티/회원</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_5" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 지도/날씨</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_6" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원탈퇴 · 오류/이용경험</div><div class="capsub">사유 선택</div><div class="frame"><dc-import name="My" screen="withdraw_7" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">회원 탈퇴</div><div class="capsub">사유 선택 · 설문형</div><div class="frame"><dc-import name="My" screen="withdraw" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">탈퇴 완료</div><div class="capsub">완료 → 로그인</div><div class="frame"><dc-import name="My" screen="withdraw_done" hint-size="393,852"></dc-import></div></div>
   </div>
 
@@ -210,6 +164,7 @@
     <div class="col"><div class="cap">알림 없음</div><div class="capsub">알림함</div><div class="frame"><dc-import name="Empty" type="alarm" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">조황 없음</div><div class="capsub">내 조황</div><div class="frame"><dc-import name="Empty" type="catch" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">쿠폰 없음</div><div class="capsub">쿠폰함</div><div class="frame"><dc-import name="Empty" type="coupon" hint-size="393,852"></dc-import></div></div>
+    <div class="col"><div class="cap">채팅 없음</div><div class="capsub">채팅</div><div class="frame"><dc-import name="Empty" type="chat" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">결제내역 없음</div><div class="capsub">결제 내역</div><div class="frame"><dc-import name="Empty" type="payment" hint-size="393,852"></dc-import></div></div>
   </div>
 
@@ -228,135 +183,5 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { mode:false, conns:[], drag:null, tick:0 };
-  _root=null; _anchors={};
-  rootRef = (el)=>{ this._root = el; if(el){ el.classList.toggle("cmode", this.state.mode); this._assign(); } };
-
-  componentDidMount(){
-    try{ const s=localStorage.getItem("af_connections"); if(s) this.setState({conns:JSON.parse(s)}); }catch(e){}
-    this._sync = (e)=>{ if(e.key==="af_connections"){ try{ this.setState({conns:e.newValue?JSON.parse(e.newValue):[]}); }catch(x){} } };
-    window.addEventListener("storage", this._sync);
-    this._move = (e)=>this.onMove(e);
-    this._up = (e)=>this.onUp(e);
-    this._rz = ()=>this.measure();
-    document.addEventListener("mousemove", this._move);
-    document.addEventListener("mouseup", this._up);
-    window.addEventListener("resize", this._rz);
-    setTimeout(()=>{ this._assign(); this.measure(); }, 900);
-    setTimeout(()=>this.measure(), 2600);
-    setTimeout(()=>this.measure(), 5000);
-  }
-  componentWillUnmount(){
-    document.removeEventListener("mousemove", this._move);
-    document.removeEventListener("mouseup", this._up);
-    window.removeEventListener("resize", this._rz);
-  }
-
-  _assign(){
-    if(!this._root) return;
-    const cols = this._root.querySelectorAll(".col");
-    cols.forEach((c,i)=>{
-      const cap = c.querySelector(".cap");
-      const label = cap ? cap.textContent.trim() : ("화면 "+i);
-      const id = label;
-      c.setAttribute("data-cid", id);
-      c.__label = label;
-      const frame = c.querySelector(".frame");
-      if(frame && !frame.querySelector(".chandle")){
-        frame.style.position = "relative";
-        const h = document.createElement("div");
-        h.className = "chandle";
-        h.innerHTML = '<svg width="13" height="13" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5.5" fill="#0041FF"></circle><circle cx="6.5" cy="6.5" r="2" fill="#fff"></circle></svg>';
-        h.style.cssText = "position:absolute; right:7px; top:50%; transform:translateY(-50%); width:28px; height:28px; border-radius:50%; background:#fff; box-shadow:0 3px 10px rgba(0,0,0,.28); align-items:center; justify-content:center; cursor:crosshair; z-index:90;";
-        h.addEventListener("mousedown", (e)=>{ e.preventDefault(); e.stopPropagation(); this.startDrag(id, e); });
-        frame.appendChild(h);
-      }
-    });
-  }
-
-  measure(){
-    if(!this._root) return;
-    const rr = this._root.getBoundingClientRect();
-    const a = {};
-    this._root.querySelectorAll(".col").forEach(c=>{
-      const id = c.getAttribute("data-cid"); if(!id) return;
-      const f = c.querySelector(".frame"); if(!f) return;
-      const fr = f.getBoundingClientRect();
-      a[id] = { x:fr.left-rr.left, y:fr.top-rr.top, w:fr.width, h:fr.height, label:c.__label };
-    });
-    this._anchors = a; this.setState(s=>({ tick:s.tick+1 }));
-  }
-
-  startDrag(id, e){
-    if(!this.state.mode || !this._root) return;
-    const rr = this._root.getBoundingClientRect();
-    this.setState({ drag:{ from:id, mx:e.clientX-rr.left, my:e.clientY-rr.top } });
-  }
-  onMove(e){
-    if(!this.state.drag || !this._root) return;
-    const rr = this._root.getBoundingClientRect();
-    this.setState(s=> s.drag ? ({ drag:Object.assign({}, s.drag, { mx:e.clientX-rr.left, my:e.clientY-rr.top }) }) : {});
-  }
-  onUp(e){
-    if(!this.state.drag) return;
-    const drag = this.state.drag;
-    const tgt = document.elementFromPoint(e.clientX, e.clientY);
-    const col = tgt && tgt.closest && tgt.closest(".col");
-    if(col){ const to = col.getAttribute("data-cid"); if(to && to!==drag.from) this.addConn(drag.from, to); }
-    this.setState({ drag:null });
-  }
-
-  addConn(from, to){
-    const conns = this.state.conns.concat([{ id:"c"+Date.now(), from, to, label:"탭" }]);
-    this.save(conns); this.setState({ conns });
-  }
-  delConn(id){ const conns = this.state.conns.filter(c=>c.id!==id); this.save(conns); this.setState({ conns }); }
-  editLabel(id){
-    const c = this.state.conns.find(x=>x.id===id); if(!c) return;
-    const v = window.prompt("이 연결의 동작/트리거 이름", c.label);
-    if(v!=null){ const conns = this.state.conns.map(x=> x.id===id ? Object.assign({}, x, { label:v||"탭" }) : x); this.save(conns); this.setState({ conns }); }
-  }
-  save(conns){ try{ localStorage.setItem("af_connections", JSON.stringify(conns)); }catch(e){} }
-  clearAll(){ if(window.confirm("모든 연결을 지울까요?")){ this.save([]); this.setState({ conns:[] }); } }
-  toggleMode(){
-    this.setState(s=>{ const m=!s.mode; if(this._root) this._root.classList.toggle("cmode", m); return { mode:m, drag:null }; }, ()=>{ this._assign(); this.measure(); });
-  }
-
-  pathD(ax,ay,bx,by){ const dx=Math.abs(bx-ax); const c=Math.max(50, dx*0.45); return "M "+ax+" "+ay+" C "+(ax+c)+" "+ay+", "+(bx-c)+" "+by+", "+bx+" "+by; }
-
-  renderVals(){
-    const R = React.createElement;
-    const A = this._anchors;
-    const lines = this.state.conns.map(c=>{
-      const f = A[c.from], t = A[c.to];
-      if(!f || !t) return null;
-      const ax = f.x + f.w, ay = f.y + f.h/2;
-      const leftAnchor = t.x >= f.x;
-      const bx = leftAnchor ? t.x : t.x + t.w;
-      const by = t.y + t.h/2;
-      return { id:c.id, d:this.pathD(ax,ay,bx,by), mx:Math.round((ax+bx)/2), my:Math.round((ay+by)/2), label:c.label, del:()=>this.delConn(c.id), edit:()=>this.editLabel(c.id) };
-    }).filter(Boolean);
-    const paths = lines.map(l=> R("path", { key:l.id, d:l.d, fill:"none", stroke:"#0041FF", strokeWidth:2.5, markerEnd:"url(#carrow)", opacity:0.92 }));
-    paths.push(...lines.map(l=> R("circle", { key:l.id+"_o", cx:l.d.split(" ")[1], cy:l.d.split(" ")[2], r:4, fill:"#0041FF" })));
-    let temp = null;
-    if(this.state.drag){ const f = A[this.state.drag.from]; if(f){ const d=this.pathD(f.x+f.w, f.y+f.h/2, this.state.drag.mx, this.state.drag.my); temp = R("path", { d, fill:"none", stroke:"#0041FF", strokeWidth:2.5, strokeDasharray:"7 6", markerEnd:"url(#carrow)" }); } }
-    const connSvg = R("g", null, temp ? paths.concat([React.cloneElement(temp,{key:"temp"})]) : paths);
-    return {
-      modeClass: this.state.mode ? "cmode" : "",
-      rootRef: this.rootRef,
-      mode: this.state.mode,
-      toggleMode: ()=>this.toggleMode(),
-      clearAll: ()=>this.clearAll(),
-      toggleBg: this.state.mode ? "#0041FF" : "#fff",
-      toggleColor: this.state.mode ? "#fff" : "#0041FF",
-      toggleLabel: this.state.mode ? "연결 모드 ON" : "연결 모드",
-      connCount: this.state.conns.length,
-      lines, connSvg,
-    };
-  }
-}
-</script>
 </body>
 </html>

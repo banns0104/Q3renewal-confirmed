@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>.af-pm *{box-sizing:border-box;} .af-pm{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;} .tap{cursor:pointer;transition:transform .1s ease;} .tap:active{transform:scale(.98);}</style>
 </helmet>
 <div class="af-pm" style="width:393px; height:852px; background:#fff; position:relative; overflow:hidden; display:flex; flex-direction:column;">
@@ -38,35 +37,53 @@
     </div>
     <div style="padding:0 18px 16px;">
       <div style="text-align:center; margin-bottom:13px; font-weight:500; font-size:11.5px; color:#AAA; letter-spacing:-0.3px;">권한은 설정에서 언제든 다시 변경할 수 있어요.</div>
-      <div class="tap" onClick="{{ goHome }}" style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff; letter-spacing:-0.4px;">동의하고 시작하기</div>
+      <div class="tap" onClick="{{ startPerms }}" style="height:54px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff; letter-spacing:-0.4px;">동의하고 시작하기</div>
     </div>
   </div>
   </sc-if>
 
-  <!-- OS 권한 다이얼로그 (location / notification) -->
+  <!-- OS 권한/추적 다이얼로그 -->
   <sc-if value="{{ isDialog }}" hint-placeholder-val="{{ false }}">
   <div style="flex:1; position:relative; background:#EDEFF3;">
-    <div style="position:absolute; inset:0; background:rgba(0,0,0,.32);"></div>
-    <div style="position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); width:270px; background:rgba(250,250,252,.96); backdrop-filter:blur(20px); border-radius:14px; overflow:hidden; text-align:center;">
-      <div style="padding:20px 18px 16px;">
-        <div style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">{{ dlgTitle }}</div>
-        <div style="margin-top:7px; font-weight:400; font-size:13px; line-height:1.45; color:#363636; letter-spacing:-0.3px; white-space:pre-line;">{{ dlgBody }}</div>
+    <div style="position:absolute; inset:0; background:rgba(0,0,0,.34);"></div>
+
+    <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); width:270px; background:rgba(250,250,252,.97); backdrop-filter:blur(20px); border-radius:14px; overflow:hidden; text-align:center;">
+      <div style="padding:20px 16px 15px;">
+        <div style="font-weight:700; font-size:15.5px; line-height:1.32; color:#191919; letter-spacing:-0.4px; white-space:pre-line;">{{ dlgTitle }}</div>
+        <div style="margin-top:7px; font-weight:400; font-size:12.5px; line-height:1.46; color:#363636; letter-spacing:-0.3px; white-space:pre-line;">{{ dlgBody }}</div>
       </div>
-      <sc-if value="{{ dlgThree }}" hint-placeholder-val="{{ false }}">
-        <div class="tap" onClick="{{ goHome }}" style="height:44px; border-top:0.5px solid rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-weight:400; font-size:16px; color:#0A84FF;">한 번 허용</div>
-      </sc-if>
-      <div class="tap" onClick="{{ goHome }}" style="height:44px; border-top:0.5px solid rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-weight:400; font-size:16px; color:#0A84FF;">{{ dlgAllow }}</div>
-      <div class="tap" onClick="{{ goHome }}" style="height:44px; border-top:0.5px solid rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; color:#0A84FF;">허용 안 함</div>
+      <sc-for list="{{ dlgButtons }}" as="b" hint-placeholder-count="2">
+        <div class="tap" onClick="{{ b.onClick }}" style="height:44px; border-top:0.5px solid rgba(0,0,0,.13); display:flex; align-items:center; justify-content:center; font-weight:{{ b.weight }}; font-size:16px; color:#0A84FF;">{{ b.label }}</div>
+      </sc-for>
     </div>
+    </sc-if>
+
+    <sc-if value="{{ isAOS }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; left:50%; top:45%; transform:translate(-50%,-50%); width:304px; background:#FBF8FD; border-radius:26px; overflow:hidden; padding:24px 24px 14px;">
+      <div style="width:34px; height:34px; border-radius:50%; background:#E7E0F5; display:flex; align-items:center; justify-content:center; margin-bottom:14px;"><svg width="19" height="19" viewBox="0 0 24 24"><path d="M12 3 L19 6 L19 11 C19 16 12 21 12 21 C12 21 5 16 5 11 L5 6 Z" fill="none" stroke="#6433DF" stroke-width="1.7" stroke-linejoin="round"></path><path d="M9.2 11.8 L11.2 13.8 L15 9.6" fill="none" stroke="#6433DF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div style="font-weight:700; font-size:18px; color:#1B1B1F; letter-spacing:-0.4px;">{{ dlgTitle }}</div>
+      <div style="margin-top:11px; font-weight:400; font-size:13px; line-height:1.62; color:#45464F; letter-spacing:-0.3px; white-space:pre-line;">{{ dlgBody }}</div>
+      <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:4px;">
+        <sc-for list="{{ dlgButtons }}" as="b" hint-placeholder-count="2">
+          <div class="tap" onClick="{{ b.onClick }}" style="height:40px; padding:0 14px; border-radius:1000px; display:flex; align-items:center; font-weight:700; font-size:14px; color:#0041FF;">{{ b.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
   </div>
   </sc-if>
 
   <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;intro&quot;,&quot;location&quot;,&quot;notification&quot;],&quot;default&quot;:&quot;intro&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;intro&quot;,&quot;location&quot;,&quot;notification&quot;,&quot;tracking_ios&quot;,&quot;tracking_aos&quot;],&quot;default&quot;:&quot;intro&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  state = {};
+  scr(){ return this.state.step || this.props.screen || "intro"; }
+  internal = ["intro","location","notification","tracking_ios","tracking_aos"];
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  btn(to){ return () => { if(this.internal.indexOf(to)>=0) this.setState({step:to}); else this.nav(to)(); }; }
   pic(name){
     const R=React.createElement; const ln=(d,c,w=1.8)=>R("path",{d,fill:"none",stroke:c,strokeWidth:w,strokeLinecap:"round",strokeLinejoin:"round"});
     const svg=(ch)=>R("svg",{width:22,height:22,viewBox:"0 0 24 24"},ch);
@@ -79,21 +96,26 @@ class Component extends DCLogic {
     }
   }
   renderVals(){
-    const s = this.props.screen || "intro";
+    const s = this.scr();
     const dlg = {
-      location: { title:"‘어바웃피싱’이(가) 사용자의\n위치에 접근하려고 합니다", body:"주변 출조 선박과 포인트를 추천해 드려요.", allow:"앱을 사용하는 동안 허용", three:true },
-      notification: { title:"‘어바웃피싱’이(가) 알림을\n보내려고 합니다", body:"예약 확정·마감 임박·조황 소식을 보내드려요.", allow:"허용", three:false },
+      location: { variant:"ios", title:"‘어바웃피싱’이(가) 사용자의\n위치에 접근하려고 합니다", body:"주변 출조 선박과 낚시 포인트를 추천해 드려요.", buttons:[{label:"앱을 사용하는 동안 허용",weight:400,to:"tracking_ios"},{label:"한 번 허용",weight:400,to:"tracking_ios"},{label:"허용 안 함",weight:600,to:"tracking_ios"}] },
+      notification: { variant:"ios", title:"‘어바웃피싱’이(가) 알림을\n보내려고 합니다", body:"예약 확정·마감 임박·조황 소식을 보내드려요.", buttons:[{label:"허용",weight:400,to:"auth_login"},{label:"허용 안 함",weight:600,to:"auth_login"}] },
+      tracking_ios: { variant:"ios", title:"‘어바웃피싱’이(가) 다른 회사의\n앱 및 웹사이트에 걸친 사용자의\n활동을 추적하도록 허용하시겠습니까?", body:"맞춤 추천·광고 제공을 위해 기기의\n광고 식별자(IDFA)를 사용해요.", buttons:[{label:"앱에 추적 금지 요청",weight:400,to:"tracking_aos"},{label:"허용",weight:600,to:"tracking_aos"}] },
+      tracking_aos: { variant:"aos", title:"광고 식별자(ADID) 수집 동의", body:"맞춤형 광고와 더 나은 서비스 제공을 위해\n기기의 광고 식별자(ADID·AAID)를 수집해요.\n동의하지 않아도 서비스는 이용할 수 있어요.", buttons:[{label:"동의 안 함",weight:500,to:"auth_login"},{label:"동의",weight:700,to:"auth_login"}] },
     };
     const d = dlg[s] || dlg.location;
+    const isDlg = !!dlg[s];
     return {
-      isIntro: s==="intro", isDialog: s==="location"||s==="notification",
-      goHome: this.nav("auth_login"),
-      dlgTitle: d.title, dlgBody: d.body, dlgAllow: d.allow, dlgThree: d.three,
+      isIntro: s==="intro", isDialog: isDlg,
+      isIOS: isDlg && d.variant==="ios", isAOS: isDlg && d.variant==="aos",
+      goHome: this.nav("auth_login"), startPerms: this.btn("location"),
+      dlgTitle: d.title, dlgBody: d.body,
+      dlgButtons: d.buttons.map(b=>({ label:b.label, weight:b.weight||400, onClick:this.btn(b.to) })),
       perms: [
-        { name:"위치", tag:"필수", tagBg:"#EEF3FF", tagColor:"#0041FF", tint:"#EAF0FF", icon:this.pic("loc"), desc:"내 주변 출조 선박·낚시 포인트를 추천해 드려요." },
+        { name:"위치", tag:"선택", tagBg:"#F3F3F3", tagColor:"#999", tint:"#EAF0FF", icon:this.pic("loc"), desc:"내 주변 출조 선박·낚시 포인트를 추천해 드려요." },
         { name:"알림", tag:"선택", tagBg:"#F3F3F3", tagColor:"#999", tint:"#FFF4E4", icon:this.pic("bell"), desc:"예약 확정, 마감 임박, 관심 어종 조황을 알려드려요." },
         { name:"카메라 · 사진", tag:"선택", tagBg:"#F3F3F3", tagColor:"#999", tint:"#E8FBEE", icon:this.pic("cam"), desc:"조황 인증과 프로필 사진 등록에 사용돼요." },
-        { name:"기기 정보", tag:"필수", tagBg:"#EEF3FF", tagColor:"#0041FF", tint:"#F1EEFC", icon:this.pic("shield"), desc:"안전한 결제와 본인 확인을 위해 필요해요." },
+        { name:"기기 정보", tag:"선택", tagBg:"#F3F3F3", tagColor:"#999", tint:"#F1EEFC", icon:this.pic("shield"), desc:"안전한 결제와 본인 확인을 위해 사용돼요." },
       ],
     };
   }

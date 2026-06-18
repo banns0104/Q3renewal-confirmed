@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
   .af-sub *{ box-sizing:border-box; }
   .af-sub{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -121,6 +120,10 @@
   <!-- ============ 공지/이벤트 상세 ============ -->
   <sc-if value="{{ isPostDetail }}" hint-placeholder-val="{{ false }}">
   <div style="position:absolute; inset:0; background:#fff; z-index:50;">
+    <div style="height:54px; width:100%; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 34px;">
+      <span style="font-family:'SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
+      <div style="display:flex; align-items:center; gap:6px;"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg><span style="font-weight:600; font-size:14px; color:#191919;">5G</span><div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div></div>
+    </div>
     <div style="height:52px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ closeDet }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">공지사항</span></div>
     <div style="padding:14px 22px 0;">
       <span style="height:22px; padding:0 9px; border-radius:6px; background:{{ pdBadgeBg }}; color:{{ pdBadgeColor }}; font-weight:700; font-size:11px; display:inline-flex; align-items:center;">{{ pdBadge }}</span>
@@ -226,7 +229,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;detail&quot;,&quot;notif&quot;,&quot;notice&quot;,&quot;event&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { wish:false, det:null, done:null };
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
   showDet(d){ return ()=> this.setState({det:d}); }
   closeDet = ()=> this.setState({det:null});
 
@@ -246,7 +249,10 @@ class Component extends DCLogic {
   renderVals(){
     const s = this.props.screen || "detail";
     const isDetail = s==="detail";
-    const det = this.state.det;
+    const sampleNotice = {badge:"중요",badgeBg:"#FFECEC",badgeColor:"#EE0005",date:"2026.08.14",title:"추석 연휴 예약·환불 운영 안내",body:"추석 연휴(9/14~9/18) 기간 고객센터 운영과 환불 처리 일정을 안내드려요.\n\n· 고객센터 휴무  9/15 ~ 9/17\n· 휴무 기간 접수된 환불은 9/18부터 순차 처리돼요.\n· 기상 결항 자동환불은 연휴 중에도 정상 작동해요.\n\n이용에 참고 부탁드려요."};
+    const sampleEvent = {badge:"이벤트",badgeBg:"#EEF3FF",badgeColor:"#0041FF",date:"2026.08.01 ~ 08.31",title:"첫 출조, 5,000원 머니 드려요",body:"신규 가입 후 첫 선박 예약을 완료하면 5,000원 머니를 자동 지급해드려요.\n\n· 대상  신규 가입 회원\n· 지급  첫 예약 결제 완료 시 자동 적립\n· 사용  적립일로부터 30일 이내\n\n지금 마음에 드는 선박을 찾아보세요."};
+    const det = this.state.det || (s==="notice_detail" ? sampleNotice : s==="event_detail" ? sampleEvent : null);
+    const done = this.state.done || (s==="cancel_done" ? "cancel" : s==="review_done" ? "review" : null);
     return {
       isPostDetail: !!det,
       pdBadge: det?det.badge:"", pdBadgeBg: det?det.badgeBg:"#EEF3FF", pdBadgeColor: det?det.badgeColor:"#0041FF",
@@ -254,16 +260,16 @@ class Component extends DCLogic {
       closeDet: this.closeDet,
       isDetail, isNotif:s==="notif", isNotice:s==="notice", isEvent:s==="event",
       isReview:s==="review", isChat:s==="chat", isCancel:s==="cancel",
-      isDone: !!this.state.done,
-      doneTint: this.state.done==="cancel" ? "#FFECEC" : "#E8FBEE",
-      doneColor: this.state.done==="cancel" ? "#EE0005" : "#1F8A5B",
-      doneTitle: this.state.done==="cancel" ? "예약이 취소됐어요" : "후기가 등록됐어요",
-      doneDesc: this.state.done==="cancel" ? "환불 90,000원은 2~3영업일 이내\n원결제 수단으로 입금돼요." : "소중한 후기 감사해요.\n1,500머니가 적립됐어요.",
-      doneCta: this.state.done==="cancel" ? "예약 내역으로" : "홈으로",
-      doneSub: this.state.done==="cancel" ? "" : "내 조황에서 보기",
+      isDone: !!done,
+      doneTint: done==="cancel" ? "#FFECEC" : "#E8FBEE",
+      doneColor: done==="cancel" ? "#EE0005" : "#1F8A5B",
+      doneTitle: done==="cancel" ? "예약이 취소됐어요" : "후기가 등록됐어요",
+      doneDesc: done==="cancel" ? "환불 90,000원은 2~3영업일 이내\n원결제 수단으로 입금돼요." : "소중한 후기 감사해요.\n1,500머니가 적립됐어요.",
+      doneCta: done==="cancel" ? "예약 내역으로" : "홈으로",
+      doneSub: done==="cancel" ? "" : "내 조황에서 보기",
       submitReview: ()=> this.setState({done:"review"}),
       submitCancel: ()=> this.setState({done:"cancel"}),
-      goHome: this.state.done==="cancel" ? this.nav("reserv") : this.nav("home"),
+      goHome: done==="cancel" ? this.nav("reserv") : this.nav("home"),
       stars:["#FF8A00","#FF8A00","#FF8A00","#FF8A00","#E5E5E5"],
       cancelReasons:[{label:"개인 사정으로 일정 변경",on:true,stroke:"#0041FF"},{label:"기상 악화 우려",on:false,stroke:"#CFCFCF"},{label:"다른 선박으로 변경",on:false,stroke:"#CFCFCF"},{label:"단순 변심",on:false,stroke:"#CFCFCF"}],
       statusBg: isDetail ? "transparent" : "#fff",
@@ -290,7 +296,6 @@ class Component extends DCLogic {
       notifList: [
         { title:"예약이 확정되었어요", desc:"블랙이글호 · 08.16(토) 04:30 출항이 확정됐어요. 준비물을 확인해보세요.", time:"방금 전", tint:"#EAF0FF", icon:this.ic("cal"), unread:true, bg:"#F7FAFF", onClick:this.nav("detail") },
         { title:"머니 70원이 적립됐어요", desc:"첫 예약 축하 머니가 도착했어요. 다음 예약에 바로 쓸 수 있어요.", time:"1시간 전", tint:"#FFF7E0", icon:this.ic("coin"), unread:true, bg:"#FFFDF6", onClick:this.nav("my") },
-        { title:"중고거래 채팅이 왔어요", desc:"#광어킹 고객이 ‘갈치대 4.5칸’에 문의를 남겼어요.", time:"어제", tint:"#E8FBEE", icon:this.ic("trade"), unread:false, bg:"#fff", onClick:this.nav("chat") },
         { title:"관심 어종 핫조황", desc:"팔로우한 ‘참돔러버’님이 홍원항 조황을 올렸어요.", time:"2일 전", tint:"#F5EDFF", icon:this.ic("bell"), unread:false, bg:"#fff", onClick:this.nav("news_b") },
       ],
       notices: [

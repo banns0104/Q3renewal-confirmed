@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>.af-err *{box-sizing:border-box;} .af-err{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}</style>
 </helmet>
 <div class="af-err" style="width:393px; height:852px; background:#ffffff; position:relative; overflow:hidden; display:flex; flex-direction:column;">
@@ -75,7 +74,7 @@ class Component extends DCLogic {
       cta:"공지사항 확인하기", ctaPrimary:false, ctaTo:"noop" },
   };
 
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
 
   icon(name){
     const R = React.createElement;

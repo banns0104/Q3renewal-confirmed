@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
   .afm *{ box-sizing:border-box; }
   .afm{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -46,7 +45,7 @@
       <div class="tap" onClick="{{ go_profile }}" style="width:54px; height:54px; border-radius:50%; background:linear-gradient(150deg,#7B5CFF,#5B33E0); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:#fff; flex:none;">현</div>
       <div style="flex:1;">
         <div style="font-weight:400; font-size:18px; color:#191919; letter-spacing:-0.5px;"><span style="font-weight:800;">현일</span>님</div>
-        <div style="margin-top:4px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;"><span style="color:#6433DF; font-weight:700;">Lv.3 단골</span> · 매너 4.8</div>
+        <div style="margin-top:4px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">매너 4.8</div>
       </div>
       <div class="tap" onClick="{{ go_profile }}" style="height:32px; padding:0 15px; border-radius:1000px; border:1px solid #E2E2E2; display:flex; align-items:center; font-weight:600; font-size:13px; color:#555; letter-spacing:-0.3px;">수정</div>
     </div>
@@ -65,28 +64,12 @@
       </div>
     </div>
 
-    <!-- level -->
-    <div class="tap" onClick="{{ go_level }}" style="margin:14px 20px 0; border-radius:14px; background:#F1EEFC; padding:15px 16px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="font-weight:700; font-size:13.5px; color:#6433DF; letter-spacing:-0.3px;">Lv.3 단골</span>
-        <span style="flex:1; font-weight:500; font-size:12.5px; color:#8A7CB8; letter-spacing:-0.3px;">머니 +2% · 무료배송 · 우선 알림</span>
-        <svg width="7" height="13" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#B6A8DD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-      <div style="margin-top:12px; height:7px; border-radius:1000px; background:#E0D9F4; overflow:hidden;"><div style="width:41%; height:100%; border-radius:1000px; background:linear-gradient(90deg,#6433DF,#3E6BF6);"></div></div>
-      <div style="margin-top:7px; display:flex; justify-content:space-between;"><span style="font-weight:600; font-size:11px; color:#9A8DC4;">EXP 70/170</span><span style="font-weight:700; font-size:11px; color:#6433DF;">Lv.4까지 출조 5회</span></div>
-    </div>
-
-    <!-- money + coupon -->
-    <div style="margin:12px 20px 0; display:flex; gap:11px;">
-      <div class="tap" onClick="{{ noop }}" style="flex:1; border-radius:14px; background:#EDF2FF; padding:15px;">
-        <div style="display:flex; align-items:center; gap:6px;"><div style="width:20px; height:20px; border-radius:50%; background:#FFC700; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11px; color:#fff;">M</div><span style="font-weight:600; font-size:12px; color:#5570A8; letter-spacing:-0.3px;">어바웃피싱 머니</span></div>
-        <div style="margin-top:9px; font-weight:800; font-size:19px; color:#0041FF; letter-spacing:-0.6px;">12,400<span style="font-size:13px;">원</span></div>
-        <div style="margin-top:3px; font-weight:600; font-size:11px; color:#7E94C4;">+1,200원 오늘 적립</div>
-      </div>
-      <div class="tap" onClick="{{ go_coupon }}" style="flex:1; border-radius:14px; background:#FFF4E4; padding:15px;">
-        <div style="font-weight:600; font-size:12px; color:#B8915A; letter-spacing:-0.3px;">쿠폰함</div>
-        <div style="margin-top:9px; font-weight:800; font-size:19px; color:#FF8A00; letter-spacing:-0.6px;">5<span style="font-size:13px; color:#C98A3E;">장</span></div>
-        <div style="margin-top:3px; font-weight:600; font-size:11px; color:#C2A06B;">5,000원 신규 쿠폰</div>
+    <!-- coupon -->
+    <div style="margin:14px 20px 0;">
+      <div class="tap" onClick="{{ go_coupon }}" style="border-radius:14px; background:#FFF4E4; padding:16px 18px; display:flex; align-items:center; gap:14px;">
+        <div style="flex:1;"><div style="font-weight:600; font-size:12px; color:#B8915A; letter-spacing:-0.3px;">쿠폰함</div><div style="margin-top:7px; font-weight:800; font-size:19px; color:#FF8A00; letter-spacing:-0.6px;">5<span style="font-size:13px; color:#C98A3E;">장</span></div></div>
+        <span style="font-weight:600; font-size:12px; color:#C2A06B;">5,000원 신규 쿠폰</span>
+        <svg width="7" height="13" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#D9BE92" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
 
@@ -145,8 +128,7 @@
         <span style="height:24px; padding:0 10px; border-radius:7px; background:#F3F3F3; color:#767676; font-weight:700; font-size:11.5px; display:inline-flex; align-items:center;">출조 완료</span>
         <div style="margin-top:12px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">대박호</span><span style="font-weight:600; font-size:13px; color:#767676;">4/12(토) 04:30</span></div>
         <div style="margin-top:6px; font-weight:500; font-size:13px; color:#767676; letter-spacing:-0.3px;">포항 구룡포 · 참돔 · 박선장 · 2인 · 220,000원</div>
-        <div style="margin-top:12px; padding:11px 13px; border-radius:10px; background:#FFF7E0; display:flex; align-items:center; gap:9px;"><div style="width:22px; height:22px; border-radius:50%; background:#FFC700; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:11px;">M</div><span style="flex:1; font-weight:600; font-size:12.5px; color:#9A7B1E;">후기 작성하고 1,500머니 받기</span></div>
-        <div style="margin-top:12px; display:flex; gap:8px;"><div class="tap" onClick="{{ noop }}" style="flex:1; height:42px; border-radius:9px; background:#F3F3F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#555;">재예약</div><div class="tap" onClick="{{ go_review }}" style="flex:1; height:42px; border-radius:9px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#fff;">후기 작성</div></div>
+        <div style="margin-top:14px; display:flex; gap:8px;"><div class="tap" onClick="{{ noop }}" style="flex:1; height:42px; border-radius:9px; background:#F3F3F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#555;">재예약</div><div class="tap" onClick="{{ go_review }}" style="flex:1; height:42px; border-radius:9px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#fff;">후기 작성</div></div>
       </div>
       <div style="border:1px solid #EEE; border-radius:14px; padding:16px; background:#fff;">
         <span style="height:24px; padding:0 10px; border-radius:7px; background:#E8FBEE; color:#1F8A5B; font-weight:700; font-size:11.5px; display:inline-flex; align-items:center;">후기 완료</span>
@@ -171,7 +153,7 @@
   <!-- ================= 내 조황 ================= -->
   <sc-if value="{{ isCatch }}" hint-placeholder-val="{{ false }}">
   <div>
-    <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px;">내 조황</span></div><span class="tap" onClick="{{ noop }}" style="font-weight:700; font-size:14px; color:#0041FF; letter-spacing:-0.3px;">올리기</span></div>
+    <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px;">내 조황</span></div><span class="tap" onClick="{{ go_catchReg }}" style="font-weight:700; font-size:14px; color:#0041FF; letter-spacing:-0.3px;">올리기</span></div>
     <div style="padding:14px 18px 0; display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px;">
       <sc-for list="{{ catches }}" as="c" hint-placeholder-count="9">
         <div class="tap" onClick="{{ noop }}" style="position:relative; aspect-ratio:1; border-radius:10px; background:#E9ECF1; overflow:hidden;"><span style="position:absolute; left:7px; bottom:7px; height:21px; padding:0 7px; border-radius:5px; background:rgba(30,32,40,.78); color:#fff; font-weight:600; font-size:11px; display:flex; align-items:center;">{{ c }}</span></div>
@@ -207,7 +189,19 @@
   <!-- ================= 쿠폰함 ================= -->
   <sc-if value="{{ isCoupon }}" hint-placeholder-val="{{ false }}">
   <div>
-    <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px;">쿠폰함</span></div><span class="tap" onClick="{{ noop }}" style="font-weight:700; font-size:14px; color:#0041FF; letter-spacing:-0.3px;">코드 입력</span></div>
+    <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px;">쿠폰함</span></div><span class="tap" onClick="{{ openCouponReg }}" style="font-weight:700; font-size:14px; color:#0041FF; letter-spacing:-0.3px;">코드 입력</span></div>
+    <sc-if value="{{ couponRegOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; inset:0; z-index:80;">
+      <div class="tap" onClick="{{ closeCouponReg }}" style="position:absolute; inset:0; background:rgba(0,0,0,.5);"></div>
+      <div style="position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:22px 22px 0 0; padding:14px 20px 26px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;"><span style="font-weight:800; font-size:17px; color:#191919; letter-spacing:-0.4px;">쿠폰 등록</span><div class="tap" onClick="{{ closeCouponReg }}" style="width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div>
+        <div style="font-weight:700; font-size:13px; color:#767676; margin-bottom:9px;">쿠폰 코드</div>
+        <div style="display:flex; gap:9px;"><div style="flex:1; height:52px; border-radius:11px; background:#F5F6F8; display:flex; align-items:center; padding:0 15px; font-weight:500; font-size:15px; color:#BBB;">코드를 입력하세요</div><div class="tap" onClick="{{ noop }}" style="width:82px; height:52px; border-radius:11px; background:#EEF0F3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#555;">붙여넣기</div></div>
+        <div style="margin-top:14px; border-radius:12px; background:#EEF3FF; padding:14px 16px;"><div style="font-weight:700; font-size:12.5px; color:#0041FF;">쿠폰 등록 안내</div><div style="margin-top:7px; font-weight:500; font-size:12px; line-height:1.7; color:#5570A8;">· 코드는 대소문자를 구분합니다<br>· 등록한 쿠폰은 쿠폰함에서 확인할 수 있어요</div></div>
+        <div class="tap" onClick="{{ closeCouponReg }}" style="margin-top:16px; height:52px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">쿠폰 등록</div>
+      </div>
+    </div>
+    </sc-if>
     <div style="display:flex; padding:0 8px; border-bottom:1px solid #F0F0F0;">
       <sc-for list="{{ couponTabs }}" as="t" hint-placeholder-count="3">
         <div class="tap" onClick="{{ t.onClick }}" style="flex:1; height:46px; display:flex; align-items:center; justify-content:center; gap:5px; border-bottom:2px solid {{ t.line }};"><span style="font-weight:{{ t.weight }}; font-size:14px; color:{{ t.color }}; letter-spacing:-0.3px;">{{ t.label }}</span><span style="font-weight:700; font-size:12px; color:{{ t.numColor }};">{{ t.num }}</span></div>
@@ -344,23 +338,21 @@
 
   <!-- 회원 탈퇴 -->
   <sc-if value="{{ isWithdraw }}" hint-placeholder-val="{{ false }}">
-  <div>
-    <div style="height:50px; display:flex; align-items:center; padding:0 18px; gap:10px;"><div class="tap" onClick="{{ go_profile }}" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800;font-size:18px;color:#191919;letter-spacing:-0.5px;">회원 탈퇴</span></div>
-    <div style="padding:18px 24px 0;">
-      <div style="font-weight:800;font-size:22px;line-height:1.34;letter-spacing:-0.6px;color:#191919;">잠깐만요, 이 혜택을<br>정말 포기하시겠어요?</div>
-      <div style="margin-top:11px;font-weight:500;font-size:14px;color:#767676;letter-spacing:-0.4px;">탈퇴하면 아래 내역이 모두 삭제되고 되살릴 수 없어요.</div>
-      <div style="margin-top:20px;border-radius:14px;background:#F8F8F8;padding:18px;display:flex;flex-direction:column;gap:13px;">
-        <sc-for list="{{ withdrawLoss }}" as="w" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:9px;"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8 L12 8" stroke="#EE0005" stroke-width="2" stroke-linecap="round"></path></svg><span style="flex:1;font-weight:500;font-size:13.5px;color:#555;letter-spacing:-0.3px;">{{ w }}</span></div></sc-for>
-      </div>
-      <div style="margin-top:24px;font-weight:700;font-size:14px;color:#191919;letter-spacing:-0.4px;">떠나시는 이유를 알려주세요 <span style="font-weight:500;color:#AAA;">(복수 선택)</span></div>
-      <div style="margin-top:12px;display:flex;flex-direction:column;gap:2px;">
-        <sc-for list="{{ withdrawReasons }}" as="r" hint-placeholder-count="6"><div class="tap" onClick="{{ r.toggle }}" style="display:flex;align-items:center;gap:11px;padding:11px 2px;"><div style="width:22px;height:22px;border-radius:6px;border:1.6px solid {{ r.border }};background:{{ r.fill }};display:flex;align-items:center;justify-content:center;flex:none;"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.5 7.2 5.8 10.5 11.5 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="flex:1;font-weight:500;font-size:14px;color:#363636;letter-spacing:-0.3px;">{{ r.label }}</span></div></sc-for>
-      </div>
-      <div style="margin-top:8px;height:88px;border-radius:12px;background:#F5F6F8;padding:13px 14px;font-weight:500;font-size:13px;color:#AAA;line-height:1.55;">개선했으면 하는 점을 자유롭게 적어주세요. 소중한 의견으로 더 나아질게요.</div>
+  <div style="display:flex; flex-direction:column; min-height:802px;">
+    <div style="height:52px; display:flex; align-items:center; padding:0 12px;"><div class="tap" onClick="{{ go_profile }}" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    <div style="padding:8px 24px 0; flex:1;">
+      <div style="font-weight:800;font-size:21px;line-height:1.42;letter-spacing:-0.5px;color:#191919;">이용에 불편을 드려 죄송합니다.<br>소중한 정보를 토대로 개선해 볼게요.</div>
+      <div class="tap" onClick="{{ toggleWdCat }}" style="margin-top:28px; height:58px; border:1px solid {{ wdCatBorder }}; border-radius:14px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; gap:10px;"><span style="font-weight:500; font-size:16px; color:{{ wdCatColor }}; letter-spacing:-0.4px; white-space:nowrap;">{{ wdCatLabel }}</span><svg width="17" height="10" viewBox="0 0 18 11" style="transform:rotate({{ wdCatRot }}); transition:transform .2s;"><path d="M1 1 9 9 17 1" fill="none" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <sc-if value="{{ wdCatOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:8px; border:1px solid #EEE; border-radius:14px; overflow:hidden;"><sc-for list="{{ wdCats }}" as="c" hint-placeholder-count="8"><div class="tap" onClick="{{ c.onClick }}" style="height:48px; display:flex; align-items:center; padding:0 18px; background:{{ c.bg }}; border-bottom:1px solid #F4F4F4;"><span style="font-weight:{{ c.weight }}; font-size:15px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</span></div></sc-for></div>
+      </sc-if>
+      <sc-if value="{{ wdHasReasons }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:14px; display:flex; flex-direction:column;"><sc-for list="{{ wdReasons }}" as="r" hint-placeholder-count="5"><div class="tap" onClick="{{ r.onClick }}" style="display:flex; align-items:flex-start; gap:12px; padding:13px 2px;"><div style="width:24px; height:24px; border-radius:50%; border:2px solid {{ r.ring }}; background:{{ r.fill }}; display:flex; align-items:center; justify-content:center; flex:none; margin-top:1px;"><div style="width:8px; height:8px; border-radius:50%; background:{{ r.dot }};"></div></div><span style="flex:1; font-weight:500; font-size:15px; line-height:1.4; color:#363636; letter-spacing:-0.3px;">{{ r.label }}</span></div><sc-if value="{{ r.showInput }}" hint-placeholder-val="{{ false }}"><div style="margin:2px 2px 8px; height:96px; border:1px solid #E5E5E5; border-radius:12px; padding:14px; font-weight:500; font-size:14px; color:#BBB; line-height:1.5;">자세한 이유를 알려주실 수 있을까요?</div></sc-if></sc-for></div>
+      </sc-if>
     </div>
     <div style="position:sticky;bottom:0;background:#fff;padding:14px 18px;display:flex;gap:10px;border-top:1px solid #EEE;">
-      <div class="tap" onClick="{{ go_profile }}" style="flex:1;height:52px;border-radius:1000px;background:#0041FF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;">계속 이용하기</div>
-      <div class="tap" onClick="{{ confirmWithdraw }}" style="width:120px;height:52px;border-radius:1000px;background:#F3F3F3;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#AAA;">탈퇴하기</div>
+      <div class="tap" onClick="{{ go_profile }}" style="width:150px;height:54px;border-radius:1000px;background:#F3F3F3;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#555;">탈퇴 취소</div>
+      <div class="tap" onClick="{{ confirmWithdraw }}" style="flex:1;height:54px;border-radius:1000px;background:{{ wdNextBg }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;">다음으로</div>
     </div>
   </div>
   </sc-if>
@@ -415,11 +407,11 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mypage&quot;,&quot;reserv&quot;,&quot;catch&quot;,&quot;wish&quot;,&quot;coupon&quot;,&quot;noti&quot;,&quot;faq&quot;,&quot;interest&quot;,&quot;profile&quot;],&quot;default&quot;:&quot;mypage&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mypage&quot;,&quot;reserv&quot;,&quot;reserv_done&quot;,&quot;reserv_cancel&quot;,&quot;catch&quot;,&quot;wish&quot;,&quot;coupon&quot;,&quot;coupon_reg&quot;,&quot;noti&quot;,&quot;faq&quot;,&quot;interest&quot;,&quot;profile&quot;,&quot;withdraw&quot;,&quot;withdraw_0&quot;,&quot;withdraw_1&quot;,&quot;withdraw_2&quot;,&quot;withdraw_3&quot;,&quot;withdraw_4&quot;,&quot;withdraw_5&quot;,&quot;withdraw_6&quot;,&quot;withdraw_7&quot;],&quot;default&quot;:&quot;mypage&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = {
     screen: null,
-    reservTab: "예정", couponTab: "사용가능", wdr:{},
+    reservTab: "예정", couponTab: "사용가능", wdr:{}, wdCat:-1, wdReason:-1, wdCatOpen:false,
     noti: { m0:true, a0:true,a1:true,a2:true, b0:true,b1:true,b2:false, c0:true,c1:false,c2:true },
     faqOpen: -1,
     fish: { "우럭":true,"갈치":true,"광어":true,"참돔":false,"감성돔":false,"주꾸미":false,"볼락":false },
@@ -428,15 +420,31 @@ class Component extends DCLogic {
   };
   get screen(){ return this.state.screen || this.props.screen || "mypage"; }
   set(s){ return () => this.setState({ screen:s }); }
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+
+  WCATS = ["예약·출조","상품·주문배송","이벤트·혜택","지도·날씨","알림·마케팅","보상·회원혜택","커뮤니티·회원","오류·이용경험"];
+  WREASONS = [
+    ["원하는 선박·지역이 없어요","예약·결제 과정이 너무 번거로워요","가격·수수료가 비싸요","잔여석·실시간 정보가 부정확해요","직접 입력"],
+    ["상품 필터·검색 기능이 불편해요","상품 상세가 너무 작거나 안 보여요","장바구니에 담은 상품이 자꾸 없어져요","주문 과정이 번거롭고 불편해요","배송 현황을 확인하기 어려워요","직접 입력"],
+    ["특정 유저만 보상받는 것 같아요","이벤트 당첨자 선정이 투명하지 않아요","이벤트 공지가 느리거나 불명확해요","흥미로운 이벤트·챌린지가 없어요","이벤트 보상이 매력적이지 않아요","직접 입력"],
+    ["지도에서 원하는 포인트를 찾기 어려워요","날씨·물때 정보가 다른 서비스보다 부정확해요","지도 조작 방법이 어려워요","직접 입력"],
+    ["알림을 꺼도 계속 알림이 와요","앱 내 광고 요소가 너무 많아요","푸시 메시지가 너무 많이 와요","직접 입력"],
+    ["혜택의 유효기간이 너무 짧아요","보상 내용을 확인하기 어려워요","어바웃피싱 머니를 모으기 어렵고 오래 걸려요","전반적으로 혜택이 부족해요","직접 입력"],
+    ["나에게 유용한 정보가 없어요","초보자를 위한 정보가 부족해요","활동하는 회원이 너무 적어요","내가 작성한 글에 반응이 없어요","비매너 회원을 만났어요","직접 입력"],
+    ["앱 속도가 너무 느려요","사용 권한(위치·카메라) 허용을 반복적으로 받아요","앱이 자주 꺼지거나 실행되지 않아요","갑자기 로그아웃되는 경우가 많아요","알 수 없는 오류가 자주 발생해요","고객 응대가 불친절해요","글자가 너무 작아요","직접 입력"],
+  ];
 
   renderVals(){
-    const sc = this.screen;
+    const raw = this.screen;
+    const wdForce = (typeof raw==="string" && /^withdraw_\d+$/.test(raw)) ? parseInt(raw.split("_")[1]) : null;
+    const sc = raw==="reserv_done"||raw==="reserv_cancel" ? "reserv" : (wdForce!=null ? "withdraw" : (raw==="coupon_reg" ? "coupon" : raw));
+    const wdCatEff = wdForce!=null ? wdForce : this.state.wdCat;
+    const reservTab = raw==="reserv_done" ? "완료" : raw==="reserv_cancel" ? "취소" : this.state.reservTab;
     const S = (k)=> sc===k;
     const badge = (text,bg,color)=>({hasBadge:true,badge:text,badgeBg:bg,badgeColor:color});
 
     const reservTabs = [["예정","2"],["완료","12"],["취소","1"]].map(([label,num])=>{
-      const on = this.state.reservTab===label;
+      const on = reservTab===label;
       return { label, num, onClick:()=>this.setState({reservTab:label}), line:on?"#191919":"transparent", weight:on?700:500, color:on?"#191919":"#AAA", numColor:on?"#191919":"#CCC" };
     });
     const couponTabs = [["사용가능","3"],["사용완료","5"],["만료","2"]].map(([label,num])=>{
@@ -473,8 +481,8 @@ class Component extends DCLogic {
       isMain:S("mypage"), isReserv:S("reserv"), isCatch:S("catch"), isWish:S("wish"),
       isCoupon:S("coupon"), isNoti:S("noti"), isFaq:S("faq"), isInterest:S("interest"), isProfile:S("profile"), isLevel:S("level"),
       go_level:this.set("level"),
-      go_cancel:this.nav("cancel"), go_review:this.nav("review"),
-      rtUpcoming:this.state.reservTab==="예정", rtDone:this.state.reservTab==="완료", rtCancel:this.state.reservTab==="취소",
+      go_cancel:this.nav("cancel"), go_review:this.nav("review"), go_catchReg:this.nav("catch_register"),
+      rtUpcoming:reservTab==="예정", rtDone:reservTab==="완료", rtCancel:reservTab==="취소",
       expRules:[{pt:"+10",label:"출조 1회 완료"},{pt:"+5",label:"조황 사진 등록"},{pt:"+3",label:"출조 후기 작성"},{pt:"+2",label:"친구 매너 평가"}],
       levelTiers:[
         { lv:"Lv.1", name:"새내기", req:"EXP 0 · 가입 즉시", now:false, bg:"#F8F8F8", border:"none", perks:[{t:"5,000원 첫 예약 쿠폰",d:"가입 즉시 자동 발급 · 30일 사용"},{t:"출조 가이드 무료",d:"초보용 PDF 가이드북 다운로드"}] },
@@ -488,8 +496,17 @@ class Component extends DCLogic {
       isWithdraw:S("withdraw"), isWithdrawDone:S("withdraw_done"), isInvite:this.state.invite, isPay:S("payment"),
       go_pay:this.set("payment"),
       payMethods:[{label:"카카오페이",mark:"K",bg:"#FEE500",state:"연결됨",color:"#1F8A5B"},{label:"네이버페이",mark:"N",bg:"#03C75A",state:"연결",color:"#999"},{label:"토스페이",mark:"t",bg:"#0064FF",state:"연결",color:"#999"}],
-      withdrawLoss:["Lv.3 단골 등급과 누적 출조 기록","보유 머니 12,400원","사용 가능한 쿠폰 5장","작성한 출조 후기와 조황"],
-      withdrawReasons:["원하는 선박·지역이 없어요","예약·결제가 불편해요","가격·수수료가 비싸요","사용 빈도가 낮아요","알림이 너무 많아요","기타"].map((label,i)=>{ const on=!!this.state.wdr[i]; return { label, border:on?"#0041FF":"#CFCFCF", fill:on?"#0041FF":"#fff", toggle:()=>this.setState(st=>{const m=Object.assign({},st.wdr);m[i]=!m[i];return {wdr:m};}) }; }),
+      withdrawLoss:["누적 출조 기록","사용 가능한 쿠폰 5장","작성한 출조 후기와 조황"],
+      toggleWdCat: ()=>this.setState(st=>({wdCatOpen:!st.wdCatOpen})),
+      wdCatOpen: this.state.wdCatOpen,
+      wdCatLabel: wdCatEff>=0 ? this.WCATS[wdCatEff] : "탈퇴사유를 선택해 주세요.",
+      wdCatColor: wdCatEff>=0 ? "#191919" : "#AAA",
+      wdCatBorder: this.state.wdCatOpen ? "#0041FF" : "#E0E0E0",
+      wdCatRot: this.state.wdCatOpen ? "180deg" : "0deg",
+      wdCats: this.WCATS.map((label,i)=>({ label, onClick:()=>this.setState({wdCat:i,wdReason:-1,wdCatOpen:false}), bg:i===wdCatEff?"#F5F8FF":"#fff", color:i===wdCatEff?"#0041FF":"#363636", weight:i===wdCatEff?700:500 })),
+      wdHasReasons: wdCatEff>=0,
+      wdReasons: (wdCatEff>=0 ? this.WREASONS[wdCatEff] : []).map((label,i)=>{ const on=this.state.wdReason===i; return { label, ring:on?"#0041FF":"#CFCFCF", fill:on?"#0041FF":"#fff", dot:on?"#fff":"transparent", onClick:()=>this.setState({wdReason:i}), showInput: on && label==="직접 입력" }; }),
+      wdNextBg: this.state.wdReason>=0 ? "#191919" : "#D5D5D5",
       go_login:this.nav("auth_login"), go_withdraw:this.set("withdraw"), confirmWithdraw:this.set("withdraw_done"), closeInvite:()=>this.setState({invite:false}),
       back: this.set("mypage"),
       noop: this.nav("noop"),
@@ -502,7 +519,7 @@ class Component extends DCLogic {
         Object.assign({ label:"내 조황", onClick:this.set("catch") }, badge("후기 1","#F2F2F2","#888")),
         Object.assign({ label:"찜한 선박", onClick:this.set("wish") }, badge("3","#F2F2F2","#888")),
         { label:"관심낚시 설정", onClick:this.set("interest"), hasBadge:false },
-        { label:"친구 초대 · 양쪽 5,000원", onClick:()=>this.setState({invite:true}), hasBadge:false },
+        { label:"친구 초대", onClick:()=>this.setState({invite:true}), hasBadge:false },
       ],
       settings: [
         { label:"결제수단 관리", onClick:this.set("payment"), hasBadge:true, badge:"2" },
@@ -512,6 +529,9 @@ class Component extends DCLogic {
       ],
 
       reservTabs, couponTabs, notiGroups, faqs, fishChips, regionChips, levels,
+      couponRegOpen: !!this.state.couponRegOpen || raw==="coupon_reg",
+      openCouponReg: ()=>this.setState({couponRegOpen:true}),
+      closeCouponReg: ()=>this.setState({couponRegOpen:false}),
       cpEmpty: false,
       coupons: (this.state.couponTab==="사용완료") ? [
         { value:"5,000원", title:"첫 예약 환영 쿠폰", desc:"블랙이글호 예약에 사용", exp:"2026.04.20 사용", border:"#EEE", bg:"#FAFAFB", op:"0.7", valColor:"#999", expColor:"#AAA", stamp:"사용완료" },

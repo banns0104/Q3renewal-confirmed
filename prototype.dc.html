@@ -11,6 +11,8 @@
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
 <link rel="stylesheet" href="./scr/home/fig-tokens.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-tokens.css">
+<link rel="stylesheet" href="./scr/chuljohome/fig-assets.css">
 <link rel="stylesheet" href="./scr/splash/fig-assets.css">
 <link rel="stylesheet" href="./scr/home/fig-assets.css">
 <link rel="stylesheet" href="./scr/reserve_list/fig-assets.css">
@@ -71,14 +73,14 @@
             <sc-if value="{{ v_perm_location }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="location" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_perm_notification }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="notification" hint-size="393,852"></dc-import></sc-if>
 
-            <sc-if value="{{ v_home }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AFHome" from="./scr/home/Components.bundle.js" hint-size="393,3000"></x-import></sc-if>
             <sc-if value="{{ v_news_b }}" hint-placeholder-val="{{ false }}"><dc-import name="News" hint-size="393,1600"></dc-import></sc-if>
-            <sc-if value="{{ v_reserve_list }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AFReserveList" from="./scr/reserve_list/Components.bundle.js" hint-size="393,3000"></x-import></sc-if>
+            <sc-if value="{{ v_reserve_list }}" hint-placeholder-val="{{ false }}"><div style="position:relative; content-visibility:auto; contain-intrinsic-size:393px 8516px; overflow:hidden; height:8516px;"><x-import component-from-global-scope="Screen" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import><div data-route="search" style="position:absolute; left:14px; right:14px; top:474px; height:62px; z-index:6; cursor:pointer;"></div></div></sc-if>
             <sc-if value="{{ v_map }}" hint-placeholder-val="{{ false }}"><dc-import name="Map" hint-size="393,852"></dc-import></sc-if>
-            <sc-if value="{{ v_search }}" hint-placeholder-val="{{ false }}"><dc-import name="Search" hint-size="393,1200"></dc-import></sc-if>
+            <sc-if value="{{ v_search }}" hint-placeholder-val="{{ false }}"><dc-import name="Search" screen="empty" hint-size="393,1200"></dc-import></sc-if>
 
             <sc-if value="{{ v_my }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="{{ mySub }}" key="{{ myKey }}" hint-size="393,1400"></dc-import></sc-if>
             <sc-if value="{{ v_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></sc-if>
+            <sc-if value="{{ v_catch_register }}" hint-placeholder-val="{{ false }}"><dc-import name="Catch" screen="pin" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_notif }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_notice }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_event }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></sc-if>
@@ -140,26 +142,40 @@
       </div>
     </div>
     <div style="margin-top:14px; text-align:center; font-weight:600; font-size:12px; color:#AAA; letter-spacing:-0.3px;">{{ currentLabel }}</div>
+    <sc-if value="{{ hasUserChips }}" hint-placeholder-val="{{ false }}">
+    <div style="margin:12px auto 0; width:411px; background:#fff; border-radius:14px; padding:12px 14px; box-shadow:0 6px 24px rgba(20,22,30,.1);">
+      <div style="font-weight:700; font-size:11px; color:#6433DF; letter-spacing:0.2px; margin-bottom:9px;">🔗 레이아웃에서 연결한 화면</div>
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <sc-for list="{{ userChips }}" as="u" hint-placeholder-count="0">
+          <div class="tab-btn" onClick="{{ u.onClick }}" style="display:flex; align-items:center; gap:8px; padding:8px 11px; border-radius:9px; background:#F4F1FC; cursor:pointer;">
+            <span style="height:20px; padding:0 8px; border-radius:1000px; background:#6433DF; color:#fff; font-weight:700; font-size:10.5px; display:flex; align-items:center; white-space:nowrap;">{{ u.label }}</span>
+            <span style="flex:1; font-weight:600; font-size:12.5px; color:#363636; letter-spacing:-0.3px;">→ {{ u.to }}</span>
+            <svg width="6" height="11" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#9A8DC4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { view:"splash", mySub:"mypage", myKey:0, hist:[] };
+  state = { view:"splash", mySub:"mypage", myKey:0, hist:[], userConns:[] };
   _scroll = null; _phone = null;
 
-  EXTRACTED = ["home","reserve_list"];
-  TAB_VIEWS = ["home","news_b","reserve_list","map","search","my"];
+  EXTRACTED = ["reserve_list"];
+  TAB_VIEWS = ["news_b","reserve_list","map","search","my"];
   MY_SUBS = ["mypage","reserv","catch","wish","coupon","noti","faq","interest","profile"];
 
   SCREENS = [
-    { key:"home", label:"통합홈 (출조탭 홈)", group:"메인 화면" },
     { key:"news_b", label:"새소식", group:"메인 화면" },
     { key:"map", label:"탐색 지도", group:"메인 화면" },
     { key:"search", label:"통합검색", group:"메인 화면" },
-    { key:"reserve_list", label:"선박 리스트", group:"메인 화면" },
+    { key:"reserve_list", label:"출조 (통합홈)", group:"메인 화면" },
 
     { key:"detail", label:"예약 상세", group:"서브페이지" },
+    { key:"catch_register", label:"조황 등록(핀)", group:"서브페이지" },
     { key:"notif", label:"알림", group:"서브페이지" },
     { key:"news_notice", label:"공지사항", group:"서브페이지" },
     { key:"news_event", label:"이벤트", group:"서브페이지" },
@@ -245,6 +261,10 @@ class Component extends DCLogic {
   }
   routeFor(view, j){
     if(/찾아보세요|검색|돋보기/.test(j)) return "search";
+    if(/이벤트|챔피언십|기획전|쿠폰|혜택/.test(j)) return "news_event";
+    if(/공지/.test(j)) return "news_notice";
+    if(/포인트맵|포인트 맵|지도/.test(j)) return "map";
+    if(/조황/.test(j)) return "catch_register";
     if(view==="map" || view==="pointmap") return null;
     if(view==="shop") return "cart";
     return "detail";
@@ -254,6 +274,7 @@ class Component extends DCLogic {
     this.ripple(e.clientX, e.clientY);
     const routed = e.target.closest && e.target.closest("[data-route]");
     if(routed){ this.go(routed.getAttribute("data-route"), "mypage"); return; }
+    if(this.state.view==="splash"){ clearTimeout(this._t); this.go("perm_intro","mypage"); return; }
     if(!this.EXTRACTED.includes(this.state.view)) return;
     const r = this.routeFor(this.state.view, this.namePath(e));
     if(r) this.go(r, "mypage");
@@ -282,6 +303,9 @@ class Component extends DCLogic {
     if(this._phone) this._phone.addEventListener("click", this.onClick, false);
     if(this._scroll) this._scroll.addEventListener("scroll", this.onScroll, { passive:true });
     this._t = setTimeout(()=>{ if(this.state.view==="splash") this.go("perm_intro","mypage"); }, 2000);
+    try{ this.setState({userConns: JSON.parse(localStorage.getItem("af_connections")||"[]")}); }catch(e){}
+    this._csync=(e)=>{ if(!e || e.key==="af_connections"){ try{ this.setState({userConns: JSON.parse(localStorage.getItem("af_connections")||"[]")}); }catch(x){} } };
+    window.addEventListener("storage", this._csync);
     this.scheduleEnhance();
   }
   componentWillUnmount(){
@@ -294,7 +318,7 @@ class Component extends DCLogic {
     const view = this.state.view;
     const ACT = "#191919", IDLE = "#AEAEB6";
     const out = {};
-    this.EXTRACTED.concat(["splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","review","chat","cancel","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
+    this.EXTRACTED.concat(["catch_register","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","review","chat","cancel","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
 
     out.mySub = this.state.mySub; out.myKey = this.state.myKey; out.fadeKey = view+"_"+this.state.myKey;
 
@@ -317,7 +341,7 @@ class Component extends DCLogic {
     const newsOn = (view==="news_b");
     out.goNews = this.setView("news_b"); out.newsC = newsOn?ACT:IDLE; out.newsW = newsOn?700:600;
     out.goExplore = this.setView("map"); out.exploreC = view==="map"?ACT:IDLE; out.exploreW = view==="map"?700:600;
-    out.goChuljo = this.setView("home"); out.chuljoC = view==="home"?ACT:IDLE; out.chuljoW = view==="home"?700:600;
+    out.goChuljo = this.setView("reserve_list"); out.chuljoC = view==="reserve_list"?ACT:IDLE; out.chuljoW = view==="reserve_list"?700:600;
     out.goMy = this.setMy("mypage"); out.profRing = (view==="my"?"2.5px":"0px");
     out.goNotif = this.setView("notif");
 
@@ -327,6 +351,11 @@ class Component extends DCLogic {
     const cur = this.SCREENS.find(s=> s.my!=null ? (view==="my"&&this.state.mySub===s.my) : s.key===view);
     out.currentLabel = cur ? cur.label : (view==="my" ? "마이페이지" : "");
     out.scrollRef = this.scrollRef; out.phoneRef = this.phoneRef; out.overlayRef = this.overlayRef;
+    const _norm=s=>String(s||"").replace(/\([^)]*\)/g,"").replace(/[·∙\/\s]/g,"").toLowerCase();
+    const _nc=_norm(out.currentLabel);
+    const _mapView=(label)=>{ const n=_norm(label); if(!n) return null; for(const s of this.SCREENS){ const sn=_norm(s.label); if(sn && (sn===n || sn.indexOf(n)>=0 || n.indexOf(sn)>=0)){ return s.my!=null?["my",s.my]:[s.key,"mypage"]; } } return null; };
+    const _uc=(this.state.userConns||[]).filter(c=>{ if(!c||!c.from) return false; const fn=_norm(c.from); return fn && _nc && (fn===_nc || fn.indexOf(_nc)>=0 || _nc.indexOf(fn)>=0); }).map(c=>{ const t=_mapView(c.to); return t?{ label:c.label||"탭", to:c.to, onClick:()=>this.go(t[0],t[1]) }:null; }).filter(Boolean);
+    out.userChips=_uc; out.hasUserChips=_uc.length>0;
     return out;
   }
 }

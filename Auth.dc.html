@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
   .af-auth *{ box-sizing:border-box; }
   .af-auth{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -83,14 +82,19 @@
 
       <sc-if value="{{ codeSent }}" hint-placeholder-val="{{ false }}">
       <div style="margin-top:24px; font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.4px;">인증번호</div>
-      <div style="margin-top:9px; height:50px; border:1px solid #E0E0E0; border-radius:10px; display:flex; align-items:center; justify-content:space-between; padding:0 15px;">
-        <span style="font-weight:600; font-size:16px; color:#191919; letter-spacing:4px;">••••••</span>
+      <div style="margin-top:9px; height:50px; border:1px solid {{ codeBorder }}; border-radius:10px; display:flex; align-items:center; justify-content:space-between; padding:0 15px;">
+        <span style="font-weight:600; font-size:16px; color:{{ codeDigitColor }}; letter-spacing:4px;">••••••</span>
         <div style="display:flex; align-items:center; gap:12px;">
           <span style="font-weight:600; font-size:14px; color:#EE0005; letter-spacing:-0.2px;">2:58</span>
           <span style="font-weight:500; font-size:13px; color:#999; letter-spacing:-0.4px; text-decoration:underline; text-underline-offset:2px;">재전송</span>
         </div>
       </div>
+      <sc-if value="{{ codeError }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:9px; display:flex; align-items:center; gap:5px;"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.2" fill="none" stroke="#EE0005" stroke-width="1.3"></circle><path d="M7 3.8 L7 7.6" stroke="#EE0005" stroke-width="1.4" stroke-linecap="round"></path><circle cx="7" cy="10" r="0.85" fill="#EE0005"></circle></svg><span style="font-weight:500; font-size:12.5px; color:#EE0005; letter-spacing:-0.3px;">인증번호가 일치하지 않아요. 다시 확인해주세요.</span></div>
+      </sc-if>
+      <sc-if value="{{ codeOk }}" hint-placeholder-val="{{ true }}">
       <div style="margin-top:10px; font-weight:400; font-size:12.5px; color:#999; letter-spacing:-0.4px;">*문자로 받은 6자리 인증번호를 입력해주세요.</div>
+      </sc-if>
       </sc-if>
     </div>
     <div style="padding:0 18px 28px;">
@@ -242,7 +246,7 @@
   <div style="position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:134px; height:5px; border-radius:3px; background:#191919;"></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;start&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;kakao&quot;,&quot;naver&quot;,&quot;phone&quot;,&quot;phonecode&quot;,&quot;terms&quot;,&quot;termsagreed&quot;,&quot;termsdetail&quot;,&quot;onboarding&quot;],&quot;default&quot;:&quot;login&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;start&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;kakao&quot;,&quot;naver&quot;,&quot;phone&quot;,&quot;phonecode&quot;,&quot;phonecode_error&quot;,&quot;terms&quot;,&quot;termsagreed&quot;,&quot;termsdetail&quot;,&quot;onboarding&quot;],&quot;default&quot;:&quot;login&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = {
     step: null,
@@ -257,6 +261,7 @@ class Component extends DCLogic {
   effStep(){
     const s = this.step;
     if(s==="phonecode") return "phone";
+    if(s==="phonecode_error") return "phone";
     if(s==="termsagreed") return "terms";
     if(s==="termsdetail") return "termsdetail";
     return s;
@@ -291,7 +296,8 @@ class Component extends DCLogic {
 
   renderVals(){
     const step = this.effStep();
-    const forceCode = this.step==="phonecode";
+    const forceCode = this.step==="phonecode" || this.step==="phonecode_error";
+    const codeError = this.step==="phonecode_error";
     const forceAgree = this.step==="termsagreed";
     const codeSent = this.state.codeSent || forceCode;
     const termsArr = (this._touched || !forceAgree) ? this.state.terms : [true,true,true,true];
@@ -307,6 +313,9 @@ class Component extends DCLogic {
       isTermsDetail: step === "termsdetail",
       isOnboard: step === "onboarding",
       codeSent,
+      codeError, codeOk: !codeError,
+      codeBorder: codeError ? "#EE0005" : "#E0E0E0",
+      codeDigitColor: codeError ? "#EE0005" : "#191919",
       phoneTitle: codeSent ? "인증번호를\n입력해주세요" : "휴대폰 번호를\n입력해주세요",
       phoneDesc: codeSent ? "문자로 받은 6자리 인증번호를 입력해주세요." : "본인 확인을 위해 인증이 필요해요.",
 
@@ -316,7 +325,7 @@ class Component extends DCLogic {
       goPhone: this.go("phone"),
       goTerms: this.go("terms"),
       goOnboard: this.go("onboarding"),
-      goHome: () => { window.parent && window.parent.postMessage({ type:"af-nav", to:"home" }, "*"); this.setState({ step:"login" }); },
+      goHome: () => { window.postMessage({ type:"af-nav", to:"home" }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to:"home" }, "*"); this.setState({ step:"login" }); },
       requestCode: () => this.setState({ codeSent: true }),
 
       phoneCtaBg: codeSent ? "#0041FF" : "#F3F3F3",

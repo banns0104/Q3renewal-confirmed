@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>.af-rv *{box-sizing:border-box;} .af-rv{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;} .tap{cursor:pointer;transition:transform .1s ease;} .tap:active{transform:scale(.99);} .cell{height:38px;display:flex;align-items:center;justify-content:center;font-size:13.5px;border-radius:9px;}</style>
 </helmet>
 <div class="af-rv" style="width:393px; min-height:852px; background:#fff; position:relative;">
@@ -17,6 +16,31 @@
     <span style="font-family:'SF Pro Display',sans-serif; font-weight:600; font-size:16px; color:#191919;">8:00</span>
     <div style="display:flex; align-items:center; gap:6px;"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#191919"><rect x="0" y="7" width="3" height="5" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></g></svg><span style="font-weight:600; font-size:14px; color:#191919;">5G</span><div style="width:24px; height:12px; border:1.4px solid #191919; border-radius:3px; position:relative; opacity:.85;"><div style="position:absolute; left:1.6px; top:1.6px; bottom:1.6px; width:15px; background:#191919; border-radius:1px;"></div></div></div>
   </div>
+
+  <!-- 출조탭 선박 리스트 -->
+  <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 20px 0;"><div style="display:flex; align-items:baseline; gap:2px;"><span style="font-weight:800; font-size:22px; color:#191919; letter-spacing:-0.6px;">출조</span><span style="width:5px; height:5px; border-radius:50%; background:#0041FF;"></span></div><div style="display:flex; gap:15px;"><svg class="tap" width="23" height="23" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="#191919" stroke-width="1.8"></circle><path d="M16 16 20 20" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div>
+    <div style="display:flex; gap:20px; padding:14px 20px 0;"><sc-for list="{{ subTabs }}" as="t" hint-placeholder-count="3"><span class="tap" style="font-weight:{{ t.weight }}; font-size:16px; color:{{ t.color }}; letter-spacing:-0.4px;">{{ t.label }}</span></sc-for></div>
+    <div style="margin-top:14px; display:flex; gap:7px; padding:0 20px 12px; overflow-x:auto; border-bottom:1px solid #F2F2F2;"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><div class="tap" style="height:34px; padding:0 13px; border-radius:1000px; border:1px solid {{ f.border }}; background:{{ f.bg }}; display:flex; align-items:center; gap:4px; white-space:nowrap; flex:none;"><span style="font-weight:600; font-size:13px; color:{{ f.color }}; letter-spacing:-0.3px;">{{ f.label }}</span><svg width="9" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="{{ f.color }}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></sc-for></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 20px 4px;"><span style="font-weight:600; font-size:13px; color:#767676; letter-spacing:-0.3px;">총 <b style="color:#191919;">128</b>척</span><div class="tap" style="display:flex; align-items:center; gap:4px; font-weight:600; font-size:13px; color:#363636;">추천순 <svg width="9" height="6" viewBox="0 0 10 6"><path d="M1 1 5 5 9 1" fill="none" stroke="#363636" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    <div style="padding:6px 18px 0; display:flex; flex-direction:column; gap:14px;">
+      <sc-for list="{{ boats }}" as="b" hint-placeholder-count="5">
+        <div class="tap" onClick="{{ goDetail }}" style="display:flex; gap:13px; padding-bottom:14px; border-bottom:1px solid #F4F4F4;">
+          <div style="position:relative; width:104px; height:104px; border-radius:13px; background:#E9ECF1; overflow:hidden; flex:none;"><span style="position:absolute; left:0; top:0; height:21px; padding:0 8px; background:{{ b.ribBg }}; color:#fff; font-weight:700; font-size:10px; display:flex; align-items:center; border-radius:0 0 8px 0;">{{ b.rib }}</span><div style="position:absolute; right:7px; bottom:7px; width:26px; height:26px; border-radius:7px; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center;"><svg width="15" height="14" viewBox="0 0 16 15"><path d="M8 13.5C8 13.5 1.5 9.2 1.5 5.3C1.5 3.4 3 2 4.8 2C6 2 7.2 2.7 8 3.9C8.8 2.7 10 2 11.2 2C13 2 14.5 3.4 14.5 5.3C14.5 9.2 8 13.5 8 13.5Z" fill="{{ b.heart }}" stroke="#AAA" stroke-width="1.3" stroke-linejoin="round"></path></svg></div></div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:5px;"><sc-for list="{{ b.badges }}" as="bd" hint-placeholder-count="2"><span style="height:20px; padding:0 7px; border-radius:5px; background:{{ bd.bg }}; color:{{ bd.color }}; font-weight:700; font-size:10px; display:flex; align-items:center;">{{ bd.t }}</span></sc-for></div>
+            <div style="margin-top:6px; font-weight:700; font-size:16px; color:#191919; letter-spacing:-0.4px;">{{ b.name }}</div>
+            <div style="margin-top:3px; font-weight:500; font-size:12px; color:#999; letter-spacing:-0.3px;">{{ b.meta }}</div>
+            <div style="margin-top:7px; display:flex; gap:5px;"><sc-for list="{{ b.tags }}" as="tg" hint-placeholder-count="3"><span style="height:21px; padding:0 8px; border-radius:5px; background:#F3F3F3; color:#767676; font-weight:600; font-size:10.5px; display:flex; align-items:center;">{{ tg }}</span></sc-for></div>
+            <div style="margin-top:8px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:12px; color:{{ b.seatColor }};">{{ b.seat }}</span><span style="font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">{{ b.price }}<span style="font-size:12px; font-weight:600; color:#AAA;">~</span></span></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:30px;"></div>
+  </div>
+  </sc-if>
 
   <!-- 선박 상세 -->
   <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ true }}">
@@ -105,10 +129,10 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;detail&quot;,&quot;reserve&quot;,&quot;pay&quot;,&quot;done&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;list&quot;,&quot;detail&quot;,&quot;reserve&quot;,&quot;pay&quot;,&quot;done&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { screen:null, qty:1, wish:false, agree:false };
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
   set(s){ return ()=> this.setState({ screen:s }); }
 
   cal(sel){
@@ -126,7 +150,16 @@ class Component extends DCLogic {
     const s=this.state.screen || this.props.screen || "detail";
     const dow=[["일","#EE5B49"],["월","#888"],["화","#888"],["수","#888"],["목","#888"],["금","#888"],["토","#3B82F6"]].map(x=>({l:x[0],c:x[1]}));
     return {
-      isDetail:s==="detail", isReserve:s==="reserve", isPay:s==="pay", isDone:s==="done",
+      isDetail:s==="detail", isReserve:s==="reserve", isPay:s==="pay", isDone:s==="done", isList:s==="list",
+      subTabs:["홈","탐색","조황"].map((label,i)=>({label, weight:i===0?700:500, color:i===0?"#191919":"#AAA"})),
+      filters:[{label:"지역"},{label:"어종"},{label:"날짜"},{label:"실시간예약"}].map((f,i)=>({label:f.label, border:i===0?"#0041FF":"#E2E2E2", bg:i===0?"#EEF3FF":"#fff", color:i===0?"#0041FF":"#555"})),
+      boats:[
+        { name:"전투호", meta:"경기 시흥 · 9.77t · 최대 20명", rib:"실시간", ribBg:"#0AD2FF", heart:"none", seat:"잔여 11석", seatColor:"#0041FF", price:"90,000원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"},{t:"보유인증",bg:"#FFF1E9",color:"#FF4C14"}], tags:["광어","우럭"] },
+        { name:"블랙이글호", meta:"인천 중구 홍원항 · 12t · 최대 18명", rib:"실시간", ribBg:"#0AD2FF", heart:"#FF3C3A", seat:"잔여 2석 · 마감 임박", seatColor:"#EE0005", price:"104,500원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"}], tags:["참돔","갈치"] },
+        { name:"만선호", meta:"태안 신진도항 · 9.9t · 최대 16명", rib:"5%", ribBg:"#FF6B2C", heart:"none", seat:"잔여 8석", seatColor:"#999", price:"82,000원", badges:[{t:"전화예약",bg:"#F3F3F3",color:"#767676"}], tags:["우럭","광어","노래미"] },
+        { name:"거제대박호", meta:"거제 장목항 · 15t · 최대 22명", rib:"대회", ribBg:"#6433DF", heart:"none", seat:"잔여 5석", seatColor:"#999", price:"130,000원", badges:[{t:"챔피언십",bg:"#F1EBFF",color:"#6433DF"}], tags:["갈치"] },
+        { name:"청해호", meta:"통영 삼덕항 · 9.77t · 최대 20명", rib:"최저가", ribBg:"#B9E100", heart:"none", seat:"잔여 14석", seatColor:"#999", price:"75,000원", badges:[{t:"실시간예약",bg:"#EEF8FF",color:"#0041FF"}], tags:["볼락","우럭"] },
+      ],
       back:this.nav("back"), noop:this.nav("noop"),
       goDetail:this.set("detail"), goReserve:this.set("reserve"), goPay:this.set("pay"), goDone:this.set("done"),
       goHome:this.nav("home"), goMyReserv:this.nav("reserv"), goReview:this.nav("review"),

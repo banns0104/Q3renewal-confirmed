@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>
   .sysc *{ box-sizing:border-box; }
   .sysc{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -161,6 +160,55 @@ class Component extends DCLogic {
         // 알림톡
         mk({ type:"kakao", situation:"카카오 · 예약 확정", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 예약이 확정되었습니다", desc:"현일님, 예약이 확정되었어요.\n· 블랙이글호 5/24(토) 04:30\n· 홍원항 · 1명 · 90,000원", buttons:[{label:"예약 상세 보기"},{label:"예약 취소"}] }),
         mk({ type:"kakao", situation:"카카오 · 출항 전 안내", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 출항 전 안내드려요", desc:"내일 새벽 출항을 잊지 마세요.\n· 04:30 홍원항 집결\n· 준비물 신분증·멀미약·방한복", buttons:[{label:"길찾기"},{label:"준비물 확인"}] }),
+        // 얼럿 (추가)
+        mk({ type:"alert", situation:"휴대폰 인증 · 번호 불일치", screen:"인증번호 입력 화면", bd:"phone", title:"인증번호가 일치하지 않아요", desc:"번호를 다시 확인하고 입력해주세요. 5회 실패 시 잠시 제한돼요.", buttons:[blue("확인")] }),
+        mk({ type:"alert", situation:"휴대폰 인증 · 시간 만료", screen:"인증번호 입력 화면", bd:"phone", title:"인증 시간이 만료됐어요", desc:"인증번호를 다시 요청해주세요.", buttons:[blue("재전송")] }),
+        mk({ type:"alert", situation:"예약 상세 · 미로그인", screen:"예약 상세 화면", bd:"detail", title:"로그인이 필요해요", desc:"예약하려면 먼저 로그인해주세요.", buttons:[close,blue("로그인")] }),
+        mk({ type:"alert", situation:"결제 · 쿠폰 사용 불가", screen:"결제 화면", bd:"pay", title:"사용할 수 없는 쿠폰이에요", desc:"최소 결제 금액 조건을 확인해주세요.", buttons:[blue("확인")] }),
+        mk({ type:"alert", situation:"카카오 로그인 · 연동 실패", screen:"로그인 화면", bd:"news", title:"카카오 연결에 실패했어요", desc:"잠시 후 다시 시도하거나 다른 방법으로 로그인해주세요.", buttons:[close,blue("다시 시도")] }),
+        mk({ type:"alert", situation:"공통 · 세션 만료", screen:"전체 공통", bd:"news", title:"다시 로그인해주세요", desc:"보안을 위해 로그아웃됐어요. 다시 로그인해주세요.", buttons:[blue("로그인")] }),
+        mk({ type:"alert", situation:"쇼핑 · 재고 소진", screen:"상품 상세 화면", bd:"news", title:"품절된 상품이에요", desc:"재입고 알림을 신청하면 입고 시 알려드려요.", buttons:[close,blue("재입고 알림")] }),
+        // 컴펌 (추가)
+        mk({ type:"confirm", situation:"권한 · 위치 재요청", screen:"탐색(지도) 화면", bd:"map", title:"위치 권한을 켤까요?", desc:"권한을 켜면 내 주변 선박과 길안내를 쓸 수 있어요.", buttons:[cancel,blue("설정으로")] }),
+        mk({ type:"confirm", situation:"광고 추적 · 동의 확인", screen:"광고 ID 화면", bd:"news", title:"맞춤 광고를 받을까요?", desc:"광고 식별자로 더 관련성 높은 혜택을 보여드려요.", buttons:[{label:"허용 안 함",color:"#0A84FF",weight:600},blue("동의")] }),
+        mk({ type:"confirm", situation:"채팅 · 신고/차단", screen:"1:1 채팅 화면", bd:"detail", title:"이 사용자를 차단할까요?", desc:"차단하면 더 이상 메시지를 받지 않아요.", buttons:[cancel,red("차단")] }),
+        mk({ type:"confirm", situation:"찜 · 전체 삭제", screen:"찜한 선박 화면", bd:"wish", title:"찜 목록을 비울까요?", desc:"찜한 선박이 모두 삭제돼요.", buttons:[cancel,red("비우기")] }),
+        mk({ type:"confirm", situation:"결제수단 · 카드 삭제", screen:"결제수단 관리 화면", bd:"my", title:"이 카드를 삭제할까요?", desc:"등록된 결제수단에서 제거돼요.", buttons:[cancel,red("삭제")] }),
+        mk({ type:"confirm", situation:"알림 설정 · 야간 차단 해제", screen:"알림 설정 화면", bd:"my", title:"야간 알림을 받을까요?", desc:"22시~07시에도 알림이 올 수 있어요.", buttons:[cancel,blue("받기")] }),
+        // 토스트 (추가)
+        mk({ type:"toast", situation:"검색 · 최근검색 삭제", screen:"통합검색 화면", bd:"news", title:"검색 기록을 삭제했어요" }),
+        mk({ type:"toast", situation:"쿠폰 · 다운로드 완료", screen:"쿠폰함 화면", bd:"my", title:"쿠폰을 받았어요" }),
+        mk({ type:"toast", situation:"후기 · 등록 완료", screen:"후기 작성 화면", bd:"review", title:"후기가 등록됐어요 · 1,500머니 적립" }),
+        mk({ type:"toast", situation:"예약 취소 · 접수", screen:"예약 취소 화면", bd:"reserv", title:"취소가 접수됐어요" }),
+        mk({ type:"toast", situation:"장바구니 · 담기", screen:"상품 상세 화면", bd:"news", title:"장바구니에 담았어요" }),
+        mk({ type:"toast", situation:"프로필 · 저장 완료", screen:"프로필 편집 화면", bd:"profile", title:"프로필을 저장했어요" }),
+        mk({ type:"toast", situation:"조황 · 업로드 완료", screen:"내 조황 화면", bd:"reserv", title:"조황을 등록했어요" }),
+        mk({ type:"toast", situation:"공통 · 클립보드 복사", screen:"전체 공통", bd:"news", title:"링크를 복사했어요" }),
+        // 푸쉬 (추가)
+        mk({ type:"push", situation:"채팅 · 새 메시지", screen:"잠금화면", bd:"news", title:"김태수 선장", desc:"네, 토요일 04:30 집결 맞습니다. 조심히 오세요!", time:"방금" }),
+        mk({ type:"push", situation:"조황 · 관심어종 알림", screen:"잠금화면", bd:"news", title:"우럭 조황이 올라왔어요", desc:"관심 어종 우럭이 보령에서 활발해요.", time:"10분 전" }),
+        mk({ type:"push", situation:"기상 · 결항 안내", screen:"잠금화면", bd:"news", title:"기상 악화로 결항됐어요", desc:"5/24 만선호 출조가 결항돼 전액 환불 처리됐어요.", time:"1시간 전" }),
+        mk({ type:"push", situation:"머니 · 소멸 예정", screen:"잠금화면", bd:"news", title:"머니가 곧 소멸돼요", desc:"5,000머니가 3일 뒤 소멸돼요. 예약에 사용해보세요.", time:"어제" }),
+        // 알림톡 (추가)
+        mk({ type:"kakao", situation:"카카오 · 취소/환불 접수", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 취소·환불이 접수되었습니다", desc:"현일님, 취소 요청이 접수되었어요.\n· 블랙이글호 5/24(토)\n· 환불 90,000원 · 2~3영업일 내 입금", buttons:[{label:"환불 상세 보기"}] }),
+        mk({ type:"kakao", situation:"카카오 · 후기 머니 적립", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 머니가 적립되었습니다", desc:"후기 작성 감사해요!\n· 1,500머니 적립 완료\n· 유효기간 적립일+30일", buttons:[{label:"내 머니 보기"}] }),
+        mk({ type:"kakao", situation:"카카오 · 결항 환불 완료", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 결항 환불이 완료되었습니다", desc:"기상 악화로 결항되어 전액 환불됐어요.\n· 환불 90,000원 · 원결제 수단", buttons:[{label:"다른 날짜 찾기"}] }),
+        // 신규 화면 (승선안전·규정·신고·쿠폰·설정·위치·결제)
+        mk({ type:"alert", situation:"승선 안전 동의 · 미동의", screen:"승선 안전 동의 화면", bd:"detail", title:"안전 수칙 동의가 필요해요", desc:"필수 안전 수칙에 모두 동의해야 예약을 진행할 수 있어요.", buttons:[blue("확인")] }),
+        mk({ type:"confirm", situation:"쿠폰 등록 · 코드 오류", screen:"쿠폰 등록 화면", bd:"my", title:"등록할 수 없는 코드예요", desc:"코드를 다시 확인해주세요. 이미 사용했거나 만료된 코드일 수 있어요.", buttons:[cancel,blue("다시 입력")] }),
+        mk({ type:"toast", situation:"쿠폰 등록 · 완료", screen:"쿠폰 등록 화면", bd:"my", title:"쿠폰이 등록됐어요" }),
+        mk({ type:"toast", situation:"가상계좌 폐지 · 계좌복사 대체", screen:"결제 화면", bd:"pay", title:"안내 문구를 복사했어요" }),
+        mk({ type:"toast", situation:"설정 · 캐시 삭제", screen:"설정 화면", bd:"my", title:"캐시를 삭제했어요" }),
+        mk({ type:"confirm", situation:"설정 · 마케팅 수신 해제", screen:"설정 화면", bd:"my", title:"마케팅 알림을 끌까요?", desc:"혜택·이벤트 소식을 더 이상 받지 않아요.", buttons:[cancel,blue("끄기")] }),
+        mk({ type:"alert", situation:"신고 · 접수 완료", screen:"신고 화면", bd:"detail", title:"신고가 접수됐어요", desc:"검토 후 조치 결과를 알려드릴게요.", buttons:[blue("확인")] }),
+        mk({ type:"confirm", situation:"신고 · 사용자 차단", screen:"신고 화면", bd:"detail", title:"이 사용자를 차단할까요?", desc:"차단하면 서로의 글·메시지가 보이지 않아요.", buttons:[cancel,red("차단")] }),
+        mk({ type:"alert", situation:"위치 꺼짐 · 지도 진입", screen:"탐색(지도) 화면", bd:"map", title:"위치가 꺼져 있어요", desc:"내 주변 정보를 보려면 위치를 켜거나 지역을 선택해주세요.", buttons:[{label:"지역 선택",color:"#0A84FF",weight:600},blue("위치 켜기")] }),
+        mk({ type:"alert", situation:"결제 · 본인인증 실패", screen:"본인인증 화면", bd:"news", title:"본인인증에 실패했어요", desc:"인증 시간이 만료됐거나 정보가 일치하지 않아요. 다시 시도해주세요.", buttons:[close,blue("다시 인증")] }),
+        mk({ type:"alert", situation:"공통 · 세션 만료", screen:"전체 공통", bd:"news", title:"다시 로그인이 필요해요", desc:"보안을 위해 자동 로그아웃됐어요. 다시 로그인하면 이어서 진행돼요.", buttons:[blue("로그인하기")] }),
+        mk({ type:"alert", situation:"카메라 권한 꺼짐 · 조황 등록", screen:"내 조황 화면", bd:"reserv", title:"카메라 권한이 꺼져 있어요", desc:"조황 사진 촬영을 위해 설정에서 카메라를 켜주세요.", buttons:[close,blue("설정으로")] }),
+        mk({ type:"push", situation:"가상계좌 폐지 안내 · 결제 확정", screen:"잠금화면", bd:"news", title:"결제가 확정됐어요", desc:"해진호 · 갈치 야간 예약이 확정됐어요.", time:"방금" }),
+        mk({ type:"toast", situation:"친구 초대 · 코드 복사", screen:"친구 초대 화면", bd:"my", title:"초대 코드를 복사했어요" }),
+        mk({ type:"kakao", situation:"카카오 · 친구 초대 보상", screen:"카카오톡", bd:"news", title:"[어바웃피싱] 초대 보상이 적립되었습니다", desc:"초대한 친구가 첫 예약을 완료했어요.\n· 5,000머니 적립 완료", buttons:[{label:"내 머니 보기"}] }),
       ],
     };
   }

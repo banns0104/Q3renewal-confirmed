@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <style>.af-sc *{box-sizing:border-box;} .af-sc{font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;} .tap{cursor:pointer;transition:transform .1s ease;} .tap:active{transform:scale(.99);}</style>
 </helmet>
 <div class="af-sc" style="width:393px; min-height:852px; background:#fff; position:relative;">
@@ -135,6 +134,45 @@
       <div style="flex:1;"><span style="display:inline-flex; height:22px; padding:0 9px; border-radius:6px; background:#0041FF; color:#fff; font-weight:700; font-size:10.5px; align-items:center;">웰컴 쿠폰팩</span><div style="margin-top:8px; font-weight:800; font-size:15px; color:#191919; line-height:1.4; letter-spacing:-0.4px;">선박 예약 쿠폰 13장을<br>한번에 받아가세요.</div></div>
       <img src="assets/avatar.png" style="width:72px; height:72px; object-fit:cover; object-position:50% 10%; border-radius:50%; flex:none;">
     </div>
+
+    <!-- 실시간 검색순위 -->
+    <div style="padding:30px 20px 0; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">실시간 검색순위</span><span style="font-weight:500; font-size:11.5px; color:#AAA;">● 09:21 기준</span></div>
+    <div style="padding:16px 20px 0; display:flex; gap:18px;">
+      <div style="flex:1; display:flex; flex-direction:column; gap:15px;">
+        <sc-for list="{{ ranksL }}" as="r" hint-placeholder-count="5"><div class="tap" onClick="{{ setResult }}" style="display:flex; align-items:center; gap:11px;"><span style="width:14px; font-weight:800; font-size:14px; color:{{ r.numColor }};">{{ r.rank }}</span><span style="flex:1; font-weight:500; font-size:13.5px; color:#363636; letter-spacing:-0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.kw }}</span><span style="font-weight:700; font-size:11px; color:{{ r.deltaColor }};">{{ r.delta }}</span></div></sc-for>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:15px;">
+        <sc-for list="{{ ranksR }}" as="r" hint-placeholder-count="5"><div class="tap" onClick="{{ setResult }}" style="display:flex; align-items:center; gap:11px;"><span style="width:18px; font-weight:800; font-size:14px; color:{{ r.numColor }};">{{ r.rank }}</span><span style="flex:1; font-weight:500; font-size:13.5px; color:#363636; letter-spacing:-0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.kw }}</span><span style="font-weight:700; font-size:11px; color:{{ r.deltaColor }};">{{ r.delta }}</span></div></sc-for>
+      </div>
+    </div>
+
+    <!-- 어바웃피싱 기획전 -->
+    <div style="padding:32px 20px 0; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">어바웃피싱 기획전</span><span class="tap" onClick="{{ noop }}" style="font-weight:500; font-size:12.5px; color:#999;">전체보기 ›</span></div>
+    <div class="tap" onClick="{{ goDetail }}" style="margin:14px 20px 0; height:96px; border-radius:14px; background:linear-gradient(110deg,#1A4FE0,#3B82F6); padding:0 20px; display:flex; align-items:center; overflow:hidden;"><div style="flex:1;"><span style="display:inline-flex; height:22px; padding:0 9px; border-radius:6px; background:rgba(255,255,255,.22); color:#fff; font-weight:700; font-size:10.5px; align-items:center;">기획전</span><div style="margin-top:7px; font-weight:800; font-size:16px; color:#fff; letter-spacing:-0.4px;">제주의 짜릿한 손맛</div><div style="margin-top:3px; font-weight:500; font-size:12px; color:rgba(255,255,255,.85);">설렘 반, 대물 반 제주로 떠나요!</div></div></div>
+    <div style="padding:14px 0 0 20px; display:flex; gap:11px; overflow-x:auto;">
+      <sc-for list="{{ planBoats }}" as="b" hint-placeholder-count="3"><div class="tap" onClick="{{ b.onClick }}" style="width:140px; flex:none;"><div style="width:140px; height:100px; border-radius:12px; background:#E4E7EC; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; color:#AAB2BC; font-weight:600; font-size:12px;">선박이미지<span style="position:absolute; left:0; top:0; width:30px; height:30px; background:#191919; color:#fff; font-weight:800; font-size:11px; padding:3px 0 0 4px; clip-path:polygon(0 0,100% 0,0 100%);">대</span></div><div style="margin-top:9px; font-weight:700; font-size:14px; color:#191919;">{{ b.name }}</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">{{ b.loc }}</div><div style="margin-top:4px; font-weight:800; font-size:14px; color:#191919;">{{ b.price }}</div></div></sc-for>
+    </div>
+
+    <!-- 지금 인기있는 선박 -->
+    <div style="padding:32px 20px 0; font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">지금 인기있는 선박</div>
+    <div style="padding:14px 0 0 20px; display:flex; gap:8px; overflow-x:auto;">
+      <sc-for list="{{ popFilters }}" as="f" hint-placeholder-count="4"><div class="tap" onClick="{{ f.onClick }}" style="height:34px; padding:0 15px; border-radius:1000px; background:{{ f.bg }}; color:{{ f.color }}; font-weight:600; font-size:13px; display:flex; align-items:center; white-space:nowrap; flex:none;">{{ f.label }}</div></sc-for>
+    </div>
+    <div style="padding:4px 20px 0;">
+      <sc-for list="{{ popBoats }}" as="b" hint-placeholder-count="3"><div class="tap" onClick="{{ b.onClick }}" style="display:flex; gap:13px; padding:16px 0; border-bottom:1px solid #F4F4F4;"><div style="width:74px; height:74px; border-radius:12px; background:#E4E7EC; flex:none; display:flex; align-items:center; justify-content:center; color:#AAB2BC; font-weight:600; font-size:11px;">선박</div><div style="flex:1;"><div style="font-weight:700; font-size:15px; color:#191919;">{{ b.name }}</div><div style="margin-top:3px; font-weight:500; font-size:12.5px; color:#999;">{{ b.loc }}</div><div style="margin-top:4px; font-weight:800; font-size:15px; color:#191919;">{{ b.price }}</div><div style="margin-top:7px; display:flex; gap:5px; flex-wrap:wrap; align-items:center;"><span style="height:21px; padding:0 8px; border-radius:5px; background:#F3F3F3; color:#767676; font-weight:600; font-size:10.5px; display:flex; align-items:center;">{{ b.fish }}</span><span style="height:21px; padding:0 8px; border-radius:5px; background:#C5E000; color:#3a3a00; font-weight:700; font-size:10.5px; display:flex; align-items:center;">ⓒ 할인쿠폰</span></div></div></div></sc-for>
+    </div>
+
+    <!-- 지금 주목받는 선박 (AD) -->
+    <div style="padding:32px 20px 0; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:16px; color:#191919; letter-spacing:-0.4px;">지금 주목받는 선박</span><span style="height:18px; padding:0 7px; border-radius:4px; background:#EEF0F3; color:#999; font-weight:700; font-size:10px; display:flex; align-items:center;">AD</span></div>
+    <div class="tap" onClick="{{ goDetail }}" style="margin:14px 20px 0; border:1px solid #EEE; border-radius:16px; padding:16px; position:relative;">
+      <span style="position:absolute; left:24px; top:24px; height:20px; padding:0 8px; border-radius:5px; background:#191919; color:#fff; font-weight:700; font-size:10px; display:flex; align-items:center; z-index:2;">AD</span>
+      <div style="height:150px; border-radius:12px; background:#E4E7EC; display:flex; align-items:center; justify-content:center; color:#AAB2BC; font-weight:600; font-size:13px;">선박이미지</div>
+      <div style="margin-top:13px;"><span style="height:22px; padding:0 9px; border-radius:6px; background:#EAF2FF; color:#0041FF; font-weight:700; font-size:11px; display:inline-flex; align-items:center;">● 실시간 · 잔여 2석</span></div>
+      <div style="margin-top:11px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.4px;">뉴스타호</span><span style="font-weight:600; font-size:12.5px; color:#767676;">★ 4.9 · 예약 1,240</span></div>
+      <div style="margin-top:5px; font-weight:500; font-size:12.5px; color:#767676;">인천 중구 · 55.1km · 대광어/우럭 전문</div>
+      <div style="margin-top:14px; display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:800; font-size:18px; color:#191919;">95,000원~</span><div class="tap" onClick="{{ goDetail }}" style="height:42px; padding:0 20px; border-radius:1000px; background:#0041FF; display:flex; align-items:center; font-weight:700; font-size:14px; color:#fff;">상세보기 ›</div></div>
+    </div>
+
     <div style="height:40px;"></div>
   </div>
   </sc-if>
@@ -145,7 +183,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;result&quot;,&quot;empty&quot;],&quot;default&quot;:&quot;result&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { tab:"전체", screen:null };
-  nav(to){ return () => { try{ window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
+  nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
   renderVals(){
     const sc = this.state.screen || this.props.screen || "result";
     const t = this.state.tab;
@@ -155,6 +193,32 @@ class Component extends DCLogic {
     return {
       isResult: sc==="result", isEmpty: sc==="empty",
       back:this.nav("back"), noop:this.nav("noop"), goMap:this.nav("map"), goDetail:this.nav("detail"),
+      setResult: ()=>this.setState({screen:"result"}),
+      ranksL:[
+        {rank:"1",kw:"통영 볼락",delta:"▲1",numColor:"#0041FF",deltaColor:"#EE0005"},
+        {rank:"2",kw:"대광어 다운샷",delta:"▲1",numColor:"#0041FF",deltaColor:"#EE0005"},
+        {rank:"3",kw:"주꾸미",delta:"▼1",numColor:"#0041FF",deltaColor:"#3B82F6"},
+        {rank:"4",kw:"제주 갈치",delta:"▲2",numColor:"#191919",deltaColor:"#EE0005"},
+        {rank:"5",kw:"챔피언십 2차전",delta:"–",numColor:"#191919",deltaColor:"#BBB"},
+      ],
+      ranksR:[
+        {rank:"6",kw:"갑오징어",delta:"▼2",numColor:"#191919",deltaColor:"#3B82F6"},
+        {rank:"7",kw:"홍원항 갈치",delta:"NEW",numColor:"#191919",deltaColor:"#0041FF"},
+        {rank:"8",kw:"예당저수지 붕어",delta:"▲1",numColor:"#191919",deltaColor:"#EE0005"},
+        {rank:"9",kw:"남해 한치",delta:"▼1",numColor:"#191919",deltaColor:"#3B82F6"},
+        {rank:"10",kw:"초보 환영 선박",delta:"NEW",numColor:"#191919",deltaColor:"#0041FF"},
+      ],
+      planBoats:[
+        {name:"자이언트2호",loc:"제주 서귀포",price:"120,000원~",onClick:this.nav("detail")},
+        {name:"한라호",loc:"제주 한림",price:"110,000원~",onClick:this.nav("detail")},
+        {name:"성산일출호",loc:"제주 성산",price:"130,000원~",onClick:this.nav("detail")},
+      ],
+      popFilters:["추천순","거리순","가격 낮은순","쿠폰 보유"].map(l=>{ const on=(this.state.popFilter||"추천순")===l; return {label:l, onClick:()=>this.setState({popFilter:l}), bg:on?"#191919":"#F4F5F7", color:on?"#fff":"#767676"}; }),
+      popBoats:[
+        {name:"제비호",loc:"인천 중구 55.1km",price:"90,000원~",fish:"갑오징어",onClick:this.nav("detail")},
+        {name:"킹콩6호",loc:"인천 중구 55.1km",price:"90,000원~",fish:"갑오징어",onClick:this.nav("detail")},
+        {name:"뉴승진호",loc:"인천 중구 55.1km",price:"90,000원~",fish:"갑오징어",onClick:this.nav("detail")},
+      ],
       qText: sc==="empty" ? "지역/선박/어종을 입력해 주세요." : "광어",
       qColor: sc==="empty" ? "#AAA" : "#191919",
       tabs:[tab("전체",70),tab("업체",13),tab("조황",54),tab("포인트",3)],
