@@ -82,7 +82,6 @@
             <sc-if value="{{ v_my }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="{{ mySub }}" key="{{ myKey }}" hint-size="393,1400"></dc-import></sc-if>
             <sc-if value="{{ v_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></sc-if>
             <sc-if value="{{ v_reserve_form }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="reserve" hint-size="393,1200"></dc-import></sc-if>
-            <sc-if value="{{ v_safety }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_pay }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="pay" hint-size="393,1600"></dc-import></sc-if>
             <sc-if value="{{ v_verifying }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="verifying" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_failed }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="failed" hint-size="393,852"></dc-import></sc-if>
@@ -188,7 +187,6 @@ class Component extends DCLogic {
 
     { key:"detail", label:"선박 상세", group:"출조·예약·결제" },
     { key:"reserve_form", label:"예약 (인원·날짜)", group:"출조·예약·결제" },
-    { key:"safety", label:"승선 안전 동의", group:"출조·예약·결제" },
     { key:"pay", label:"결제", group:"출조·예약·결제" },
     { key:"verifying", label:"결제 확인중", group:"출조·예약·결제" },
     { key:"failed", label:"결제 실패", group:"출조·예약·결제" },
@@ -290,10 +288,12 @@ class Component extends DCLogic {
     return t.slice(0, 200);
   }
   routeFor(view, j){
-    if(/찾아보세요|검색해|입력해|돋보기/.test(j)) return "search";
+    if(/쿠폰\s*받기|쿠폰\s*다운|할인쿠폰|쿠폰\s*팩|받기/.test(j)) return "toast:쿠폰을 다운로드했어요";
+    if(/^(인천|경기|충남|충북|전북|전남|경남|경북|부산|강원|제주|서해|동해|남해)/.test(j.trim())) return "search";
+    if(/찾아보세요|검색해|입력해|돋보기|선박 상세 검색/.test(j)) return "search";
     if(/더보기|전체보기/.test(j)) return "search";
     if(/알림/.test(j)) return "notif";
-    if(/챔피언십|기획전|이벤트|쿠폰|혜택|특가|배너|참가/.test(j)) return "news_event";
+    if(/챔피언십|기획전|이벤트|혜택|특가|배너|참가/.test(j)) return "news_event";
     if(/공지/.test(j)) return "news_notice";
     if(/포인트맵|포인트 맵|탐색|지도|cctv|길안내/i.test(j)) return "map";
     if(/조황 등록|조황 올리|올리기/.test(j)) return "catch_register";
@@ -312,6 +312,7 @@ class Component extends DCLogic {
     if(this.state.view==="splash"){ clearTimeout(this._t); this.go("perm_intro","mypage"); return; }
     if(!this.EXTRACTED.includes(this.state.view)) return;
     const r = this.routeFor(this.state.view, this.namePath(e));
+    if(r && r.indexOf("toast:")===0){ this.toast(r.slice(6)); return; }
     if(r==='reserv' || r==='wish'){ this.go('my', r); return; }
     if(r) this.go(r, "mypage");
   };
@@ -337,6 +338,7 @@ class Component extends DCLogic {
     let to = d.to;
     if(to==="back"){ this.back(); return; }
     if(to==="noop"){ this.toast("준비 중인 기능이에요"); return; }
+    if(to && to.indexOf("toast:")===0){ this.toast(to.slice(6)); return; }
     if(this.NAV_ALIAS[to]) to = this.NAV_ALIAS[to];
     if(to==="wish"){ this.go("my", "wish"); return; }
     if(to && to.indexOf("my:")===0){ this.go("my", to.slice(3)); return; }
@@ -364,7 +366,7 @@ class Component extends DCLogic {
     const view = this.state.view;
     const ACT = "#191919", IDLE = "#AEAEB6";
     const out = {};
-    this.EXTRACTED.concat(["catch_register","catch_form","catch_done","locoff","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","search_unified","my","detail","reserve_form","safety","pay","verifying","failed","reserve_done","setting","notif","news_notice","notice_detail","news_event","event_detail","review","review_done","cancel","cancel_done","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
+    this.EXTRACTED.concat(["catch_register","catch_form","catch_done","locoff","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","search_unified","my","detail","reserve_form","pay","verifying","failed","reserve_done","setting","notif","news_notice","notice_detail","news_event","event_detail","review","review_done","cancel","cancel_done","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
 
     out.mySub = this.state.mySub; out.myKey = this.state.myKey; out.fadeKey = view+"_"+this.state.myKey;
 

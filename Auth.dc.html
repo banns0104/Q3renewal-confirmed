@@ -123,10 +123,10 @@
 
       <div style="margin-top:8px; display:flex; flex-direction:column;">
         <sc-for list="{{ terms }}" as="t" hint-placeholder-count="4">
-          <div class="af-btn" onClick="{{ t.detail }}" style="height:50px; display:flex; align-items:center; gap:12px; padding:0 6px;">
+          <div class="af-btn" onClick="{{ t.toggle }}" style="height:50px; display:flex; align-items:center; gap:12px; padding:0 6px;">
             <svg width="20" height="20" viewBox="0 0 20 20" style="flex:none;"><path d="M3 10.5 7.5 15 16.5 5" fill="none" stroke="{{ t.stroke }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             <span style="flex:1; font-weight:500; font-size:14.5px; color:#363636; letter-spacing:-0.4px;">{{ t.label }}</span>
-            <svg width="7" height="13" viewBox="0 0 7 13" style="flex:none;"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <svg class="af-btn" onClick="{{ t.detail }}" width="7" height="13" viewBox="0 0 7 13" style="flex:none;"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </div>
         </sc-for>
       </div>

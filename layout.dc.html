@@ -113,6 +113,7 @@
   <div class="row">
     <div class="col"><div class="cap">출조 (통합홈)</div><div class="capsub">출조 탭 홈 · Figma 추출</div><div class="frame" style="content-visibility:auto;contain-intrinsic-size:393px 8604px;"><x-import component-from-global-scope="AFChuljoHome" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import></div></div>
     <div class="col"><div class="cap">새소식 (피드형)</div><div class="capsub">홈 탭 · 완성본</div><div class="frame"><dc-import name="News" hint-size="393,1600"></dc-import></div></div>
+    <div class="col"><div class="cap">새소식 · 지역변경 모달</div><div class="capsub">관심지역 추가·삭제·선택</div><div class="frame"><dc-import name="News" view="region" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">새소식 (기본형)</div><div class="capsub">날씨·내예약·찜한선박 · Figma</div><div class="frame"><x-import component-from-global-scope="AFNewsA" from="./scr/news_a/Components.bundle.js" hint-size="393,1600"></x-import></div></div>
     <div class="col"><div class="cap">탐색 지도</div><div class="capsub">지도 탐색 · 완성본</div><div class="frame"><dc-import name="Map" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">통합검색 (상단 네비)</div><div class="capsub">검색 결과 · 다중 섹션</div><div class="frame"><dc-import name="Search" hint-size="393,1200"></dc-import></div></div>
@@ -133,7 +134,6 @@
     <div class="col"><div class="cap">알림 설정</div><div class="capsub">알림 토글</div><div class="frame"><dc-import name="My" screen="noti" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">고객센터 FAQ</div><div class="capsub">자주 묻는 질문</div><div class="frame"><dc-import name="My" screen="faq" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">프로필 편집</div><div class="capsub">계정 연동</div><div class="frame"><dc-import name="My" screen="profile" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">회원 레벨 안내</div><div class="capsub">등급·EXP·혜택</div><div class="frame"><dc-import name="My" screen="level" hint-size="393,1400"></dc-import></div></div>
   </div>
 
   <!-- 4. SUB -->
@@ -152,9 +152,7 @@
     <div class="col"><div class="cap">후기 완료</div><div class="capsub">머니 적립 완료</div><div class="frame"><dc-import name="Sub" screen="review_done" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">예약 취소·환불</div><div class="capsub">취소 사유·환불액</div><div class="frame"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">취소 완료</div><div class="capsub">환불 안내</div><div class="frame"><dc-import name="Sub" screen="cancel_done" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">승선 안전 동의</div><div class="capsub">체크리스트·면책</div><div class="frame"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">취소·환불 규정</div><div class="capsub">수수료 단계</div><div class="frame"><dc-import name="Flows" screen="refund" hint-size="393,852"></dc-import></div></div>
-    <div class="col"><div class="cap">신고하기</div><div class="capsub">사유·차단</div><div class="frame"><dc-import name="Flows" screen="report" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">쿠폰함 · 코드입력 모달</div><div class="capsub">코드 붙여넣기</div><div class="frame"><dc-import name="My" screen="coupon_reg" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">결제 진행중</div><div class="capsub">PG 로딩</div><div class="frame"><dc-import name="Flows" screen="paying" hint-size="393,852"></dc-import></div></div>
     <div class="col"><div class="cap">결제 확인중</div><div class="capsub">최대 1분</div><div class="frame"><dc-import name="Flows" screen="verifying" hint-size="393,852"></dc-import></div></div>

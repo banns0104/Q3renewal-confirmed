@@ -106,7 +106,7 @@
   <!-- ============ 알림 ============ -->
   <sc-if value="{{ isNotif }}" hint-placeholder-val="{{ false }}">
   <div>
-    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">알림</span><span class="tap" onClick="{{ noop }}" style="font-weight:500; font-size:13px; color:#999;">모두 읽음</span></div>
+    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">알림</span><div style="display:flex; align-items:center; gap:14px;"><span class="tap" onClick="{{ noop }}" style="font-weight:500; font-size:13px; color:#999;">모두 읽음</span><div class="tap" onClick="{{ goNotiSetting }}" style="width:24px; height:24px; display:flex; align-items:center; justify-content:center;"><svg width="21" height="21" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="#363636" stroke-width="1.7"></circle><path d="M12 4 V6 M12 18 V20 M4 12 H6 M18 12 H20 M6.3 6.3 L7.7 7.7 M16.3 16.3 L17.7 17.7 M17.7 6.3 L16.3 7.7 M7.7 16.3 L6.3 17.7" stroke="#363636" stroke-width="1.6" stroke-linecap="round"></path></svg></div></div></div>
     <sc-for list="{{ notifList }}" as="n" hint-placeholder-count="4">
       <div class="tap" onClick="{{ n.onClick }}" style="display:flex; gap:13px; padding:16px 20px; background:{{ n.bg }}; border-bottom:1px solid #F5F5F5;">
         <div style="width:42px; height:42px; border-radius:12px; background:{{ n.tint }}; display:flex; align-items:center; justify-content:center; flex:none;">{{ n.icon }}</div>
@@ -287,7 +287,7 @@ class Component extends DCLogic {
       ctaClick: (this.state.cancelReason||0)===0 ? (()=>this.setState({done:"resched"})) : (()=>this.setState({done:"cancel"})),
       statusBg: isDetail ? "transparent" : "#fff",
       statusColor: isDetail ? "#fff" : "#191919",
-      back: this.nav("back"), noop: this.nav("noop"),
+      back: this.nav("back"), noop: this.nav("noop"), goNotiSetting: this.nav("noti"),
 
       wishFill: this.state.wish ? "#FF3C3A" : "rgba(255,255,255,.001)",
       wishFill2: this.state.wish ? "#FF3C3A" : "none",

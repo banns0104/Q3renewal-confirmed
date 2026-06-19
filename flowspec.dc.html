@@ -180,6 +180,7 @@
     <!-- 2 새소식 -->
     <div class="sech" style="margin-top:50px;"><div class="secnum">2</div><div class="sect">새소식</div><div class="secn">메인(피드형/기본형) → 공지·이벤트 → 상세 → 빈화면</div></div>
     <div class="grid" style="gap:30px;">
+      <div><div class="mock"><div class="mockinner"><dc-import name="News" view="region" hint-size="393,852"></dc-import></div></div><div class="mlabel">새소식 · 지역변경 모달</div></div>
       <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="News" hint-size="393,1600"></dc-import></div><div class="badge" style="top:150px;">A1</div><div class="badge" style="top:248px;">B1</div><div class="badge" style="top:360px;">C1</div></div><div class="mlabel">새소식 (홈)</div></div>
         <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">데일리 브리핑</span></div>
           <div class="srow"><span class="sk">①</span><span class="sv">검색 아이콘 <span class="to">→ 통합검색</span></span></div>
@@ -433,14 +434,8 @@
           <div class="srow"><span class="sk">①</span><span class="sv">날짜 캘린더 — 출항일 선택 · 마감일·과거 비활성</span></div>
           <div class="srow"><span class="sk">②</span><span class="sv">인원 스테퍼 — 증감 · 최소인원 미만 안내·잔여석 초과 제한</span></div>
           <div class="srow"><span class="sk">③</span><span class="sv">상품/옵션 토글(장비 대여 등)</span></div>
-          <div class="srow"><span class="sk">④</span><span class="sv">예약 정보 입력하기 <span class="to">→ 승선 안전 동의</span> · 미선택 시 비활성</span></div>
+          <div class="srow"><span class="sk">④</span><span class="sv">예약 정보 입력하기 <span class="to">→ 결제</span> · 미선택 시 비활성</span></div>
           <div class="srow"><span class="sk">데이터</span><span class="sv">BE · POST /reservations(PENDING) · 잔여석≥인원·중복예약 차단</span></div>
-        </div></div>
-      <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></div><div class="badge" style="top:150px;">A1</div></div><div class="mlabel">승선 안전 동의</div></div>
-        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">출항 전 필수 동의</span></div>
-          <div class="srow"><span class="sk">정책</span><span class="sv">구명조끼·음주제한·기상결항·보호자동반 4종 · 전체 체크 시 CTA 활성</span></div>
-          <div class="srow"><span class="sk">동작</span><span class="sv">동의하고 계속 <span class="to">→ 결제</span></span></div>
-          <div class="srow"><span class="sk">예외</span><span class="sv">면책 고지 — 안전수칙 미준수 사고 비보장</span></div>
         </div></div>
       <div class="node"><div><div class="mock"><div class="mockinner"><dc-import name="Flows" screen="refund" hint-size="393,852"></dc-import></div></div><div class="mlabel">취소·환불 규정</div></div>
         <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">기능</div><span style="font-weight:700;font-size:13px;color:#191919;">취소·환불 규정</span></div>
@@ -587,6 +582,13 @@
           <div class="srow"><span class="sk">①</span><span class="sv">만료 쿠폰 목록(기간만료 스탬프)</span></div>
           <div class="srow"><span class="sk">②</span><span class="sv">비활성·재발급 불가</span></div>
           <div class="srow"><span class="sk">데이터</span><span class="sv">GET /coupons?status=expired</span></div>
+        </div></div>
+      <div class="node"><div><div class="sm"><div class="sminner"><dc-import name="My" screen="coupon_reg" hint-size="393,852"></dc-import></div><div class="badge" style="top:120px;">A1</div></div><div class="smlabel">쿠폰함 · 코드입력 모달</div></div>
+        <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">A1</div><span style="font-weight:700;font-size:13px;color:#191919;">쿠폰 코드 입력 모달</span></div>
+          <div class="srow"><span class="sk">①</span><span class="sv">쿠폰함 "쿠폰 등록" 버튼 → 코드 입력 바텀시트(서브페이지 아님)</span></div>
+          <div class="srow"><span class="sk">②</span><span class="sv">코드 입력 + 붙여넣기 · 등록 버튼</span></div>
+          <div class="srow"><span class="sk">③</span><span class="sv">유효 T "쿠폰을 등록했어요" / 무효 A "유효하지 않은 코드" · 중복·만료 거절</span></div>
+          <div class="srow"><span class="sk">데이터</span><span class="sv">BE · POST /coupons/redeem · 422 만료/소진</span></div>
         </div></div>
 <div class="node">      <div><div class="sm"><div class="sminner"><dc-import name="My" screen="interest" hint-size="393,852"></dc-import></div></div><div class="smlabel">관심낚시 설정</div></div>
         <div class="spec"><div style="display:flex;align-items:center;gap:7px;"><div class="schip" style="background:#0041FF;">기능</div><span style="font-weight:700;font-size:13px;color:#191919;">관심낚시 설정</span></div>
@@ -841,7 +843,7 @@ class Component extends DCLogic {
       ["탐색","예약 업체 리스트","jump"],["예약 업체 리스트","선박 상세","jump"],["탐색","조황 상세","jump"],["탐색","CCTV 영상 모달","jump"],
       ["탐색","조황 등록 ① 위치","jump"],["내 조황","조황 등록 ① 위치","jump"],["조황 등록 ① 위치","조황 등록 ② 입력","seq"],["조황 등록 ② 입력","조황 등록 ③ 완료","seq"],["조황 등록 ③ 완료","내 조황","jump"],
       ["예약 내역","예약 취소·환불","jump"],["예약 내역","후기 작성","jump"],["후기 작성","내 조황","jump"],["후기 작성","후기 완료","seq"],["예약 취소·환불","취소 완료","seq"],["취소 완료","예약 내역","jump"],
-      ["선박 상세","승선 안전 동의","jump"],["승선 안전 동의","결제 진행중","seq"],["결제 진행중","결제 확인중","seq"],["결제 확인중","예약 완료","seq"],["결제 진행중","결제 실패","jump"],["결제 실패","결제","jump"],["선박 상세","취소·환불 규정","jump"],["마이페이지","설정","jump"],["설정","회원 탈퇴","jump"],["쿠폰함","쿠폰 등록","jump"],["탐색","위치 꺼짐","empty"],
+      ["선박 상세","결제 진행중","jump"],["결제 진행중","결제 확인중","seq"],["결제 확인중","예약 완료","seq"],["결제 진행중","결제 실패","jump"],["결제 실패","결제","jump"],["선박 상세","취소·환불 규정","jump"],["마이페이지","설정","jump"],["설정","회원 탈퇴","jump"],["쿠폰함","쿠폰 등록","jump"],["탐색","위치 꺼짐","empty"],
       ["선박 상세","알림","jump"],["선박 상세","마이페이지","jump"],["알림","마이페이지","jump"],["알림","새소식","jump"],
       ["예약 완료","통합홈","jump"],["예약 내역","선박 상세","jump"],["찜한 선박","선박 상세","jump"],
       ["공지사항","선박 상세","jump"],["이벤트","선박 상세","jump"],["공지사항","공지 상세","jump"],["이벤트","이벤트 상세","jump"],

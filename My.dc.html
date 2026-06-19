@@ -286,10 +286,10 @@
       <div style="margin-top:9px; display:flex; gap:8px;"><div style="flex:1; height:50px; border-radius:10px; background:#F5F6F8; display:flex; align-items:center; padding:0 15px; font-weight:500; font-size:14px; color:#363636;">hyunil@kakao.com</div><div class="tap" onClick="{{ noop }}" style="width:64px; height:50px; border-radius:10px; background:#191919; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#fff;">인증</div></div>
       <div style="margin-top:9px; font-weight:500; font-size:12px; color:#AAA; letter-spacing:-0.3px;">예약·환불 안내가 이 이메일로 전송됩니다</div>
       <div style="margin-top:28px; font-weight:700; font-size:14px; color:#191919; letter-spacing:-0.4px;">계정 연동</div>
-      <div style="margin-top:12px; display:flex; flex-direction:column; gap:4px;">
-        <div style="display:flex; align-items:center; gap:12px; padding:10px 0;"><div style="width:38px; height:38px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#191919;">K</div><div style="flex:1;"><div style="font-weight:700; font-size:14px; color:#191919;">카카오</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">hyunil@kakao.com</div></div><span style="font-weight:700; font-size:13px; color:#1F8A5B;">연결됨</span></div>
-        <div style="display:flex; align-items:center; gap:12px; padding:10px 0;"><div style="width:38px; height:38px; border-radius:50%; background:#191919; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#fff;">Ap</div><div style="flex:1;"><div style="font-weight:700; font-size:14px; color:#191919;">Apple</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">미연결</div></div><div class="tap" onClick="{{ noop }}" style="height:30px; padding:0 14px; border-radius:1000px; background:#F1F1F1; display:flex; align-items:center; font-weight:600; font-size:13px; color:#555;">연결</div></div>
-        <div style="display:flex; align-items:center; gap:12px; padding:10px 0;"><div style="width:38px; height:38px; border-radius:50%; background:#F0F0F0; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 20 20"><rect x="6" y="2.5" width="8" height="15" rx="2" fill="none" stroke="#767676" stroke-width="1.5"></rect></svg></div><div style="flex:1;"><div style="font-weight:700; font-size:14px; color:#191919;">휴대폰 인증</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">010-****-1234</div></div><div style="display:flex; align-items:center; gap:8px;"><span style="font-weight:700; font-size:13px; color:#1F8A5B;">인증됨</span><div class="tap" onClick="{{ noop }}" style="height:30px; padding:0 13px; border-radius:1000px; background:#F1F1F1; display:flex; align-items:center; font-weight:600; font-size:13px; color:#555;">변경</div></div></div>
+      <div style="margin-top:6px; font-weight:500; font-size:12px; color:#AAA; letter-spacing:-0.3px;">휴대폰 인증 계정 기준으로 소셜 계정을 연결·해제할 수 있어요</div>
+      <div style="margin-top:10px; display:flex; flex-direction:column; gap:4px;">
+        <div style="display:flex; align-items:center; gap:12px; padding:10px 0;"><div style="width:38px; height:38px; border-radius:50%; background:#EEF3FF; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 20 20"><rect x="6" y="2.5" width="8" height="15" rx="2" fill="none" stroke="#0041FF" stroke-width="1.5"></rect></svg></div><div style="flex:1;"><div style="font-weight:700; font-size:14px; color:#191919;">휴대폰 인증 <span style="font-weight:600; font-size:11px; color:#0041FF;">· 대표 계정</span></div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">010-****-1234</div></div><div class="tap" onClick="{{ noop }}" style="height:30px; padding:0 13px; border-radius:1000px; background:#F1F1F1; display:flex; align-items:center; font-weight:600; font-size:13px; color:#555;">변경</div></div>
+        <sc-for list="{{ accountLinks }}" as="a" hint-placeholder-count="3"><div style="display:flex; align-items:center; gap:12px; padding:10px 0;"><div style="width:38px; height:38px; border-radius:50%; background:{{ a.iconBg }}; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:{{ a.iconColor }};">{{ a.mark }}</div><div style="flex:1;"><div style="font-weight:700; font-size:14px; color:#191919;">{{ a.label }}</div><div style="margin-top:2px; font-weight:500; font-size:12px; color:#999;">{{ a.sub }}</div></div><div class="tap" onClick="{{ a.toggle }}" style="height:30px; padding:0 14px; border-radius:1000px; background:{{ a.btnBg }}; display:flex; align-items:center; font-weight:600; font-size:13px; color:{{ a.btnColor }};">{{ a.btn }}</div></div></sc-for>
       </div>
     </div>
     <div style="margin:30px 20px 0; display:flex; flex-direction:column; gap:11px;">
@@ -455,8 +455,8 @@ class Component extends DCLogic {
 
     const notiDefs = [
       { title:"예약 관련", items:[["a0","예약 확정·변경","예약/취소/일정 변경 알림"],["a1","출항 D-day","전날·당일 새벽 알림"],["a2","잔여 슬롯 변동","관심 선박 마감 임박"]] },
-      { title:"조황·관심", items:[["b0","관심 어종 핫조황","우럭·갈치·참돔 알림"],["b1","선장 1:1 메시지","예약 선박 선장 응답"],["b2","챔피언십 순위 변동","월간 챔피언십 진행"]] },
-      { title:"마케팅·이벤트", items:[["m0","마케팅 정보 수신 동의","혜택·이벤트·광고성 정보 (선택)"],["c0","타임세일·할인 쿠폰","마감 임박·신규 쿠폰"],["c1","친구 초대 보상","추천 보상 적립 알림"],["c2","야간 알림 차단","22:00~08:00 푸시 안 보냄"]] },
+      { title:"조황·관심", items:[["b0","관심 어종 핫조황","우럭·갈치·참돔 알림"],["b2","챔피언십 순위 변동","월간 챔피언십 진행"]] },
+      { title:"마케팅·이벤트", items:[["m0","마케팅 정보 수신 동의","혜택·이벤트·광고성 정보 (선택)"],["c2","야간 알림 차단","22:00~08:00 푸시 안 보냄"]] },
     ];
     const notiGroups = notiDefs.map(g=>({ title:g.title, items:g.items.map(([k,label,desc])=>{
       const on = this.state.noti[k];
@@ -510,6 +510,17 @@ class Component extends DCLogic {
       wdNextBg: this.state.wdReason>=0 ? "#191919" : "#D5D5D5",
       go_login:this.nav("auth_login"), go_withdraw:this.set("withdraw"), confirmWithdraw:this.set("withdraw_done"), closeInvite:()=>this.setState({invite:false}),
       back: this.set("mypage"),
+      accountLinks: [
+        {key:"kakao", label:"카카오", mark:"K", iconBg:"#FEE500", iconColor:"#191919", connSub:"hyunil@kakao.com"},
+        {key:"apple", label:"Apple", mark:"", iconBg:"#191919", iconColor:"#fff", connSub:"Apple ID 연결됨"},
+        {key:"naver", label:"네이버", mark:"N", iconBg:"#03C75A", iconColor:"#fff", connSub:"hyunil@naver.com"},
+      ].map(a=>{ const on = (this.state.links||{kakao:true})[a.key]!==undefined ? this.state.links[a.key] : (a.key==="kakao"); return {
+        label:a.label, mark:a.mark, iconBg:on?a.iconBg:"#F0F0F0", iconColor:on?a.iconColor:"#BBB",
+        sub: on ? a.connSub : "미연결",
+        btn: on ? "연결 해제" : "연결",
+        btnBg: on ? "#FBECEC" : "#EAF0FF", btnColor: on ? "#EE0005" : "#0041FF",
+        toggle: ()=>this.setState(st=>({ links: Object.assign({kakao:true,apple:false,naver:false}, st.links, {[a.key]: !((st.links||{kakao:true})[a.key]!==undefined ? st.links[a.key] : (a.key==="kakao")) }) }))
+      }; }),
       noop: this.nav("noop"),
       go_profile: this.set("profile"), go_reserv: this.set("reserv"), go_wish: this.set("wish"),
       go_coupon: this.set("coupon"), go_notiList: this.nav("notif"),
@@ -523,7 +534,7 @@ class Component extends DCLogic {
         { label:"친구 초대", onClick:()=>this.setState({invite:true}), hasBadge:false },
       ],
       settings: [
-        { label:"설정", onClick:this.nav("setting"), hasBadge:false },
+        { label:"약관 및 정보", onClick:this.nav("setting"), hasBadge:false },
         { label:"알림 설정", onClick:this.set("noti"), hasBadge:false },
         { label:"1:1 상담", onClick:this.set("faq"), hasBadge:false },
         { label:"자주 묻는 질문", onClick:this.set("faq"), hasBadge:false },

@@ -14,13 +14,16 @@
   .afn{ font-family:"Pretendard Variable","Pretendard",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
   .tap{ cursor:pointer; transition:transform .1s ease; }
   .tap:active{ transform:scale(.99); }
+  .rg-fixed{ position:fixed; inset:0; }
+  .rg-abs{ position:absolute; inset:0; }
+  .afn-cap{ height:852px !important; overflow:hidden; }
 </style>
 </helmet>
-<div class="afn" style="width:393px; min-height:852px; background:#fff; position:relative;">
+<div class="afn {{ rootCls }}" style="width:393px; min-height:852px; background:#fff; position:relative;">
 
   <!-- 관심지역 선택 바텔시트 -->
   <sc-if value="{{ regionOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed; inset:0; z-index:90;">
+  <div class="{{ rgCls }}" style="z-index:90;">
     <div class="tap" onClick="{{ closeRegion }}" style="position:absolute; inset:0; background:rgba(0,0,0,.5);"></div>
     <div style="position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:22px 22px 0 0; overflow:hidden; max-height:560px; display:flex; flex-direction:column;">
       <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 22px 12px;"><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">내 관심지역 선택</span><div style="display:flex; align-items:center; gap:14px;"><span class="tap" onClick="{{ toggleRegionEdit }}" style="font-weight:600; font-size:14px; color:{{ regionEditColor }}; letter-spacing:-0.3px;">{{ regionEditLabel }}</span><div class="tap" onClick="{{ closeRegion }}" style="width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#191919" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div></div>
@@ -221,7 +224,9 @@ class Component extends DCLogic {
         {title:"바다사랑님이 청해호를 찜했어요", meta:"통영 삼덕항 · 1시간 전", onClick:this.nav("detail")},
       ],
       curRegion: (regions[rsel]||"충남 신진도항").split(" ").slice(-1)[0],
-      regionOpen: !!this.state.regionOpen,
+      regionOpen: !!this.state.regionOpen || this.props.view==="region",
+      rgCls: this.props.view==="region" ? "rg-abs" : "rg-fixed",
+      rootCls: this.props.view==="region" ? "afn-cap" : "",
       openRegion: ()=>this.setState({regionOpen:true}),
       closeRegion: ()=>this.setState({regionOpen:false, regionEdit:false}),
       toggleRegionEdit: ()=>this.setState(st=>({regionEdit:!st.regionEdit})),
