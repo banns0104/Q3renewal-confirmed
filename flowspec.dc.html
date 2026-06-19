@@ -761,7 +761,34 @@
 class Component extends DCLogic {
   svgRef = (el)=>{ this._svg = el; if(el){ setTimeout(()=>this.drawArrows(), 1500); setTimeout(()=>this.drawArrows(), 3200); } };
   state = { showAll:false, hidden:{}, pinned:null, pinLabel:"" };
-  componentDidMount(){ this._draw = ()=>{ this.stampBadges(); this.indexFrames(); this.drawArrows(); }; window.addEventListener("resize", this._draw); setTimeout(this._draw, 1800); setTimeout(this._draw, 4000); document.addEventListener("click", this.onChipClick); this._sync=()=>this.drawArrows(); window.addEventListener("storage", this._sync); this._bgClick=(e)=>{ if(this.state.pinned!=null && !(e.target.closest&&e.target.closest(".mock,.sm,.fl-toolbar"))){ this.setPin(null); } }; document.addEventListener("click", this._bgClick); }
+  componentDidMount(){ this._draw = ()=>{ this.stampBadges(); this.indexFrames(); this.drawArrows(); }; window.addEventListener("resize", this._draw); setTimeout(this._draw, 1800); setTimeout(this._draw, 4000); document.addEventListener("click", this.onChipClick); this._sync=()=>this.drawArrows(); window.addEventListener("storage", this._sync); this._bgClick=(e)=>{ if(this.state.pinned!=null && !(e.target.closest&&e.target.closest(".mock,.sm,.fl-toolbar"))){ this.setPin(null); } }; document.addEventListener("click", this._bgClick); setTimeout(()=>this.buildSearch(), 2000); }
+  buildSearch(){
+    const root = this._svg && this._svg.closest(".fl"); if(!root || root.querySelector(".fl-search-fab")) return;
+    const fab = document.createElement("div");
+    fab.className = "fl-search-fab";
+    fab.style.cssText = "position:fixed; right:26px; bottom:26px; width:56px; height:56px; border-radius:50%; background:#0041FF; box-shadow:0 8px 24px rgba(0,65,255,.4); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:120; transition:transform .12s;";
+    fab.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="#fff" stroke-width="2.1"></circle><path d="M16 16 21 21" stroke="#fff" stroke-width="2.1" stroke-linecap="round"></path></svg>';
+    const panel = document.createElement("div");
+    panel.style.cssText = "position:fixed; right:26px; bottom:92px; width:330px; max-height:62vh; background:#fff; border-radius:16px; box-shadow:0 16px 50px rgba(15,17,25,.32); z-index:120; display:flex; flex-direction:column; overflow:hidden;";
+    panel.innerHTML = '<div style="padding:14px 16px 10px; border-bottom:1px solid #EEE;"><div style="display:flex; align-items:center; gap:9px; height:42px; background:#F3F4F6; border-radius:11px; padding:0 13px;"><svg width="17" height="17" viewBox="0 0 20 20"><circle cx="9" cy="9" r="6.2" fill="none" stroke="#8A8F98" stroke-width="1.8"></circle><path d="M13.5 13.5 18 18" stroke="#8A8F98" stroke-width="1.8" stroke-linecap="round"></path></svg><input class="fl-search-in" placeholder="화면 이름 검색 (예: 결제, 탈퇴, 지도)" style="flex:1; border:none; outline:none; background:transparent; font-family:inherit; font-weight:600; font-size:14px; color:#191919; letter-spacing:-0.3px;"></div></div><div class="fl-search-res" style="flex:1; overflow-y:auto; padding:6px 0;"></div>';
+    root.appendChild(fab); root.appendChild(panel);
+    const input = panel.querySelector(".fl-search-in");
+    const res = panel.querySelector(".fl-search-res");
+    const open = ()=>{ panel.style.display="flex"; setTimeout(()=>input.focus(), 50); };
+    const close = ()=>{ panel.style.display="none"; };
+    fab.addEventListener("click", (e)=>{ e.stopPropagation(); panel.style.display==="flex" ? close() : open(); });
+    document.addEventListener("click", (e)=>{ if(panel.style.display==="flex" && !panel.contains(e.target) && e.target!==fab && !fab.contains(e.target)) close(); });
+    const jump = (i)=>{ const el=this._frames[i]; if(!el) return; const y=el.getBoundingClientRect().top + window.scrollY - 130; window.scrollTo({top:y, behavior:"smooth"}); el.classList.remove("fl-hl"); void el.offsetWidth; el.classList.add("fl-hl"); this.setPin(i); close(); };
+    const render = (q)=>{
+      const ql = q.trim().toLowerCase();
+      const items = (this._frames||[]).map((el,i)=>({i, label:this.frameLabel(el)})).filter(o=>o.label && (!ql || o.label.toLowerCase().includes(ql)));
+      if(!items.length){ res.innerHTML = '<div style="padding:22px 16px; text-align:center; font-weight:500; font-size:13px; color:#AAA;">검색 결과가 없어요</div>'; return; }
+      res.innerHTML = items.slice(0,60).map(o=>'<div class="fl-sr" data-i="'+o.i+'" style="display:flex; align-items:center; gap:9px; padding:10px 16px; cursor:pointer;"><div style="width:6px; height:6px; border-radius:50%; background:#0041FF; flex:none;"></div><span style="flex:1; font-weight:600; font-size:13px; color:#363636; letter-spacing:-0.3px;">'+o.label.replace(/</g,"&lt;")+'</span><svg width="6" height="11" viewBox="0 0 7 13"><path d="M1 1 6 6.5 1 12" fill="none" stroke="#CCC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>').join("");
+      res.querySelectorAll(".fl-sr").forEach(r=>{ r.addEventListener("mouseenter",()=>r.style.background="#F4F6FA"); r.addEventListener("mouseleave",()=>r.style.background="transparent"); r.addEventListener("click",()=>jump(+r.getAttribute("data-i"))); });
+    };
+    input.addEventListener("input", ()=>render(input.value));
+    render("");
+  }
   indexFrames(){ const root=this._svg&&this._svg.closest(".fl"); if(!root) return; this._frames=[...root.querySelectorAll(".mock,.sm")]; this._frames.forEach((el,i)=>{ el.setAttribute("data-fi",i); el.style.cursor="pointer"; if(el.__bound) return; el.__bound=true; el.addEventListener("mouseenter",()=>{ if(this.state.pinned==null) this.applyHL(i); }); el.addEventListener("mouseleave",()=>{ if(this.state.pinned==null) this.applyHL(null); }); el.addEventListener("click",(e)=>{ e.stopPropagation(); this.setPin(this.state.pinned===i?null:i); }); }); }
   setPin(i){ const lbl = i!=null && this._frames&&this._frames[i] ? (this._frames[i].parentElement.querySelector(".mlabel,.smlabel")||{}).textContent||"" : ""; this.setState({pinned:i, pinLabel:lbl.trim()}, ()=>this.applyHL(i)); }
   frameLabel(el){ const l=el.parentElement.querySelector(".mlabel,.smlabel"); return l?l.textContent.trim():""; }
