@@ -74,19 +74,33 @@
             <sc-if value="{{ v_perm_notification }}" hint-placeholder-val="{{ false }}"><dc-import name="Permission" screen="notification" hint-size="393,852"></dc-import></sc-if>
 
             <sc-if value="{{ v_news_b }}" hint-placeholder-val="{{ false }}"><dc-import name="News" hint-size="393,1600"></dc-import></sc-if>
-            <sc-if value="{{ v_reserve_list }}" hint-placeholder-val="{{ false }}"><div style="position:relative; content-visibility:auto; contain-intrinsic-size:393px 8516px; overflow:hidden; height:8516px;"><x-import component-from-global-scope="AFChuljoHome" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import><div data-route="search" style="position:absolute; left:14px; right:14px; top:474px; height:62px; z-index:6; cursor:pointer;"></div></div></sc-if>
+            <sc-if value="{{ v_reserve_list }}" hint-placeholder-val="{{ false }}"><div style="position:relative; content-visibility:auto; contain-intrinsic-size:393px 8516px; overflow:hidden; height:8516px;"><x-import component-from-global-scope="AFChuljoHome" from="./scr/chuljohome/Components.bundle.js" hint-size="393,1600"></x-import><div data-route="search" style="position:absolute; left:12px; right:12px; top:452px; height:92px; z-index:5; cursor:pointer;"></div></div></sc-if>
             <sc-if value="{{ v_map }}" hint-placeholder-val="{{ false }}"><dc-import name="Map" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_search }}" hint-placeholder-val="{{ false }}"><dc-import name="Search" screen="empty" hint-size="393,1200"></dc-import></sc-if>
+            <sc-if value="{{ v_search_unified }}" hint-placeholder-val="{{ false }}"><dc-import name="Search" hint-size="393,1200"></dc-import></sc-if>
 
             <sc-if value="{{ v_my }}" hint-placeholder-val="{{ false }}"><dc-import name="My" screen="{{ mySub }}" key="{{ myKey }}" hint-size="393,1400"></dc-import></sc-if>
             <sc-if value="{{ v_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="detail" hint-size="393,1500"></dc-import></sc-if>
+            <sc-if value="{{ v_reserve_form }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="reserve" hint-size="393,1200"></dc-import></sc-if>
+            <sc-if value="{{ v_safety }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="safety" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_pay }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="pay" hint-size="393,1600"></dc-import></sc-if>
+            <sc-if value="{{ v_verifying }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="verifying" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_failed }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="failed" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_reserve_done }}" hint-placeholder-val="{{ false }}"><dc-import name="Reserve" screen="done" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_catch_register }}" hint-placeholder-val="{{ false }}"><dc-import name="Catch" screen="pin" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_catch_form }}" hint-placeholder-val="{{ false }}"><dc-import name="Catch" screen="form" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_catch_done }}" hint-placeholder-val="{{ false }}"><dc-import name="Catch" screen="done" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_locoff }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="locoff" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_setting }}" hint-placeholder-val="{{ false }}"><dc-import name="Flows" screen="setting" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_notif }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notif" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_notice }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notice" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_notice_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="notice_detail" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_news_event }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="event" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_event_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="event_detail" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_review }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="review" hint-size="393,852"></dc-import></sc-if>
-            <sc-if value="{{ v_chat }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="chat" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_review_done }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="review_done" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_cancel }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="cancel" hint-size="393,852"></dc-import></sc-if>
+            <sc-if value="{{ v_cancel_done }}" hint-placeholder-val="{{ false }}"><dc-import name="Sub" screen="cancel_done" hint-size="393,852"></dc-import></sc-if>
 
             <sc-if value="{{ v_empty_reserve }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="reserve" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_empty_wish }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="wish" hint-size="393,852"></dc-import></sc-if>
@@ -95,8 +109,6 @@
             <sc-if value="{{ v_empty_alarm }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="alarm" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_empty_catch }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="catch" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_empty_coupon }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="coupon" hint-size="393,852"></dc-import></sc-if>
-            <sc-if value="{{ v_empty_chat }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="chat" hint-size="393,852"></dc-import></sc-if>
-            <sc-if value="{{ v_empty_payment }}" hint-placeholder-val="{{ false }}"><dc-import name="Empty" type="payment" hint-size="393,852"></dc-import></sc-if>
 
             <sc-if value="{{ v_err_404 }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="404" hint-size="393,852"></dc-import></sc-if>
             <sc-if value="{{ v_err_500 }}" hint-placeholder-val="{{ false }}"><dc-import name="Error" type="500" hint-size="393,852"></dc-import></sc-if>
@@ -109,11 +121,10 @@
 
         <!-- top-right icon cluster (clean overlay over extracted gnb) -->
         <sc-if value="{{ showTopIcons }}" hint-placeholder-val="{{ false }}">
-          <div ref="{{ overlayRef }}" style="position:absolute; right:18px; top:71px; display:flex; gap:15px; align-items:center; z-index:20; transition:opacity .18s ease;">
+          <div ref="{{ overlayRef }}" style="position:absolute; right:18px; top:71px; display:flex; gap:16px; align-items:center; z-index:20; transition:opacity .18s ease;">
+            <div class="tab-btn" data-route="search_unified" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="#363636" stroke-width="1.7"></circle><path d="M16 16 L20.5 20.5" stroke="#363636" stroke-width="1.7" stroke-linecap="round"></path></svg></div>
             <div class="tab-btn" data-route="notif" style="position:relative; width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M7 10C7 7 9 5 12 5C15 5 17 7 17 10C17 15 19 17 19 17L5 17C5 17 7 15 7 10Z" fill="none" stroke="#363636" stroke-width="1.7" stroke-linejoin="round"></path><path d="M10 19.5C10.4 20.4 11.1 21 12 21C12.9 21 13.6 20.4 14 19.5" fill="none" stroke="#363636" stroke-width="1.7" stroke-linecap="round"></path></svg><span style="position:absolute; right:1px; top:1px; width:6px; height:6px; border-radius:50%; background:#EE0005;"></span></div>
-            
-            <div class="tab-btn" data-route="my" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="#363636" stroke-width="1.7"></circle><path d="M5.5 19.5C5.5 15.9 8.4 14 12 14C15.6 14 18.5 15.9 18.5 19.5" fill="none" stroke="#363636" stroke-width="1.7" stroke-linecap="round"></path></svg></div>
-            <div class="tab-btn" data-route="search" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="#363636" stroke-width="1.7"></rect></svg></div>
+            <div class="tab-btn" data-route="wish" style="width:25px; height:25px; display:flex; align-items:center; justify-content:center;"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.4C5 7.9 6.9 6 9.2 6c1.5 0 2.4.8 2.8 1.4C12.4 6.8 13.3 6 14.8 6 17.1 6 19 7.9 19 10.6 19 15.4 12 20 12 20Z" fill="none" stroke="#363636" stroke-width="1.7" stroke-linejoin="round"></path></svg></div>
           </div>
         </sc-if>
 
@@ -166,22 +177,37 @@ class Component extends DCLogic {
 
   EXTRACTED = ["reserve_list"];
   TAB_VIEWS = ["news_b","reserve_list","map","search","my"];
-  MY_SUBS = ["mypage","reserv","catch","wish","coupon","noti","faq","interest","profile"];
+  MY_SUBS = ["mypage","reserv","catch","wish","coupon","noti","faq","interest","profile","withdraw_0","withdraw_done"];
 
   SCREENS = [
     { key:"news_b", label:"새소식", group:"메인 화면" },
     { key:"map", label:"탐색 지도", group:"메인 화면" },
-    { key:"search", label:"통합검색", group:"메인 화면" },
     { key:"reserve_list", label:"출조 (통합홈)", group:"메인 화면" },
+    { key:"search", label:"출조 검색결과", group:"메인 화면" },
+    { key:"search_unified", label:"통합검색", group:"메인 화면" },
 
-    { key:"detail", label:"예약 상세", group:"서브페이지" },
-    { key:"catch_register", label:"조황 등록(핀)", group:"서브페이지" },
+    { key:"detail", label:"선박 상세", group:"출조·예약·결제" },
+    { key:"reserve_form", label:"예약 (인원·날짜)", group:"출조·예약·결제" },
+    { key:"safety", label:"승선 안전 동의", group:"출조·예약·결제" },
+    { key:"pay", label:"결제", group:"출조·예약·결제" },
+    { key:"verifying", label:"결제 확인중", group:"출조·예약·결제" },
+    { key:"failed", label:"결제 실패", group:"출조·예약·결제" },
+    { key:"reserve_done", label:"예약 완료", group:"출조·예약·결제" },
+    { key:"cancel", label:"예약 취소·환불", group:"출조·예약·결제" },
+    { key:"cancel_done", label:"취소 완료", group:"출조·예약·결제" },
+    { key:"review", label:"후기 작성", group:"출조·예약·결제" },
+    { key:"review_done", label:"후기 완료", group:"출조·예약·결제" },
+
+    { key:"catch_register", label:"조황 등록 ① 위치", group:"탐색·조황" },
+    { key:"catch_form", label:"조황 등록 ② 입력", group:"탐색·조황" },
+    { key:"catch_done", label:"조황 등록 ③ 완료", group:"탐색·조황" },
+    { key:"locoff", label:"위치 꺼짐", group:"탐색·조황" },
+
     { key:"notif", label:"알림", group:"서브페이지" },
     { key:"news_notice", label:"공지사항", group:"서브페이지" },
+    { key:"notice_detail", label:"공지 상세", group:"서브페이지" },
     { key:"news_event", label:"이벤트", group:"서브페이지" },
-    { key:"review", label:"후기 작성", group:"서브페이지" },
-    { key:"chat", label:"1:1 채팅", group:"서브페이지" },
-    { key:"cancel", label:"예약 취소·환불", group:"서브페이지" },
+    { key:"event_detail", label:"이벤트 상세", group:"서브페이지" },
 
     { my:"mypage", label:"마이페이지", group:"마이페이지" },
     { my:"reserv", label:"예약 내역", group:"마이페이지" },
@@ -192,6 +218,9 @@ class Component extends DCLogic {
     { my:"noti", label:"알림 설정", group:"마이페이지" },
     { my:"faq", label:"고객센터 FAQ", group:"마이페이지" },
     { my:"profile", label:"프로필 편집", group:"마이페이지" },
+    { my:"withdraw_0", label:"회원 탈퇴", group:"마이페이지" },
+    { my:"withdraw_done", label:"탈퇴 완료", group:"마이페이지" },
+    { key:"setting", label:"설정", group:"마이페이지" },
 
     { key:"splash", label:"스플래쉬", group:"인증 · 온보딩" },
     { key:"perm_intro", label:"앱 권한 동의", group:"인증 · 온보딩" },
@@ -209,8 +238,6 @@ class Component extends DCLogic {
     { key:"empty_alarm", label:"알림 없음", group:"빈 상태 (Empty)" },
     { key:"empty_catch", label:"조황 없음", group:"빈 상태 (Empty)" },
     { key:"empty_coupon", label:"쿠폰 없음", group:"빈 상태 (Empty)" },
-    { key:"empty_chat", label:"채팅 없음", group:"빈 상태 (Empty)" },
-    { key:"empty_payment", label:"결제내역 없음", group:"빈 상태 (Empty)" },
 
     { key:"err_404", label:"404", group:"에러 (Error)" },
     { key:"err_500", label:"500", group:"에러 (Error)" },
@@ -222,8 +249,9 @@ class Component extends DCLogic {
   phoneRef = (el)=>{ this._phone = el; };
 
   go(view, mySub){
+    this._restoreScroll = 0;
     this.setState(st=>{
-      const hist = st.view && st.view!==view ? st.hist.concat([{ view:st.view, mySub:st.mySub }]) : st.hist;
+      const hist = st.view && st.view!==view ? st.hist.concat([{ view:st.view, mySub:st.mySub, scrollTop:(this._scroll?this._scroll.scrollTop:0) }]) : st.hist;
       return { view, mySub: (mySub!=null?mySub:st.mySub), myKey: st.myKey+1, hist };
     }, ()=> this.afterNav());
   }
@@ -233,10 +261,11 @@ class Component extends DCLogic {
     this.setState(st=>{
       if(!st.hist.length) return {};
       const p = st.hist[st.hist.length-1];
+      this._restoreScroll = p.scrollTop || 0;
       return { view:p.view, mySub:p.mySub, myKey:st.myKey+1, hist:st.hist.slice(0,-1) };
     }, ()=> this.afterNav());
   }
-  afterNav(){ if(this._scroll) this._scroll.scrollTop = 0; this.scheduleEnhance(); }
+  afterNav(){ const s = this._restoreScroll || 0; const apply=()=>{ if(this._scroll) this._scroll.scrollTop = s; }; apply(); requestAnimationFrame(apply); setTimeout(apply, 60); setTimeout(apply, 200); this._restoreScroll = 0; this.scheduleEnhance(); }
 
   toast(msg){
     if(!this._phone) return;
@@ -256,15 +285,21 @@ class Component extends DCLogic {
   }
 
   namePath(e){
-    const t = (e.target && e.target.textContent) ? e.target.textContent : "";
-    return t.length > 55 ? "" : t;
+    let el = e.target, t = "";
+    for(let i=0; i<4 && el; i++){ const tx = (el.textContent||"").trim(); if(tx){ t = tx; break; } el = el.parentElement; }
+    return t.slice(0, 200);
   }
   routeFor(view, j){
-    if(/찾아보세요|검색|돋보기/.test(j)) return "search";
-    if(/이벤트|챔피언십|기획전|쿠폰|혜택/.test(j)) return "news_event";
+    if(/찾아보세요|검색해|입력해|돋보기/.test(j)) return "search";
+    if(/더보기|전체보기/.test(j)) return "search";
+    if(/알림/.test(j)) return "notif";
+    if(/챔피언십|기획전|이벤트|쿠폰|혜택|특가|배너|참가/.test(j)) return "news_event";
     if(/공지/.test(j)) return "news_notice";
-    if(/포인트맵|포인트 맵|지도/.test(j)) return "map";
-    if(/조황/.test(j)) return "catch_register";
+    if(/포인트맵|포인트 맵|탐색|지도|cctv|길안내/i.test(j)) return "map";
+    if(/조황 등록|조황 올리|올리기/.test(j)) return "catch_register";
+    if(/실시간조황|조황/.test(j)) return "map";
+    if(/예약 내역|내 예약/.test(j)) return "reserv";
+    if(/찜|관심 선박/.test(j)) return "wish";
     if(view==="map" || view==="pointmap") return null;
     if(view==="shop") return "cart";
     return "detail";
@@ -277,6 +312,7 @@ class Component extends DCLogic {
     if(this.state.view==="splash"){ clearTimeout(this._t); this.go("perm_intro","mypage"); return; }
     if(!this.EXTRACTED.includes(this.state.view)) return;
     const r = this.routeFor(this.state.view, this.namePath(e));
+    if(r==='reserv' || r==='wish'){ this.go('my', r); return; }
     if(r) this.go(r, "mypage");
   };
 
@@ -289,11 +325,21 @@ class Component extends DCLogic {
   };
   scheduleEnhance(){ if(this._overlay){ this._overlay.style.opacity = "1"; this._overlay.style.pointerEvents = "auto"; } }
 
+  NAV_ALIAS = {
+    home:"news_b", news:"news_b", explore:"map", chuljo:"reserve_list", reserve_list:"reserve_list",
+    reserv:"my:reserv", myreserv:"my:reserv", my_reserve:"my:reserv",
+    catch:"map", catch_realtime:"map", realtime_catch:"map", jowhang:"map",
+    search:"search_unified", unified_search:"search_unified", boat_search:"search",
+    event:"news_event", notice:"news_notice", coupon:"my:coupon",
+  };
   onMsg = (e)=>{
     const d = e.data; if(!d || d.type!=="af-nav") return;
-    const to = d.to;
+    let to = d.to;
     if(to==="back"){ this.back(); return; }
     if(to==="noop"){ this.toast("준비 중인 기능이에요"); return; }
+    if(this.NAV_ALIAS[to]) to = this.NAV_ALIAS[to];
+    if(to==="wish"){ this.go("my", "wish"); return; }
+    if(to && to.indexOf("my:")===0){ this.go("my", to.slice(3)); return; }
     if(this.MY_SUBS.includes(to)){ this.go("my", to); return; }
     this.go(to, "mypage");
   };
@@ -318,11 +364,11 @@ class Component extends DCLogic {
     const view = this.state.view;
     const ACT = "#191919", IDLE = "#AEAEB6";
     const out = {};
-    this.EXTRACTED.concat(["catch_register","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","my","detail","notif","news_notice","news_event","review","chat","cancel","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","empty_chat","empty_payment","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
+    this.EXTRACTED.concat(["catch_register","catch_form","catch_done","locoff","reserve_list","splash","auth_login","auth_phone","auth_terms","auth_onboard","news_b","map","search","search_unified","my","detail","reserve_form","safety","pay","verifying","failed","reserve_done","setting","notif","news_notice","notice_detail","news_event","event_detail","review","review_done","cancel","cancel_done","empty_reserve","empty_wish","empty_search","empty_news","empty_alarm","empty_catch","empty_coupon","perm_intro","perm_location","perm_notification","err_404","err_500","err_network","err_maintenance"]).forEach(k=>{ out["v_"+k] = (view===k); });
 
     out.mySub = this.state.mySub; out.myKey = this.state.myKey; out.fadeKey = view+"_"+this.state.myKey;
 
-    const order = ["메인 화면","마이페이지","서브페이지","인증 · 온보딩","빈 상태 (Empty)","에러 (Error)"];
+    const order = ["메인 화면","출조·예약·결제","탐색·조황","서브페이지","마이페이지","인증 · 온보딩","빈 상태 (Empty)","에러 (Error)"];
     out.groups = order.map(title=>({
       title,
       items: this.SCREENS.filter(s=>s.group===title).map(s=>{
@@ -347,7 +393,7 @@ class Component extends DCLogic {
 
     out.showTab = this.TAB_VIEWS.includes(view);
     out.showBubble = this.EXTRACTED.includes(view);
-    out.showTopIcons = this.EXTRACTED.includes(view) && view!=="map" && view!=="pointmap";
+    out.showTopIcons = ["reserve_list"].includes(view);
     const cur = this.SCREENS.find(s=> s.my!=null ? (view==="my"&&this.state.mySub===s.my) : s.key===view);
     out.currentLabel = cur ? cur.label : (view==="my" ? "마이페이지" : "");
     out.scrollRef = this.scrollRef; out.phoneRef = this.phoneRef; out.overlayRef = this.overlayRef;

@@ -172,7 +172,7 @@
   <!-- ============ 후기 작성 ============ -->
   <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
   <div>
-    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">후기 작성</span></div><span style="font-weight:700; font-size:13px; color:#0041FF;">+1,500 머니</span></div>
+    <div style="height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:18px; color:#191919; letter-spacing:-0.5px;">후기 작성</span></div></div>
     <div style="padding:14px 20px 0;">
       <div style="font-weight:700; font-size:15px; color:#191919; letter-spacing:-0.4px;">블랙이글호 · 5/24 출조</div>
       <div style="margin-top:16px; font-weight:600; font-size:13px; color:#767676;">만족도</div>
@@ -206,10 +206,17 @@
     <div style="padding:14px 20px 0;">
       <div style="border-radius:14px; background:#F8F8F8; padding:16px;"><div style="font-weight:700; font-size:15px; color:#191919;">블랙이글호</div><div style="margin-top:5px; font-weight:500; font-size:13px; color:#767676;">5/24(토) 04:30 · 1인 · 90,000원</div></div>
       <div style="margin-top:22px; font-weight:700; font-size:14px; color:#191919;">취소 사유</div>
-      <div style="margin-top:11px; display:flex; flex-direction:column; gap:11px;"><sc-for list="{{ cancelReasons }}" as="c" hint-placeholder-count="4"><div class="tap" onClick="{{ noop }}" style="display:flex; align-items:center; gap:10px;"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="{{ c.stroke }}" stroke-width="1.6"></circle><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><circle cx="10" cy="10" r="4.5" fill="#0041FF"></circle></sc-if></svg><span style="font-weight:500; font-size:14px; color:#363636;">{{ c.label }}</span></div></sc-for></div>
+      <div style="margin-top:11px; display:flex; flex-direction:column; gap:11px;"><sc-for list="{{ cancelReasons }}" as="c" hint-placeholder-count="4"><div class="tap" onClick="{{ c.onClick }}" style="display:flex; align-items:center; gap:10px;"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="{{ c.stroke }}" stroke-width="1.6"></circle><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><circle cx="10" cy="10" r="4.5" fill="#0041FF"></circle></sc-if></svg><span style="font-weight:500; font-size:14px; color:#363636;">{{ c.label }}</span></div></sc-for></div>
+      <sc-if value="{{ isResched }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:22px; font-weight:700; font-size:14px; color:#191919;">변경할 날짜 선택</div>
+      <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ reschedDates }}" as="d" hint-placeholder-count="4"><div class="tap" onClick="{{ d.onClick }}" style="height:40px; padding:0 15px; border-radius:1000px; border:1px solid {{ d.border }}; background:{{ d.bg }}; display:flex; align-items:center; font-weight:600; font-size:13px; color:{{ d.color }};">{{ d.label }}</div></sc-for></div>
+      <div style="margin-top:18px; border-radius:12px; background:#E8FBEE; padding:15px 16px;"><div style="font-weight:700; font-size:13px; color:#1F8A5B;">결제 취소 없이 날짜만 변경돼요</div><div style="margin-top:5px; font-weight:500; font-size:11.5px; color:#6FAE8C;">기존 결제 90,000원이 그대로 이전돼요. 잔여석이 있는 날짜만 선택할 수 있어요.</div></div>
+      </sc-if>
+      <sc-if value="{{ isCancelMode }}" hint-placeholder-val="{{ true }}">
       <div style="margin-top:22px; border-radius:12px; background:#EAF0FF; padding:15px 16px;"><div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-weight:600; font-size:13px; color:#5570A8;">예상 환불 금액</span><span style="font-weight:800; font-size:17px; color:#0041FF;">90,000원</span></div><div style="margin-top:6px; font-weight:500; font-size:11.5px; color:#7E94C4;">*출항 24시간 전이라 전액 환불돼요.</div></div>
+      </sc-if>
     </div>
-    <div style="position:sticky; bottom:0; background:#fff; padding:14px 18px; border-top:1px solid #EEE;"><div class="tap" onClick="{{ submitCancel }}" style="height:52px; border-radius:1000px; background:#EE0005; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">예약 취소하기</div></div>
+    <div style="position:sticky; bottom:0; background:#fff; padding:14px 18px; border-top:1px solid #EEE;"><div class="tap" onClick="{{ ctaClick }}" style="height:52px; border-radius:1000px; background:{{ ctaBg }}; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#fff;">{{ ctaLabel }}</div></div>
   </div>
   </sc-if>
 
@@ -228,7 +235,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;detail&quot;,&quot;notif&quot;,&quot;notice&quot;,&quot;event&quot;],&quot;default&quot;:&quot;detail&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { wish:false, det:null, done:null };
+  state = { wish:false, det:null, done:null, cancelReason:0, reschedIdx:0 };
   nav(to){ return () => { try{ window.postMessage({ type:"af-nav", to }, "*"); if(window.parent&&window.parent!==window) window.parent.postMessage({ type:"af-nav", to }, "*"); }catch(e){} }; }
   showDet(d){ return ()=> this.setState({det:d}); }
   closeDet = ()=> this.setState({det:null});
@@ -263,15 +270,21 @@ class Component extends DCLogic {
       isDone: !!done,
       doneTint: done==="cancel" ? "#FFECEC" : "#E8FBEE",
       doneColor: done==="cancel" ? "#EE0005" : "#1F8A5B",
-      doneTitle: done==="cancel" ? "예약이 취소됐어요" : "후기가 등록됐어요",
-      doneDesc: done==="cancel" ? "환불 90,000원은 2~3영업일 이내\n원결제 수단으로 입금돼요." : "소중한 후기 감사해요.\n1,500머니가 적립됐어요.",
-      doneCta: done==="cancel" ? "예약 내역으로" : "홈으로",
-      doneSub: done==="cancel" ? "" : "내 조황에서 보기",
+      doneTitle: done==="cancel" ? "예약이 취소됐어요" : done==="resched" ? "일정이 변경됐어요" : "후기가 등록됐어요",
+      doneDesc: done==="cancel" ? "환불 90,000원은 2~3영업일 이내\n원결제 수단으로 입금돼요." : done==="resched" ? "추가 결제 없이 새 날짜로\n일정이 변경됐어요." : "소중한 후기 감사해요.\n다른 낚시인에게 큰 도움이 돼요.",
+      doneCta: done==="review" ? "홈으로" : "예약 내역으로",
+      doneSub: done==="review" ? "내 조황에서 보기" : "",
       submitReview: ()=> this.setState({done:"review"}),
       submitCancel: ()=> this.setState({done:"cancel"}),
-      goHome: done==="cancel" ? this.nav("reserv") : this.nav("home"),
+      goHome: done==="review" ? this.nav("home") : this.nav("reserv"),
       stars:["#FF8A00","#FF8A00","#FF8A00","#FF8A00","#E5E5E5"],
-      cancelReasons:[{label:"개인 사정으로 일정 변경",on:true,stroke:"#0041FF"},{label:"기상 악화 우려",on:false,stroke:"#CFCFCF"},{label:"다른 선박으로 변경",on:false,stroke:"#CFCFCF"},{label:"단순 변심",on:false,stroke:"#CFCFCF"}],
+      cancelReasons:["개인 사정으로 일정 변경","기상 악화 우려","다른 선박으로 변경","단순 변심"].map((label,i)=>({label, on:(this.state.cancelReason||0)===i, stroke:(this.state.cancelReason||0)===i?"#0041FF":"#CFCFCF", onClick:()=>this.setState({cancelReason:i})})),
+      isResched: (this.state.cancelReason||0)===0,
+      isCancelMode: (this.state.cancelReason||0)!==0,
+      reschedDates:["5/31(토)","6/1(일)","6/7(토)","6/8(일)","6/14(토)"].map((label,i)=>{const on=(this.state.reschedIdx||0)===i; return {label, onClick:()=>this.setState({reschedIdx:i}), bg:on?"#0041FF":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#fff":"#555"};}),
+      ctaLabel: (this.state.cancelReason||0)===0 ? "일정 변경하기" : "예약 취소하기",
+      ctaBg: (this.state.cancelReason||0)===0 ? "#0041FF" : "#EE0005",
+      ctaClick: (this.state.cancelReason||0)===0 ? (()=>this.setState({done:"resched"})) : (()=>this.setState({done:"cancel"})),
       statusBg: isDetail ? "transparent" : "#fff",
       statusColor: isDetail ? "#fff" : "#191919",
       back: this.nav("back"), noop: this.nav("noop"),

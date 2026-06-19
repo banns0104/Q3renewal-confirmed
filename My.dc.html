@@ -265,8 +265,8 @@
     <div style="height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 18px;"><div style="display:flex; align-items:center; gap:10px;"><div class="tap" onClick="{{ back }}" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center;"><svg width="11" height="20" viewBox="0 0 11 20"><path d="M10 1 1.5 10 10 19" fill="none" stroke="#191919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-weight:800; font-size:19px; color:#191919; letter-spacing:-0.5px;">관심낚시 설정</span></div><span class="tap" onClick="{{ back }}" style="font-weight:700; font-size:14px; color:#0041FF;">저장</span></div>
     <div style="padding:14px 20px 8px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">관심 어종</div>
     <div style="padding:0 18px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ fishChips }}" as="c" hint-placeholder-count="7"><div class="tap" onClick="{{ c.toggle }}" style="height:38px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
-    <div style="padding:26px 20px 8px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">숙련도</div>
-    <div style="margin:0 18px; height:46px; border-radius:11px; background:#F2F3F5; display:flex; padding:4px;"><sc-for list="{{ levels }}" as="l" hint-placeholder-count="3"><div class="tap" onClick="{{ l.onClick }}" style="flex:1; border-radius:8px; background:{{ l.bg }}; display:flex; align-items:center; justify-content:center; font-weight:{{ l.weight }}; font-size:14px; color:{{ l.color }}; box-shadow:{{ l.shadow }};">{{ l.label }}</div></sc-for></div>
+    <div style="padding:26px 20px 8px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">주로 가는 낚시</div>
+    <div style="padding:0 18px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ fishingTypes }}" as="l" hint-placeholder-count="4"><div class="tap" onClick="{{ l.onClick }}" style="height:42px; padding:0 18px; border-radius:1000px; border:1px solid {{ l.border }}; background:{{ l.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ l.color }}; letter-spacing:-0.3px;">{{ l.label }}</div></sc-for></div>
     <div style="padding:26px 20px 8px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">자주 가는 지역</div>
     <div style="padding:0 18px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ regionChips }}" as="c" hint-placeholder-count="4"><div class="tap" onClick="{{ c.toggle }}" style="height:38px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
   </div>
@@ -393,11 +393,11 @@
       <div style="display:flex;justify-content:flex-end;"><div class="tap" onClick="{{ closeInvite }}" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3 L13 13 M13 3 L3 13" stroke="#999" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div>
       <div style="text-align:center;margin-top:-4px;">
         <div style="width:72px;height:72px;border-radius:50%;background:#EAF0FF;margin:0 auto;display:flex;align-items:center;justify-content:center;"><div style="width:32px;height:32px;border-radius:50%;background:#FFC700;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;">M</div></div>
-        <div style="margin-top:16px;font-weight:800;font-size:21px;line-height:1.35;letter-spacing:-0.5px;color:#191919;">친구 초대하고<br>양쪽 모두 5,000원</div>
-        <div style="margin-top:9px;font-weight:500;font-size:13.5px;color:#767676;letter-spacing:-0.3px;">친구가 첫 출조를 예약하면<br>나와 친구 모두 머니를 받아요.</div>
+        <div style="margin-top:16px;font-weight:800;font-size:21px;line-height:1.35;letter-spacing:-0.5px;color:#191919;">친구를 어바웃피싱에<br>초대해 보세요</div>
+        <div style="margin-top:9px;font-weight:500;font-size:13.5px;color:#767676;letter-spacing:-0.3px;">초대 링크를 공유해서<br>함께 출조할 친구를 초대해 보세요.</div>
       </div>
       <div style="margin-top:20px;height:54px;border-radius:12px;border:1px dashed #C9D6FF;background:#F7FAFF;display:flex;align-items:center;padding:0 16px;gap:10px;">
-        <span style="flex:1;font-weight:800;font-size:17px;letter-spacing:1px;color:#0041FF;">FISH-7A29</span>
+        <span style="flex:1;font-weight:800;font-size:17px;letter-spacing:1px;color:#0041FF;">https://abf.kr/i/7A29</span>
         <div class="tap" onClick="{{ noop }}" style="height:34px;padding:0 14px;border-radius:1000px;background:#0041FF;display:flex;align-items:center;font-weight:600;font-size:13px;color:#fff;">복사</div>
       </div>
       <div class="tap" onClick="{{ noop }}" style="margin-top:11px;height:52px;border-radius:1000px;background:#FEE500;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#191919;">카카오톡으로 초대하기</div>
@@ -411,7 +411,7 @@
 class Component extends DCLogic {
   state = {
     screen: null,
-    reservTab: "예정", couponTab: "사용가능", wdr:{}, wdCat:-1, wdReason:-1, wdCatOpen:false,
+    reservTab: "예정", couponTab: null, wdr:{}, wdCat:-1, wdReason:-1, wdCatOpen:false,
     noti: { m0:true, a0:true,a1:true,a2:true, b0:true,b1:true,b2:false, c0:true,c1:false,c2:true },
     faqOpen: -1,
     fish: { "우럭":true,"갈치":true,"광어":true,"참돔":false,"감성돔":false,"주꾸미":false,"볼락":false },
@@ -447,8 +447,9 @@ class Component extends DCLogic {
       const on = reservTab===label;
       return { label, num, onClick:()=>this.setState({reservTab:label}), line:on?"#191919":"transparent", weight:on?700:500, color:on?"#191919":"#AAA", numColor:on?"#191919":"#CCC" };
     });
+    const couponTab = this.state.couponTab || this.props.couponTab || "사용가능";
     const couponTabs = [["사용가능","3"],["사용완료","5"],["만료","2"]].map(([label,num])=>{
-      const on = this.state.couponTab===label;
+      const on = couponTab===label;
       return { label, num, onClick:()=>this.setState({couponTab:label}), line:on?"#191919":"transparent", weight:on?700:500, color:on?"#191919":"#AAA", numColor:on?"#191919":"#CCC" };
     });
 
@@ -468,14 +469,14 @@ class Component extends DCLogic {
       ["기상 악화로 출항이 취소되면?","선장 판단으로 결항 시 결제 금액 100%가 자동 환불돼요. 별도 신청은 필요 없어요."],
       ["매너점수는 어떻게 올라가나요?","정상 출조 완료, 리뷰 작성, 노쇼 없는 예약이 쌓이면 매너점수가 올라가요."],
       ["결제수단이 어떻게 되나요?","신용/체크카드, 간편결제, 어바웃피싱 머니로 결제할 수 있어요."],
-      ["친구 초대 코드는 어디서?","마이페이지 > 친구 초대에서 코드를 확인할 수 있어요. 양쪽 모두 5,000원 머니를 받아요."],
+      ["친구 초대는 어디서?","마이페이지 > 친구 초대에서 초대 링크를 복사해 공유할 수 있어요."],
     ];
     const faqs = faqDefs.map(([q,a],i)=>({ q, a, open:this.state.faqOpen===i, rot:this.state.faqOpen===i?"180deg":"0deg", toggle:()=>this.setState(st=>({faqOpen:st.faqOpen===i?-1:i})) }));
 
     const chip = (label, sel, toggle)=>({ label, toggle, bg:sel?"#fff":"#F4F5F7", border:sel?"#0041FF":"#F4F5F7", color:sel?"#0041FF":"#767676" });
-    const fishChips = ["우럭","갈치","광어","참돔","감성돔","주꾸미","볼락"].map(l=>chip(l,this.state.fish[l],()=>this.setState(st=>({fish:Object.assign({},st.fish,{[l]:!st.fish[l]})}))));
-    const regionChips = ["충남","전남","경남","제주"].map(l=>chip(l,this.state.region[l],()=>this.setState(st=>({region:Object.assign({},st.region,{[l]:!st.region[l]})}))));
-    const levels = ["초보","중급","베테랑"].map(l=>{ const on=this.state.level===l; return { label:l, onClick:()=>this.setState({level:l}), bg:on?"#fff":"transparent", color:on?"#0041FF":"#999", weight:on?700:500, shadow:on?"0 1px 4px rgba(0,0,0,.12)":"none" }; });
+    const fishChips = ["우럭","광어","참돔","감성돔","농어","갈치","고등어","삼치","주꾸미","갑오징어","한치","문어","볼락","열기","대구","가자미","붕어","배스","송어","쏘가리","향어"].map(l=>chip(l,this.state.fish[l],()=>this.setState(st=>({fish:Object.assign({},st.fish,{[l]:!st.fish[l]})}))));
+    const regionChips = ["인천","경기","충남·서해","전북","전남·여수","경남·통영","부산","경북·포항","강원·동해","제주","충북·내수면","경기·저수지"].map(l=>chip(l,this.state.region[l],()=>this.setState(st=>({region:Object.assign({},st.region,{[l]:!st.region[l]})}))));
+    const fishingTypes = ["바다만 가요","민물만 가요","바다·민물 둘 다","이제 시작한 초보예요"].map(l=>{ const on=this.state.level===l; return { label:l, onClick:()=>this.setState({level:l}), bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676" }; });
 
     return {
       isMain:S("mypage"), isReserv:S("reserv"), isCatch:S("catch"), isWish:S("wish"),
@@ -522,21 +523,21 @@ class Component extends DCLogic {
         { label:"친구 초대", onClick:()=>this.setState({invite:true}), hasBadge:false },
       ],
       settings: [
-        { label:"결제수단 관리", onClick:this.set("payment"), hasBadge:true, badge:"2" },
+        { label:"설정", onClick:this.nav("setting"), hasBadge:false },
         { label:"알림 설정", onClick:this.set("noti"), hasBadge:false },
         { label:"1:1 상담", onClick:this.set("faq"), hasBadge:false },
         { label:"자주 묻는 질문", onClick:this.set("faq"), hasBadge:false },
       ],
 
-      reservTabs, couponTabs, notiGroups, faqs, fishChips, regionChips, levels,
+      reservTabs, couponTabs, notiGroups, faqs, fishChips, regionChips, fishingTypes,
       couponRegOpen: !!this.state.couponRegOpen || raw==="coupon_reg",
       openCouponReg: ()=>this.setState({couponRegOpen:true}),
       closeCouponReg: ()=>this.setState({couponRegOpen:false}),
       cpEmpty: false,
-      coupons: (this.state.couponTab==="사용완료") ? [
+      coupons: (couponTab==="사용완료") ? [
         { value:"5,000원", title:"첫 예약 환영 쿠폰", desc:"블랙이글호 예약에 사용", exp:"2026.04.20 사용", border:"#EEE", bg:"#FAFAFB", op:"0.7", valColor:"#999", expColor:"#AAA", stamp:"사용완료" },
         { value:"3,000원", title:"리뷰 작성 보상 쿠폰", desc:"대박호 예약에 사용", exp:"2026.03.30 사용", border:"#EEE", bg:"#FAFAFB", op:"0.7", valColor:"#999", expColor:"#AAA", stamp:"사용완료" },
-      ] : (this.state.couponTab==="만료") ? [
+      ] : (couponTab==="만료") ? [
         { value:"10%", title:"봄 시즌 할인 쿠폰", desc:"미사용 만료", exp:"2026.03.31 만료", border:"#EEE", bg:"#FAFAFB", op:"0.6", valColor:"#BBB", expColor:"#BBB", stamp:"기간만료" },
         { value:"5,000원", title:"친구 초대 보상", desc:"미사용 만료", exp:"2026.02.28 만료", border:"#EEE", bg:"#FAFAFB", op:"0.6", valColor:"#BBB", expColor:"#BBB", stamp:"기간만료" },
       ] : [

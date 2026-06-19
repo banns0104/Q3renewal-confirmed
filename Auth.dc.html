@@ -17,7 +17,7 @@
   .af-btn:active{ transform:scale(.98); }
 </style>
 </helmet>
-<div class="af-auth" style="width:393px; height:852px; background:#ffffff; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+<div class="af-auth" style="width:393px; min-height:852px; background:#ffffff; position:relative; display:flex; flex-direction:column;">
 
   <!-- status bar -->
   <div style="height:54px; width:100%; display:flex; align-items:center; justify-content:space-between; padding:8px 22px 0 34px; flex:none;">
@@ -224,14 +224,14 @@
     <div style="height:52px; display:flex; align-items:center; justify-content:flex-end; padding:0 22px; flex:none;">
       <div class="af-btn" onClick="{{ goHome }}" style="font-weight:500; font-size:14px; color:#999; letter-spacing:-0.4px;">건너뛰기</div>
     </div>
-    <div style="padding:14px 24px 0; flex:1; overflow:hidden;">
+    <div style="padding:14px 24px 24px; flex:1;">
       <div style="font-family:'Pretendard Variable',sans-serif; font-weight:800; font-size:24px; line-height:1.32; letter-spacing:-0.6px; color:#191919;">선호하는 낚시를<br>알려주세요</div>
       <div style="margin-top:11px; font-weight:500; font-size:14px; color:#767676; letter-spacing:-0.4px;">관련된 맞춤 정보를 제공해 드려요!</div>
 
       <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">관심 어종</div>
       <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ fishChips }}" as="c" hint-placeholder-count="7"><div class="af-btn" onClick="{{ c.toggle }}" style="height:40px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
-      <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">숙련도</div>
-      <div style="margin-top:11px; height:46px; border-radius:11px; background:#F2F3F5; display:flex; padding:4px;"><sc-for list="{{ levels }}" as="l" hint-placeholder-count="3"><div class="af-btn" onClick="{{ l.onClick }}" style="flex:1; border-radius:8px; background:{{ l.bg }}; display:flex; align-items:center; justify-content:center; font-weight:{{ l.weight }}; font-size:14px; color:{{ l.color }}; box-shadow:{{ l.shadow }};">{{ l.label }}</div></sc-for></div>
+      <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">주로 가는 낚시</div>
+      <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ fishingTypes }}" as="l" hint-placeholder-count="4"><div class="af-btn" onClick="{{ l.onClick }}" style="height:42px; padding:0 18px; border-radius:1000px; border:1px solid {{ l.border }}; background:{{ l.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ l.color }}; letter-spacing:-0.3px;">{{ l.label }}</div></sc-for></div>
       <div style="margin-top:24px; font-weight:800; font-size:15px; color:#191919; letter-spacing:-0.4px;">자주 가는 지역</div>
       <div style="margin-top:11px; display:flex; flex-wrap:wrap; gap:9px;"><sc-for list="{{ regionChips }}" as="c" hint-placeholder-count="4"><div class="af-btn" onClick="{{ c.toggle }}" style="height:40px; padding:0 16px; border-radius:1000px; border:1px solid {{ c.border }}; background:{{ c.bg }}; display:flex; align-items:center; font-weight:600; font-size:13.5px; color:{{ c.color }}; letter-spacing:-0.3px;">{{ c.label }}</div></sc-for></div>
     </div>
@@ -341,9 +341,9 @@ class Component extends DCLogic {
       termsCtaBg: requiredOk ? "#0041FF" : "#F3F3F3",
       termsCtaColor: requiredOk ? "#fff" : "#BBB",
 
-      fishChips: ["우럭","갈치","광어","참도","감성도","주꾸미","볼락"].map(l=>{ const on=!!this.state.fish[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({fish:Object.assign({},st.fish,{[l]:!st.fish[l]})})) }; }),
-      levels: ["초보","중급","베테랑"].map(l=>{ const on=this.state.skill===l; return { label:l, onClick:()=>this.setState({skill:l}), bg:on?"#fff":"transparent", color:on?"#0041FF":"#999", weight:on?700:500, shadow:on?"0 1px 4px rgba(0,0,0,.12)":"none" }; }),
-      regionChips: ["충남","전남","경남","제주"].map(l=>{ const on=!!this.state.region[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({region:Object.assign({},st.region,{[l]:!st.region[l]})})) }; }),
+      fishChips: ["우럭","광어","참돔","감성돔","농어","갈치","고등어","삼치","주꾸미","갑오징어","한치","문어","볼락","열기","대구","가자미","붕어","배스","송어","쏘가리","향어"].map(l=>{ const on=!!this.state.fish[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({fish:Object.assign({},st.fish,{[l]:!st.fish[l]})})) }; }),
+      fishingTypes: ["바다만 가요","민물만 가요","바다·민물 둘 다","이제 시작한 초보예요"].map(l=>{ const on=this.state.skill===l; return { label:l, onClick:()=>this.setState({skill:l}), bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676" }; }),
+      regionChips: ["인천","경기","충남·서해","전북","전남·여수","경남·통영","부산","경북·포항","강원·동해","제주","충북·내수면","경기·저수지"].map(l=>{ const on=!!this.state.region[l]; return { label:l, bg:on?"#fff":"#F4F5F7", border:on?"#0041FF":"#F4F5F7", color:on?"#0041FF":"#767676", toggle:()=>this.setState(st=>({region:Object.assign({},st.region,{[l]:!st.region[l]})})) }; }),
       selectedCountLabel: (Object.values(this.state.fish).filter(Boolean).length) + "개 어종을 선택했어요",
     };
   }

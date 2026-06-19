@@ -152,9 +152,9 @@ class Component extends DCLogic {
       toggleBlock:()=>this.setState(st=>({block:!st.block})), blockBg:this.state.block?"#0041FF":"#E3E3E8", blockKnob:this.state.block?"21px":"2.5px",
       reportCtaBg:"#EE5B52",
       settingGroups:[
-        {title:"알림", items:[{label:"알림 설정",hasArrow:true},{label:"마케팅 수신 동의",hasVal:true,val:"ON"}]},
+        {title:"알림", items:[{label:"알림 설정",hasArrow:true}]},
         {title:"약관·정책", items:[{label:"서비스 이용약관",hasArrow:true},{label:"개인정보 처리방침",hasArrow:true},{label:"위치기반서비스 약관",hasArrow:true}]},
-        {title:"앱 정보", items:[{label:"버전 정보",hasVal:true,val:"v2.4.0"},{label:"캐시 삭제",hasVal:true,val:"12.4MB"},{label:"로그아웃",hasArrow:true},{label:"회원 탈퇴",hasArrow:true,color:"#EE0005"}]},
+        {title:"앱 정보", items:[{label:"버전 정보",hasVal:true,val:"v2.4.0"},{label:"캐시 삭제",hasVal:true,val:"12.4MB"}]},
       ].map(g=>({title:g.title, items:g.items.map(it=>Object.assign({color:"#363636",hasArrow:false,hasVal:false},it))})),
       vbankRows:[{k:"입금 은행",v:"국민은행",c:"#191919"},{k:"계좌번호",v:"012345-04-678910",c:"#191919"},{k:"예금주",v:"(주)어바웃피싱",c:"#191919"},{k:"입금 금액",v:"178,000원",c:"#0041FF"}],
       regionPick:["인천·경기","충남·서해","전남·여수","경남·통영"],
